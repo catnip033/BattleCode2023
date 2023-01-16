@@ -6,6 +6,12 @@ import java.util.Random;
 
 public class Robot {
 
+    int encode (MapLocation location, int ID) { return location.x | (location.y << 6) | (ID << 12); }
+    int encode (int x, int y) { return x | (y << 6); }
+
+    int decodeID (int code) { return (code >> 12) & 0xF; }
+    MapLocation decodeLocation (int code) { return new MapLocation(code & 0x3F, (code >> 6) & 0x3F); }
+
     protected RobotController rc;
 
     protected MapLocation currentLocation;

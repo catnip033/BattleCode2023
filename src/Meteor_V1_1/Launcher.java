@@ -91,7 +91,7 @@ public strictfp class Launcher extends Robot {
         int minHealth = Constants.INF;
         attackTarget = null;
 
-        for (RobotInfo robot : rc.senseNearbyRobots(13, team.opponent())) {
+        for (RobotInfo robot : rc.senseNearbyRobots(16, team.opponent())) {
             if(robot.getType() == RobotType.HEADQUARTERS) continue;
             int health = robot.getHealth();
             if(robot.getType() == RobotType.LAUNCHER) { health -= 50; }

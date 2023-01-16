@@ -58,9 +58,6 @@ public strictfp class Carrier extends Robot {
             draw();
             return;
         }
-        if (currentLocation.isAdjacentTo(headquarterLocation)) {
-            foundEnemy = false;
-        }
 
         if (anchorMode) {
             if(rc.canPlaceAnchor() && rc.senseTeamOccupyingIsland(rc.senseIsland(rc.getLocation())) == Team.NEUTRAL) {
@@ -128,6 +125,10 @@ public strictfp class Carrier extends Robot {
                 MapLocation location = robotInfo.getLocation();
                 int distance = distanceTo(location);
                 if (distance < minDistance) { minDistance = distance; target = location; }
+            }
+            if (foundEnemy && currentLocation.distanceSquaredTo(target) <= 5) {
+                foundEnemy = false;
+                target = null;
             }
         } else {
             if (target != null && target.equals(headquarterLocation)) target = null;

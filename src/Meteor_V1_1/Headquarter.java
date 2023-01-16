@@ -6,12 +6,16 @@ public strictfp class Headquarter extends Robot {
     private int anchorBuildOrder = 0;
     private int amplifierCount = 0;
 
+    private final int hqIdx;
+
     public Headquarter(RobotController rc) throws GameActionException {
         super(rc);
 
-        if (rc.readSharedArray(Idx.firstHqId) == 0) {
-            rc.writeSharedArray(Idx.firstHqId, rc.getID());
-        }
+        hqIdx = rc.readSharedArray(Idx.teamHqCount);
+        rc.writeSharedArray(Idx.teamHqCount, hqIdx + 1);
+        rc.writeSharedArray(hqIdx + Idx.teamHqDataOffset, encode(currentLocation, rc.getID()));
+
+        if (rc.getRoundNum() == 2 && hqIdx == 0) { calculatePossibleEnemyHqLocations(); }
 
         buildDroid(RobotType.CARRIER);
     }
@@ -19,9 +23,10 @@ public strictfp class Headquarter extends Robot {
     public void step() throws GameActionException {
         super.step();
 
-        if (rc.getID() == rc.readSharedArray(Idx.firstHqId)) {
+        final int n = rc.readSharedArray(Idx.teamHqCount);
+
+        if (hqIdx == 0) {
             minimap.reset();
-            rc.setIndicatorString("reset()");
         }
 
         RobotInfo[] nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
@@ -40,10 +45,10 @@ public strictfp class Headquarter extends Robot {
 
         if (rc.isActionReady()) {
             if (rc.getRoundNum() <= 150) {
-                if (mn >= 60) {
-                    buildDroid(RobotType.LAUNCHER);
-                } else if (ad >= 50) {
+                if (ad >= 50) {
                     buildDroid(RobotType.CARRIER);
+                } else if (mn >= 60) {
+                    buildDroid(RobotType.LAUNCHER);
                 }
             } else if (rc.getRoundNum() <= 500) {
                 if (mn >= 40 && ad >= 40 && amplifierCount < 2) {
@@ -78,6 +83,31 @@ public strictfp class Headquarter extends Robot {
             if (rc.canBuildRobot(robotType, location)) {
                 rc.buildRobot(robotType, location);
                 return;
+            }
+        }
+    }
+
+    private void calculatePossibleEnemyHqLocations() throws GameActionException {
+        int width = rc.getMapWidth() - 1, height = rc.getMapHeight() - 1;
+        int n = rc.readSharedArray(Idx.teamHqCount);
+
+        // Horizontal, Vertical, Rotational symmetry for all team archon locations
+        for (int i = 0; i < n; ++i) {
+            MapLocation teamHqLocation = decodeLocation(rc.readSharedArray(i + Idx.teamHqDataOffset));
+            int x = teamHqLocation.x, y = teamHqLocation.y;
+
+            rc.writeSharedArray(i * 3 + 0 + Idx.enemyHqLocationOffset, encode(width - x, y));
+            rc.writeSharedArray(i * 3 + 1 + Idx.enemyHqLocationOffset, encode(x, height - y));
+            rc.writeSharedArray(i * 3 + 2 + Idx.enemyHqLocationOffset, encode(width - x, height - y));
+        }
+
+        // Remove Duplicates
+        for (int i = 0; i < n * 3; ++i) {
+            for(int j = 0; j < i; ++j) {
+                if ((rc.readSharedArray(i + Idx.enemyHqLocationOffset) & 0xFFF) == (rc.readSharedArray(j + Idx.enemyHqLocationOffset) & 0xFFF)) {
+                    rc.writeSharedArray(i + Idx.enemyHqLocationOffset, 60);
+                    break;
+                }
             }
         }
     }
