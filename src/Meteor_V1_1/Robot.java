@@ -56,6 +56,7 @@ public class Robot {
         minimap.updateInfo();
     }
 
+    // TODO: when to use BugPath
     protected boolean move() throws GameActionException {
         if (!rc.isMovementReady() || currentLocation.equals(target)) { return false; }
         boolean encounteredObstacle = false;

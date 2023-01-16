@@ -11,7 +11,7 @@ public strictfp class Carrier extends Robot {
     public Carrier(RobotController rc) throws GameActionException {
         super(rc);
 
-        for (RobotInfo robotInfo : rc.senseNearbyRobots(8, team)) {
+        for (RobotInfo robotInfo : rc.senseNearbyRobots(9, team)) {
             if (robotInfo.getType() != RobotType.HEADQUARTERS) continue;
             headquarterLocation = robotInfo.getLocation();
             break;

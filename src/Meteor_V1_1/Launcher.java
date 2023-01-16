@@ -3,12 +3,26 @@ package Meteor_V1_1;
 import battlecode.common.*;
 
 public strictfp class Launcher extends Robot {
-
+    private MapLocation hqLocation;
     private RobotInfo[] nearbyEnemies;
     private MapLocation attackTarget;
 
+    private MapLocation[] enemyhqLocations = new MapLocation[3];
+    private boolean[] noEnemyHq = new boolean[3];
+
     public Launcher(RobotController rc) throws GameActionException {
         super(rc);
+
+        for (RobotInfo robotInfo : rc.senseNearbyRobots(8, team)) {
+            if (robotInfo.getType() != RobotType.HEADQUARTERS) continue;
+            hqLocation = robotInfo.getLocation();
+            break;
+        }
+
+        final int width = rc.getMapWidth(), height = rc.getMapHeight();
+        enemyhqLocations[0] = new MapLocation(width - hqLocation.x - 1, hqLocation.y);
+        enemyhqLocations[1] = new MapLocation(hqLocation.x, height - hqLocation.y - 1);
+        enemyhqLocations[2] = new MapLocation(width - hqLocation.x - 1, height - hqLocation.y - 1);
     }
 
     public void step() throws GameActionException {
@@ -29,7 +43,10 @@ public strictfp class Launcher extends Robot {
         updateAttackTarget();
 
         // Reset target if adjacent to it
-        if (target != null && currentLocation.isAdjacentTo(target)) { target = null; }
+        if (target != null && currentLocation.isAdjacentTo(target) &&
+                (!rc.canSenseRobotAtLocation(target)
+                        || rc.senseRobotAtLocation(target).getType() != RobotType.HEADQUARTERS
+                        || rc.senseRobotAtLocation(target).getTeam() != team.opponent())) { target = null; }
 
         // Move to attack target
         if (attackTarget != null && !isDangerous(rc.senseRobotAtLocation(attackTarget).type)) {
@@ -136,15 +153,19 @@ public strictfp class Launcher extends Robot {
     protected void updateTarget() throws GameActionException {
         int minDistance = Constants.INF;
 
-        // Loop through all lead locations and find the best one
-        for (WellInfo wellInfo : rc.senseNearbyWells()) {
-            MapLocation location = wellInfo.getMapLocation();
+        for (int i = 0; i < 3; ++i) {
+            MapLocation location = enemyhqLocations[i];
+            if (rc.canSenseLocation(location) && !rc.canSenseRobotAtLocation(location)) {
+                noEnemyHq[i] = true;
+            }
+            if (noEnemyHq[i]) continue;
+
             int launcherCount = 0;
             for (RobotInfo robotInfo : rc.senseNearbyRobots(location, 5, team)) {
                 if (robotInfo.getType() == RobotType.LAUNCHER) launcherCount++;
             }
             int distance = distanceTo(location);
-            if (distance <= 2 || launcherCount >= 5) {
+            if (distance >= 2 && launcherCount >= 8) {
                 if (location.equals(target)) {
                     target = null;
                 }
@@ -156,6 +177,8 @@ public strictfp class Launcher extends Robot {
                 target = location;
             }
         }
+
+        if (target == null) selectRandomTarget();
     }
 
     private int distanceTo(MapLocation location) {

@@ -16,8 +16,6 @@ public strictfp class Headquarter extends Robot {
         rc.writeSharedArray(hqIdx + Idx.teamHqDataOffset, encode(currentLocation, rc.getID()));
 
         if (rc.getRoundNum() == 2 && hqIdx == 0) { calculatePossibleEnemyHqLocations(); }
-
-        buildDroid(RobotType.CARRIER);
     }
 
     public void step() throws GameActionException {
@@ -77,6 +75,25 @@ public strictfp class Headquarter extends Robot {
     }
 
     private void buildDroid(RobotType robotType) throws GameActionException {
+        MapLocation well = bestWell();
+        if (robotType == RobotType.CARRIER && well != null) {
+            int minDistance = Constants.INF;
+            MapLocation buildLocation = null;
+
+            for(MapInfo mapInfo : rc.senseNearbyMapInfos(9)) {
+                MapLocation location = mapInfo.getMapLocation();
+                int distance = well.distanceSquaredTo(location);
+                if (rc.canBuildRobot(robotType, location) && distance < minDistance) {
+                    minDistance = distance;
+                    buildLocation = location;
+                }
+            }
+
+            if (buildLocation != null) {
+                rc.buildRobot(robotType, buildLocation);
+                return;
+            }
+        }
         for (int i = 0; i < 8; ++i) {
             Direction direction = directions[RNG.nextInt(8)];
             MapLocation location = currentLocation.add(direction);
@@ -85,6 +102,23 @@ public strictfp class Headquarter extends Robot {
                 return;
             }
         }
+    }
+
+    MapLocation bestWell() throws GameActionException {
+        int minCount = Constants.INF;
+        MapLocation bestWellLocation = null;
+        for(WellInfo wellInfo : rc.senseNearbyWells()) {
+            MapLocation location = wellInfo.getMapLocation();
+            int carrierCount = 0;
+            for (RobotInfo robotInfo : rc.senseNearbyRobots(location, 5, team)) {
+                if (robotInfo.getType() == RobotType.CARRIER) carrierCount++;
+            }
+            if (carrierCount < minCount) {
+                minCount = carrierCount;
+                bestWellLocation = location;
+            }
+        }
+        return bestWellLocation;
     }
 
     private void calculatePossibleEnemyHqLocations() throws GameActionException {
