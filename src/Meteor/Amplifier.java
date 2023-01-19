@@ -2,7 +2,7 @@ package Meteor;
 
 import battlecode.common.*;
 
-public strictfp class Amplifier extends Robot {
+public strictfp class Amplifier extends MobileRobot {
 
     public Amplifier(RobotController rc) throws GameActionException {
         super(rc);
@@ -11,13 +11,13 @@ public strictfp class Amplifier extends Robot {
     public void step() throws GameActionException {
         super.step();
 
-        if (target != null && currentLocation.distanceSquaredTo(target) <= 5) {
-            target = null;
+        if (targetLocation != null && rc.canSenseLocation(targetLocation)) {
+            targetLocation = null;
         }
 
         RobotInfo[] nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
 
-        minimap.reportNearbyEnemies(nearbyEnemies);
+        map.reportNearbyEnemies(nearbyEnemies);
 
         RobotInfo enemyAttacker = null;
         for (RobotInfo robot : nearbyEnemies) {
@@ -35,7 +35,7 @@ public strictfp class Amplifier extends Robot {
             return;
         }
 
-        if (target == null) selectRandomTarget();
+        if (targetLocation == null) selectRandomTarget();
 
         move();
         draw();

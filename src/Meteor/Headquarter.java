@@ -6,29 +6,25 @@ public strictfp class Headquarter extends Robot {
     private int anchorBuildOrder = 0;
     private int amplifierCount = 0;
 
-    private final int hqIdx;
+    private final int idx;
 
     public Headquarter(RobotController rc) throws GameActionException {
         super(rc);
 
-        hqIdx = rc.readSharedArray(Idx.teamHQCount);
+        idx = rc.readSharedArray(Idx.teamHQCount);
 
-        rc.writeSharedArray(Idx.teamHQCount, hqIdx + 1);
-        rc.writeSharedArray(hqIdx + Idx.teamHQDataOffset, encode(currentLocation, rc.getID()));
-
-        if (rc.getRoundNum() == 2 && hqIdx == 0) { calculatePossibleEnemyHQLocations(); }
+        rc.writeSharedArray(Idx.teamHQCount, idx + 1);
+        rc.writeSharedArray(idx + Idx.teamHQLocationOffset, encode(currentLocation, rc.getID()));
     }
 
     public void step() throws GameActionException {
         super.step();
 
-        if (hqIdx == 0) {
-            minimap.reset();
-        }
+        if (idx == 0) { map.reset(); }
 
         RobotInfo[] nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
 
-        minimap.reportNearbyEnemies(nearbyEnemies);
+        map.reportNearbyEnemies(nearbyEnemies);
 
         for (RobotInfo robot : nearbyEnemies) {
             if (isDangerous(robot.getType())) {
@@ -79,7 +75,7 @@ public strictfp class Headquarter extends Robot {
             int minDistance = Constants.INF;
             MapLocation buildLocation = null;
 
-            for(MapInfo mapInfo : rc.senseNearbyMapInfos(9)) {
+            for (MapInfo mapInfo : rc.senseNearbyMapInfos(9)) {
                 MapLocation location = mapInfo.getMapLocation();
                 int distance = well.distanceSquaredTo(location);
                 if (rc.canBuildRobot(robotType, location) && distance < minDistance) {
@@ -93,9 +89,11 @@ public strictfp class Headquarter extends Robot {
                 return;
             }
         }
+
         for (int i = 0; i < 8; ++i) {
             Direction direction = directions[RNG.nextInt(8)];
             MapLocation location = currentLocation.add(direction);
+
             if (rc.canBuildRobot(robotType, location)) {
                 rc.buildRobot(robotType, location);
                 return;
@@ -103,45 +101,25 @@ public strictfp class Headquarter extends Robot {
         }
     }
 
-    MapLocation bestWell() throws GameActionException {
+    private MapLocation bestWell() throws GameActionException {
         int minCount = Constants.INF;
         MapLocation bestWellLocation = null;
-        for(WellInfo wellInfo : rc.senseNearbyWells()) {
+
+        for (WellInfo wellInfo : rc.senseNearbyWells()) {
             MapLocation location = wellInfo.getMapLocation();
+
             int carrierCount = 0;
+
             for (RobotInfo robotInfo : rc.senseNearbyRobots(location, 5, team)) {
                 if (robotInfo.getType() == RobotType.CARRIER) carrierCount++;
             }
+
             if (carrierCount < minCount) {
                 minCount = carrierCount;
                 bestWellLocation = location;
             }
         }
+
         return bestWellLocation;
-    }
-
-    private void calculatePossibleEnemyHQLocations() throws GameActionException {
-        int width = rc.getMapWidth() - 1, height = rc.getMapHeight() - 1;
-        int n = rc.readSharedArray(Idx.teamHQCount);
-
-        // Horizontal, Vertical, Rotational symmetry for all team archon locations
-        for (int i = 0; i < n; ++i) {
-            MapLocation teamHqLocation = decodeLocation(rc.readSharedArray(i + Idx.teamHQDataOffset));
-            int x = teamHqLocation.x, y = teamHqLocation.y;
-
-            rc.writeSharedArray(i * 3 + 0 + Idx.enemyHQLocationOffset, encode(width - x, y));
-            rc.writeSharedArray(i * 3 + 1 + Idx.enemyHQLocationOffset, encode(x, height - y));
-            rc.writeSharedArray(i * 3 + 2 + Idx.enemyHQLocationOffset, encode(width - x, height - y));
-        }
-
-        // Remove Duplicates
-        for (int i = 0; i < n * 3; ++i) {
-            for(int j = 0; j < i; ++j) {
-                if ((rc.readSharedArray(i + Idx.enemyHQLocationOffset) & 0xFFF) == (rc.readSharedArray(j + Idx.enemyHQLocationOffset) & 0xFFF)) {
-                    rc.writeSharedArray(i + Idx.enemyHQLocationOffset, 60);
-                    break;
-                }
-            }
-        }
     }
 }

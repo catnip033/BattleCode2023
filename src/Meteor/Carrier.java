@@ -2,10 +2,10 @@ package Meteor;
 
 import battlecode.common.*;
 
-public strictfp class Carrier extends Robot {
+public strictfp class Carrier extends MobileRobot {
     private MapLocation closestTeamHQLocation;
 
-    private boolean anchorMode = false;
+    private boolean carryingAnchor = false;
     private boolean foundEnemy = false;
 
     public Carrier(RobotController rc) throws GameActionException {
@@ -17,15 +17,17 @@ public strictfp class Carrier extends Robot {
     public void step() throws GameActionException {
         super.step();
 
+        updateClosestTeamHQLocation();
+
         if (rc.canTakeAnchor(closestTeamHQLocation, Anchor.STANDARD)) {
             rc.takeAnchor(closestTeamHQLocation, Anchor.STANDARD);
-            anchorMode = true;
+            carryingAnchor = true;
         }
 
         RobotInfo[] nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
 
         if (rc.canWriteSharedArray(0, 0)) {
-            minimap.reportNearbyEnemies(nearbyEnemies);
+            map.reportNearbyEnemies(nearbyEnemies);
         }
 
         RobotInfo enemyAttacker = null;
@@ -36,17 +38,7 @@ public strictfp class Carrier extends Robot {
             }
         }
 
-        // Evade enemy soldier
         if (enemyAttacker != null) {
-//            if (rc.isActionReady()) {
-//                if (rc.canAttack(enemyAttacker.getLocation())) {
-//                    rc.attack(enemyAttacker.getLocation());
-//                }
-//                MapLocation location = currentLocation.add(currentLocation.directionTo(enemyAttacker.getLocation()));
-//                if (rc.canAttack(location)) {
-//                    rc.attack(location);
-//                }
-//            }
             foundEnemy = true;
             updateTargetForEvasion(nearbyEnemies);
             while (move()) ;
@@ -55,17 +47,22 @@ public strictfp class Carrier extends Robot {
             return;
         }
 
-        if (anchorMode) {
+        if (carryingAnchor) {
             if (rc.canPlaceAnchor() && rc.senseTeamOccupyingIsland(rc.senseIsland(rc.getLocation())) == Team.NEUTRAL) {
                 rc.placeAnchor();
-                anchorMode = false;
+                carryingAnchor = false;
             }
         }
 
         else {
             if (rc.isActionReady()) {
-                if (isReturning()) transfer();
-                else mine();
+                if (isReturning()) {
+                    transfer();
+                }
+
+                else {
+                    mine();
+                }
             }
         }
 
@@ -77,10 +74,10 @@ public strictfp class Carrier extends Robot {
 
     private void updateClosestTeamHQLocation() throws GameActionException {
         final int teamHQCount = rc.readSharedArray(Idx.teamHQCount);
-        int minDistance = 60;
+        int minDistance = Constants.INF;
 
         for (int i=0; i<teamHQCount; ++i) {
-            MapLocation teamHQLocation = decodeLocation(rc.readSharedArray(i + Idx.teamHQDataOffset));
+            MapLocation teamHQLocation = decodeLocation(rc.readSharedArray(i + Idx.teamHQLocationOffset));
             
             int distance = distanceTo(teamHQLocation);
 
@@ -118,66 +115,75 @@ public strictfp class Carrier extends Robot {
     }
 
     private void updateTarget() throws GameActionException {
-        if (currentLocation.equals(target)) { target = null; }
+        if (currentLocation.equals(targetLocation)) { targetLocation = null; }
 
-        if (anchorMode) {
-            int[] ids = rc.senseNearbyIslands();
-            for(int id : ids) {
-                if(rc.senseTeamOccupyingIsland(id) == Team.NEUTRAL) {
-                    MapLocation[] locs = rc.senseNearbyIslandLocations(id);
-                    if(locs.length > 0) {
-                        target = locs[0];
-                        break;
-                    }
+        if (carryingAnchor) {
+            int[] islandIdxs = rc.senseNearbyIslands();
+
+            for (int idx : islandIdxs) {
+                if (rc.senseTeamOccupyingIsland(idx) == Team.NEUTRAL) {
+                    MapLocation[] islandLocations = rc.senseNearbyIslandLocations(idx);
+
+		    int minDistance = Constants.INF;
+
+		    for (MapLocation islandLocation : islandLocations) {
+			int distance = distanceTo(islandLocation);
+
+			if (distance < minDistance) {
+			    minDistance = distance;
+			    targetLocation = islandLocation;
+			}
+		    }
                 }
             }
-        } else if (isReturning()) {
-            target = closestTeamHQLocation;
-            int minDistance = Constants.INF;
-            for (RobotInfo robotInfo : rc.senseNearbyRobots(-1, team)) {
-                if (robotInfo.getType() != RobotType.HEADQUARTERS) continue;
-                MapLocation location = robotInfo.getLocation();
-                int distance = distanceTo(location);
-                if (distance < minDistance) { minDistance = distance; target = location; }
-            }
-            if (foundEnemy && currentLocation.distanceSquaredTo(target) <= 5) {
+        }
+
+        else if (isReturning()) {
+            targetLocation = closestTeamHQLocation;
+
+            // TODO ???
+            if (foundEnemy && currentLocation.distanceSquaredTo(targetLocation) <= 5) {
                 foundEnemy = false;
-                target = null;
+                targetLocation = null;
             }
-        } else {
-            if (target != null && target.equals(closestTeamHQLocation)) target = null;
+        }
+
+        else {
+            if (targetLocation != null && targetLocation.equals(closestTeamHQLocation)) targetLocation = null;
 
             int minDistance = Constants.INF;
 
-            // Loop through all lead locations and find the best one
             for (WellInfo wellInfo : rc.senseNearbyWells()) {
                 MapLocation location = wellInfo.getMapLocation();
+
                 int carrierCount = 0;
+
                 for (RobotInfo robotInfo : rc.senseNearbyRobots(location, 5, team)) {
                     if (robotInfo.getType() == RobotType.CARRIER) carrierCount++;
                 }
+
                 int distance = distanceTo(location);
                 if (distance >= 2
                         && ((wellInfo.getResourceType() == ResourceType.ADAMANTIUM && carrierCount >= 2)
                         || (wellInfo.getResourceType() == ResourceType.MANA && carrierCount >= 7))) {
-                    if (location.equals(target)) {
-                        target = null;
+                    if (location.equals(targetLocation)) {
+                        targetLocation = null;
                     }
                     continue;
                 }
 
                 if (distance < minDistance) {
                     minDistance = distance;
-                    target = location;
+                    targetLocation = location;
                 }
             }
 
-            if (target != null && minDistance != Constants.INF && currentLocation.distanceSquaredTo(target) <= 9) {
-                target = bestLocationNextTo(target);
+            if (targetLocation != null && minDistance != Constants.INF && currentLocation.distanceSquaredTo(targetLocation) <= 9) {
+                targetLocation = bestLocationNextTo(targetLocation);
             }
         }
 
-        if (target == null) { selectRandomTarget(); }
+        if (targetLocation == null) { selectRandomTarget(); }
     }
 
     protected MapLocation bestLocationNextTo(MapLocation location) throws GameActionException {
@@ -195,9 +201,5 @@ public strictfp class Carrier extends Robot {
         }
 
         return bestNeighbor;
-    }
-
-    private int distanceTo(MapLocation location) {
-        return Math.max(Math.abs(location.x - currentLocation.x), Math.abs(location.y - currentLocation.y));
     }
 }
