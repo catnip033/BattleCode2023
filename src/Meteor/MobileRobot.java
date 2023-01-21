@@ -70,14 +70,37 @@ public class MobileRobot extends Robot {
         targetLocation = currentLocation;
 
         for (Direction direction : directions) {
-            MapLocation location = currentLocation.add(direction).add(direction);
+            MapLocation location = currentLocation.add(direction);
+            if (rc.getType() == RobotType.CARRIER) {
+                location = location.add(direction);
+            }
 
             if (!rc.canSenseLocation(location) || !rc.onTheMap(location) || rc.canSenseRobotAtLocation(location) || !rc.sensePassability(location)) { continue; }
 
             int distance = 0;
+            MapLocation enemyHQLocation = null;
             for (RobotInfo robot : nearbyEnemies) {
                 if (isDangerous(robot.type)) {
                     distance += location.distanceSquaredTo(robot.location);
+                }
+                if (robot.getType() == RobotType.HEADQUARTERS) {
+                    enemyHQLocation = robot.location;
+                    if (currentLocation.distanceSquaredTo(enemyHQLocation) <= 9) {
+                        distance += location.distanceSquaredTo(enemyHQLocation);
+                    }
+                    int nextDistance = currentLocation.add(direction).distanceSquaredTo(enemyHQLocation);
+                    if (nextDistance <= 9) {
+                        distance -= 50 / (nextDistance + 1);
+                    }
+                }
+            }
+            if (enemyHQLocation != null) {
+                Direction tangentDirection = currentLocation.directionTo(enemyHQLocation).rotateLeft();
+                for (int i=3; i>=1; --i) {
+                    if (direction.equals(tangentDirection)) {
+                        distance += i;
+                    }
+                    tangentDirection = tangentDirection.rotateLeft();
                 }
             }
 

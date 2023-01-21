@@ -4,9 +4,11 @@ import battlecode.common.*;
 
 public strictfp class Carrier extends MobileRobot {
     private MapLocation closestTeamHQLocation;
+    private MapLocation closestWellLocation;
 
     private boolean carryingAnchor = false;
     private boolean foundEnemy = false;
+    private boolean returningResource = false;
 
     public Carrier(RobotController rc) throws GameActionException {
         super(rc);
@@ -40,8 +42,12 @@ public strictfp class Carrier extends MobileRobot {
 
         if (enemyAttacker != null) {
             foundEnemy = true;
-            updateTargetForEvasion(nearbyEnemies);
+            if (rc.getWeight() > 0) returningResource = true;
+            updateTarget();
+            if (distanceTo(closestTeamHQLocation) > 5) updateTargetForEvasion(nearbyEnemies);
             while (move()) ;
+
+            transferOrMine();
 
             draw();
             return;
@@ -55,21 +61,31 @@ public strictfp class Carrier extends MobileRobot {
         }
 
         else {
-            if (rc.isActionReady()) {
-                if (isReturning()) {
-                    transfer();
-                }
-
-                else {
-                    mine();
-                }
-            }
+            transferOrMine();
         }
 
         updateTarget();
         while (move()) ;
 
+        transferOrMine();
+
         draw();
+    }
+
+    private void transferOrMine() throws GameActionException {
+        if (!rc.isActionReady()) { return; }
+        if (isReturning()) {
+            transfer();
+            if (rc.getWeight() == 0) {
+                returningResource = false;
+            }
+        }
+        else {
+            mine();
+            if (rc.getWeight() == GameConstants.CARRIER_CAPACITY) {
+                returningResource = true;
+            }
+        }
     }
 
     private void updateClosestTeamHQLocation() throws GameActionException {
@@ -89,12 +105,18 @@ public strictfp class Carrier extends MobileRobot {
     }
 
     private boolean isReturning() throws GameActionException {
-        return rc.getWeight() == GameConstants.CARRIER_CAPACITY || foundEnemy;
+        return returningResource || foundEnemy;
     }
 
     private void mine() throws GameActionException {
-        for (WellInfo wellInfo : rc.senseNearbyWells(2)) {
+        for (WellInfo wellInfo : rc.senseNearbyWells(2, ResourceType.MANA)) {
             rc.collectResource(wellInfo.getMapLocation(), -1);
+            closestWellLocation = wellInfo.getMapLocation();
+            return;
+        }
+        for (WellInfo wellInfo : rc.senseNearbyWells(2, ResourceType.ADAMANTIUM)) {
+            rc.collectResource(wellInfo.getMapLocation(), -1);
+            closestWellLocation = wellInfo.getMapLocation();
             return;
         }
     }
@@ -106,7 +128,7 @@ public strictfp class Carrier extends MobileRobot {
             for (ResourceType resourceType : ResourceType.values()) {
                 if (resourceType == ResourceType.NO_RESOURCE) continue;
                 int amount = rc.getResourceAmount(resourceType);
-                if (rc.canTransferResource(location, resourceType, amount)) {
+                if (amount > 0 && rc.canTransferResource(location, resourceType, amount)) {
                     rc.transferResource(location, resourceType, amount);
                     return;
                 }
@@ -116,6 +138,7 @@ public strictfp class Carrier extends MobileRobot {
 
     private void updateTarget() throws GameActionException {
         if (currentLocation.equals(targetLocation)) { targetLocation = null; }
+        if (targetLocation != null && rc.canSenseLocation(targetLocation) && !rc.sensePassability(targetLocation)) { targetLocation = null; }
 
         if (carryingAnchor) {
             int[] islandIdxs = rc.senseNearbyIslands();
@@ -144,12 +167,15 @@ public strictfp class Carrier extends MobileRobot {
             // TODO ???
             if (foundEnemy && currentLocation.distanceSquaredTo(targetLocation) <= 5) {
                 foundEnemy = false;
+            }
+            if (!isReturning()) {
                 targetLocation = null;
             }
         }
 
         else {
             if (targetLocation != null && targetLocation.equals(closestTeamHQLocation)) targetLocation = null;
+            if (closestWellLocation != null && targetLocation == null) targetLocation = closestWellLocation;
 
             int minDistance = Constants.INF;
 
@@ -163,9 +189,9 @@ public strictfp class Carrier extends MobileRobot {
                 }
 
                 int distance = distanceTo(location);
-                if (distance >= 2
+                if ((distance >= 2 || rc.getWeight() <= 3)
                         && ((wellInfo.getResourceType() == ResourceType.ADAMANTIUM && carrierCount >= 2)
-                        || (wellInfo.getResourceType() == ResourceType.MANA && carrierCount >= 7))) {
+                        || (wellInfo.getResourceType() == ResourceType.MANA && carrierCount >= 9))) {
                     if (location.equals(targetLocation)) {
                         targetLocation = null;
                     }

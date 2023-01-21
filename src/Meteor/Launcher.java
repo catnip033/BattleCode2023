@@ -10,7 +10,6 @@ public strictfp class Launcher extends MobileRobot {
 
     private MapLocation[] enemyHQLocations;
 
-    private boolean[] isEnemyHQ;
     private boolean[] isExplored;
 
     private final int totalHQCount;
@@ -20,10 +19,9 @@ public strictfp class Launcher extends MobileRobot {
 
         totalHQCount = rc.readSharedArray(Idx.teamHQCount);
 
-        enemyHQLocations = new MapLocation[totalHQCount * 3];
+        enemyHQLocations = new MapLocation[3];
 
-        isEnemyHQ = new boolean[totalHQCount * 3];
-        isExplored = new boolean[totalHQCount * 3];
+        isExplored = new boolean[3];
 
         final int width = rc.getMapWidth(), height = rc.getMapHeight();
 
@@ -31,10 +29,6 @@ public strictfp class Launcher extends MobileRobot {
 
         for (int i=0; i<totalHQCount; ++i) {
             MapLocation location = decodeLocation(rc.readSharedArray(i + Idx.teamHQLocationOffset));
-            
-            enemyHQLocations[i * 3 + 0] = new MapLocation(width - location.x - 1, location.y);
-            enemyHQLocations[i * 3 + 1] = new MapLocation(location.x, height - location.y - 1);
-            enemyHQLocations[i * 3 + 2] = new MapLocation(width - location.x - 1, height - location.y - 1);
 
             int distance = distanceTo(location);
             if (distance < minDistance) {
@@ -42,6 +36,10 @@ public strictfp class Launcher extends MobileRobot {
                 minDistance = distance;
             }
         }
+
+        enemyHQLocations[0] = new MapLocation(width - teamHQLocation.x - 1, height - teamHQLocation.y - 1);
+        enemyHQLocations[1] = new MapLocation(width - teamHQLocation.x - 1, teamHQLocation.y);
+        enemyHQLocations[2] = new MapLocation(teamHQLocation.x, height - teamHQLocation.y - 1);
     }
 
     public void step() throws GameActionException {
@@ -61,7 +59,7 @@ public strictfp class Launcher extends MobileRobot {
         updateAttackTarget();
 
         // Reset target if adjacent to it
-        if (targetLocation != null && currentLocation.isAdjacentTo(targetLocation) &&
+        if (targetLocation != null && currentLocation.distanceSquaredTo(targetLocation) <= 2 &&
                 (!rc.canSenseRobotAtLocation(targetLocation)
                         || rc.senseRobotAtLocation(targetLocation).getType() != RobotType.HEADQUARTERS
                         || rc.senseRobotAtLocation(targetLocation).getTeam() != team.opponent())) { targetLocation = null; }
@@ -90,32 +88,39 @@ public strictfp class Launcher extends MobileRobot {
             }
         }
 
-        /*
+
         final int enemyAttackerCount = getEnemyAttackerCount();
         final MapLocation closestEnemyAttacker = getClosestEnemyAttacker();
 
-        MapLocation enemy = minimap.getClosestEnemy();
+        MapLocation enemy = map.getClosestEnemy();
 
-        if (enemy != null && (targetLocation == null || map.getInfo(targetLocation) == 0 || currentLocation.distanceSquaredTo(targetLocation) > 40 && map.getInfo(targetLocation) < map.getInfo(enemy))) {
+        if (enemy != null && (targetLocation == null || map.getLevel(targetLocation) == 0 || currentLocation.distanceSquaredTo(targetLocation) > 40 && map.getLevel(targetLocation) < map.getLevel(enemy))) {
             targetLocation = enemy;
         }
 
         if (targetLocation == null) selectRandomTarget();
 
-        if (closest != null && currentLocation.distanceSquaredTo(closest) <= 13) updateTargetForEvasion(nearbyEnemies);
+        if (closestEnemyAttacker != null && currentLocation.distanceSquaredTo(closestEnemyAttacker) <= 16) updateTargetForEvasion(nearbyEnemies);
 
-        if (enemySoldierCount >= 2) {
+        if (enemyAttackerCount >= 2) {
             if (rc.canWriteSharedArray(0, 0)) {
-                map.reportEnemy(closest, 3);
+                map.reportEnemy(closestEnemyAttacker, 3);
             }
             updateTargetForEvasion(nearbyEnemies);
+        }
+
+
+        for (RobotInfo robot : nearbyEnemies) {
+            if (robot.getType() == RobotType.HEADQUARTERS) {
+                updateTargetForEvasion(nearbyEnemies);
+                break;
+            }
         }
 
         if (attackTarget != null && rc.isActionReady()) {
             if (isDangerous(rc.senseRobotAtLocation(attackTarget).type)) { updateTargetForEvasion(nearbyEnemies); }
             rc.attack(attackTarget);
         }
-        */
 
         move();
 
@@ -140,9 +145,9 @@ public strictfp class Launcher extends MobileRobot {
 
             int health = robot.getHealth();
 
-            if (robotType == RobotType.LAUNCHER)     { health -= 50; }
-            if (robotType == RobotType.DESTABILIZER) { health -= 70; }
-            if (robotType == RobotType.BOOSTER)      { health -= 90; }
+            if (robotType == RobotType.LAUNCHER)     { health -= 500; }
+            if (robotType == RobotType.DESTABILIZER) { health -= 700; }
+            if (robotType == RobotType.BOOSTER)      { health -= 900; }
 
             if (health < minHealth) {
                 minHealth = health;
@@ -180,33 +185,51 @@ public strictfp class Launcher extends MobileRobot {
     }
 
     protected void updateTarget() throws GameActionException {
+        int minHealth = Constants.INF;
+
+        for (RobotInfo robot : nearbyEnemies) {
+            RobotType robotType = robot.getType();
+
+            if (robotType != RobotType.CARRIER) continue;
+
+            int health = robot.getHealth();
+
+            if (health < minHealth) {
+                minHealth = health;
+                targetLocation = robot.location;
+            }
+        }
+    }
+
+    @Override
+    protected void selectRandomTarget() throws GameActionException {
         int minDistance = Constants.INF;
 
-        for (int i = 0; i < totalHQCount * 3; ++i) {
-            if (!isExplored[i]) continue;
-
+        for (int i = 0; i < 3; ++i) {
             MapLocation location = enemyHQLocations[i];
+            if (isExplored[i]) continue;
 
             if (rc.canSenseLocation(location)) {
                 if (rc.canSenseRobotAtLocation(location)) {
                     RobotInfo robot = rc.senseRobotAtLocation(location);
 
-                    if (robot.type == RobotType.HEADQUARTERS && robot.team == team.opponent()) {
-                        isEnemyHQ[i] = true;
+                    if (robot.type != RobotType.HEADQUARTERS || robot.team != team.opponent()) {
+                        isExplored[i] = true;
+                        continue;
                     }
+                } else {
+                    isExplored[i] = true;
+                    continue;
                 }
-
-                isExplored[i] = true;
-                continue;
             }
 
-            int distance = distanceTo(location);
+            int distance = 0; //distanceTo(location);
             if (distance < minDistance) {
                 minDistance = distance;
                 targetLocation = location;
             }
         }
 
-        if (targetLocation == null) selectRandomTarget();
+        if (targetLocation == null) super.selectRandomTarget();
     }
 }
