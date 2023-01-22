@@ -1,9 +1,10 @@
 package Pathing;
 
 public abstract class Idx {
-    static final int teamHqCount = 0;
-    static final int enemyHqDataOffset = 1;
-    static final int teamHqDataOffset = 5;
-    static final int enemyHqLocationOffset = 9;
-    static final int minimapOffset = 24;
+    static final int teamHQCount = 0;
+
+    static final int teamHQLocationOffset = 1;
+    static final int enemyHQLocationOffset = 5;
+
+    static final int mapOffset = 14;
 }
