@@ -82,9 +82,11 @@ public class Map {
         MapLocation closestEnemy = null;
 
         for (int i = 0; i < GRID_MAX_IDX; ++i) {
+            int data = rc.readSharedArray(i + Idx.mapOffset + parity(false));
+            if (data == 0) { continue; }
             for (int j = 0; j < INFOS_PER_INTEGER; ++j) {
 
-                int info = (rc.readSharedArray(i + Idx.mapOffset + parity(false)) >> (j * BITS_PER_INFO)) & MASK;
+                int info = (data >> (j * BITS_PER_INFO)) & MASK;
                 int level = info & 0b11;
 
                 if (level == 0) { continue; }
