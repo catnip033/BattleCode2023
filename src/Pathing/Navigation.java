@@ -2,12 +2,10 @@ package Pathing;
 
 import battlecode.common.*;
 
-import java.util.ArrayList;
-
 public class Navigation {
-
-    private RobotController rc;
-    private Team team;
+    private final RobotController rc;
+    private final Team team;
+    private final Bug bug;
 
     private MapLocation previousLocation;
     private MapLocation currentLocation;
@@ -15,15 +13,13 @@ public class Navigation {
     private MapLocation targetLocation;
 
     private Direction lastDirection;
-    private ArrayList<MapLocation> closestWallLocations;
 
     private double globalBest = 1000000;
 
     public Navigation (RobotController rc) {
         this.rc = rc;
         team = rc.getTeam();
-
-        closestWallLocations = new ArrayList<MapLocation>();
+        bug = new Bug(rc);
     }
     
     private static MapLocation l0;
@@ -576,8 +572,9 @@ public class Navigation {
     private static boolean o68;
 
     private Direction getBestDirection0() throws GameActionException {
-        MapLocation best = currentLocation;
         double localBest = 1000000.0;
+        boolean temp1 = false;
+        boolean temp2 = false;
         l34 = currentLocation;
         v34 = 0;
         d34 = Direction.CENTER;
@@ -849,16 +846,17 @@ public class Navigation {
         r20 = false;
         o20 = false;
     
-        if (rc.onTheMap(l25) && rc.canSenseLocation(l25)) {
+        if (rc.onTheMap(l25)) {
             if (rc.senseCloud(l25)) {
                 p25 = 1.5;
                 b25 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l25).getCurrentDirection();
-                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && currentDirection.equals(Direction.CENTER))) {
-                    p25 = rc.senseMapInfo(l25).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l25)) {
+                MapInfo mapInfo = rc.senseMapInfo(l25);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l25), currentDirection) > 0))) {
+                    p25 = mapInfo.getCooldownMultiplier(team);
                     b25 = false;
                 }
             }
@@ -874,22 +872,24 @@ public class Navigation {
             r25 |= r34;
             r25 |= r35;
             r25 &= !b25;
-            o35 |= b25;
+            if (targetLocation.equals(l25)) {
+                temp1 = true;
+                temp2 = r25;
+            }
         }
-        else {
-            o35 |= b25;
-        }
+        o35 |= b25;
 
-        if (rc.onTheMap(l35) && rc.canSenseLocation(l35)) {
+        if (rc.onTheMap(l35)) {
             if (rc.senseCloud(l35)) {
                 p35 = 1.5;
                 b35 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l35).getCurrentDirection();
-                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && currentDirection.equals(Direction.CENTER))) {
-                    p35 = rc.senseMapInfo(l35).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l35)) {
+                MapInfo mapInfo = rc.senseMapInfo(l35);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l35), currentDirection) > 0))) {
+                    p35 = mapInfo.getCooldownMultiplier(team);
                     b35 = false;
                 }
             }
@@ -910,24 +910,25 @@ public class Navigation {
             r35 |= r34;
             r35 |= r43;
             r35 &= !b35;
-            o25 |= b35;
-            o43 |= b35;
+            if (targetLocation.equals(l35)) {
+                temp1 = true;
+                temp2 = r35;
+            }
         }
-        else {
-            o25 |= b35;
-            o43 |= b35;
-        }
+        o25 |= b35;
+        o43 |= b35;
 
-        if (rc.onTheMap(l43) && rc.canSenseLocation(l43)) {
+        if (rc.onTheMap(l43)) {
             if (rc.senseCloud(l43)) {
                 p43 = 1.5;
                 b43 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l43).getCurrentDirection();
-                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && currentDirection.equals(Direction.CENTER))) {
-                    p43 = rc.senseMapInfo(l43).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l43)) {
+                MapInfo mapInfo = rc.senseMapInfo(l43);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l43), currentDirection) > 0))) {
+                    p43 = mapInfo.getCooldownMultiplier(team);
                     b43 = false;
                 }
             }
@@ -943,22 +944,24 @@ public class Navigation {
             r43 |= r35;
             r43 |= r34;
             r43 &= !b43;
-            o35 |= b43;
+            if (targetLocation.equals(l43)) {
+                temp1 = true;
+                temp2 = r43;
+            }
         }
-        else {
-            o35 |= b43;
-        }
+        o35 |= b43;
 
-        if (rc.onTheMap(l26) && rc.canSenseLocation(l26)) {
+        if (rc.onTheMap(l26)) {
             if (rc.senseCloud(l26)) {
                 p26 = 1.5;
                 b26 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l26).getCurrentDirection();
-                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && currentDirection.equals(Direction.CENTER))) {
-                    p26 = rc.senseMapInfo(l26).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l26)) {
+                MapInfo mapInfo = rc.senseMapInfo(l26);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l26), currentDirection) > 0))) {
+                    p26 = mapInfo.getCooldownMultiplier(team);
                     b26 = false;
                 }
             }
@@ -979,24 +982,25 @@ public class Navigation {
             r26 |= r25;
             r26 |= r34;
             r26 &= !b26;
-            o35 |= b26;
-            o25 |= b26;
+            if (targetLocation.equals(l26)) {
+                temp1 = true;
+                temp2 = r26;
+            }
         }
-        else {
-            o35 |= b26;
-            o25 |= b26;
-        }
+        o35 |= b26;
+        o25 |= b26;
 
-        if (rc.onTheMap(l44) && rc.canSenseLocation(l44)) {
+        if (rc.onTheMap(l44)) {
             if (rc.senseCloud(l44)) {
                 p44 = 1.5;
                 b44 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l44).getCurrentDirection();
-                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && currentDirection.equals(Direction.CENTER))) {
-                    p44 = rc.senseMapInfo(l44).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l44)) {
+                MapInfo mapInfo = rc.senseMapInfo(l44);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l44), currentDirection) > 0))) {
+                    p44 = mapInfo.getCooldownMultiplier(team);
                     b44 = false;
                 }
             }
@@ -1017,24 +1021,25 @@ public class Navigation {
             r44 |= r34;
             r44 |= r43;
             r44 &= !b44;
-            o35 |= b44;
-            o43 |= b44;
+            if (targetLocation.equals(l44)) {
+                temp1 = true;
+                temp2 = r44;
+            }
         }
-        else {
-            o35 |= b44;
-            o43 |= b44;
-        }
+        o35 |= b44;
+        o43 |= b44;
 
-        if (rc.onTheMap(l52) && rc.canSenseLocation(l52)) {
+        if (rc.onTheMap(l52)) {
             if (rc.senseCloud(l52)) {
                 p52 = 1.5;
                 b52 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l52).getCurrentDirection();
-                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && currentDirection.equals(Direction.CENTER))) {
-                    p52 = rc.senseMapInfo(l52).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l52)) {
+                MapInfo mapInfo = rc.senseMapInfo(l52);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l52), currentDirection) > 0))) {
+                    p52 = mapInfo.getCooldownMultiplier(team);
                     b52 = false;
                 }
             }
@@ -1050,24 +1055,25 @@ public class Navigation {
             r52 |= r44;
             r52 |= r43;
             r52 &= !b52;
-            o44 |= b52;
-            o43 |= b52;
+            if (targetLocation.equals(l52)) {
+                temp1 = true;
+                temp2 = r52;
+            }
         }
-        else {
-            o44 |= b52;
-            o43 |= b52;
-        }
+        o44 |= b52;
+        o43 |= b52;
 
-        if (rc.onTheMap(l36) && rc.canSenseLocation(l36)) {
+        if (rc.onTheMap(l36)) {
             if (rc.senseCloud(l36)) {
                 p36 = 1.5;
                 b36 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l36).getCurrentDirection();
-                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && currentDirection.equals(Direction.CENTER))) {
-                    p36 = rc.senseMapInfo(l36).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l36)) {
+                MapInfo mapInfo = rc.senseMapInfo(l36);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l36), currentDirection) > 0))) {
+                    p36 = mapInfo.getCooldownMultiplier(team);
                     b36 = false;
                 }
             }
@@ -1088,26 +1094,26 @@ public class Navigation {
             r36 |= r35;
             r36 |= r44;
             r36 &= !b36;
-            o26 |= b36;
-            o35 |= b36;
-            o44 |= b36;
+            if (targetLocation.equals(l36)) {
+                temp1 = true;
+                temp2 = r36;
+            }
         }
-        else {
-            o26 |= b36;
-            o35 |= b36;
-            o44 |= b36;
-        }
+        o26 |= b36;
+        o35 |= b36;
+        o44 |= b36;
 
-        if (rc.onTheMap(l16) && rc.canSenseLocation(l16)) {
+        if (rc.onTheMap(l16)) {
             if (rc.senseCloud(l16)) {
                 p16 = 1.5;
                 b16 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l16).getCurrentDirection();
-                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && currentDirection.equals(Direction.CENTER))) {
-                    p16 = rc.senseMapInfo(l16).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l16)) {
+                MapInfo mapInfo = rc.senseMapInfo(l16);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l16), currentDirection) > 0))) {
+                    p16 = mapInfo.getCooldownMultiplier(team);
                     b16 = false;
                 }
             }
@@ -1123,24 +1129,25 @@ public class Navigation {
             r16 |= r25;
             r16 |= r26;
             r16 &= !b16;
-            o25 |= b16;
-            o26 |= b16;
+            if (targetLocation.equals(l16)) {
+                temp1 = true;
+                temp2 = r16;
+            }
         }
-        else {
-            o25 |= b16;
-            o26 |= b16;
-        }
+        o25 |= b16;
+        o26 |= b16;
 
-        if (rc.onTheMap(l53) && rc.canSenseLocation(l53)) {
+        if (rc.onTheMap(l53)) {
             if (rc.senseCloud(l53)) {
                 p53 = 1.5;
                 b53 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l53).getCurrentDirection();
-                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && currentDirection.equals(Direction.CENTER))) {
-                    p53 = rc.senseMapInfo(l53).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l53)) {
+                MapInfo mapInfo = rc.senseMapInfo(l53);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l53), currentDirection) > 0))) {
+                    p53 = mapInfo.getCooldownMultiplier(team);
                     b53 = false;
                 }
             }
@@ -1166,28 +1173,27 @@ public class Navigation {
             r53 |= r43;
             r53 |= r52;
             r53 &= !b53;
-            o45 |= b53;
-            o44 |= b53;
-            o43 |= b53;
-            o52 |= b53;
+            if (targetLocation.equals(l53)) {
+                temp1 = true;
+                temp2 = r53;
+            }
         }
-        else {
-            o45 |= b53;
-            o44 |= b53;
-            o43 |= b53;
-            o52 |= b53;
-        }
+        o45 |= b53;
+        o44 |= b53;
+        o43 |= b53;
+        o52 |= b53;
 
-        if (rc.onTheMap(l27) && rc.canSenseLocation(l27)) {
+        if (rc.onTheMap(l27)) {
             if (rc.senseCloud(l27)) {
                 p27 = 1.5;
                 b27 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l27).getCurrentDirection();
-                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && currentDirection.equals(Direction.CENTER))) {
-                    p27 = rc.senseMapInfo(l27).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l27)) {
+                MapInfo mapInfo = rc.senseMapInfo(l27);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l27), currentDirection) > 0))) {
+                    p27 = mapInfo.getCooldownMultiplier(team);
                     b27 = false;
                 }
             }
@@ -1213,28 +1219,27 @@ public class Navigation {
             r27 |= r26;
             r27 |= r35;
             r27 &= !b27;
-            o36 |= b27;
-            o17 |= b27;
-            o26 |= b27;
-            o35 |= b27;
+            if (targetLocation.equals(l27)) {
+                temp1 = true;
+                temp2 = r27;
+            }
         }
-        else {
-            o36 |= b27;
-            o17 |= b27;
-            o26 |= b27;
-            o35 |= b27;
-        }
+        o36 |= b27;
+        o17 |= b27;
+        o26 |= b27;
+        o35 |= b27;
 
-        if (rc.onTheMap(l17) && rc.canSenseLocation(l17)) {
+        if (rc.onTheMap(l17)) {
             if (rc.senseCloud(l17)) {
                 p17 = 1.5;
                 b17 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l17).getCurrentDirection();
-                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && currentDirection.equals(Direction.CENTER))) {
-                    p17 = rc.senseMapInfo(l17).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l17)) {
+                MapInfo mapInfo = rc.senseMapInfo(l17);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l17), currentDirection) > 0))) {
+                    p17 = mapInfo.getCooldownMultiplier(team);
                     b17 = false;
                 }
             }
@@ -1260,28 +1265,27 @@ public class Navigation {
             r17 |= r16;
             r17 |= r25;
             r17 &= !b17;
-            o26 |= b17;
-            o27 |= b17;
-            o16 |= b17;
-            o25 |= b17;
+            if (targetLocation.equals(l17)) {
+                temp1 = true;
+                temp2 = r17;
+            }
         }
-        else {
-            o26 |= b17;
-            o27 |= b17;
-            o16 |= b17;
-            o25 |= b17;
-        }
+        o26 |= b17;
+        o27 |= b17;
+        o16 |= b17;
+        o25 |= b17;
 
-        if (rc.onTheMap(l45) && rc.canSenseLocation(l45)) {
+        if (rc.onTheMap(l45)) {
             if (rc.senseCloud(l45)) {
                 p45 = 1.5;
                 b45 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l45).getCurrentDirection();
-                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && currentDirection.equals(Direction.CENTER))) {
-                    p45 = rc.senseMapInfo(l45).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l45)) {
+                MapInfo mapInfo = rc.senseMapInfo(l45);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l45), currentDirection) > 0))) {
+                    p45 = mapInfo.getCooldownMultiplier(team);
                     b45 = false;
                 }
             }
@@ -1307,28 +1311,27 @@ public class Navigation {
             r45 |= r44;
             r45 |= r53;
             r45 &= !b45;
-            o36 |= b45;
-            o35 |= b45;
-            o44 |= b45;
-            o53 |= b45;
+            if (targetLocation.equals(l45)) {
+                temp1 = true;
+                temp2 = r45;
+            }
         }
-        else {
-            o36 |= b45;
-            o35 |= b45;
-            o44 |= b45;
-            o53 |= b45;
-        }
+        o36 |= b45;
+        o35 |= b45;
+        o44 |= b45;
+        o53 |= b45;
 
-        if (rc.onTheMap(l18) && rc.canSenseLocation(l18)) {
+        if (rc.onTheMap(l18)) {
             if (rc.senseCloud(l18)) {
                 p18 = 1.5;
                 b18 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l18).getCurrentDirection();
-                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && currentDirection.equals(Direction.CENTER))) {
-                    p18 = rc.senseMapInfo(l18).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l18)) {
+                MapInfo mapInfo = rc.senseMapInfo(l18);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l18), currentDirection) > 0))) {
+                    p18 = mapInfo.getCooldownMultiplier(team);
                     b18 = false;
                 }
             }
@@ -1349,26 +1352,26 @@ public class Navigation {
             r18 |= r17;
             r18 |= r26;
             r18 &= !b18;
-            o27 |= b18;
-            o17 |= b18;
-            o26 |= b18;
+            if (targetLocation.equals(l18)) {
+                temp1 = true;
+                temp2 = r18;
+            }
         }
-        else {
-            o27 |= b18;
-            o17 |= b18;
-            o26 |= b18;
-        }
+        o27 |= b18;
+        o17 |= b18;
+        o26 |= b18;
 
-        if (rc.onTheMap(l54) && rc.canSenseLocation(l54)) {
+        if (rc.onTheMap(l54)) {
             if (rc.senseCloud(l54)) {
                 p54 = 1.5;
                 b54 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l54).getCurrentDirection();
-                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && currentDirection.equals(Direction.CENTER))) {
-                    p54 = rc.senseMapInfo(l54).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l54)) {
+                MapInfo mapInfo = rc.senseMapInfo(l54);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l54), currentDirection) > 0))) {
+                    p54 = mapInfo.getCooldownMultiplier(team);
                     b54 = false;
                 }
             }
@@ -1389,26 +1392,26 @@ public class Navigation {
             r54 |= r44;
             r54 |= r53;
             r54 &= !b54;
-            o45 |= b54;
-            o44 |= b54;
-            o53 |= b54;
+            if (targetLocation.equals(l54)) {
+                temp1 = true;
+                temp2 = r54;
+            }
         }
-        else {
-            o45 |= b54;
-            o44 |= b54;
-            o53 |= b54;
-        }
+        o45 |= b54;
+        o44 |= b54;
+        o53 |= b54;
 
-        if (rc.onTheMap(l60) && rc.canSenseLocation(l60)) {
+        if (rc.onTheMap(l60)) {
             if (rc.senseCloud(l60)) {
                 p60 = 1.5;
                 b60 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l60).getCurrentDirection();
-                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && currentDirection.equals(Direction.CENTER))) {
-                    p60 = rc.senseMapInfo(l60).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l60)) {
+                MapInfo mapInfo = rc.senseMapInfo(l60);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l60), currentDirection) > 0))) {
+                    p60 = mapInfo.getCooldownMultiplier(team);
                     b60 = false;
                 }
             }
@@ -1424,24 +1427,25 @@ public class Navigation {
             r60 |= r53;
             r60 |= r52;
             r60 &= !b60;
-            o53 |= b60;
-            o52 |= b60;
+            if (targetLocation.equals(l60)) {
+                temp1 = true;
+                temp2 = r60;
+            }
         }
-        else {
-            o53 |= b60;
-            o52 |= b60;
-        }
+        o53 |= b60;
+        o52 |= b60;
 
-        if (rc.onTheMap(l37) && rc.canSenseLocation(l37)) {
+        if (rc.onTheMap(l37)) {
             if (rc.senseCloud(l37)) {
                 p37 = 1.5;
                 b37 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l37).getCurrentDirection();
-                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && currentDirection.equals(Direction.CENTER))) {
-                    p37 = rc.senseMapInfo(l37).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l37)) {
+                MapInfo mapInfo = rc.senseMapInfo(l37);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l37), currentDirection) > 0))) {
+                    p37 = mapInfo.getCooldownMultiplier(team);
                     b37 = false;
                 }
             }
@@ -1462,26 +1466,26 @@ public class Navigation {
             r37 |= r36;
             r37 |= r45;
             r37 &= !b37;
-            o27 |= b37;
-            o36 |= b37;
-            o45 |= b37;
+            if (targetLocation.equals(l37)) {
+                temp1 = true;
+                temp2 = r37;
+            }
         }
-        else {
-            o27 |= b37;
-            o36 |= b37;
-            o45 |= b37;
-        }
+        o27 |= b37;
+        o36 |= b37;
+        o45 |= b37;
 
-        if (rc.onTheMap(l8) && rc.canSenseLocation(l8)) {
+        if (rc.onTheMap(l8)) {
             if (rc.senseCloud(l8)) {
                 p8 = 1.5;
                 b8 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l8).getCurrentDirection();
-                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && currentDirection.equals(Direction.CENTER))) {
-                    p8 = rc.senseMapInfo(l8).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l8)) {
+                MapInfo mapInfo = rc.senseMapInfo(l8);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l8), currentDirection) > 0))) {
+                    p8 = mapInfo.getCooldownMultiplier(team);
                     b8 = false;
                 }
             }
@@ -1497,24 +1501,25 @@ public class Navigation {
             r8 |= r16;
             r8 |= r17;
             r8 &= !b8;
-            o16 |= b8;
-            o17 |= b8;
+            if (targetLocation.equals(l8)) {
+                temp1 = true;
+                temp2 = r8;
+            }
         }
-        else {
-            o16 |= b8;
-            o17 |= b8;
-        }
+        o16 |= b8;
+        o17 |= b8;
 
-        if (rc.onTheMap(l61) && rc.canSenseLocation(l61)) {
+        if (rc.onTheMap(l61)) {
             if (rc.senseCloud(l61)) {
                 p61 = 1.5;
                 b61 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l61).getCurrentDirection();
-                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && currentDirection.equals(Direction.CENTER))) {
-                    p61 = rc.senseMapInfo(l61).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l61)) {
+                MapInfo mapInfo = rc.senseMapInfo(l61);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l61), currentDirection) > 0))) {
+                    p61 = mapInfo.getCooldownMultiplier(team);
                     b61 = false;
                 }
             }
@@ -1540,28 +1545,27 @@ public class Navigation {
             r61 |= r52;
             r61 |= r60;
             r61 &= !b61;
-            o54 |= b61;
-            o53 |= b61;
-            o52 |= b61;
-            o60 |= b61;
+            if (targetLocation.equals(l61)) {
+                temp1 = true;
+                temp2 = r61;
+            }
         }
-        else {
-            o54 |= b61;
-            o53 |= b61;
-            o52 |= b61;
-            o60 |= b61;
-        }
+        o54 |= b61;
+        o53 |= b61;
+        o52 |= b61;
+        o60 |= b61;
 
-        if (rc.onTheMap(l46) && rc.canSenseLocation(l46)) {
+        if (rc.onTheMap(l46)) {
             if (rc.senseCloud(l46)) {
                 p46 = 1.5;
                 b46 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l46).getCurrentDirection();
-                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && currentDirection.equals(Direction.CENTER))) {
-                    p46 = rc.senseMapInfo(l46).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l46)) {
+                MapInfo mapInfo = rc.senseMapInfo(l46);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l46), currentDirection) > 0))) {
+                    p46 = mapInfo.getCooldownMultiplier(team);
                     b46 = false;
                 }
             }
@@ -1587,28 +1591,27 @@ public class Navigation {
             r46 |= r45;
             r46 |= r54;
             r46 &= !b46;
-            o37 |= b46;
-            o36 |= b46;
-            o45 |= b46;
-            o54 |= b46;
+            if (targetLocation.equals(l46)) {
+                temp1 = true;
+                temp2 = r46;
+            }
         }
-        else {
-            o37 |= b46;
-            o36 |= b46;
-            o45 |= b46;
-            o54 |= b46;
-        }
+        o37 |= b46;
+        o36 |= b46;
+        o45 |= b46;
+        o54 |= b46;
 
-        if (rc.onTheMap(l9) && rc.canSenseLocation(l9)) {
+        if (rc.onTheMap(l9)) {
             if (rc.senseCloud(l9)) {
                 p9 = 1.5;
                 b9 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l9).getCurrentDirection();
-                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && currentDirection.equals(Direction.CENTER))) {
-                    p9 = rc.senseMapInfo(l9).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l9)) {
+                MapInfo mapInfo = rc.senseMapInfo(l9);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l9), currentDirection) > 0))) {
+                    p9 = mapInfo.getCooldownMultiplier(team);
                     b9 = false;
                 }
             }
@@ -1634,28 +1637,27 @@ public class Navigation {
             r9 |= r8;
             r9 |= r16;
             r9 &= !b9;
-            o17 |= b9;
-            o18 |= b9;
-            o8 |= b9;
-            o16 |= b9;
+            if (targetLocation.equals(l9)) {
+                temp1 = true;
+                temp2 = r9;
+            }
         }
-        else {
-            o17 |= b9;
-            o18 |= b9;
-            o8 |= b9;
-            o16 |= b9;
-        }
+        o17 |= b9;
+        o18 |= b9;
+        o8 |= b9;
+        o16 |= b9;
 
-        if (rc.onTheMap(l28) && rc.canSenseLocation(l28)) {
+        if (rc.onTheMap(l28)) {
             if (rc.senseCloud(l28)) {
                 p28 = 1.5;
                 b28 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l28).getCurrentDirection();
-                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && currentDirection.equals(Direction.CENTER))) {
-                    p28 = rc.senseMapInfo(l28).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l28)) {
+                MapInfo mapInfo = rc.senseMapInfo(l28);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l28), currentDirection) > 0))) {
+                    p28 = mapInfo.getCooldownMultiplier(team);
                     b28 = false;
                 }
             }
@@ -1681,28 +1683,27 @@ public class Navigation {
             r28 |= r27;
             r28 |= r36;
             r28 &= !b28;
-            o37 |= b28;
-            o18 |= b28;
-            o27 |= b28;
-            o36 |= b28;
+            if (targetLocation.equals(l28)) {
+                temp1 = true;
+                temp2 = r28;
+            }
         }
-        else {
-            o37 |= b28;
-            o18 |= b28;
-            o27 |= b28;
-            o36 |= b28;
-        }
+        o37 |= b28;
+        o18 |= b28;
+        o27 |= b28;
+        o36 |= b28;
 
-        if (rc.onTheMap(l10) && rc.canSenseLocation(l10)) {
+        if (rc.onTheMap(l10)) {
             if (rc.senseCloud(l10)) {
                 p10 = 1.5;
                 b10 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l10).getCurrentDirection();
-                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && currentDirection.equals(Direction.CENTER))) {
-                    p10 = rc.senseMapInfo(l10).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l10)) {
+                MapInfo mapInfo = rc.senseMapInfo(l10);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l10), currentDirection) > 0))) {
+                    p10 = mapInfo.getCooldownMultiplier(team);
                     b10 = false;
                 }
             }
@@ -1728,28 +1729,27 @@ public class Navigation {
             r10 |= r9;
             r10 |= r17;
             r10 &= !b10;
-            o18 |= b10;
-            o19 |= b10;
-            o9 |= b10;
-            o17 |= b10;
+            if (targetLocation.equals(l10)) {
+                temp1 = true;
+                temp2 = r10;
+            }
         }
-        else {
-            o18 |= b10;
-            o19 |= b10;
-            o9 |= b10;
-            o17 |= b10;
-        }
+        o18 |= b10;
+        o19 |= b10;
+        o9 |= b10;
+        o17 |= b10;
 
-        if (rc.onTheMap(l62) && rc.canSenseLocation(l62)) {
+        if (rc.onTheMap(l62)) {
             if (rc.senseCloud(l62)) {
                 p62 = 1.5;
                 b62 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l62).getCurrentDirection();
-                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && currentDirection.equals(Direction.CENTER))) {
-                    p62 = rc.senseMapInfo(l62).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l62)) {
+                MapInfo mapInfo = rc.senseMapInfo(l62);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l62), currentDirection) > 0))) {
+                    p62 = mapInfo.getCooldownMultiplier(team);
                     b62 = false;
                 }
             }
@@ -1775,28 +1775,27 @@ public class Navigation {
             r62 |= r53;
             r62 |= r61;
             r62 &= !b62;
-            o55 |= b62;
-            o54 |= b62;
-            o53 |= b62;
-            o61 |= b62;
+            if (targetLocation.equals(l62)) {
+                temp1 = true;
+                temp2 = r62;
+            }
         }
-        else {
-            o55 |= b62;
-            o54 |= b62;
-            o53 |= b62;
-            o61 |= b62;
-        }
+        o55 |= b62;
+        o54 |= b62;
+        o53 |= b62;
+        o61 |= b62;
 
-        if (rc.onTheMap(l55) && rc.canSenseLocation(l55)) {
+        if (rc.onTheMap(l55)) {
             if (rc.senseCloud(l55)) {
                 p55 = 1.5;
                 b55 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l55).getCurrentDirection();
-                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && currentDirection.equals(Direction.CENTER))) {
-                    p55 = rc.senseMapInfo(l55).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l55)) {
+                MapInfo mapInfo = rc.senseMapInfo(l55);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l55), currentDirection) > 0))) {
+                    p55 = mapInfo.getCooldownMultiplier(team);
                     b55 = false;
                 }
             }
@@ -1822,28 +1821,27 @@ public class Navigation {
             r55 |= r54;
             r55 |= r62;
             r55 &= !b55;
-            o46 |= b55;
-            o45 |= b55;
-            o54 |= b55;
-            o62 |= b55;
+            if (targetLocation.equals(l55)) {
+                temp1 = true;
+                temp2 = r55;
+            }
         }
-        else {
-            o46 |= b55;
-            o45 |= b55;
-            o54 |= b55;
-            o62 |= b55;
-        }
+        o46 |= b55;
+        o45 |= b55;
+        o54 |= b55;
+        o62 |= b55;
 
-        if (rc.onTheMap(l19) && rc.canSenseLocation(l19)) {
+        if (rc.onTheMap(l19)) {
             if (rc.senseCloud(l19)) {
                 p19 = 1.5;
                 b19 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l19).getCurrentDirection();
-                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && currentDirection.equals(Direction.CENTER))) {
-                    p19 = rc.senseMapInfo(l19).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l19)) {
+                MapInfo mapInfo = rc.senseMapInfo(l19);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l19), currentDirection) > 0))) {
+                    p19 = mapInfo.getCooldownMultiplier(team);
                     b19 = false;
                 }
             }
@@ -1869,28 +1867,27 @@ public class Navigation {
             r19 |= r18;
             r19 |= r27;
             r19 &= !b19;
-            o28 |= b19;
-            o10 |= b19;
-            o18 |= b19;
-            o27 |= b19;
+            if (targetLocation.equals(l19)) {
+                temp1 = true;
+                temp2 = r19;
+            }
         }
-        else {
-            o28 |= b19;
-            o10 |= b19;
-            o18 |= b19;
-            o27 |= b19;
-        }
+        o28 |= b19;
+        o10 |= b19;
+        o18 |= b19;
+        o27 |= b19;
 
-        if (rc.onTheMap(l63) && rc.canSenseLocation(l63)) {
+        if (rc.onTheMap(l63)) {
             if (rc.senseCloud(l63)) {
                 p63 = 1.5;
                 b63 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l63).getCurrentDirection();
-                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && currentDirection.equals(Direction.CENTER))) {
-                    p63 = rc.senseMapInfo(l63).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l63)) {
+                MapInfo mapInfo = rc.senseMapInfo(l63);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l63), currentDirection) > 0))) {
+                    p63 = mapInfo.getCooldownMultiplier(team);
                     b63 = false;
                 }
             }
@@ -1911,26 +1908,26 @@ public class Navigation {
             r63 |= r54;
             r63 |= r62;
             r63 &= !b63;
-            o55 |= b63;
-            o54 |= b63;
-            o62 |= b63;
+            if (targetLocation.equals(l63)) {
+                temp1 = true;
+                temp2 = r63;
+            }
         }
-        else {
-            o55 |= b63;
-            o54 |= b63;
-            o62 |= b63;
-        }
+        o55 |= b63;
+        o54 |= b63;
+        o62 |= b63;
 
-        if (rc.onTheMap(l11) && rc.canSenseLocation(l11)) {
+        if (rc.onTheMap(l11)) {
             if (rc.senseCloud(l11)) {
                 p11 = 1.5;
                 b11 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l11).getCurrentDirection();
-                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && currentDirection.equals(Direction.CENTER))) {
-                    p11 = rc.senseMapInfo(l11).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l11)) {
+                MapInfo mapInfo = rc.senseMapInfo(l11);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l11), currentDirection) > 0))) {
+                    p11 = mapInfo.getCooldownMultiplier(team);
                     b11 = false;
                 }
             }
@@ -1951,26 +1948,26 @@ public class Navigation {
             r11 |= r10;
             r11 |= r18;
             r11 &= !b11;
-            o19 |= b11;
-            o10 |= b11;
-            o18 |= b11;
+            if (targetLocation.equals(l11)) {
+                temp1 = true;
+                temp2 = r11;
+            }
         }
-        else {
-            o19 |= b11;
-            o10 |= b11;
-            o18 |= b11;
-        }
+        o19 |= b11;
+        o10 |= b11;
+        o18 |= b11;
 
-        if (rc.onTheMap(l2) && rc.canSenseLocation(l2)) {
+        if (rc.onTheMap(l2)) {
             if (rc.senseCloud(l2)) {
                 p2 = 1.5;
                 b2 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l2).getCurrentDirection();
-                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && currentDirection.equals(Direction.CENTER))) {
-                    p2 = rc.senseMapInfo(l2).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l2)) {
+                MapInfo mapInfo = rc.senseMapInfo(l2);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l2), currentDirection) > 0))) {
+                    p2 = mapInfo.getCooldownMultiplier(team);
                     b2 = false;
                 }
             }
@@ -1986,24 +1983,25 @@ public class Navigation {
             r2 |= r8;
             r2 |= r9;
             r2 &= !b2;
-            o8 |= b2;
-            o9 |= b2;
+            if (targetLocation.equals(l2)) {
+                temp1 = true;
+                temp2 = r2;
+            }
         }
-        else {
-            o8 |= b2;
-            o9 |= b2;
-        }
+        o8 |= b2;
+        o9 |= b2;
 
-        if (rc.onTheMap(l66) && rc.canSenseLocation(l66)) {
+        if (rc.onTheMap(l66)) {
             if (rc.senseCloud(l66)) {
                 p66 = 1.5;
                 b66 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l66).getCurrentDirection();
-                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && currentDirection.equals(Direction.CENTER))) {
-                    p66 = rc.senseMapInfo(l66).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l66)) {
+                MapInfo mapInfo = rc.senseMapInfo(l66);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l66), currentDirection) > 0))) {
+                    p66 = mapInfo.getCooldownMultiplier(team);
                     b66 = false;
                 }
             }
@@ -2019,24 +2017,25 @@ public class Navigation {
             r66 |= r61;
             r66 |= r60;
             r66 &= !b66;
-            o61 |= b66;
-            o60 |= b66;
+            if (targetLocation.equals(l66)) {
+                temp1 = true;
+                temp2 = r66;
+            }
         }
-        else {
-            o61 |= b66;
-            o60 |= b66;
-        }
+        o61 |= b66;
+        o60 |= b66;
 
-        if (rc.onTheMap(l38) && rc.canSenseLocation(l38)) {
+        if (rc.onTheMap(l38)) {
             if (rc.senseCloud(l38)) {
                 p38 = 1.5;
                 b38 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l38).getCurrentDirection();
-                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && currentDirection.equals(Direction.CENTER))) {
-                    p38 = rc.senseMapInfo(l38).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l38)) {
+                MapInfo mapInfo = rc.senseMapInfo(l38);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l38), currentDirection) > 0))) {
+                    p38 = mapInfo.getCooldownMultiplier(team);
                     b38 = false;
                 }
             }
@@ -2057,26 +2056,26 @@ public class Navigation {
             r38 |= r37;
             r38 |= r46;
             r38 &= !b38;
-            o28 |= b38;
-            o37 |= b38;
-            o46 |= b38;
+            if (targetLocation.equals(l38)) {
+                temp1 = true;
+                temp2 = r38;
+            }
         }
-        else {
-            o28 |= b38;
-            o37 |= b38;
-            o46 |= b38;
-        }
+        o28 |= b38;
+        o37 |= b38;
+        o46 |= b38;
 
-        if (rc.onTheMap(l3) && rc.canSenseLocation(l3)) {
+        if (rc.onTheMap(l3)) {
             if (rc.senseCloud(l3)) {
                 p3 = 1.5;
                 b3 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l3).getCurrentDirection();
-                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && currentDirection.equals(Direction.CENTER))) {
-                    p3 = rc.senseMapInfo(l3).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l3)) {
+                MapInfo mapInfo = rc.senseMapInfo(l3);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l3), currentDirection) > 0))) {
+                    p3 = mapInfo.getCooldownMultiplier(team);
                     b3 = false;
                 }
             }
@@ -2102,28 +2101,27 @@ public class Navigation {
             r3 |= r2;
             r3 |= r8;
             r3 &= !b3;
-            o9 |= b3;
-            o10 |= b3;
-            o2 |= b3;
-            o8 |= b3;
+            if (targetLocation.equals(l3)) {
+                temp1 = true;
+                temp2 = r3;
+            }
         }
-        else {
-            o9 |= b3;
-            o10 |= b3;
-            o2 |= b3;
-            o8 |= b3;
-        }
+        o9 |= b3;
+        o10 |= b3;
+        o2 |= b3;
+        o8 |= b3;
 
-        if (rc.onTheMap(l47) && rc.canSenseLocation(l47)) {
+        if (rc.onTheMap(l47)) {
             if (rc.senseCloud(l47)) {
                 p47 = 1.5;
                 b47 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l47).getCurrentDirection();
-                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && currentDirection.equals(Direction.CENTER))) {
-                    p47 = rc.senseMapInfo(l47).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l47)) {
+                MapInfo mapInfo = rc.senseMapInfo(l47);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l47), currentDirection) > 0))) {
+                    p47 = mapInfo.getCooldownMultiplier(team);
                     b47 = false;
                 }
             }
@@ -2149,28 +2147,27 @@ public class Navigation {
             r47 |= r46;
             r47 |= r55;
             r47 &= !b47;
-            o38 |= b47;
-            o37 |= b47;
-            o46 |= b47;
-            o55 |= b47;
+            if (targetLocation.equals(l47)) {
+                temp1 = true;
+                temp2 = r47;
+            }
         }
-        else {
-            o38 |= b47;
-            o37 |= b47;
-            o46 |= b47;
-            o55 |= b47;
-        }
+        o38 |= b47;
+        o37 |= b47;
+        o46 |= b47;
+        o55 |= b47;
 
-        if (rc.onTheMap(l29) && rc.canSenseLocation(l29)) {
+        if (rc.onTheMap(l29)) {
             if (rc.senseCloud(l29)) {
                 p29 = 1.5;
                 b29 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l29).getCurrentDirection();
-                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && currentDirection.equals(Direction.CENTER))) {
-                    p29 = rc.senseMapInfo(l29).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l29)) {
+                MapInfo mapInfo = rc.senseMapInfo(l29);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l29), currentDirection) > 0))) {
+                    p29 = mapInfo.getCooldownMultiplier(team);
                     b29 = false;
                 }
             }
@@ -2196,28 +2193,27 @@ public class Navigation {
             r29 |= r28;
             r29 |= r37;
             r29 &= !b29;
-            o38 |= b29;
-            o19 |= b29;
-            o28 |= b29;
-            o37 |= b29;
+            if (targetLocation.equals(l29)) {
+                temp1 = true;
+                temp2 = r29;
+            }
         }
-        else {
-            o38 |= b29;
-            o19 |= b29;
-            o28 |= b29;
-            o37 |= b29;
-        }
+        o38 |= b29;
+        o19 |= b29;
+        o28 |= b29;
+        o37 |= b29;
 
-        if (rc.onTheMap(l67) && rc.canSenseLocation(l67)) {
+        if (rc.onTheMap(l67)) {
             if (rc.senseCloud(l67)) {
                 p67 = 1.5;
                 b67 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l67).getCurrentDirection();
-                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && currentDirection.equals(Direction.CENTER))) {
-                    p67 = rc.senseMapInfo(l67).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l67)) {
+                MapInfo mapInfo = rc.senseMapInfo(l67);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l67), currentDirection) > 0))) {
+                    p67 = mapInfo.getCooldownMultiplier(team);
                     b67 = false;
                 }
             }
@@ -2243,28 +2239,27 @@ public class Navigation {
             r67 |= r60;
             r67 |= r66;
             r67 &= !b67;
-            o62 |= b67;
-            o61 |= b67;
-            o60 |= b67;
-            o66 |= b67;
+            if (targetLocation.equals(l67)) {
+                temp1 = true;
+                temp2 = r67;
+            }
         }
-        else {
-            o62 |= b67;
-            o61 |= b67;
-            o60 |= b67;
-            o66 |= b67;
-        }
+        o62 |= b67;
+        o61 |= b67;
+        o60 |= b67;
+        o66 |= b67;
 
-        if (rc.onTheMap(l68) && rc.canSenseLocation(l68)) {
+        if (rc.onTheMap(l68)) {
             if (rc.senseCloud(l68)) {
                 p68 = 1.5;
                 b68 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l68).getCurrentDirection();
-                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && currentDirection.equals(Direction.CENTER))) {
-                    p68 = rc.senseMapInfo(l68).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l68)) {
+                MapInfo mapInfo = rc.senseMapInfo(l68);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l68), currentDirection) > 0))) {
+                    p68 = mapInfo.getCooldownMultiplier(team);
                     b68 = false;
                 }
             }
@@ -2290,28 +2285,27 @@ public class Navigation {
             r68 |= r61;
             r68 |= r67;
             r68 &= !b68;
-            o63 |= b68;
-            o62 |= b68;
-            o61 |= b68;
-            o67 |= b68;
+            if (targetLocation.equals(l68)) {
+                temp1 = true;
+                temp2 = r68;
+            }
         }
-        else {
-            o63 |= b68;
-            o62 |= b68;
-            o61 |= b68;
-            o67 |= b68;
-        }
+        o63 |= b68;
+        o62 |= b68;
+        o61 |= b68;
+        o67 |= b68;
 
-        if (rc.onTheMap(l4) && rc.canSenseLocation(l4)) {
+        if (rc.onTheMap(l4)) {
             if (rc.senseCloud(l4)) {
                 p4 = 1.5;
                 b4 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l4).getCurrentDirection();
-                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && currentDirection.equals(Direction.CENTER))) {
-                    p4 = rc.senseMapInfo(l4).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l4)) {
+                MapInfo mapInfo = rc.senseMapInfo(l4);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l4), currentDirection) > 0))) {
+                    p4 = mapInfo.getCooldownMultiplier(team);
                     b4 = false;
                 }
             }
@@ -2337,28 +2331,27 @@ public class Navigation {
             r4 |= r3;
             r4 |= r9;
             r4 &= !b4;
-            o10 |= b4;
-            o11 |= b4;
-            o3 |= b4;
-            o9 |= b4;
+            if (targetLocation.equals(l4)) {
+                temp1 = true;
+                temp2 = r4;
+            }
         }
-        else {
-            o10 |= b4;
-            o11 |= b4;
-            o3 |= b4;
-            o9 |= b4;
-        }
+        o10 |= b4;
+        o11 |= b4;
+        o3 |= b4;
+        o9 |= b4;
 
-        if (rc.onTheMap(l56) && rc.canSenseLocation(l56)) {
+        if (rc.onTheMap(l56)) {
             if (rc.senseCloud(l56)) {
                 p56 = 1.5;
                 b56 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l56).getCurrentDirection();
-                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && currentDirection.equals(Direction.CENTER))) {
-                    p56 = rc.senseMapInfo(l56).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l56)) {
+                MapInfo mapInfo = rc.senseMapInfo(l56);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l56), currentDirection) > 0))) {
+                    p56 = mapInfo.getCooldownMultiplier(team);
                     b56 = false;
                 }
             }
@@ -2384,28 +2377,27 @@ public class Navigation {
             r56 |= r55;
             r56 |= r63;
             r56 &= !b56;
-            o47 |= b56;
-            o46 |= b56;
-            o55 |= b56;
-            o63 |= b56;
+            if (targetLocation.equals(l56)) {
+                temp1 = true;
+                temp2 = r56;
+            }
         }
-        else {
-            o47 |= b56;
-            o46 |= b56;
-            o55 |= b56;
-            o63 |= b56;
-        }
+        o47 |= b56;
+        o46 |= b56;
+        o55 |= b56;
+        o63 |= b56;
 
-        if (rc.onTheMap(l20) && rc.canSenseLocation(l20)) {
+        if (rc.onTheMap(l20)) {
             if (rc.senseCloud(l20)) {
                 p20 = 1.5;
                 b20 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l20).getCurrentDirection();
-                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && currentDirection.equals(Direction.CENTER))) {
-                    p20 = rc.senseMapInfo(l20).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l20)) {
+                MapInfo mapInfo = rc.senseMapInfo(l20);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l20), currentDirection) > 0))) {
+                    p20 = mapInfo.getCooldownMultiplier(team);
                     b20 = false;
                 }
             }
@@ -2431,19 +2423,18 @@ public class Navigation {
             r20 |= r19;
             r20 |= r28;
             r20 &= !b20;
-            o29 |= b20;
-            o11 |= b20;
-            o19 |= b20;
-            o28 |= b20;
+            if (targetLocation.equals(l20)) {
+                temp1 = true;
+                temp2 = r20;
+            }
         }
-        else {
-            o29 |= b20;
-            o11 |= b20;
-            o19 |= b20;
-            o28 |= b20;
-        }
+        o29 |= b20;
+        o11 |= b20;
+        o19 |= b20;
+        o28 |= b20;
 
-        int dx = targetLocation.x - l34.x;
+        if (temp1 && temp2) {
+            int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -2533,10 +2524,6 @@ public class Navigation {
 
             case 0:
                 switch(dy) {
-                    case 0:
-                        if (v34 < 10000) {
-                            return d34;
-                        }
                     case 1:
                         if (v35 < 10000) {
                             return d35;
@@ -2640,6 +2627,7 @@ public class Navigation {
                 } break;
 
         }
+        }
     
         o2 = r2;
         o3 = r3;
@@ -2661,7 +2649,6 @@ public class Navigation {
             if (dist2 < localBest) {
                 localBest = dist2;
                 ans = d2;
-                best = l2;
             }
         }
 
@@ -2670,7 +2657,6 @@ public class Navigation {
             if (dist3 < localBest) {
                 localBest = dist3;
                 ans = d3;
-                best = l3;
             }
         }
 
@@ -2679,7 +2665,6 @@ public class Navigation {
             if (dist4 < localBest) {
                 localBest = dist4;
                 ans = d4;
-                best = l4;
             }
         }
 
@@ -2688,7 +2673,6 @@ public class Navigation {
             if (dist11 < localBest) {
                 localBest = dist11;
                 ans = d11;
-                best = l11;
             }
         }
 
@@ -2697,7 +2681,6 @@ public class Navigation {
             if (dist20 < localBest) {
                 localBest = dist20;
                 ans = d20;
-                best = l20;
             }
         }
 
@@ -2706,7 +2689,6 @@ public class Navigation {
             if (dist29 < localBest) {
                 localBest = dist29;
                 ans = d29;
-                best = l29;
             }
         }
 
@@ -2715,7 +2697,6 @@ public class Navigation {
             if (dist38 < localBest) {
                 localBest = dist38;
                 ans = d38;
-                best = l38;
             }
         }
 
@@ -2724,7 +2705,6 @@ public class Navigation {
             if (dist47 < localBest) {
                 localBest = dist47;
                 ans = d47;
-                best = l47;
             }
         }
 
@@ -2733,7 +2713,6 @@ public class Navigation {
             if (dist56 < localBest) {
                 localBest = dist56;
                 ans = d56;
-                best = l56;
             }
         }
 
@@ -2742,7 +2721,6 @@ public class Navigation {
             if (dist63 < localBest) {
                 localBest = dist63;
                 ans = d63;
-                best = l63;
             }
         }
 
@@ -2751,7 +2729,6 @@ public class Navigation {
             if (dist66 < localBest) {
                 localBest = dist66;
                 ans = d66;
-                best = l66;
             }
         }
 
@@ -2760,7 +2737,6 @@ public class Navigation {
             if (dist67 < localBest) {
                 localBest = dist67;
                 ans = d67;
-                best = l67;
             }
         }
 
@@ -2769,733 +2745,23 @@ public class Navigation {
             if (dist68 < localBest) {
                 localBest = dist68;
                 ans = d68;
-                best = l68;
             }
         }
 
-        draws0();
-        rc.setIndicatorDot(best, 0, 0, 255);
         if (localBest < globalBest) {
             globalBest = localBest;
+            bug.reset();
             return ans;
         }
-        return getBestDirectionWallFollow0(ans);
-    }
 
-    private Direction getBestDirectionWallFollow0(Direction prev) throws GameActionException {
-        Direction ans = Direction.CENTER;
-        int minDistance = closestWallLocations.isEmpty() ? 1000000 : currentLocation.distanceSquaredTo(closestWallLocations.get(0));
-    
-        if (b2) {
-            int distance = currentLocation.distanceSquaredTo(l2);
-            if (distance == minDistance) {
-                closestWallLocations.add(l2);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l2);
-                minDistance = distance;
-            }
-        }
-
-        if (b3) {
-            int distance = currentLocation.distanceSquaredTo(l3);
-            if (distance == minDistance) {
-                closestWallLocations.add(l3);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l3);
-                minDistance = distance;
-            }
-        }
-
-        if (b4) {
-            int distance = currentLocation.distanceSquaredTo(l4);
-            if (distance == minDistance) {
-                closestWallLocations.add(l4);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l4);
-                minDistance = distance;
-            }
-        }
-
-        if (b8) {
-            int distance = currentLocation.distanceSquaredTo(l8);
-            if (distance == minDistance) {
-                closestWallLocations.add(l8);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l8);
-                minDistance = distance;
-            }
-        }
-
-        if (b9) {
-            int distance = currentLocation.distanceSquaredTo(l9);
-            if (distance == minDistance) {
-                closestWallLocations.add(l9);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l9);
-                minDistance = distance;
-            }
-        }
-
-        if (b10) {
-            int distance = currentLocation.distanceSquaredTo(l10);
-            if (distance == minDistance) {
-                closestWallLocations.add(l10);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l10);
-                minDistance = distance;
-            }
-        }
-
-        if (b11) {
-            int distance = currentLocation.distanceSquaredTo(l11);
-            if (distance == minDistance) {
-                closestWallLocations.add(l11);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l11);
-                minDistance = distance;
-            }
-        }
-
-        if (b16) {
-            int distance = currentLocation.distanceSquaredTo(l16);
-            if (distance == minDistance) {
-                closestWallLocations.add(l16);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l16);
-                minDistance = distance;
-            }
-        }
-
-        if (b17) {
-            int distance = currentLocation.distanceSquaredTo(l17);
-            if (distance == minDistance) {
-                closestWallLocations.add(l17);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l17);
-                minDistance = distance;
-            }
-        }
-
-        if (b18) {
-            int distance = currentLocation.distanceSquaredTo(l18);
-            if (distance == minDistance) {
-                closestWallLocations.add(l18);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l18);
-                minDistance = distance;
-            }
-        }
-
-        if (b19) {
-            int distance = currentLocation.distanceSquaredTo(l19);
-            if (distance == minDistance) {
-                closestWallLocations.add(l19);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l19);
-                minDistance = distance;
-            }
-        }
-
-        if (b20) {
-            int distance = currentLocation.distanceSquaredTo(l20);
-            if (distance == minDistance) {
-                closestWallLocations.add(l20);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l20);
-                minDistance = distance;
-            }
-        }
-
-        if (b25) {
-            int distance = currentLocation.distanceSquaredTo(l25);
-            if (distance == minDistance) {
-                closestWallLocations.add(l25);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l25);
-                minDistance = distance;
-            }
-        }
-
-        if (b26) {
-            int distance = currentLocation.distanceSquaredTo(l26);
-            if (distance == minDistance) {
-                closestWallLocations.add(l26);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l26);
-                minDistance = distance;
-            }
-        }
-
-        if (b27) {
-            int distance = currentLocation.distanceSquaredTo(l27);
-            if (distance == minDistance) {
-                closestWallLocations.add(l27);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l27);
-                minDistance = distance;
-            }
-        }
-
-        if (b28) {
-            int distance = currentLocation.distanceSquaredTo(l28);
-            if (distance == minDistance) {
-                closestWallLocations.add(l28);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l28);
-                minDistance = distance;
-            }
-        }
-
-        if (b29) {
-            int distance = currentLocation.distanceSquaredTo(l29);
-            if (distance == minDistance) {
-                closestWallLocations.add(l29);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l29);
-                minDistance = distance;
-            }
-        }
-
-        if (b35) {
-            int distance = currentLocation.distanceSquaredTo(l35);
-            if (distance == minDistance) {
-                closestWallLocations.add(l35);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l35);
-                minDistance = distance;
-            }
-        }
-
-        if (b36) {
-            int distance = currentLocation.distanceSquaredTo(l36);
-            if (distance == minDistance) {
-                closestWallLocations.add(l36);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l36);
-                minDistance = distance;
-            }
-        }
-
-        if (b37) {
-            int distance = currentLocation.distanceSquaredTo(l37);
-            if (distance == minDistance) {
-                closestWallLocations.add(l37);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l37);
-                minDistance = distance;
-            }
-        }
-
-        if (b38) {
-            int distance = currentLocation.distanceSquaredTo(l38);
-            if (distance == minDistance) {
-                closestWallLocations.add(l38);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l38);
-                minDistance = distance;
-            }
-        }
-
-        if (b43) {
-            int distance = currentLocation.distanceSquaredTo(l43);
-            if (distance == minDistance) {
-                closestWallLocations.add(l43);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l43);
-                minDistance = distance;
-            }
-        }
-
-        if (b44) {
-            int distance = currentLocation.distanceSquaredTo(l44);
-            if (distance == minDistance) {
-                closestWallLocations.add(l44);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l44);
-                minDistance = distance;
-            }
-        }
-
-        if (b45) {
-            int distance = currentLocation.distanceSquaredTo(l45);
-            if (distance == minDistance) {
-                closestWallLocations.add(l45);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l45);
-                minDistance = distance;
-            }
-        }
-
-        if (b46) {
-            int distance = currentLocation.distanceSquaredTo(l46);
-            if (distance == minDistance) {
-                closestWallLocations.add(l46);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l46);
-                minDistance = distance;
-            }
-        }
-
-        if (b47) {
-            int distance = currentLocation.distanceSquaredTo(l47);
-            if (distance == minDistance) {
-                closestWallLocations.add(l47);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l47);
-                minDistance = distance;
-            }
-        }
-
-        if (b52) {
-            int distance = currentLocation.distanceSquaredTo(l52);
-            if (distance == minDistance) {
-                closestWallLocations.add(l52);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l52);
-                minDistance = distance;
-            }
-        }
-
-        if (b53) {
-            int distance = currentLocation.distanceSquaredTo(l53);
-            if (distance == minDistance) {
-                closestWallLocations.add(l53);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l53);
-                minDistance = distance;
-            }
-        }
-
-        if (b54) {
-            int distance = currentLocation.distanceSquaredTo(l54);
-            if (distance == minDistance) {
-                closestWallLocations.add(l54);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l54);
-                minDistance = distance;
-            }
-        }
-
-        if (b55) {
-            int distance = currentLocation.distanceSquaredTo(l55);
-            if (distance == minDistance) {
-                closestWallLocations.add(l55);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l55);
-                minDistance = distance;
-            }
-        }
-
-        if (b56) {
-            int distance = currentLocation.distanceSquaredTo(l56);
-            if (distance == minDistance) {
-                closestWallLocations.add(l56);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l56);
-                minDistance = distance;
-            }
-        }
-
-        if (b60) {
-            int distance = currentLocation.distanceSquaredTo(l60);
-            if (distance == minDistance) {
-                closestWallLocations.add(l60);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l60);
-                minDistance = distance;
-            }
-        }
-
-        if (b61) {
-            int distance = currentLocation.distanceSquaredTo(l61);
-            if (distance == minDistance) {
-                closestWallLocations.add(l61);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l61);
-                minDistance = distance;
-            }
-        }
-
-        if (b62) {
-            int distance = currentLocation.distanceSquaredTo(l62);
-            if (distance == minDistance) {
-                closestWallLocations.add(l62);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l62);
-                minDistance = distance;
-            }
-        }
-
-        if (b63) {
-            int distance = currentLocation.distanceSquaredTo(l63);
-            if (distance == minDistance) {
-                closestWallLocations.add(l63);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l63);
-                minDistance = distance;
-            }
-        }
-
-        if (b66) {
-            int distance = currentLocation.distanceSquaredTo(l66);
-            if (distance == minDistance) {
-                closestWallLocations.add(l66);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l66);
-                minDistance = distance;
-            }
-        }
-
-        if (b67) {
-            int distance = currentLocation.distanceSquaredTo(l67);
-            if (distance == minDistance) {
-                closestWallLocations.add(l67);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l67);
-                minDistance = distance;
-            }
-        }
-
-        if (b68) {
-            int distance = currentLocation.distanceSquaredTo(l68);
-            if (distance == minDistance) {
-                closestWallLocations.add(l68);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l68);
-                minDistance = distance;
-            }
-        }
-
-        if (minDistance > 2) { return prev; }
-        int maxDot = -999999;
-        minDistance = 1000000;
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            Direction vertical = currentLocation.directionTo(closestWallLocation);
-
-            Direction tangent1 = vertical.rotateLeft().rotateLeft();
-            Direction tangent2 = vertical.rotateRight().rotateRight();
-
-            int dx = lastDirection.getDeltaX();
-            int dy = lastDirection.getDeltaY();
-
-            int dot1 = tangent1.getDeltaX() * dx + tangent1.getDeltaY() * dy;
-            int dot2 = tangent2.getDeltaX() * dx + tangent2.getDeltaY() * dy;
-
-            int distance1 = currentLocation.add(tangent1).distanceSquaredTo(targetLocation);
-            int distance2 = currentLocation.add(tangent2).distanceSquaredTo(targetLocation);
-
-            if (!rc.canMove(tangent1)) {
-                dot1 = -1000000;
-            }
-
-            if (!rc.canMove(tangent2)) {
-                dot2 = -1000000;
-            }
-
-            if (dot1 > maxDot) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 > maxDot) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-
-            if (dot1 == maxDot && distance1 < minDistance) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 == maxDot && distance2 < minDistance) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-        }
-        draws0();
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            rc.setIndicatorDot(closestWallLocation, 255, 0, 0);
-        }
-        return ans;
-    }
-
-    private void draws0() throws GameActionException {
-    
-        rc.setIndicatorDot(l2, 255, 0, 255);
-        if (b2) {
-            rc.setIndicatorDot(l2, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l3, 255, 0, 255);
-        if (b3) {
-            rc.setIndicatorDot(l3, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l4, 255, 0, 255);
-        if (b4) {
-            rc.setIndicatorDot(l4, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l8, 255, 0, 255);
-        if (b8) {
-            rc.setIndicatorDot(l8, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l9, 255, 0, 255);
-        if (b9) {
-            rc.setIndicatorDot(l9, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l10, 255, 0, 255);
-        if (b10) {
-            rc.setIndicatorDot(l10, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l11, 255, 0, 255);
-        if (b11) {
-            rc.setIndicatorDot(l11, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l16, 255, 0, 255);
-        if (b16) {
-            rc.setIndicatorDot(l16, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l17, 255, 0, 255);
-        if (b17) {
-            rc.setIndicatorDot(l17, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l18, 255, 0, 255);
-        if (b18) {
-            rc.setIndicatorDot(l18, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l19, 255, 0, 255);
-        if (b19) {
-            rc.setIndicatorDot(l19, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l20, 255, 0, 255);
-        if (b20) {
-            rc.setIndicatorDot(l20, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l25, 255, 0, 255);
-        if (b25) {
-            rc.setIndicatorDot(l25, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l26, 255, 0, 255);
-        if (b26) {
-            rc.setIndicatorDot(l26, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l27, 255, 0, 255);
-        if (b27) {
-            rc.setIndicatorDot(l27, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l28, 255, 0, 255);
-        if (b28) {
-            rc.setIndicatorDot(l28, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l29, 255, 0, 255);
-        if (b29) {
-            rc.setIndicatorDot(l29, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l35, 255, 0, 255);
-        if (b35) {
-            rc.setIndicatorDot(l35, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l36, 255, 0, 255);
-        if (b36) {
-            rc.setIndicatorDot(l36, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l37, 255, 0, 255);
-        if (b37) {
-            rc.setIndicatorDot(l37, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l38, 255, 0, 255);
-        if (b38) {
-            rc.setIndicatorDot(l38, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l43, 255, 0, 255);
-        if (b43) {
-            rc.setIndicatorDot(l43, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l44, 255, 0, 255);
-        if (b44) {
-            rc.setIndicatorDot(l44, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l45, 255, 0, 255);
-        if (b45) {
-            rc.setIndicatorDot(l45, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l46, 255, 0, 255);
-        if (b46) {
-            rc.setIndicatorDot(l46, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l47, 255, 0, 255);
-        if (b47) {
-            rc.setIndicatorDot(l47, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l52, 255, 0, 255);
-        if (b52) {
-            rc.setIndicatorDot(l52, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l53, 255, 0, 255);
-        if (b53) {
-            rc.setIndicatorDot(l53, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l54, 255, 0, 255);
-        if (b54) {
-            rc.setIndicatorDot(l54, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l55, 255, 0, 255);
-        if (b55) {
-            rc.setIndicatorDot(l55, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l56, 255, 0, 255);
-        if (b56) {
-            rc.setIndicatorDot(l56, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l60, 255, 0, 255);
-        if (b60) {
-            rc.setIndicatorDot(l60, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l61, 255, 0, 255);
-        if (b61) {
-            rc.setIndicatorDot(l61, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l62, 255, 0, 255);
-        if (b62) {
-            rc.setIndicatorDot(l62, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l63, 255, 0, 255);
-        if (b63) {
-            rc.setIndicatorDot(l63, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l66, 255, 0, 255);
-        if (b66) {
-            rc.setIndicatorDot(l66, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l67, 255, 0, 255);
-        if (b67) {
-            rc.setIndicatorDot(l67, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l68, 255, 0, 255);
-        if (b68) {
-            rc.setIndicatorDot(l68, 255, 255, 255);
-        }
-
+        bug.move(targetLocation);
+        return null;
     }
 
     private Direction getBestDirection1() throws GameActionException {
-        MapLocation best = currentLocation;
         double localBest = 1000000.0;
+        boolean temp1 = false;
+        boolean temp2 = false;
         l34 = currentLocation;
         v34 = 0;
         d34 = Direction.CENTER;
@@ -3760,16 +3026,17 @@ public class Navigation {
         r68 = false;
         o68 = false;
     
-        if (rc.onTheMap(l35) && rc.canSenseLocation(l35)) {
+        if (rc.onTheMap(l35)) {
             if (rc.senseCloud(l35)) {
                 p35 = 1.5;
                 b35 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l35).getCurrentDirection();
-                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && currentDirection.equals(Direction.CENTER))) {
-                    p35 = rc.senseMapInfo(l35).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l35)) {
+                MapInfo mapInfo = rc.senseMapInfo(l35);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l35), currentDirection) > 0))) {
+                    p35 = mapInfo.getCooldownMultiplier(team);
                     b35 = false;
                 }
             }
@@ -3785,22 +3052,24 @@ public class Navigation {
             r35 |= r34;
             r35 |= r43;
             r35 &= !b35;
-            o43 |= b35;
+            if (targetLocation.equals(l35)) {
+                temp1 = true;
+                temp2 = r35;
+            }
         }
-        else {
-            o43 |= b35;
-        }
+        o43 |= b35;
 
-        if (rc.onTheMap(l43) && rc.canSenseLocation(l43)) {
+        if (rc.onTheMap(l43)) {
             if (rc.senseCloud(l43)) {
                 p43 = 1.5;
                 b43 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l43).getCurrentDirection();
-                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && currentDirection.equals(Direction.CENTER))) {
-                    p43 = rc.senseMapInfo(l43).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l43)) {
+                MapInfo mapInfo = rc.senseMapInfo(l43);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l43), currentDirection) > 0))) {
+                    p43 = mapInfo.getCooldownMultiplier(team);
                     b43 = false;
                 }
             }
@@ -3816,22 +3085,24 @@ public class Navigation {
             r43 |= r35;
             r43 |= r34;
             r43 &= !b43;
-            o35 |= b43;
+            if (targetLocation.equals(l43)) {
+                temp1 = true;
+                temp2 = r43;
+            }
         }
-        else {
-            o35 |= b43;
-        }
+        o35 |= b43;
 
-        if (rc.onTheMap(l42) && rc.canSenseLocation(l42)) {
+        if (rc.onTheMap(l42)) {
             if (rc.senseCloud(l42)) {
                 p42 = 1.5;
                 b42 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l42).getCurrentDirection();
-                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && currentDirection.equals(Direction.CENTER))) {
-                    p42 = rc.senseMapInfo(l42).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l42)) {
+                MapInfo mapInfo = rc.senseMapInfo(l42);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l42), currentDirection) > 0))) {
+                    p42 = mapInfo.getCooldownMultiplier(team);
                     b42 = false;
                 }
             }
@@ -3847,22 +3118,24 @@ public class Navigation {
             r42 |= r43;
             r42 |= r34;
             r42 &= !b42;
-            o43 |= b42;
+            if (targetLocation.equals(l42)) {
+                temp1 = true;
+                temp2 = r42;
+            }
         }
-        else {
-            o43 |= b42;
-        }
+        o43 |= b42;
 
-        if (rc.onTheMap(l44) && rc.canSenseLocation(l44)) {
+        if (rc.onTheMap(l44)) {
             if (rc.senseCloud(l44)) {
                 p44 = 1.5;
                 b44 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l44).getCurrentDirection();
-                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && currentDirection.equals(Direction.CENTER))) {
-                    p44 = rc.senseMapInfo(l44).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l44)) {
+                MapInfo mapInfo = rc.senseMapInfo(l44);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l44), currentDirection) > 0))) {
+                    p44 = mapInfo.getCooldownMultiplier(team);
                     b44 = false;
                 }
             }
@@ -3883,24 +3156,25 @@ public class Navigation {
             r44 |= r34;
             r44 |= r43;
             r44 &= !b44;
-            o35 |= b44;
-            o43 |= b44;
+            if (targetLocation.equals(l44)) {
+                temp1 = true;
+                temp2 = r44;
+            }
         }
-        else {
-            o35 |= b44;
-            o43 |= b44;
-        }
+        o35 |= b44;
+        o43 |= b44;
 
-        if (rc.onTheMap(l26) && rc.canSenseLocation(l26)) {
+        if (rc.onTheMap(l26)) {
             if (rc.senseCloud(l26)) {
                 p26 = 1.5;
                 b26 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l26).getCurrentDirection();
-                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && currentDirection.equals(Direction.CENTER))) {
-                    p26 = rc.senseMapInfo(l26).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l26)) {
+                MapInfo mapInfo = rc.senseMapInfo(l26);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l26), currentDirection) > 0))) {
+                    p26 = mapInfo.getCooldownMultiplier(team);
                     b26 = false;
                 }
             }
@@ -3916,22 +3190,24 @@ public class Navigation {
             r26 |= r35;
             r26 |= r34;
             r26 &= !b26;
-            o35 |= b26;
+            if (targetLocation.equals(l26)) {
+                temp1 = true;
+                temp2 = r26;
+            }
         }
-        else {
-            o35 |= b26;
-        }
+        o35 |= b26;
 
-        if (rc.onTheMap(l36) && rc.canSenseLocation(l36)) {
+        if (rc.onTheMap(l36)) {
             if (rc.senseCloud(l36)) {
                 p36 = 1.5;
                 b36 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l36).getCurrentDirection();
-                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && currentDirection.equals(Direction.CENTER))) {
-                    p36 = rc.senseMapInfo(l36).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l36)) {
+                MapInfo mapInfo = rc.senseMapInfo(l36);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l36), currentDirection) > 0))) {
+                    p36 = mapInfo.getCooldownMultiplier(team);
                     b36 = false;
                 }
             }
@@ -3952,26 +3228,26 @@ public class Navigation {
             r36 |= r35;
             r36 |= r44;
             r36 &= !b36;
-            o26 |= b36;
-            o35 |= b36;
-            o44 |= b36;
+            if (targetLocation.equals(l36)) {
+                temp1 = true;
+                temp2 = r36;
+            }
         }
-        else {
-            o26 |= b36;
-            o35 |= b36;
-            o44 |= b36;
-        }
+        o26 |= b36;
+        o35 |= b36;
+        o44 |= b36;
 
-        if (rc.onTheMap(l52) && rc.canSenseLocation(l52)) {
+        if (rc.onTheMap(l52)) {
             if (rc.senseCloud(l52)) {
                 p52 = 1.5;
                 b52 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l52).getCurrentDirection();
-                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && currentDirection.equals(Direction.CENTER))) {
-                    p52 = rc.senseMapInfo(l52).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l52)) {
+                MapInfo mapInfo = rc.senseMapInfo(l52);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l52), currentDirection) > 0))) {
+                    p52 = mapInfo.getCooldownMultiplier(team);
                     b52 = false;
                 }
             }
@@ -3992,26 +3268,26 @@ public class Navigation {
             r52 |= r43;
             r52 |= r42;
             r52 &= !b52;
-            o44 |= b52;
-            o43 |= b52;
-            o42 |= b52;
+            if (targetLocation.equals(l52)) {
+                temp1 = true;
+                temp2 = r52;
+            }
         }
-        else {
-            o44 |= b52;
-            o43 |= b52;
-            o42 |= b52;
-        }
+        o44 |= b52;
+        o43 |= b52;
+        o42 |= b52;
 
-        if (rc.onTheMap(l53) && rc.canSenseLocation(l53)) {
+        if (rc.onTheMap(l53)) {
             if (rc.senseCloud(l53)) {
                 p53 = 1.5;
                 b53 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l53).getCurrentDirection();
-                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && currentDirection.equals(Direction.CENTER))) {
-                    p53 = rc.senseMapInfo(l53).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l53)) {
+                MapInfo mapInfo = rc.senseMapInfo(l53);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l53), currentDirection) > 0))) {
+                    p53 = mapInfo.getCooldownMultiplier(team);
                     b53 = false;
                 }
             }
@@ -4037,28 +3313,27 @@ public class Navigation {
             r53 |= r43;
             r53 |= r52;
             r53 &= !b53;
-            o45 |= b53;
-            o44 |= b53;
-            o43 |= b53;
-            o52 |= b53;
+            if (targetLocation.equals(l53)) {
+                temp1 = true;
+                temp2 = r53;
+            }
         }
-        else {
-            o45 |= b53;
-            o44 |= b53;
-            o43 |= b53;
-            o52 |= b53;
-        }
+        o45 |= b53;
+        o44 |= b53;
+        o43 |= b53;
+        o52 |= b53;
 
-        if (rc.onTheMap(l51) && rc.canSenseLocation(l51)) {
+        if (rc.onTheMap(l51)) {
             if (rc.senseCloud(l51)) {
                 p51 = 1.5;
                 b51 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l51).getCurrentDirection();
-                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && currentDirection.equals(Direction.CENTER))) {
-                    p51 = rc.senseMapInfo(l51).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l51)) {
+                MapInfo mapInfo = rc.senseMapInfo(l51);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l51), currentDirection) > 0))) {
+                    p51 = mapInfo.getCooldownMultiplier(team);
                     b51 = false;
                 }
             }
@@ -4079,26 +3354,26 @@ public class Navigation {
             r51 |= r43;
             r51 |= r42;
             r51 &= !b51;
-            o52 |= b51;
-            o43 |= b51;
-            o42 |= b51;
+            if (targetLocation.equals(l51)) {
+                temp1 = true;
+                temp2 = r51;
+            }
         }
-        else {
-            o52 |= b51;
-            o43 |= b51;
-            o42 |= b51;
-        }
+        o52 |= b51;
+        o43 |= b51;
+        o42 |= b51;
 
-        if (rc.onTheMap(l27) && rc.canSenseLocation(l27)) {
+        if (rc.onTheMap(l27)) {
             if (rc.senseCloud(l27)) {
                 p27 = 1.5;
                 b27 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l27).getCurrentDirection();
-                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && currentDirection.equals(Direction.CENTER))) {
-                    p27 = rc.senseMapInfo(l27).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l27)) {
+                MapInfo mapInfo = rc.senseMapInfo(l27);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l27), currentDirection) > 0))) {
+                    p27 = mapInfo.getCooldownMultiplier(team);
                     b27 = false;
                 }
             }
@@ -4119,26 +3394,26 @@ public class Navigation {
             r27 |= r26;
             r27 |= r35;
             r27 &= !b27;
-            o36 |= b27;
-            o26 |= b27;
-            o35 |= b27;
+            if (targetLocation.equals(l27)) {
+                temp1 = true;
+                temp2 = r27;
+            }
         }
-        else {
-            o36 |= b27;
-            o26 |= b27;
-            o35 |= b27;
-        }
+        o36 |= b27;
+        o26 |= b27;
+        o35 |= b27;
 
-        if (rc.onTheMap(l45) && rc.canSenseLocation(l45)) {
+        if (rc.onTheMap(l45)) {
             if (rc.senseCloud(l45)) {
                 p45 = 1.5;
                 b45 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l45).getCurrentDirection();
-                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && currentDirection.equals(Direction.CENTER))) {
-                    p45 = rc.senseMapInfo(l45).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l45)) {
+                MapInfo mapInfo = rc.senseMapInfo(l45);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l45), currentDirection) > 0))) {
+                    p45 = mapInfo.getCooldownMultiplier(team);
                     b45 = false;
                 }
             }
@@ -4164,28 +3439,27 @@ public class Navigation {
             r45 |= r44;
             r45 |= r53;
             r45 &= !b45;
-            o36 |= b45;
-            o35 |= b45;
-            o44 |= b45;
-            o53 |= b45;
+            if (targetLocation.equals(l45)) {
+                temp1 = true;
+                temp2 = r45;
+            }
         }
-        else {
-            o36 |= b45;
-            o35 |= b45;
-            o44 |= b45;
-            o53 |= b45;
-        }
+        o36 |= b45;
+        o35 |= b45;
+        o44 |= b45;
+        o53 |= b45;
 
-        if (rc.onTheMap(l18) && rc.canSenseLocation(l18)) {
+        if (rc.onTheMap(l18)) {
             if (rc.senseCloud(l18)) {
                 p18 = 1.5;
                 b18 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l18).getCurrentDirection();
-                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && currentDirection.equals(Direction.CENTER))) {
-                    p18 = rc.senseMapInfo(l18).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l18)) {
+                MapInfo mapInfo = rc.senseMapInfo(l18);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l18), currentDirection) > 0))) {
+                    p18 = mapInfo.getCooldownMultiplier(team);
                     b18 = false;
                 }
             }
@@ -4201,24 +3475,25 @@ public class Navigation {
             r18 |= r27;
             r18 |= r26;
             r18 &= !b18;
-            o27 |= b18;
-            o26 |= b18;
+            if (targetLocation.equals(l18)) {
+                temp1 = true;
+                temp2 = r18;
+            }
         }
-        else {
-            o27 |= b18;
-            o26 |= b18;
-        }
+        o27 |= b18;
+        o26 |= b18;
 
-        if (rc.onTheMap(l50) && rc.canSenseLocation(l50)) {
+        if (rc.onTheMap(l50)) {
             if (rc.senseCloud(l50)) {
                 p50 = 1.5;
                 b50 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l50).getCurrentDirection();
-                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && currentDirection.equals(Direction.CENTER))) {
-                    p50 = rc.senseMapInfo(l50).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l50)) {
+                MapInfo mapInfo = rc.senseMapInfo(l50);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l50), currentDirection) > 0))) {
+                    p50 = mapInfo.getCooldownMultiplier(team);
                     b50 = false;
                 }
             }
@@ -4234,24 +3509,25 @@ public class Navigation {
             r50 |= r51;
             r50 |= r42;
             r50 &= !b50;
-            o51 |= b50;
-            o42 |= b50;
+            if (targetLocation.equals(l50)) {
+                temp1 = true;
+                temp2 = r50;
+            }
         }
-        else {
-            o51 |= b50;
-            o42 |= b50;
-        }
+        o51 |= b50;
+        o42 |= b50;
 
-        if (rc.onTheMap(l54) && rc.canSenseLocation(l54)) {
+        if (rc.onTheMap(l54)) {
             if (rc.senseCloud(l54)) {
                 p54 = 1.5;
                 b54 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l54).getCurrentDirection();
-                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && currentDirection.equals(Direction.CENTER))) {
-                    p54 = rc.senseMapInfo(l54).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l54)) {
+                MapInfo mapInfo = rc.senseMapInfo(l54);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l54), currentDirection) > 0))) {
+                    p54 = mapInfo.getCooldownMultiplier(team);
                     b54 = false;
                 }
             }
@@ -4272,26 +3548,26 @@ public class Navigation {
             r54 |= r44;
             r54 |= r53;
             r54 &= !b54;
-            o45 |= b54;
-            o44 |= b54;
-            o53 |= b54;
+            if (targetLocation.equals(l54)) {
+                temp1 = true;
+                temp2 = r54;
+            }
         }
-        else {
-            o45 |= b54;
-            o44 |= b54;
-            o53 |= b54;
-        }
+        o45 |= b54;
+        o44 |= b54;
+        o53 |= b54;
 
-        if (rc.onTheMap(l37) && rc.canSenseLocation(l37)) {
+        if (rc.onTheMap(l37)) {
             if (rc.senseCloud(l37)) {
                 p37 = 1.5;
                 b37 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l37).getCurrentDirection();
-                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && currentDirection.equals(Direction.CENTER))) {
-                    p37 = rc.senseMapInfo(l37).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l37)) {
+                MapInfo mapInfo = rc.senseMapInfo(l37);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l37), currentDirection) > 0))) {
+                    p37 = mapInfo.getCooldownMultiplier(team);
                     b37 = false;
                 }
             }
@@ -4312,26 +3588,26 @@ public class Navigation {
             r37 |= r36;
             r37 |= r45;
             r37 &= !b37;
-            o27 |= b37;
-            o36 |= b37;
-            o45 |= b37;
+            if (targetLocation.equals(l37)) {
+                temp1 = true;
+                temp2 = r37;
+            }
         }
-        else {
-            o27 |= b37;
-            o36 |= b37;
-            o45 |= b37;
-        }
+        o27 |= b37;
+        o36 |= b37;
+        o45 |= b37;
 
-        if (rc.onTheMap(l60) && rc.canSenseLocation(l60)) {
+        if (rc.onTheMap(l60)) {
             if (rc.senseCloud(l60)) {
                 p60 = 1.5;
                 b60 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l60).getCurrentDirection();
-                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && currentDirection.equals(Direction.CENTER))) {
-                    p60 = rc.senseMapInfo(l60).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l60)) {
+                MapInfo mapInfo = rc.senseMapInfo(l60);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l60), currentDirection) > 0))) {
+                    p60 = mapInfo.getCooldownMultiplier(team);
                     b60 = false;
                 }
             }
@@ -4352,26 +3628,26 @@ public class Navigation {
             r60 |= r52;
             r60 |= r51;
             r60 &= !b60;
-            o53 |= b60;
-            o52 |= b60;
-            o51 |= b60;
+            if (targetLocation.equals(l60)) {
+                temp1 = true;
+                temp2 = r60;
+            }
         }
-        else {
-            o53 |= b60;
-            o52 |= b60;
-            o51 |= b60;
-        }
+        o53 |= b60;
+        o52 |= b60;
+        o51 |= b60;
 
-        if (rc.onTheMap(l59) && rc.canSenseLocation(l59)) {
+        if (rc.onTheMap(l59)) {
             if (rc.senseCloud(l59)) {
                 p59 = 1.5;
                 b59 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l59).getCurrentDirection();
-                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && currentDirection.equals(Direction.CENTER))) {
-                    p59 = rc.senseMapInfo(l59).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l59)) {
+                MapInfo mapInfo = rc.senseMapInfo(l59);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l59), currentDirection) > 0))) {
+                    p59 = mapInfo.getCooldownMultiplier(team);
                     b59 = false;
                 }
             }
@@ -4397,28 +3673,27 @@ public class Navigation {
             r59 |= r51;
             r59 |= r50;
             r59 &= !b59;
-            o60 |= b59;
-            o52 |= b59;
-            o51 |= b59;
-            o50 |= b59;
+            if (targetLocation.equals(l59)) {
+                temp1 = true;
+                temp2 = r59;
+            }
         }
-        else {
-            o60 |= b59;
-            o52 |= b59;
-            o51 |= b59;
-            o50 |= b59;
-        }
+        o60 |= b59;
+        o52 |= b59;
+        o51 |= b59;
+        o50 |= b59;
 
-        if (rc.onTheMap(l28) && rc.canSenseLocation(l28)) {
+        if (rc.onTheMap(l28)) {
             if (rc.senseCloud(l28)) {
                 p28 = 1.5;
                 b28 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l28).getCurrentDirection();
-                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && currentDirection.equals(Direction.CENTER))) {
-                    p28 = rc.senseMapInfo(l28).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l28)) {
+                MapInfo mapInfo = rc.senseMapInfo(l28);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l28), currentDirection) > 0))) {
+                    p28 = mapInfo.getCooldownMultiplier(team);
                     b28 = false;
                 }
             }
@@ -4444,28 +3719,27 @@ public class Navigation {
             r28 |= r27;
             r28 |= r36;
             r28 &= !b28;
-            o37 |= b28;
-            o18 |= b28;
-            o27 |= b28;
-            o36 |= b28;
+            if (targetLocation.equals(l28)) {
+                temp1 = true;
+                temp2 = r28;
+            }
         }
-        else {
-            o37 |= b28;
-            o18 |= b28;
-            o27 |= b28;
-            o36 |= b28;
-        }
+        o37 |= b28;
+        o18 |= b28;
+        o27 |= b28;
+        o36 |= b28;
 
-        if (rc.onTheMap(l46) && rc.canSenseLocation(l46)) {
+        if (rc.onTheMap(l46)) {
             if (rc.senseCloud(l46)) {
                 p46 = 1.5;
                 b46 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l46).getCurrentDirection();
-                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && currentDirection.equals(Direction.CENTER))) {
-                    p46 = rc.senseMapInfo(l46).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l46)) {
+                MapInfo mapInfo = rc.senseMapInfo(l46);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l46), currentDirection) > 0))) {
+                    p46 = mapInfo.getCooldownMultiplier(team);
                     b46 = false;
                 }
             }
@@ -4491,28 +3765,27 @@ public class Navigation {
             r46 |= r45;
             r46 |= r54;
             r46 &= !b46;
-            o37 |= b46;
-            o36 |= b46;
-            o45 |= b46;
-            o54 |= b46;
+            if (targetLocation.equals(l46)) {
+                temp1 = true;
+                temp2 = r46;
+            }
         }
-        else {
-            o37 |= b46;
-            o36 |= b46;
-            o45 |= b46;
-            o54 |= b46;
-        }
+        o37 |= b46;
+        o36 |= b46;
+        o45 |= b46;
+        o54 |= b46;
 
-        if (rc.onTheMap(l61) && rc.canSenseLocation(l61)) {
+        if (rc.onTheMap(l61)) {
             if (rc.senseCloud(l61)) {
                 p61 = 1.5;
                 b61 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l61).getCurrentDirection();
-                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && currentDirection.equals(Direction.CENTER))) {
-                    p61 = rc.senseMapInfo(l61).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l61)) {
+                MapInfo mapInfo = rc.senseMapInfo(l61);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l61), currentDirection) > 0))) {
+                    p61 = mapInfo.getCooldownMultiplier(team);
                     b61 = false;
                 }
             }
@@ -4538,28 +3811,27 @@ public class Navigation {
             r61 |= r52;
             r61 |= r60;
             r61 &= !b61;
-            o54 |= b61;
-            o53 |= b61;
-            o52 |= b61;
-            o60 |= b61;
+            if (targetLocation.equals(l61)) {
+                temp1 = true;
+                temp2 = r61;
+            }
         }
-        else {
-            o54 |= b61;
-            o53 |= b61;
-            o52 |= b61;
-            o60 |= b61;
-        }
+        o54 |= b61;
+        o53 |= b61;
+        o52 |= b61;
+        o60 |= b61;
 
-        if (rc.onTheMap(l62) && rc.canSenseLocation(l62)) {
+        if (rc.onTheMap(l62)) {
             if (rc.senseCloud(l62)) {
                 p62 = 1.5;
                 b62 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l62).getCurrentDirection();
-                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && currentDirection.equals(Direction.CENTER))) {
-                    p62 = rc.senseMapInfo(l62).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l62)) {
+                MapInfo mapInfo = rc.senseMapInfo(l62);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l62), currentDirection) > 0))) {
+                    p62 = mapInfo.getCooldownMultiplier(team);
                     b62 = false;
                 }
             }
@@ -4585,28 +3857,27 @@ public class Navigation {
             r62 |= r53;
             r62 |= r61;
             r62 &= !b62;
-            o55 |= b62;
-            o54 |= b62;
-            o53 |= b62;
-            o61 |= b62;
+            if (targetLocation.equals(l62)) {
+                temp1 = true;
+                temp2 = r62;
+            }
         }
-        else {
-            o55 |= b62;
-            o54 |= b62;
-            o53 |= b62;
-            o61 |= b62;
-        }
+        o55 |= b62;
+        o54 |= b62;
+        o53 |= b62;
+        o61 |= b62;
 
-        if (rc.onTheMap(l58) && rc.canSenseLocation(l58)) {
+        if (rc.onTheMap(l58)) {
             if (rc.senseCloud(l58)) {
                 p58 = 1.5;
                 b58 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l58).getCurrentDirection();
-                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && currentDirection.equals(Direction.CENTER))) {
-                    p58 = rc.senseMapInfo(l58).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l58)) {
+                MapInfo mapInfo = rc.senseMapInfo(l58);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l58), currentDirection) > 0))) {
+                    p58 = mapInfo.getCooldownMultiplier(team);
                     b58 = false;
                 }
             }
@@ -4627,26 +3898,26 @@ public class Navigation {
             r58 |= r51;
             r58 |= r50;
             r58 &= !b58;
-            o59 |= b58;
-            o51 |= b58;
-            o50 |= b58;
+            if (targetLocation.equals(l58)) {
+                temp1 = true;
+                temp2 = r58;
+            }
         }
-        else {
-            o59 |= b58;
-            o51 |= b58;
-            o50 |= b58;
-        }
+        o59 |= b58;
+        o51 |= b58;
+        o50 |= b58;
 
-        if (rc.onTheMap(l19) && rc.canSenseLocation(l19)) {
+        if (rc.onTheMap(l19)) {
             if (rc.senseCloud(l19)) {
                 p19 = 1.5;
                 b19 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l19).getCurrentDirection();
-                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && currentDirection.equals(Direction.CENTER))) {
-                    p19 = rc.senseMapInfo(l19).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l19)) {
+                MapInfo mapInfo = rc.senseMapInfo(l19);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l19), currentDirection) > 0))) {
+                    p19 = mapInfo.getCooldownMultiplier(team);
                     b19 = false;
                 }
             }
@@ -4667,26 +3938,26 @@ public class Navigation {
             r19 |= r18;
             r19 |= r27;
             r19 &= !b19;
-            o28 |= b19;
-            o18 |= b19;
-            o27 |= b19;
+            if (targetLocation.equals(l19)) {
+                temp1 = true;
+                temp2 = r19;
+            }
         }
-        else {
-            o28 |= b19;
-            o18 |= b19;
-            o27 |= b19;
-        }
+        o28 |= b19;
+        o18 |= b19;
+        o27 |= b19;
 
-        if (rc.onTheMap(l55) && rc.canSenseLocation(l55)) {
+        if (rc.onTheMap(l55)) {
             if (rc.senseCloud(l55)) {
                 p55 = 1.5;
                 b55 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l55).getCurrentDirection();
-                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && currentDirection.equals(Direction.CENTER))) {
-                    p55 = rc.senseMapInfo(l55).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l55)) {
+                MapInfo mapInfo = rc.senseMapInfo(l55);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l55), currentDirection) > 0))) {
+                    p55 = mapInfo.getCooldownMultiplier(team);
                     b55 = false;
                 }
             }
@@ -4712,28 +3983,27 @@ public class Navigation {
             r55 |= r54;
             r55 |= r62;
             r55 &= !b55;
-            o46 |= b55;
-            o45 |= b55;
-            o54 |= b55;
-            o62 |= b55;
+            if (targetLocation.equals(l55)) {
+                temp1 = true;
+                temp2 = r55;
+            }
         }
-        else {
-            o46 |= b55;
-            o45 |= b55;
-            o54 |= b55;
-            o62 |= b55;
-        }
+        o46 |= b55;
+        o45 |= b55;
+        o54 |= b55;
+        o62 |= b55;
 
-        if (rc.onTheMap(l63) && rc.canSenseLocation(l63)) {
+        if (rc.onTheMap(l63)) {
             if (rc.senseCloud(l63)) {
                 p63 = 1.5;
                 b63 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l63).getCurrentDirection();
-                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && currentDirection.equals(Direction.CENTER))) {
-                    p63 = rc.senseMapInfo(l63).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l63)) {
+                MapInfo mapInfo = rc.senseMapInfo(l63);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l63), currentDirection) > 0))) {
+                    p63 = mapInfo.getCooldownMultiplier(team);
                     b63 = false;
                 }
             }
@@ -4754,26 +4024,26 @@ public class Navigation {
             r63 |= r54;
             r63 |= r62;
             r63 &= !b63;
-            o55 |= b63;
-            o54 |= b63;
-            o62 |= b63;
+            if (targetLocation.equals(l63)) {
+                temp1 = true;
+                temp2 = r63;
+            }
         }
-        else {
-            o55 |= b63;
-            o54 |= b63;
-            o62 |= b63;
-        }
+        o55 |= b63;
+        o54 |= b63;
+        o62 |= b63;
 
-        if (rc.onTheMap(l57) && rc.canSenseLocation(l57)) {
+        if (rc.onTheMap(l57)) {
             if (rc.senseCloud(l57)) {
                 p57 = 1.5;
                 b57 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l57).getCurrentDirection();
-                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && currentDirection.equals(Direction.CENTER))) {
-                    p57 = rc.senseMapInfo(l57).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l57)) {
+                MapInfo mapInfo = rc.senseMapInfo(l57);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l57), currentDirection) > 0))) {
+                    p57 = mapInfo.getCooldownMultiplier(team);
                     b57 = false;
                 }
             }
@@ -4789,24 +4059,25 @@ public class Navigation {
             r57 |= r58;
             r57 |= r50;
             r57 &= !b57;
-            o58 |= b57;
-            o50 |= b57;
+            if (targetLocation.equals(l57)) {
+                temp1 = true;
+                temp2 = r57;
+            }
         }
-        else {
-            o58 |= b57;
-            o50 |= b57;
-        }
+        o58 |= b57;
+        o50 |= b57;
 
-        if (rc.onTheMap(l11) && rc.canSenseLocation(l11)) {
+        if (rc.onTheMap(l11)) {
             if (rc.senseCloud(l11)) {
                 p11 = 1.5;
                 b11 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l11).getCurrentDirection();
-                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && currentDirection.equals(Direction.CENTER))) {
-                    p11 = rc.senseMapInfo(l11).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l11)) {
+                MapInfo mapInfo = rc.senseMapInfo(l11);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l11), currentDirection) > 0))) {
+                    p11 = mapInfo.getCooldownMultiplier(team);
                     b11 = false;
                 }
             }
@@ -4822,24 +4093,25 @@ public class Navigation {
             r11 |= r19;
             r11 |= r18;
             r11 &= !b11;
-            o19 |= b11;
-            o18 |= b11;
+            if (targetLocation.equals(l11)) {
+                temp1 = true;
+                temp2 = r11;
+            }
         }
-        else {
-            o19 |= b11;
-            o18 |= b11;
-        }
+        o19 |= b11;
+        o18 |= b11;
 
-        if (rc.onTheMap(l66) && rc.canSenseLocation(l66)) {
+        if (rc.onTheMap(l66)) {
             if (rc.senseCloud(l66)) {
                 p66 = 1.5;
                 b66 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l66).getCurrentDirection();
-                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && currentDirection.equals(Direction.CENTER))) {
-                    p66 = rc.senseMapInfo(l66).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l66)) {
+                MapInfo mapInfo = rc.senseMapInfo(l66);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l66), currentDirection) > 0))) {
+                    p66 = mapInfo.getCooldownMultiplier(team);
                     b66 = false;
                 }
             }
@@ -4860,26 +4132,26 @@ public class Navigation {
             r66 |= r60;
             r66 |= r59;
             r66 &= !b66;
-            o61 |= b66;
-            o60 |= b66;
-            o59 |= b66;
+            if (targetLocation.equals(l66)) {
+                temp1 = true;
+                temp2 = r66;
+            }
         }
-        else {
-            o61 |= b66;
-            o60 |= b66;
-            o59 |= b66;
-        }
+        o61 |= b66;
+        o60 |= b66;
+        o59 |= b66;
 
-        if (rc.onTheMap(l38) && rc.canSenseLocation(l38)) {
+        if (rc.onTheMap(l38)) {
             if (rc.senseCloud(l38)) {
                 p38 = 1.5;
                 b38 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l38).getCurrentDirection();
-                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && currentDirection.equals(Direction.CENTER))) {
-                    p38 = rc.senseMapInfo(l38).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l38)) {
+                MapInfo mapInfo = rc.senseMapInfo(l38);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l38), currentDirection) > 0))) {
+                    p38 = mapInfo.getCooldownMultiplier(team);
                     b38 = false;
                 }
             }
@@ -4900,26 +4172,26 @@ public class Navigation {
             r38 |= r37;
             r38 |= r46;
             r38 &= !b38;
-            o28 |= b38;
-            o37 |= b38;
-            o46 |= b38;
+            if (targetLocation.equals(l38)) {
+                temp1 = true;
+                temp2 = r38;
+            }
         }
-        else {
-            o28 |= b38;
-            o37 |= b38;
-            o46 |= b38;
-        }
+        o28 |= b38;
+        o37 |= b38;
+        o46 |= b38;
 
-        if (rc.onTheMap(l29) && rc.canSenseLocation(l29)) {
+        if (rc.onTheMap(l29)) {
             if (rc.senseCloud(l29)) {
                 p29 = 1.5;
                 b29 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l29).getCurrentDirection();
-                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && currentDirection.equals(Direction.CENTER))) {
-                    p29 = rc.senseMapInfo(l29).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l29)) {
+                MapInfo mapInfo = rc.senseMapInfo(l29);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l29), currentDirection) > 0))) {
+                    p29 = mapInfo.getCooldownMultiplier(team);
                     b29 = false;
                 }
             }
@@ -4945,28 +4217,27 @@ public class Navigation {
             r29 |= r28;
             r29 |= r37;
             r29 &= !b29;
-            o38 |= b29;
-            o19 |= b29;
-            o28 |= b29;
-            o37 |= b29;
+            if (targetLocation.equals(l29)) {
+                temp1 = true;
+                temp2 = r29;
+            }
         }
-        else {
-            o38 |= b29;
-            o19 |= b29;
-            o28 |= b29;
-            o37 |= b29;
-        }
+        o38 |= b29;
+        o19 |= b29;
+        o28 |= b29;
+        o37 |= b29;
 
-        if (rc.onTheMap(l67) && rc.canSenseLocation(l67)) {
+        if (rc.onTheMap(l67)) {
             if (rc.senseCloud(l67)) {
                 p67 = 1.5;
                 b67 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l67).getCurrentDirection();
-                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && currentDirection.equals(Direction.CENTER))) {
-                    p67 = rc.senseMapInfo(l67).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l67)) {
+                MapInfo mapInfo = rc.senseMapInfo(l67);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l67), currentDirection) > 0))) {
+                    p67 = mapInfo.getCooldownMultiplier(team);
                     b67 = false;
                 }
             }
@@ -4992,28 +4263,27 @@ public class Navigation {
             r67 |= r60;
             r67 |= r66;
             r67 &= !b67;
-            o62 |= b67;
-            o61 |= b67;
-            o60 |= b67;
-            o66 |= b67;
+            if (targetLocation.equals(l67)) {
+                temp1 = true;
+                temp2 = r67;
+            }
         }
-        else {
-            o62 |= b67;
-            o61 |= b67;
-            o60 |= b67;
-            o66 |= b67;
-        }
+        o62 |= b67;
+        o61 |= b67;
+        o60 |= b67;
+        o66 |= b67;
 
-        if (rc.onTheMap(l47) && rc.canSenseLocation(l47)) {
+        if (rc.onTheMap(l47)) {
             if (rc.senseCloud(l47)) {
                 p47 = 1.5;
                 b47 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l47).getCurrentDirection();
-                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && currentDirection.equals(Direction.CENTER))) {
-                    p47 = rc.senseMapInfo(l47).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l47)) {
+                MapInfo mapInfo = rc.senseMapInfo(l47);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l47), currentDirection) > 0))) {
+                    p47 = mapInfo.getCooldownMultiplier(team);
                     b47 = false;
                 }
             }
@@ -5039,28 +4309,27 @@ public class Navigation {
             r47 |= r46;
             r47 |= r55;
             r47 &= !b47;
-            o38 |= b47;
-            o37 |= b47;
-            o46 |= b47;
-            o55 |= b47;
+            if (targetLocation.equals(l47)) {
+                temp1 = true;
+                temp2 = r47;
+            }
         }
-        else {
-            o38 |= b47;
-            o37 |= b47;
-            o46 |= b47;
-            o55 |= b47;
-        }
+        o38 |= b47;
+        o37 |= b47;
+        o46 |= b47;
+        o55 |= b47;
 
-        if (rc.onTheMap(l65) && rc.canSenseLocation(l65)) {
+        if (rc.onTheMap(l65)) {
             if (rc.senseCloud(l65)) {
                 p65 = 1.5;
                 b65 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l65).getCurrentDirection();
-                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && currentDirection.equals(Direction.CENTER))) {
-                    p65 = rc.senseMapInfo(l65).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l65)) {
+                MapInfo mapInfo = rc.senseMapInfo(l65);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l65), currentDirection) > 0))) {
+                    p65 = mapInfo.getCooldownMultiplier(team);
                     b65 = false;
                 }
             }
@@ -5086,28 +4355,27 @@ public class Navigation {
             r65 |= r59;
             r65 |= r58;
             r65 &= !b65;
-            o66 |= b65;
-            o60 |= b65;
-            o59 |= b65;
-            o58 |= b65;
+            if (targetLocation.equals(l65)) {
+                temp1 = true;
+                temp2 = r65;
+            }
         }
-        else {
-            o66 |= b65;
-            o60 |= b65;
-            o59 |= b65;
-            o58 |= b65;
-        }
+        o66 |= b65;
+        o60 |= b65;
+        o59 |= b65;
+        o58 |= b65;
 
-        if (rc.onTheMap(l68) && rc.canSenseLocation(l68)) {
+        if (rc.onTheMap(l68)) {
             if (rc.senseCloud(l68)) {
                 p68 = 1.5;
                 b68 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l68).getCurrentDirection();
-                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && currentDirection.equals(Direction.CENTER))) {
-                    p68 = rc.senseMapInfo(l68).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l68)) {
+                MapInfo mapInfo = rc.senseMapInfo(l68);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l68), currentDirection) > 0))) {
+                    p68 = mapInfo.getCooldownMultiplier(team);
                     b68 = false;
                 }
             }
@@ -5133,28 +4401,27 @@ public class Navigation {
             r68 |= r61;
             r68 |= r67;
             r68 &= !b68;
-            o63 |= b68;
-            o62 |= b68;
-            o61 |= b68;
-            o67 |= b68;
+            if (targetLocation.equals(l68)) {
+                temp1 = true;
+                temp2 = r68;
+            }
         }
-        else {
-            o63 |= b68;
-            o62 |= b68;
-            o61 |= b68;
-            o67 |= b68;
-        }
+        o63 |= b68;
+        o62 |= b68;
+        o61 |= b68;
+        o67 |= b68;
 
-        if (rc.onTheMap(l64) && rc.canSenseLocation(l64)) {
+        if (rc.onTheMap(l64)) {
             if (rc.senseCloud(l64)) {
                 p64 = 1.5;
                 b64 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l64).getCurrentDirection();
-                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && currentDirection.equals(Direction.CENTER))) {
-                    p64 = rc.senseMapInfo(l64).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l64)) {
+                MapInfo mapInfo = rc.senseMapInfo(l64);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l64), currentDirection) > 0))) {
+                    p64 = mapInfo.getCooldownMultiplier(team);
                     b64 = false;
                 }
             }
@@ -5180,28 +4447,27 @@ public class Navigation {
             r64 |= r58;
             r64 |= r57;
             r64 &= !b64;
-            o65 |= b64;
-            o59 |= b64;
-            o58 |= b64;
-            o57 |= b64;
+            if (targetLocation.equals(l64)) {
+                temp1 = true;
+                temp2 = r64;
+            }
         }
-        else {
-            o65 |= b64;
-            o59 |= b64;
-            o58 |= b64;
-            o57 |= b64;
-        }
+        o65 |= b64;
+        o59 |= b64;
+        o58 |= b64;
+        o57 |= b64;
 
-        if (rc.onTheMap(l56) && rc.canSenseLocation(l56)) {
+        if (rc.onTheMap(l56)) {
             if (rc.senseCloud(l56)) {
                 p56 = 1.5;
                 b56 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l56).getCurrentDirection();
-                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && currentDirection.equals(Direction.CENTER))) {
-                    p56 = rc.senseMapInfo(l56).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l56)) {
+                MapInfo mapInfo = rc.senseMapInfo(l56);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l56), currentDirection) > 0))) {
+                    p56 = mapInfo.getCooldownMultiplier(team);
                     b56 = false;
                 }
             }
@@ -5227,28 +4493,27 @@ public class Navigation {
             r56 |= r55;
             r56 |= r63;
             r56 &= !b56;
-            o47 |= b56;
-            o46 |= b56;
-            o55 |= b56;
-            o63 |= b56;
+            if (targetLocation.equals(l56)) {
+                temp1 = true;
+                temp2 = r56;
+            }
         }
-        else {
-            o47 |= b56;
-            o46 |= b56;
-            o55 |= b56;
-            o63 |= b56;
-        }
+        o47 |= b56;
+        o46 |= b56;
+        o55 |= b56;
+        o63 |= b56;
 
-        if (rc.onTheMap(l20) && rc.canSenseLocation(l20)) {
+        if (rc.onTheMap(l20)) {
             if (rc.senseCloud(l20)) {
                 p20 = 1.5;
                 b20 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l20).getCurrentDirection();
-                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && currentDirection.equals(Direction.CENTER))) {
-                    p20 = rc.senseMapInfo(l20).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l20)) {
+                MapInfo mapInfo = rc.senseMapInfo(l20);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l20), currentDirection) > 0))) {
+                    p20 = mapInfo.getCooldownMultiplier(team);
                     b20 = false;
                 }
             }
@@ -5274,19 +4539,18 @@ public class Navigation {
             r20 |= r19;
             r20 |= r28;
             r20 &= !b20;
-            o29 |= b20;
-            o11 |= b20;
-            o19 |= b20;
-            o28 |= b20;
+            if (targetLocation.equals(l20)) {
+                temp1 = true;
+                temp2 = r20;
+            }
         }
-        else {
-            o29 |= b20;
-            o11 |= b20;
-            o19 |= b20;
-            o28 |= b20;
-        }
+        o29 |= b20;
+        o11 |= b20;
+        o19 |= b20;
+        o28 |= b20;
 
-        int dx = targetLocation.x - l34.x;
+        if (temp1 && temp2) {
+            int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -5340,10 +4604,6 @@ public class Navigation {
 
             case 0:
                 switch(dy) {
-                    case 0:
-                        if (v34 < 10000) {
-                            return d34;
-                        }
                     case 1:
                         if (v35 < 10000) {
                             return d35;
@@ -5479,6 +4739,7 @@ public class Navigation {
                 } break;
 
         }
+        }
     
         o11 = r11;
         o20 = r20;
@@ -5500,7 +4761,6 @@ public class Navigation {
             if (dist11 < localBest) {
                 localBest = dist11;
                 ans = d11;
-                best = l11;
             }
         }
 
@@ -5509,7 +4769,6 @@ public class Navigation {
             if (dist20 < localBest) {
                 localBest = dist20;
                 ans = d20;
-                best = l20;
             }
         }
 
@@ -5518,7 +4777,6 @@ public class Navigation {
             if (dist29 < localBest) {
                 localBest = dist29;
                 ans = d29;
-                best = l29;
             }
         }
 
@@ -5527,7 +4785,6 @@ public class Navigation {
             if (dist38 < localBest) {
                 localBest = dist38;
                 ans = d38;
-                best = l38;
             }
         }
 
@@ -5536,7 +4793,6 @@ public class Navigation {
             if (dist47 < localBest) {
                 localBest = dist47;
                 ans = d47;
-                best = l47;
             }
         }
 
@@ -5545,7 +4801,6 @@ public class Navigation {
             if (dist56 < localBest) {
                 localBest = dist56;
                 ans = d56;
-                best = l56;
             }
         }
 
@@ -5554,7 +4809,6 @@ public class Navigation {
             if (dist57 < localBest) {
                 localBest = dist57;
                 ans = d57;
-                best = l57;
             }
         }
 
@@ -5563,7 +4817,6 @@ public class Navigation {
             if (dist63 < localBest) {
                 localBest = dist63;
                 ans = d63;
-                best = l63;
             }
         }
 
@@ -5572,7 +4825,6 @@ public class Navigation {
             if (dist64 < localBest) {
                 localBest = dist64;
                 ans = d64;
-                best = l64;
             }
         }
 
@@ -5581,7 +4833,6 @@ public class Navigation {
             if (dist65 < localBest) {
                 localBest = dist65;
                 ans = d65;
-                best = l65;
             }
         }
 
@@ -5590,7 +4841,6 @@ public class Navigation {
             if (dist66 < localBest) {
                 localBest = dist66;
                 ans = d66;
-                best = l66;
             }
         }
 
@@ -5599,7 +4849,6 @@ public class Navigation {
             if (dist67 < localBest) {
                 localBest = dist67;
                 ans = d67;
-                best = l67;
             }
         }
 
@@ -5608,716 +4857,23 @@ public class Navigation {
             if (dist68 < localBest) {
                 localBest = dist68;
                 ans = d68;
-                best = l68;
             }
         }
 
-        draws1();
-        rc.setIndicatorDot(best, 0, 0, 255);
         if (localBest < globalBest) {
             globalBest = localBest;
+            bug.reset();
             return ans;
         }
-        return getBestDirectionWallFollow1(ans);
-    }
 
-    private Direction getBestDirectionWallFollow1(Direction prev) throws GameActionException {
-        Direction ans = Direction.CENTER;
-        int minDistance = closestWallLocations.isEmpty() ? 1000000 : currentLocation.distanceSquaredTo(closestWallLocations.get(0));
-    
-        if (b11) {
-            int distance = currentLocation.distanceSquaredTo(l11);
-            if (distance == minDistance) {
-                closestWallLocations.add(l11);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l11);
-                minDistance = distance;
-            }
-        }
-
-        if (b18) {
-            int distance = currentLocation.distanceSquaredTo(l18);
-            if (distance == minDistance) {
-                closestWallLocations.add(l18);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l18);
-                minDistance = distance;
-            }
-        }
-
-        if (b19) {
-            int distance = currentLocation.distanceSquaredTo(l19);
-            if (distance == minDistance) {
-                closestWallLocations.add(l19);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l19);
-                minDistance = distance;
-            }
-        }
-
-        if (b20) {
-            int distance = currentLocation.distanceSquaredTo(l20);
-            if (distance == minDistance) {
-                closestWallLocations.add(l20);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l20);
-                minDistance = distance;
-            }
-        }
-
-        if (b26) {
-            int distance = currentLocation.distanceSquaredTo(l26);
-            if (distance == minDistance) {
-                closestWallLocations.add(l26);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l26);
-                minDistance = distance;
-            }
-        }
-
-        if (b27) {
-            int distance = currentLocation.distanceSquaredTo(l27);
-            if (distance == minDistance) {
-                closestWallLocations.add(l27);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l27);
-                minDistance = distance;
-            }
-        }
-
-        if (b28) {
-            int distance = currentLocation.distanceSquaredTo(l28);
-            if (distance == minDistance) {
-                closestWallLocations.add(l28);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l28);
-                minDistance = distance;
-            }
-        }
-
-        if (b29) {
-            int distance = currentLocation.distanceSquaredTo(l29);
-            if (distance == minDistance) {
-                closestWallLocations.add(l29);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l29);
-                minDistance = distance;
-            }
-        }
-
-        if (b35) {
-            int distance = currentLocation.distanceSquaredTo(l35);
-            if (distance == minDistance) {
-                closestWallLocations.add(l35);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l35);
-                minDistance = distance;
-            }
-        }
-
-        if (b36) {
-            int distance = currentLocation.distanceSquaredTo(l36);
-            if (distance == minDistance) {
-                closestWallLocations.add(l36);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l36);
-                minDistance = distance;
-            }
-        }
-
-        if (b37) {
-            int distance = currentLocation.distanceSquaredTo(l37);
-            if (distance == minDistance) {
-                closestWallLocations.add(l37);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l37);
-                minDistance = distance;
-            }
-        }
-
-        if (b38) {
-            int distance = currentLocation.distanceSquaredTo(l38);
-            if (distance == minDistance) {
-                closestWallLocations.add(l38);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l38);
-                minDistance = distance;
-            }
-        }
-
-        if (b42) {
-            int distance = currentLocation.distanceSquaredTo(l42);
-            if (distance == minDistance) {
-                closestWallLocations.add(l42);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l42);
-                minDistance = distance;
-            }
-        }
-
-        if (b43) {
-            int distance = currentLocation.distanceSquaredTo(l43);
-            if (distance == minDistance) {
-                closestWallLocations.add(l43);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l43);
-                minDistance = distance;
-            }
-        }
-
-        if (b44) {
-            int distance = currentLocation.distanceSquaredTo(l44);
-            if (distance == minDistance) {
-                closestWallLocations.add(l44);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l44);
-                minDistance = distance;
-            }
-        }
-
-        if (b45) {
-            int distance = currentLocation.distanceSquaredTo(l45);
-            if (distance == minDistance) {
-                closestWallLocations.add(l45);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l45);
-                minDistance = distance;
-            }
-        }
-
-        if (b46) {
-            int distance = currentLocation.distanceSquaredTo(l46);
-            if (distance == minDistance) {
-                closestWallLocations.add(l46);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l46);
-                minDistance = distance;
-            }
-        }
-
-        if (b47) {
-            int distance = currentLocation.distanceSquaredTo(l47);
-            if (distance == minDistance) {
-                closestWallLocations.add(l47);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l47);
-                minDistance = distance;
-            }
-        }
-
-        if (b50) {
-            int distance = currentLocation.distanceSquaredTo(l50);
-            if (distance == minDistance) {
-                closestWallLocations.add(l50);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l50);
-                minDistance = distance;
-            }
-        }
-
-        if (b51) {
-            int distance = currentLocation.distanceSquaredTo(l51);
-            if (distance == minDistance) {
-                closestWallLocations.add(l51);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l51);
-                minDistance = distance;
-            }
-        }
-
-        if (b52) {
-            int distance = currentLocation.distanceSquaredTo(l52);
-            if (distance == minDistance) {
-                closestWallLocations.add(l52);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l52);
-                minDistance = distance;
-            }
-        }
-
-        if (b53) {
-            int distance = currentLocation.distanceSquaredTo(l53);
-            if (distance == minDistance) {
-                closestWallLocations.add(l53);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l53);
-                minDistance = distance;
-            }
-        }
-
-        if (b54) {
-            int distance = currentLocation.distanceSquaredTo(l54);
-            if (distance == minDistance) {
-                closestWallLocations.add(l54);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l54);
-                minDistance = distance;
-            }
-        }
-
-        if (b55) {
-            int distance = currentLocation.distanceSquaredTo(l55);
-            if (distance == minDistance) {
-                closestWallLocations.add(l55);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l55);
-                minDistance = distance;
-            }
-        }
-
-        if (b56) {
-            int distance = currentLocation.distanceSquaredTo(l56);
-            if (distance == minDistance) {
-                closestWallLocations.add(l56);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l56);
-                minDistance = distance;
-            }
-        }
-
-        if (b57) {
-            int distance = currentLocation.distanceSquaredTo(l57);
-            if (distance == minDistance) {
-                closestWallLocations.add(l57);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l57);
-                minDistance = distance;
-            }
-        }
-
-        if (b58) {
-            int distance = currentLocation.distanceSquaredTo(l58);
-            if (distance == minDistance) {
-                closestWallLocations.add(l58);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l58);
-                minDistance = distance;
-            }
-        }
-
-        if (b59) {
-            int distance = currentLocation.distanceSquaredTo(l59);
-            if (distance == minDistance) {
-                closestWallLocations.add(l59);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l59);
-                minDistance = distance;
-            }
-        }
-
-        if (b60) {
-            int distance = currentLocation.distanceSquaredTo(l60);
-            if (distance == minDistance) {
-                closestWallLocations.add(l60);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l60);
-                minDistance = distance;
-            }
-        }
-
-        if (b61) {
-            int distance = currentLocation.distanceSquaredTo(l61);
-            if (distance == minDistance) {
-                closestWallLocations.add(l61);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l61);
-                minDistance = distance;
-            }
-        }
-
-        if (b62) {
-            int distance = currentLocation.distanceSquaredTo(l62);
-            if (distance == minDistance) {
-                closestWallLocations.add(l62);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l62);
-                minDistance = distance;
-            }
-        }
-
-        if (b63) {
-            int distance = currentLocation.distanceSquaredTo(l63);
-            if (distance == minDistance) {
-                closestWallLocations.add(l63);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l63);
-                minDistance = distance;
-            }
-        }
-
-        if (b64) {
-            int distance = currentLocation.distanceSquaredTo(l64);
-            if (distance == minDistance) {
-                closestWallLocations.add(l64);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l64);
-                minDistance = distance;
-            }
-        }
-
-        if (b65) {
-            int distance = currentLocation.distanceSquaredTo(l65);
-            if (distance == minDistance) {
-                closestWallLocations.add(l65);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l65);
-                minDistance = distance;
-            }
-        }
-
-        if (b66) {
-            int distance = currentLocation.distanceSquaredTo(l66);
-            if (distance == minDistance) {
-                closestWallLocations.add(l66);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l66);
-                minDistance = distance;
-            }
-        }
-
-        if (b67) {
-            int distance = currentLocation.distanceSquaredTo(l67);
-            if (distance == minDistance) {
-                closestWallLocations.add(l67);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l67);
-                minDistance = distance;
-            }
-        }
-
-        if (b68) {
-            int distance = currentLocation.distanceSquaredTo(l68);
-            if (distance == minDistance) {
-                closestWallLocations.add(l68);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l68);
-                minDistance = distance;
-            }
-        }
-
-        if (minDistance > 2) { return prev; }
-        int maxDot = -999999;
-        minDistance = 1000000;
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            Direction vertical = currentLocation.directionTo(closestWallLocation);
-
-            Direction tangent1 = vertical.rotateLeft().rotateLeft();
-            Direction tangent2 = vertical.rotateRight().rotateRight();
-
-            int dx = lastDirection.getDeltaX();
-            int dy = lastDirection.getDeltaY();
-
-            int dot1 = tangent1.getDeltaX() * dx + tangent1.getDeltaY() * dy;
-            int dot2 = tangent2.getDeltaX() * dx + tangent2.getDeltaY() * dy;
-
-            int distance1 = currentLocation.add(tangent1).distanceSquaredTo(targetLocation);
-            int distance2 = currentLocation.add(tangent2).distanceSquaredTo(targetLocation);
-
-            if (!rc.canMove(tangent1)) {
-                dot1 = -1000000;
-            }
-
-            if (!rc.canMove(tangent2)) {
-                dot2 = -1000000;
-            }
-
-            if (dot1 > maxDot) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 > maxDot) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-
-            if (dot1 == maxDot && distance1 < minDistance) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 == maxDot && distance2 < minDistance) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-        }
-        draws1();
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            rc.setIndicatorDot(closestWallLocation, 255, 0, 0);
-        }
-        return ans;
-    }
-
-    private void draws1() throws GameActionException {
-    
-        rc.setIndicatorDot(l11, 255, 0, 255);
-        if (b11) {
-            rc.setIndicatorDot(l11, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l18, 255, 0, 255);
-        if (b18) {
-            rc.setIndicatorDot(l18, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l19, 255, 0, 255);
-        if (b19) {
-            rc.setIndicatorDot(l19, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l20, 255, 0, 255);
-        if (b20) {
-            rc.setIndicatorDot(l20, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l26, 255, 0, 255);
-        if (b26) {
-            rc.setIndicatorDot(l26, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l27, 255, 0, 255);
-        if (b27) {
-            rc.setIndicatorDot(l27, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l28, 255, 0, 255);
-        if (b28) {
-            rc.setIndicatorDot(l28, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l29, 255, 0, 255);
-        if (b29) {
-            rc.setIndicatorDot(l29, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l35, 255, 0, 255);
-        if (b35) {
-            rc.setIndicatorDot(l35, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l36, 255, 0, 255);
-        if (b36) {
-            rc.setIndicatorDot(l36, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l37, 255, 0, 255);
-        if (b37) {
-            rc.setIndicatorDot(l37, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l38, 255, 0, 255);
-        if (b38) {
-            rc.setIndicatorDot(l38, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l42, 255, 0, 255);
-        if (b42) {
-            rc.setIndicatorDot(l42, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l43, 255, 0, 255);
-        if (b43) {
-            rc.setIndicatorDot(l43, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l44, 255, 0, 255);
-        if (b44) {
-            rc.setIndicatorDot(l44, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l45, 255, 0, 255);
-        if (b45) {
-            rc.setIndicatorDot(l45, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l46, 255, 0, 255);
-        if (b46) {
-            rc.setIndicatorDot(l46, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l47, 255, 0, 255);
-        if (b47) {
-            rc.setIndicatorDot(l47, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l50, 255, 0, 255);
-        if (b50) {
-            rc.setIndicatorDot(l50, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l51, 255, 0, 255);
-        if (b51) {
-            rc.setIndicatorDot(l51, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l52, 255, 0, 255);
-        if (b52) {
-            rc.setIndicatorDot(l52, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l53, 255, 0, 255);
-        if (b53) {
-            rc.setIndicatorDot(l53, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l54, 255, 0, 255);
-        if (b54) {
-            rc.setIndicatorDot(l54, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l55, 255, 0, 255);
-        if (b55) {
-            rc.setIndicatorDot(l55, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l56, 255, 0, 255);
-        if (b56) {
-            rc.setIndicatorDot(l56, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l57, 255, 0, 255);
-        if (b57) {
-            rc.setIndicatorDot(l57, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l58, 255, 0, 255);
-        if (b58) {
-            rc.setIndicatorDot(l58, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l59, 255, 0, 255);
-        if (b59) {
-            rc.setIndicatorDot(l59, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l60, 255, 0, 255);
-        if (b60) {
-            rc.setIndicatorDot(l60, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l61, 255, 0, 255);
-        if (b61) {
-            rc.setIndicatorDot(l61, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l62, 255, 0, 255);
-        if (b62) {
-            rc.setIndicatorDot(l62, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l63, 255, 0, 255);
-        if (b63) {
-            rc.setIndicatorDot(l63, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l64, 255, 0, 255);
-        if (b64) {
-            rc.setIndicatorDot(l64, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l65, 255, 0, 255);
-        if (b65) {
-            rc.setIndicatorDot(l65, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l66, 255, 0, 255);
-        if (b66) {
-            rc.setIndicatorDot(l66, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l67, 255, 0, 255);
-        if (b67) {
-            rc.setIndicatorDot(l67, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l68, 255, 0, 255);
-        if (b68) {
-            rc.setIndicatorDot(l68, 255, 255, 255);
-        }
-
+        bug.move(targetLocation);
+        return null;
     }
 
     private Direction getBestDirection2() throws GameActionException {
-        MapLocation best = currentLocation;
         double localBest = 1000000.0;
+        boolean temp1 = false;
+        boolean temp2 = false;
         l34 = currentLocation;
         v34 = 0;
         d34 = Direction.CENTER;
@@ -6589,16 +5145,17 @@ public class Navigation {
         r64 = false;
         o64 = false;
     
-        if (rc.onTheMap(l33) && rc.canSenseLocation(l33)) {
+        if (rc.onTheMap(l33)) {
             if (rc.senseCloud(l33)) {
                 p33 = 1.5;
                 b33 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l33).getCurrentDirection();
-                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && currentDirection.equals(Direction.CENTER))) {
-                    p33 = rc.senseMapInfo(l33).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l33)) {
+                MapInfo mapInfo = rc.senseMapInfo(l33);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l33), currentDirection) > 0))) {
+                    p33 = mapInfo.getCooldownMultiplier(team);
                     b33 = false;
                 }
             }
@@ -6614,22 +5171,24 @@ public class Navigation {
             r33 |= r43;
             r33 |= r34;
             r33 &= !b33;
-            o43 |= b33;
+            if (targetLocation.equals(l33)) {
+                temp1 = true;
+                temp2 = r33;
+            }
         }
-        else {
-            o43 |= b33;
-        }
+        o43 |= b33;
 
-        if (rc.onTheMap(l35) && rc.canSenseLocation(l35)) {
+        if (rc.onTheMap(l35)) {
             if (rc.senseCloud(l35)) {
                 p35 = 1.5;
                 b35 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l35).getCurrentDirection();
-                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && currentDirection.equals(Direction.CENTER))) {
-                    p35 = rc.senseMapInfo(l35).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l35)) {
+                MapInfo mapInfo = rc.senseMapInfo(l35);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l35), currentDirection) > 0))) {
+                    p35 = mapInfo.getCooldownMultiplier(team);
                     b35 = false;
                 }
             }
@@ -6645,22 +5204,24 @@ public class Navigation {
             r35 |= r34;
             r35 |= r43;
             r35 &= !b35;
-            o43 |= b35;
+            if (targetLocation.equals(l35)) {
+                temp1 = true;
+                temp2 = r35;
+            }
         }
-        else {
-            o43 |= b35;
-        }
+        o43 |= b35;
 
-        if (rc.onTheMap(l43) && rc.canSenseLocation(l43)) {
+        if (rc.onTheMap(l43)) {
             if (rc.senseCloud(l43)) {
                 p43 = 1.5;
                 b43 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l43).getCurrentDirection();
-                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && currentDirection.equals(Direction.CENTER))) {
-                    p43 = rc.senseMapInfo(l43).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l43)) {
+                MapInfo mapInfo = rc.senseMapInfo(l43);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l43), currentDirection) > 0))) {
+                    p43 = mapInfo.getCooldownMultiplier(team);
                     b43 = false;
                 }
             }
@@ -6681,24 +5242,25 @@ public class Navigation {
             r43 |= r34;
             r43 |= r33;
             r43 &= !b43;
-            o35 |= b43;
-            o33 |= b43;
+            if (targetLocation.equals(l43)) {
+                temp1 = true;
+                temp2 = r43;
+            }
         }
-        else {
-            o35 |= b43;
-            o33 |= b43;
-        }
+        o35 |= b43;
+        o33 |= b43;
 
-        if (rc.onTheMap(l42) && rc.canSenseLocation(l42)) {
+        if (rc.onTheMap(l42)) {
             if (rc.senseCloud(l42)) {
                 p42 = 1.5;
                 b42 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l42).getCurrentDirection();
-                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && currentDirection.equals(Direction.CENTER))) {
-                    p42 = rc.senseMapInfo(l42).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l42)) {
+                MapInfo mapInfo = rc.senseMapInfo(l42);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l42), currentDirection) > 0))) {
+                    p42 = mapInfo.getCooldownMultiplier(team);
                     b42 = false;
                 }
             }
@@ -6719,24 +5281,25 @@ public class Navigation {
             r42 |= r34;
             r42 |= r33;
             r42 &= !b42;
-            o43 |= b42;
-            o33 |= b42;
+            if (targetLocation.equals(l42)) {
+                temp1 = true;
+                temp2 = r42;
+            }
         }
-        else {
-            o43 |= b42;
-            o33 |= b42;
-        }
+        o43 |= b42;
+        o33 |= b42;
 
-        if (rc.onTheMap(l44) && rc.canSenseLocation(l44)) {
+        if (rc.onTheMap(l44)) {
             if (rc.senseCloud(l44)) {
                 p44 = 1.5;
                 b44 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l44).getCurrentDirection();
-                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && currentDirection.equals(Direction.CENTER))) {
-                    p44 = rc.senseMapInfo(l44).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l44)) {
+                MapInfo mapInfo = rc.senseMapInfo(l44);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l44), currentDirection) > 0))) {
+                    p44 = mapInfo.getCooldownMultiplier(team);
                     b44 = false;
                 }
             }
@@ -6757,24 +5320,25 @@ public class Navigation {
             r44 |= r34;
             r44 |= r43;
             r44 &= !b44;
-            o35 |= b44;
-            o43 |= b44;
+            if (targetLocation.equals(l44)) {
+                temp1 = true;
+                temp2 = r44;
+            }
         }
-        else {
-            o35 |= b44;
-            o43 |= b44;
-        }
+        o35 |= b44;
+        o43 |= b44;
 
-        if (rc.onTheMap(l32) && rc.canSenseLocation(l32)) {
+        if (rc.onTheMap(l32)) {
             if (rc.senseCloud(l32)) {
                 p32 = 1.5;
                 b32 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l32).getCurrentDirection();
-                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && currentDirection.equals(Direction.CENTER))) {
-                    p32 = rc.senseMapInfo(l32).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l32)) {
+                MapInfo mapInfo = rc.senseMapInfo(l32);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l32), currentDirection) > 0))) {
+                    p32 = mapInfo.getCooldownMultiplier(team);
                     b32 = false;
                 }
             }
@@ -6790,24 +5354,25 @@ public class Navigation {
             r32 |= r42;
             r32 |= r33;
             r32 &= !b32;
-            o42 |= b32;
-            o33 |= b32;
+            if (targetLocation.equals(l32)) {
+                temp1 = true;
+                temp2 = r32;
+            }
         }
-        else {
-            o42 |= b32;
-            o33 |= b32;
-        }
+        o42 |= b32;
+        o33 |= b32;
 
-        if (rc.onTheMap(l52) && rc.canSenseLocation(l52)) {
+        if (rc.onTheMap(l52)) {
             if (rc.senseCloud(l52)) {
                 p52 = 1.5;
                 b52 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l52).getCurrentDirection();
-                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && currentDirection.equals(Direction.CENTER))) {
-                    p52 = rc.senseMapInfo(l52).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l52)) {
+                MapInfo mapInfo = rc.senseMapInfo(l52);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l52), currentDirection) > 0))) {
+                    p52 = mapInfo.getCooldownMultiplier(team);
                     b52 = false;
                 }
             }
@@ -6828,26 +5393,26 @@ public class Navigation {
             r52 |= r43;
             r52 |= r42;
             r52 &= !b52;
-            o44 |= b52;
-            o43 |= b52;
-            o42 |= b52;
+            if (targetLocation.equals(l52)) {
+                temp1 = true;
+                temp2 = r52;
+            }
         }
-        else {
-            o44 |= b52;
-            o43 |= b52;
-            o42 |= b52;
-        }
+        o44 |= b52;
+        o43 |= b52;
+        o42 |= b52;
 
-        if (rc.onTheMap(l36) && rc.canSenseLocation(l36)) {
+        if (rc.onTheMap(l36)) {
             if (rc.senseCloud(l36)) {
                 p36 = 1.5;
                 b36 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l36).getCurrentDirection();
-                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && currentDirection.equals(Direction.CENTER))) {
-                    p36 = rc.senseMapInfo(l36).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l36)) {
+                MapInfo mapInfo = rc.senseMapInfo(l36);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l36), currentDirection) > 0))) {
+                    p36 = mapInfo.getCooldownMultiplier(team);
                     b36 = false;
                 }
             }
@@ -6863,24 +5428,25 @@ public class Navigation {
             r36 |= r35;
             r36 |= r44;
             r36 &= !b36;
-            o35 |= b36;
-            o44 |= b36;
+            if (targetLocation.equals(l36)) {
+                temp1 = true;
+                temp2 = r36;
+            }
         }
-        else {
-            o35 |= b36;
-            o44 |= b36;
-        }
+        o35 |= b36;
+        o44 |= b36;
 
-        if (rc.onTheMap(l51) && rc.canSenseLocation(l51)) {
+        if (rc.onTheMap(l51)) {
             if (rc.senseCloud(l51)) {
                 p51 = 1.5;
                 b51 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l51).getCurrentDirection();
-                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && currentDirection.equals(Direction.CENTER))) {
-                    p51 = rc.senseMapInfo(l51).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l51)) {
+                MapInfo mapInfo = rc.senseMapInfo(l51);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l51), currentDirection) > 0))) {
+                    p51 = mapInfo.getCooldownMultiplier(team);
                     b51 = false;
                 }
             }
@@ -6906,28 +5472,27 @@ public class Navigation {
             r51 |= r42;
             r51 |= r41;
             r51 &= !b51;
-            o52 |= b51;
-            o43 |= b51;
-            o42 |= b51;
-            o41 |= b51;
+            if (targetLocation.equals(l51)) {
+                temp1 = true;
+                temp2 = r51;
+            }
         }
-        else {
-            o52 |= b51;
-            o43 |= b51;
-            o42 |= b51;
-            o41 |= b51;
-        }
+        o52 |= b51;
+        o43 |= b51;
+        o42 |= b51;
+        o41 |= b51;
 
-        if (rc.onTheMap(l45) && rc.canSenseLocation(l45)) {
+        if (rc.onTheMap(l45)) {
             if (rc.senseCloud(l45)) {
                 p45 = 1.5;
                 b45 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l45).getCurrentDirection();
-                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && currentDirection.equals(Direction.CENTER))) {
-                    p45 = rc.senseMapInfo(l45).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l45)) {
+                MapInfo mapInfo = rc.senseMapInfo(l45);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l45), currentDirection) > 0))) {
+                    p45 = mapInfo.getCooldownMultiplier(team);
                     b45 = false;
                 }
             }
@@ -6953,28 +5518,27 @@ public class Navigation {
             r45 |= r44;
             r45 |= r53;
             r45 &= !b45;
-            o36 |= b45;
-            o35 |= b45;
-            o44 |= b45;
-            o53 |= b45;
+            if (targetLocation.equals(l45)) {
+                temp1 = true;
+                temp2 = r45;
+            }
         }
-        else {
-            o36 |= b45;
-            o35 |= b45;
-            o44 |= b45;
-            o53 |= b45;
-        }
+        o36 |= b45;
+        o35 |= b45;
+        o44 |= b45;
+        o53 |= b45;
 
-        if (rc.onTheMap(l53) && rc.canSenseLocation(l53)) {
+        if (rc.onTheMap(l53)) {
             if (rc.senseCloud(l53)) {
                 p53 = 1.5;
                 b53 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l53).getCurrentDirection();
-                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && currentDirection.equals(Direction.CENTER))) {
-                    p53 = rc.senseMapInfo(l53).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l53)) {
+                MapInfo mapInfo = rc.senseMapInfo(l53);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l53), currentDirection) > 0))) {
+                    p53 = mapInfo.getCooldownMultiplier(team);
                     b53 = false;
                 }
             }
@@ -7000,28 +5564,27 @@ public class Navigation {
             r53 |= r43;
             r53 |= r52;
             r53 &= !b53;
-            o45 |= b53;
-            o44 |= b53;
-            o43 |= b53;
-            o52 |= b53;
+            if (targetLocation.equals(l53)) {
+                temp1 = true;
+                temp2 = r53;
+            }
         }
-        else {
-            o45 |= b53;
-            o44 |= b53;
-            o43 |= b53;
-            o52 |= b53;
-        }
+        o45 |= b53;
+        o44 |= b53;
+        o43 |= b53;
+        o52 |= b53;
 
-        if (rc.onTheMap(l41) && rc.canSenseLocation(l41)) {
+        if (rc.onTheMap(l41)) {
             if (rc.senseCloud(l41)) {
                 p41 = 1.5;
                 b41 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l41).getCurrentDirection();
-                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && currentDirection.equals(Direction.CENTER))) {
-                    p41 = rc.senseMapInfo(l41).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l41)) {
+                MapInfo mapInfo = rc.senseMapInfo(l41);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l41), currentDirection) > 0))) {
+                    p41 = mapInfo.getCooldownMultiplier(team);
                     b41 = false;
                 }
             }
@@ -7047,28 +5610,27 @@ public class Navigation {
             r41 |= r33;
             r41 |= r32;
             r41 &= !b41;
-            o51 |= b41;
-            o42 |= b41;
-            o33 |= b41;
-            o32 |= b41;
+            if (targetLocation.equals(l41)) {
+                temp1 = true;
+                temp2 = r41;
+            }
         }
-        else {
-            o51 |= b41;
-            o42 |= b41;
-            o33 |= b41;
-            o32 |= b41;
-        }
+        o51 |= b41;
+        o42 |= b41;
+        o33 |= b41;
+        o32 |= b41;
 
-        if (rc.onTheMap(l50) && rc.canSenseLocation(l50)) {
+        if (rc.onTheMap(l50)) {
             if (rc.senseCloud(l50)) {
                 p50 = 1.5;
                 b50 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l50).getCurrentDirection();
-                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && currentDirection.equals(Direction.CENTER))) {
-                    p50 = rc.senseMapInfo(l50).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l50)) {
+                MapInfo mapInfo = rc.senseMapInfo(l50);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l50), currentDirection) > 0))) {
+                    p50 = mapInfo.getCooldownMultiplier(team);
                     b50 = false;
                 }
             }
@@ -7089,26 +5651,26 @@ public class Navigation {
             r50 |= r42;
             r50 |= r41;
             r50 &= !b50;
-            o51 |= b50;
-            o42 |= b50;
-            o41 |= b50;
+            if (targetLocation.equals(l50)) {
+                temp1 = true;
+                temp2 = r50;
+            }
         }
-        else {
-            o51 |= b50;
-            o42 |= b50;
-            o41 |= b50;
-        }
+        o51 |= b50;
+        o42 |= b50;
+        o41 |= b50;
 
-        if (rc.onTheMap(l54) && rc.canSenseLocation(l54)) {
+        if (rc.onTheMap(l54)) {
             if (rc.senseCloud(l54)) {
                 p54 = 1.5;
                 b54 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l54).getCurrentDirection();
-                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && currentDirection.equals(Direction.CENTER))) {
-                    p54 = rc.senseMapInfo(l54).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l54)) {
+                MapInfo mapInfo = rc.senseMapInfo(l54);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l54), currentDirection) > 0))) {
+                    p54 = mapInfo.getCooldownMultiplier(team);
                     b54 = false;
                 }
             }
@@ -7129,26 +5691,26 @@ public class Navigation {
             r54 |= r44;
             r54 |= r53;
             r54 &= !b54;
-            o45 |= b54;
-            o44 |= b54;
-            o53 |= b54;
+            if (targetLocation.equals(l54)) {
+                temp1 = true;
+                temp2 = r54;
+            }
         }
-        else {
-            o45 |= b54;
-            o44 |= b54;
-            o53 |= b54;
-        }
+        o45 |= b54;
+        o44 |= b54;
+        o53 |= b54;
 
-        if (rc.onTheMap(l31) && rc.canSenseLocation(l31)) {
+        if (rc.onTheMap(l31)) {
             if (rc.senseCloud(l31)) {
                 p31 = 1.5;
                 b31 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l31).getCurrentDirection();
-                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && currentDirection.equals(Direction.CENTER))) {
-                    p31 = rc.senseMapInfo(l31).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l31)) {
+                MapInfo mapInfo = rc.senseMapInfo(l31);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l31), currentDirection) > 0))) {
+                    p31 = mapInfo.getCooldownMultiplier(team);
                     b31 = false;
                 }
             }
@@ -7164,24 +5726,25 @@ public class Navigation {
             r31 |= r41;
             r31 |= r32;
             r31 &= !b31;
-            o41 |= b31;
-            o32 |= b31;
+            if (targetLocation.equals(l31)) {
+                temp1 = true;
+                temp2 = r31;
+            }
         }
-        else {
-            o41 |= b31;
-            o32 |= b31;
-        }
+        o41 |= b31;
+        o32 |= b31;
 
-        if (rc.onTheMap(l60) && rc.canSenseLocation(l60)) {
+        if (rc.onTheMap(l60)) {
             if (rc.senseCloud(l60)) {
                 p60 = 1.5;
                 b60 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l60).getCurrentDirection();
-                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && currentDirection.equals(Direction.CENTER))) {
-                    p60 = rc.senseMapInfo(l60).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l60)) {
+                MapInfo mapInfo = rc.senseMapInfo(l60);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l60), currentDirection) > 0))) {
+                    p60 = mapInfo.getCooldownMultiplier(team);
                     b60 = false;
                 }
             }
@@ -7202,26 +5765,26 @@ public class Navigation {
             r60 |= r52;
             r60 |= r51;
             r60 &= !b60;
-            o53 |= b60;
-            o52 |= b60;
-            o51 |= b60;
+            if (targetLocation.equals(l60)) {
+                temp1 = true;
+                temp2 = r60;
+            }
         }
-        else {
-            o53 |= b60;
-            o52 |= b60;
-            o51 |= b60;
-        }
+        o53 |= b60;
+        o52 |= b60;
+        o51 |= b60;
 
-        if (rc.onTheMap(l37) && rc.canSenseLocation(l37)) {
+        if (rc.onTheMap(l37)) {
             if (rc.senseCloud(l37)) {
                 p37 = 1.5;
                 b37 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l37).getCurrentDirection();
-                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && currentDirection.equals(Direction.CENTER))) {
-                    p37 = rc.senseMapInfo(l37).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l37)) {
+                MapInfo mapInfo = rc.senseMapInfo(l37);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l37), currentDirection) > 0))) {
+                    p37 = mapInfo.getCooldownMultiplier(team);
                     b37 = false;
                 }
             }
@@ -7237,24 +5800,25 @@ public class Navigation {
             r37 |= r36;
             r37 |= r45;
             r37 &= !b37;
-            o36 |= b37;
-            o45 |= b37;
+            if (targetLocation.equals(l37)) {
+                temp1 = true;
+                temp2 = r37;
+            }
         }
-        else {
-            o36 |= b37;
-            o45 |= b37;
-        }
+        o36 |= b37;
+        o45 |= b37;
 
-        if (rc.onTheMap(l40) && rc.canSenseLocation(l40)) {
+        if (rc.onTheMap(l40)) {
             if (rc.senseCloud(l40)) {
                 p40 = 1.5;
                 b40 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l40).getCurrentDirection();
-                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && currentDirection.equals(Direction.CENTER))) {
-                    p40 = rc.senseMapInfo(l40).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l40)) {
+                MapInfo mapInfo = rc.senseMapInfo(l40);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l40), currentDirection) > 0))) {
+                    p40 = mapInfo.getCooldownMultiplier(team);
                     b40 = false;
                 }
             }
@@ -7280,28 +5844,27 @@ public class Navigation {
             r40 |= r32;
             r40 |= r31;
             r40 &= !b40;
-            o50 |= b40;
-            o41 |= b40;
-            o32 |= b40;
-            o31 |= b40;
+            if (targetLocation.equals(l40)) {
+                temp1 = true;
+                temp2 = r40;
+            }
         }
-        else {
-            o50 |= b40;
-            o41 |= b40;
-            o32 |= b40;
-            o31 |= b40;
-        }
+        o50 |= b40;
+        o41 |= b40;
+        o32 |= b40;
+        o31 |= b40;
 
-        if (rc.onTheMap(l46) && rc.canSenseLocation(l46)) {
+        if (rc.onTheMap(l46)) {
             if (rc.senseCloud(l46)) {
                 p46 = 1.5;
                 b46 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l46).getCurrentDirection();
-                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && currentDirection.equals(Direction.CENTER))) {
-                    p46 = rc.senseMapInfo(l46).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l46)) {
+                MapInfo mapInfo = rc.senseMapInfo(l46);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l46), currentDirection) > 0))) {
+                    p46 = mapInfo.getCooldownMultiplier(team);
                     b46 = false;
                 }
             }
@@ -7327,28 +5890,27 @@ public class Navigation {
             r46 |= r45;
             r46 |= r54;
             r46 &= !b46;
-            o37 |= b46;
-            o36 |= b46;
-            o45 |= b46;
-            o54 |= b46;
+            if (targetLocation.equals(l46)) {
+                temp1 = true;
+                temp2 = r46;
+            }
         }
-        else {
-            o37 |= b46;
-            o36 |= b46;
-            o45 |= b46;
-            o54 |= b46;
-        }
+        o37 |= b46;
+        o36 |= b46;
+        o45 |= b46;
+        o54 |= b46;
 
-        if (rc.onTheMap(l61) && rc.canSenseLocation(l61)) {
+        if (rc.onTheMap(l61)) {
             if (rc.senseCloud(l61)) {
                 p61 = 1.5;
                 b61 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l61).getCurrentDirection();
-                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && currentDirection.equals(Direction.CENTER))) {
-                    p61 = rc.senseMapInfo(l61).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l61)) {
+                MapInfo mapInfo = rc.senseMapInfo(l61);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l61), currentDirection) > 0))) {
+                    p61 = mapInfo.getCooldownMultiplier(team);
                     b61 = false;
                 }
             }
@@ -7374,28 +5936,27 @@ public class Navigation {
             r61 |= r52;
             r61 |= r60;
             r61 &= !b61;
-            o54 |= b61;
-            o53 |= b61;
-            o52 |= b61;
-            o60 |= b61;
+            if (targetLocation.equals(l61)) {
+                temp1 = true;
+                temp2 = r61;
+            }
         }
-        else {
-            o54 |= b61;
-            o53 |= b61;
-            o52 |= b61;
-            o60 |= b61;
-        }
+        o54 |= b61;
+        o53 |= b61;
+        o52 |= b61;
+        o60 |= b61;
 
-        if (rc.onTheMap(l59) && rc.canSenseLocation(l59)) {
+        if (rc.onTheMap(l59)) {
             if (rc.senseCloud(l59)) {
                 p59 = 1.5;
                 b59 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l59).getCurrentDirection();
-                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && currentDirection.equals(Direction.CENTER))) {
-                    p59 = rc.senseMapInfo(l59).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l59)) {
+                MapInfo mapInfo = rc.senseMapInfo(l59);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l59), currentDirection) > 0))) {
+                    p59 = mapInfo.getCooldownMultiplier(team);
                     b59 = false;
                 }
             }
@@ -7421,28 +5982,27 @@ public class Navigation {
             r59 |= r51;
             r59 |= r50;
             r59 &= !b59;
-            o60 |= b59;
-            o52 |= b59;
-            o51 |= b59;
-            o50 |= b59;
+            if (targetLocation.equals(l59)) {
+                temp1 = true;
+                temp2 = r59;
+            }
         }
-        else {
-            o60 |= b59;
-            o52 |= b59;
-            o51 |= b59;
-            o50 |= b59;
-        }
+        o60 |= b59;
+        o52 |= b59;
+        o51 |= b59;
+        o50 |= b59;
 
-        if (rc.onTheMap(l62) && rc.canSenseLocation(l62)) {
+        if (rc.onTheMap(l62)) {
             if (rc.senseCloud(l62)) {
                 p62 = 1.5;
                 b62 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l62).getCurrentDirection();
-                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && currentDirection.equals(Direction.CENTER))) {
-                    p62 = rc.senseMapInfo(l62).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l62)) {
+                MapInfo mapInfo = rc.senseMapInfo(l62);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l62), currentDirection) > 0))) {
+                    p62 = mapInfo.getCooldownMultiplier(team);
                     b62 = false;
                 }
             }
@@ -7468,28 +6028,27 @@ public class Navigation {
             r62 |= r53;
             r62 |= r61;
             r62 &= !b62;
-            o55 |= b62;
-            o54 |= b62;
-            o53 |= b62;
-            o61 |= b62;
+            if (targetLocation.equals(l62)) {
+                temp1 = true;
+                temp2 = r62;
+            }
         }
-        else {
-            o55 |= b62;
-            o54 |= b62;
-            o53 |= b62;
-            o61 |= b62;
-        }
+        o55 |= b62;
+        o54 |= b62;
+        o53 |= b62;
+        o61 |= b62;
 
-        if (rc.onTheMap(l58) && rc.canSenseLocation(l58)) {
+        if (rc.onTheMap(l58)) {
             if (rc.senseCloud(l58)) {
                 p58 = 1.5;
                 b58 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l58).getCurrentDirection();
-                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && currentDirection.equals(Direction.CENTER))) {
-                    p58 = rc.senseMapInfo(l58).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l58)) {
+                MapInfo mapInfo = rc.senseMapInfo(l58);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l58), currentDirection) > 0))) {
+                    p58 = mapInfo.getCooldownMultiplier(team);
                     b58 = false;
                 }
             }
@@ -7515,28 +6074,27 @@ public class Navigation {
             r58 |= r50;
             r58 |= r49;
             r58 &= !b58;
-            o59 |= b58;
-            o51 |= b58;
-            o50 |= b58;
-            o49 |= b58;
+            if (targetLocation.equals(l58)) {
+                temp1 = true;
+                temp2 = r58;
+            }
         }
-        else {
-            o59 |= b58;
-            o51 |= b58;
-            o50 |= b58;
-            o49 |= b58;
-        }
+        o59 |= b58;
+        o51 |= b58;
+        o50 |= b58;
+        o49 |= b58;
 
-        if (rc.onTheMap(l49) && rc.canSenseLocation(l49)) {
+        if (rc.onTheMap(l49)) {
             if (rc.senseCloud(l49)) {
                 p49 = 1.5;
                 b49 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l49).getCurrentDirection();
-                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && currentDirection.equals(Direction.CENTER))) {
-                    p49 = rc.senseMapInfo(l49).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l49)) {
+                MapInfo mapInfo = rc.senseMapInfo(l49);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l49), currentDirection) > 0))) {
+                    p49 = mapInfo.getCooldownMultiplier(team);
                     b49 = false;
                 }
             }
@@ -7562,28 +6120,27 @@ public class Navigation {
             r49 |= r41;
             r49 |= r40;
             r49 &= !b49;
-            o58 |= b49;
-            o50 |= b49;
-            o41 |= b49;
-            o40 |= b49;
+            if (targetLocation.equals(l49)) {
+                temp1 = true;
+                temp2 = r49;
+            }
         }
-        else {
-            o58 |= b49;
-            o50 |= b49;
-            o41 |= b49;
-            o40 |= b49;
-        }
+        o58 |= b49;
+        o50 |= b49;
+        o41 |= b49;
+        o40 |= b49;
 
-        if (rc.onTheMap(l55) && rc.canSenseLocation(l55)) {
+        if (rc.onTheMap(l55)) {
             if (rc.senseCloud(l55)) {
                 p55 = 1.5;
                 b55 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l55).getCurrentDirection();
-                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && currentDirection.equals(Direction.CENTER))) {
-                    p55 = rc.senseMapInfo(l55).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l55)) {
+                MapInfo mapInfo = rc.senseMapInfo(l55);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l55), currentDirection) > 0))) {
+                    p55 = mapInfo.getCooldownMultiplier(team);
                     b55 = false;
                 }
             }
@@ -7609,28 +6166,27 @@ public class Navigation {
             r55 |= r54;
             r55 |= r62;
             r55 &= !b55;
-            o46 |= b55;
-            o45 |= b55;
-            o54 |= b55;
-            o62 |= b55;
+            if (targetLocation.equals(l55)) {
+                temp1 = true;
+                temp2 = r55;
+            }
         }
-        else {
-            o46 |= b55;
-            o45 |= b55;
-            o54 |= b55;
-            o62 |= b55;
-        }
+        o46 |= b55;
+        o45 |= b55;
+        o54 |= b55;
+        o62 |= b55;
 
-        if (rc.onTheMap(l63) && rc.canSenseLocation(l63)) {
+        if (rc.onTheMap(l63)) {
             if (rc.senseCloud(l63)) {
                 p63 = 1.5;
                 b63 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l63).getCurrentDirection();
-                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && currentDirection.equals(Direction.CENTER))) {
-                    p63 = rc.senseMapInfo(l63).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l63)) {
+                MapInfo mapInfo = rc.senseMapInfo(l63);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l63), currentDirection) > 0))) {
+                    p63 = mapInfo.getCooldownMultiplier(team);
                     b63 = false;
                 }
             }
@@ -7651,26 +6207,26 @@ public class Navigation {
             r63 |= r54;
             r63 |= r62;
             r63 &= !b63;
-            o55 |= b63;
-            o54 |= b63;
-            o62 |= b63;
+            if (targetLocation.equals(l63)) {
+                temp1 = true;
+                temp2 = r63;
+            }
         }
-        else {
-            o55 |= b63;
-            o54 |= b63;
-            o62 |= b63;
-        }
+        o55 |= b63;
+        o54 |= b63;
+        o62 |= b63;
 
-        if (rc.onTheMap(l57) && rc.canSenseLocation(l57)) {
+        if (rc.onTheMap(l57)) {
             if (rc.senseCloud(l57)) {
                 p57 = 1.5;
                 b57 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l57).getCurrentDirection();
-                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && currentDirection.equals(Direction.CENTER))) {
-                    p57 = rc.senseMapInfo(l57).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l57)) {
+                MapInfo mapInfo = rc.senseMapInfo(l57);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l57), currentDirection) > 0))) {
+                    p57 = mapInfo.getCooldownMultiplier(team);
                     b57 = false;
                 }
             }
@@ -7691,26 +6247,26 @@ public class Navigation {
             r57 |= r50;
             r57 |= r49;
             r57 &= !b57;
-            o58 |= b57;
-            o50 |= b57;
-            o49 |= b57;
+            if (targetLocation.equals(l57)) {
+                temp1 = true;
+                temp2 = r57;
+            }
         }
-        else {
-            o58 |= b57;
-            o50 |= b57;
-            o49 |= b57;
-        }
+        o58 |= b57;
+        o50 |= b57;
+        o49 |= b57;
 
-        if (rc.onTheMap(l38) && rc.canSenseLocation(l38)) {
+        if (rc.onTheMap(l38)) {
             if (rc.senseCloud(l38)) {
                 p38 = 1.5;
                 b38 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l38).getCurrentDirection();
-                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && currentDirection.equals(Direction.CENTER))) {
-                    p38 = rc.senseMapInfo(l38).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l38)) {
+                MapInfo mapInfo = rc.senseMapInfo(l38);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l38), currentDirection) > 0))) {
+                    p38 = mapInfo.getCooldownMultiplier(team);
                     b38 = false;
                 }
             }
@@ -7726,24 +6282,25 @@ public class Navigation {
             r38 |= r37;
             r38 |= r46;
             r38 &= !b38;
-            o37 |= b38;
-            o46 |= b38;
+            if (targetLocation.equals(l38)) {
+                temp1 = true;
+                temp2 = r38;
+            }
         }
-        else {
-            o37 |= b38;
-            o46 |= b38;
-        }
+        o37 |= b38;
+        o46 |= b38;
 
-        if (rc.onTheMap(l30) && rc.canSenseLocation(l30)) {
+        if (rc.onTheMap(l30)) {
             if (rc.senseCloud(l30)) {
                 p30 = 1.5;
                 b30 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l30).getCurrentDirection();
-                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && currentDirection.equals(Direction.CENTER))) {
-                    p30 = rc.senseMapInfo(l30).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l30)) {
+                MapInfo mapInfo = rc.senseMapInfo(l30);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l30), currentDirection) > 0))) {
+                    p30 = mapInfo.getCooldownMultiplier(team);
                     b30 = false;
                 }
             }
@@ -7759,24 +6316,25 @@ public class Navigation {
             r30 |= r40;
             r30 |= r31;
             r30 &= !b30;
-            o40 |= b30;
-            o31 |= b30;
+            if (targetLocation.equals(l30)) {
+                temp1 = true;
+                temp2 = r30;
+            }
         }
-        else {
-            o40 |= b30;
-            o31 |= b30;
-        }
+        o40 |= b30;
+        o31 |= b30;
 
-        if (rc.onTheMap(l66) && rc.canSenseLocation(l66)) {
+        if (rc.onTheMap(l66)) {
             if (rc.senseCloud(l66)) {
                 p66 = 1.5;
                 b66 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l66).getCurrentDirection();
-                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && currentDirection.equals(Direction.CENTER))) {
-                    p66 = rc.senseMapInfo(l66).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l66)) {
+                MapInfo mapInfo = rc.senseMapInfo(l66);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l66), currentDirection) > 0))) {
+                    p66 = mapInfo.getCooldownMultiplier(team);
                     b66 = false;
                 }
             }
@@ -7797,26 +6355,26 @@ public class Navigation {
             r66 |= r60;
             r66 |= r59;
             r66 &= !b66;
-            o61 |= b66;
-            o60 |= b66;
-            o59 |= b66;
+            if (targetLocation.equals(l66)) {
+                temp1 = true;
+                temp2 = r66;
+            }
         }
-        else {
-            o61 |= b66;
-            o60 |= b66;
-            o59 |= b66;
-        }
+        o61 |= b66;
+        o60 |= b66;
+        o59 |= b66;
 
-        if (rc.onTheMap(l39) && rc.canSenseLocation(l39)) {
+        if (rc.onTheMap(l39)) {
             if (rc.senseCloud(l39)) {
                 p39 = 1.5;
                 b39 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l39).getCurrentDirection();
-                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && currentDirection.equals(Direction.CENTER))) {
-                    p39 = rc.senseMapInfo(l39).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l39)) {
+                MapInfo mapInfo = rc.senseMapInfo(l39);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l39), currentDirection) > 0))) {
+                    p39 = mapInfo.getCooldownMultiplier(team);
                     b39 = false;
                 }
             }
@@ -7842,28 +6400,27 @@ public class Navigation {
             r39 |= r31;
             r39 |= r30;
             r39 &= !b39;
-            o49 |= b39;
-            o40 |= b39;
-            o31 |= b39;
-            o30 |= b39;
+            if (targetLocation.equals(l39)) {
+                temp1 = true;
+                temp2 = r39;
+            }
         }
-        else {
-            o49 |= b39;
-            o40 |= b39;
-            o31 |= b39;
-            o30 |= b39;
-        }
+        o49 |= b39;
+        o40 |= b39;
+        o31 |= b39;
+        o30 |= b39;
 
-        if (rc.onTheMap(l47) && rc.canSenseLocation(l47)) {
+        if (rc.onTheMap(l47)) {
             if (rc.senseCloud(l47)) {
                 p47 = 1.5;
                 b47 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l47).getCurrentDirection();
-                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && currentDirection.equals(Direction.CENTER))) {
-                    p47 = rc.senseMapInfo(l47).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l47)) {
+                MapInfo mapInfo = rc.senseMapInfo(l47);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l47), currentDirection) > 0))) {
+                    p47 = mapInfo.getCooldownMultiplier(team);
                     b47 = false;
                 }
             }
@@ -7889,28 +6446,27 @@ public class Navigation {
             r47 |= r46;
             r47 |= r55;
             r47 &= !b47;
-            o38 |= b47;
-            o37 |= b47;
-            o46 |= b47;
-            o55 |= b47;
+            if (targetLocation.equals(l47)) {
+                temp1 = true;
+                temp2 = r47;
+            }
         }
-        else {
-            o38 |= b47;
-            o37 |= b47;
-            o46 |= b47;
-            o55 |= b47;
-        }
+        o38 |= b47;
+        o37 |= b47;
+        o46 |= b47;
+        o55 |= b47;
 
-        if (rc.onTheMap(l65) && rc.canSenseLocation(l65)) {
+        if (rc.onTheMap(l65)) {
             if (rc.senseCloud(l65)) {
                 p65 = 1.5;
                 b65 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l65).getCurrentDirection();
-                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && currentDirection.equals(Direction.CENTER))) {
-                    p65 = rc.senseMapInfo(l65).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l65)) {
+                MapInfo mapInfo = rc.senseMapInfo(l65);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l65), currentDirection) > 0))) {
+                    p65 = mapInfo.getCooldownMultiplier(team);
                     b65 = false;
                 }
             }
@@ -7936,28 +6492,27 @@ public class Navigation {
             r65 |= r59;
             r65 |= r58;
             r65 &= !b65;
-            o66 |= b65;
-            o60 |= b65;
-            o59 |= b65;
-            o58 |= b65;
+            if (targetLocation.equals(l65)) {
+                temp1 = true;
+                temp2 = r65;
+            }
         }
-        else {
-            o66 |= b65;
-            o60 |= b65;
-            o59 |= b65;
-            o58 |= b65;
-        }
+        o66 |= b65;
+        o60 |= b65;
+        o59 |= b65;
+        o58 |= b65;
 
-        if (rc.onTheMap(l67) && rc.canSenseLocation(l67)) {
+        if (rc.onTheMap(l67)) {
             if (rc.senseCloud(l67)) {
                 p67 = 1.5;
                 b67 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l67).getCurrentDirection();
-                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && currentDirection.equals(Direction.CENTER))) {
-                    p67 = rc.senseMapInfo(l67).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l67)) {
+                MapInfo mapInfo = rc.senseMapInfo(l67);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l67), currentDirection) > 0))) {
+                    p67 = mapInfo.getCooldownMultiplier(team);
                     b67 = false;
                 }
             }
@@ -7983,28 +6538,27 @@ public class Navigation {
             r67 |= r60;
             r67 |= r66;
             r67 &= !b67;
-            o62 |= b67;
-            o61 |= b67;
-            o60 |= b67;
-            o66 |= b67;
+            if (targetLocation.equals(l67)) {
+                temp1 = true;
+                temp2 = r67;
+            }
         }
-        else {
-            o62 |= b67;
-            o61 |= b67;
-            o60 |= b67;
-            o66 |= b67;
-        }
+        o62 |= b67;
+        o61 |= b67;
+        o60 |= b67;
+        o66 |= b67;
 
-        if (rc.onTheMap(l64) && rc.canSenseLocation(l64)) {
+        if (rc.onTheMap(l64)) {
             if (rc.senseCloud(l64)) {
                 p64 = 1.5;
                 b64 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l64).getCurrentDirection();
-                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && currentDirection.equals(Direction.CENTER))) {
-                    p64 = rc.senseMapInfo(l64).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l64)) {
+                MapInfo mapInfo = rc.senseMapInfo(l64);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l64), currentDirection) > 0))) {
+                    p64 = mapInfo.getCooldownMultiplier(team);
                     b64 = false;
                 }
             }
@@ -8030,28 +6584,27 @@ public class Navigation {
             r64 |= r58;
             r64 |= r57;
             r64 &= !b64;
-            o65 |= b64;
-            o59 |= b64;
-            o58 |= b64;
-            o57 |= b64;
+            if (targetLocation.equals(l64)) {
+                temp1 = true;
+                temp2 = r64;
+            }
         }
-        else {
-            o65 |= b64;
-            o59 |= b64;
-            o58 |= b64;
-            o57 |= b64;
-        }
+        o65 |= b64;
+        o59 |= b64;
+        o58 |= b64;
+        o57 |= b64;
 
-        if (rc.onTheMap(l48) && rc.canSenseLocation(l48)) {
+        if (rc.onTheMap(l48)) {
             if (rc.senseCloud(l48)) {
                 p48 = 1.5;
                 b48 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l48).getCurrentDirection();
-                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && currentDirection.equals(Direction.CENTER))) {
-                    p48 = rc.senseMapInfo(l48).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l48)) {
+                MapInfo mapInfo = rc.senseMapInfo(l48);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l48), currentDirection) > 0))) {
+                    p48 = mapInfo.getCooldownMultiplier(team);
                     b48 = false;
                 }
             }
@@ -8077,28 +6630,27 @@ public class Navigation {
             r48 |= r40;
             r48 |= r39;
             r48 &= !b48;
-            o57 |= b48;
-            o49 |= b48;
-            o40 |= b48;
-            o39 |= b48;
+            if (targetLocation.equals(l48)) {
+                temp1 = true;
+                temp2 = r48;
+            }
         }
-        else {
-            o57 |= b48;
-            o49 |= b48;
-            o40 |= b48;
-            o39 |= b48;
-        }
+        o57 |= b48;
+        o49 |= b48;
+        o40 |= b48;
+        o39 |= b48;
 
-        if (rc.onTheMap(l68) && rc.canSenseLocation(l68)) {
+        if (rc.onTheMap(l68)) {
             if (rc.senseCloud(l68)) {
                 p68 = 1.5;
                 b68 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l68).getCurrentDirection();
-                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && currentDirection.equals(Direction.CENTER))) {
-                    p68 = rc.senseMapInfo(l68).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l68)) {
+                MapInfo mapInfo = rc.senseMapInfo(l68);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l68), currentDirection) > 0))) {
+                    p68 = mapInfo.getCooldownMultiplier(team);
                     b68 = false;
                 }
             }
@@ -8124,28 +6676,27 @@ public class Navigation {
             r68 |= r61;
             r68 |= r67;
             r68 &= !b68;
-            o63 |= b68;
-            o62 |= b68;
-            o61 |= b68;
-            o67 |= b68;
+            if (targetLocation.equals(l68)) {
+                temp1 = true;
+                temp2 = r68;
+            }
         }
-        else {
-            o63 |= b68;
-            o62 |= b68;
-            o61 |= b68;
-            o67 |= b68;
-        }
+        o63 |= b68;
+        o62 |= b68;
+        o61 |= b68;
+        o67 |= b68;
 
-        if (rc.onTheMap(l56) && rc.canSenseLocation(l56)) {
+        if (rc.onTheMap(l56)) {
             if (rc.senseCloud(l56)) {
                 p56 = 1.5;
                 b56 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l56).getCurrentDirection();
-                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && currentDirection.equals(Direction.CENTER))) {
-                    p56 = rc.senseMapInfo(l56).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l56)) {
+                MapInfo mapInfo = rc.senseMapInfo(l56);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l56), currentDirection) > 0))) {
+                    p56 = mapInfo.getCooldownMultiplier(team);
                     b56 = false;
                 }
             }
@@ -8171,19 +6722,18 @@ public class Navigation {
             r56 |= r55;
             r56 |= r63;
             r56 &= !b56;
-            o47 |= b56;
-            o46 |= b56;
-            o55 |= b56;
-            o63 |= b56;
+            if (targetLocation.equals(l56)) {
+                temp1 = true;
+                temp2 = r56;
+            }
         }
-        else {
-            o47 |= b56;
-            o46 |= b56;
-            o55 |= b56;
-            o63 |= b56;
-        }
+        o47 |= b56;
+        o46 |= b56;
+        o55 |= b56;
+        o63 |= b56;
 
-        int dx = targetLocation.x - l34.x;
+        if (temp1 && temp2) {
+            int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -8220,10 +6770,6 @@ public class Navigation {
                     case -1:
                         if (v33 < 10000) {
                             return d33;
-                        }
-                    case 0:
-                        if (v34 < 10000) {
-                            return d34;
                         }
                     case 1:
                         if (v35 < 10000) {
@@ -8380,6 +6926,7 @@ public class Navigation {
                 } break;
 
         }
+        }
     
         o30 = r30;
         o38 = r38;
@@ -8401,7 +6948,6 @@ public class Navigation {
             if (dist30 < localBest) {
                 localBest = dist30;
                 ans = d30;
-                best = l30;
             }
         }
 
@@ -8410,7 +6956,6 @@ public class Navigation {
             if (dist38 < localBest) {
                 localBest = dist38;
                 ans = d38;
-                best = l38;
             }
         }
 
@@ -8419,7 +6964,6 @@ public class Navigation {
             if (dist39 < localBest) {
                 localBest = dist39;
                 ans = d39;
-                best = l39;
             }
         }
 
@@ -8428,7 +6972,6 @@ public class Navigation {
             if (dist47 < localBest) {
                 localBest = dist47;
                 ans = d47;
-                best = l47;
             }
         }
 
@@ -8437,7 +6980,6 @@ public class Navigation {
             if (dist48 < localBest) {
                 localBest = dist48;
                 ans = d48;
-                best = l48;
             }
         }
 
@@ -8446,7 +6988,6 @@ public class Navigation {
             if (dist56 < localBest) {
                 localBest = dist56;
                 ans = d56;
-                best = l56;
             }
         }
 
@@ -8455,7 +6996,6 @@ public class Navigation {
             if (dist57 < localBest) {
                 localBest = dist57;
                 ans = d57;
-                best = l57;
             }
         }
 
@@ -8464,7 +7004,6 @@ public class Navigation {
             if (dist63 < localBest) {
                 localBest = dist63;
                 ans = d63;
-                best = l63;
             }
         }
 
@@ -8473,7 +7012,6 @@ public class Navigation {
             if (dist64 < localBest) {
                 localBest = dist64;
                 ans = d64;
-                best = l64;
             }
         }
 
@@ -8482,7 +7020,6 @@ public class Navigation {
             if (dist65 < localBest) {
                 localBest = dist65;
                 ans = d65;
-                best = l65;
             }
         }
 
@@ -8491,7 +7028,6 @@ public class Navigation {
             if (dist66 < localBest) {
                 localBest = dist66;
                 ans = d66;
-                best = l66;
             }
         }
 
@@ -8500,7 +7036,6 @@ public class Navigation {
             if (dist67 < localBest) {
                 localBest = dist67;
                 ans = d67;
-                best = l67;
             }
         }
 
@@ -8509,733 +7044,23 @@ public class Navigation {
             if (dist68 < localBest) {
                 localBest = dist68;
                 ans = d68;
-                best = l68;
             }
         }
 
-        draws2();
-        rc.setIndicatorDot(best, 0, 0, 255);
         if (localBest < globalBest) {
             globalBest = localBest;
+            bug.reset();
             return ans;
         }
-        return getBestDirectionWallFollow2(ans);
-    }
 
-    private Direction getBestDirectionWallFollow2(Direction prev) throws GameActionException {
-        Direction ans = Direction.CENTER;
-        int minDistance = closestWallLocations.isEmpty() ? 1000000 : currentLocation.distanceSquaredTo(closestWallLocations.get(0));
-    
-        if (b30) {
-            int distance = currentLocation.distanceSquaredTo(l30);
-            if (distance == minDistance) {
-                closestWallLocations.add(l30);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l30);
-                minDistance = distance;
-            }
-        }
-
-        if (b31) {
-            int distance = currentLocation.distanceSquaredTo(l31);
-            if (distance == minDistance) {
-                closestWallLocations.add(l31);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l31);
-                minDistance = distance;
-            }
-        }
-
-        if (b32) {
-            int distance = currentLocation.distanceSquaredTo(l32);
-            if (distance == minDistance) {
-                closestWallLocations.add(l32);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l32);
-                minDistance = distance;
-            }
-        }
-
-        if (b33) {
-            int distance = currentLocation.distanceSquaredTo(l33);
-            if (distance == minDistance) {
-                closestWallLocations.add(l33);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l33);
-                minDistance = distance;
-            }
-        }
-
-        if (b35) {
-            int distance = currentLocation.distanceSquaredTo(l35);
-            if (distance == minDistance) {
-                closestWallLocations.add(l35);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l35);
-                minDistance = distance;
-            }
-        }
-
-        if (b36) {
-            int distance = currentLocation.distanceSquaredTo(l36);
-            if (distance == minDistance) {
-                closestWallLocations.add(l36);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l36);
-                minDistance = distance;
-            }
-        }
-
-        if (b37) {
-            int distance = currentLocation.distanceSquaredTo(l37);
-            if (distance == minDistance) {
-                closestWallLocations.add(l37);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l37);
-                minDistance = distance;
-            }
-        }
-
-        if (b38) {
-            int distance = currentLocation.distanceSquaredTo(l38);
-            if (distance == minDistance) {
-                closestWallLocations.add(l38);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l38);
-                minDistance = distance;
-            }
-        }
-
-        if (b39) {
-            int distance = currentLocation.distanceSquaredTo(l39);
-            if (distance == minDistance) {
-                closestWallLocations.add(l39);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l39);
-                minDistance = distance;
-            }
-        }
-
-        if (b40) {
-            int distance = currentLocation.distanceSquaredTo(l40);
-            if (distance == minDistance) {
-                closestWallLocations.add(l40);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l40);
-                minDistance = distance;
-            }
-        }
-
-        if (b41) {
-            int distance = currentLocation.distanceSquaredTo(l41);
-            if (distance == minDistance) {
-                closestWallLocations.add(l41);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l41);
-                minDistance = distance;
-            }
-        }
-
-        if (b42) {
-            int distance = currentLocation.distanceSquaredTo(l42);
-            if (distance == minDistance) {
-                closestWallLocations.add(l42);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l42);
-                minDistance = distance;
-            }
-        }
-
-        if (b43) {
-            int distance = currentLocation.distanceSquaredTo(l43);
-            if (distance == minDistance) {
-                closestWallLocations.add(l43);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l43);
-                minDistance = distance;
-            }
-        }
-
-        if (b44) {
-            int distance = currentLocation.distanceSquaredTo(l44);
-            if (distance == minDistance) {
-                closestWallLocations.add(l44);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l44);
-                minDistance = distance;
-            }
-        }
-
-        if (b45) {
-            int distance = currentLocation.distanceSquaredTo(l45);
-            if (distance == minDistance) {
-                closestWallLocations.add(l45);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l45);
-                minDistance = distance;
-            }
-        }
-
-        if (b46) {
-            int distance = currentLocation.distanceSquaredTo(l46);
-            if (distance == minDistance) {
-                closestWallLocations.add(l46);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l46);
-                minDistance = distance;
-            }
-        }
-
-        if (b47) {
-            int distance = currentLocation.distanceSquaredTo(l47);
-            if (distance == minDistance) {
-                closestWallLocations.add(l47);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l47);
-                minDistance = distance;
-            }
-        }
-
-        if (b48) {
-            int distance = currentLocation.distanceSquaredTo(l48);
-            if (distance == minDistance) {
-                closestWallLocations.add(l48);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l48);
-                minDistance = distance;
-            }
-        }
-
-        if (b49) {
-            int distance = currentLocation.distanceSquaredTo(l49);
-            if (distance == minDistance) {
-                closestWallLocations.add(l49);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l49);
-                minDistance = distance;
-            }
-        }
-
-        if (b50) {
-            int distance = currentLocation.distanceSquaredTo(l50);
-            if (distance == minDistance) {
-                closestWallLocations.add(l50);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l50);
-                minDistance = distance;
-            }
-        }
-
-        if (b51) {
-            int distance = currentLocation.distanceSquaredTo(l51);
-            if (distance == minDistance) {
-                closestWallLocations.add(l51);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l51);
-                minDistance = distance;
-            }
-        }
-
-        if (b52) {
-            int distance = currentLocation.distanceSquaredTo(l52);
-            if (distance == minDistance) {
-                closestWallLocations.add(l52);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l52);
-                minDistance = distance;
-            }
-        }
-
-        if (b53) {
-            int distance = currentLocation.distanceSquaredTo(l53);
-            if (distance == minDistance) {
-                closestWallLocations.add(l53);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l53);
-                minDistance = distance;
-            }
-        }
-
-        if (b54) {
-            int distance = currentLocation.distanceSquaredTo(l54);
-            if (distance == minDistance) {
-                closestWallLocations.add(l54);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l54);
-                minDistance = distance;
-            }
-        }
-
-        if (b55) {
-            int distance = currentLocation.distanceSquaredTo(l55);
-            if (distance == minDistance) {
-                closestWallLocations.add(l55);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l55);
-                minDistance = distance;
-            }
-        }
-
-        if (b56) {
-            int distance = currentLocation.distanceSquaredTo(l56);
-            if (distance == minDistance) {
-                closestWallLocations.add(l56);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l56);
-                minDistance = distance;
-            }
-        }
-
-        if (b57) {
-            int distance = currentLocation.distanceSquaredTo(l57);
-            if (distance == minDistance) {
-                closestWallLocations.add(l57);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l57);
-                minDistance = distance;
-            }
-        }
-
-        if (b58) {
-            int distance = currentLocation.distanceSquaredTo(l58);
-            if (distance == minDistance) {
-                closestWallLocations.add(l58);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l58);
-                minDistance = distance;
-            }
-        }
-
-        if (b59) {
-            int distance = currentLocation.distanceSquaredTo(l59);
-            if (distance == minDistance) {
-                closestWallLocations.add(l59);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l59);
-                minDistance = distance;
-            }
-        }
-
-        if (b60) {
-            int distance = currentLocation.distanceSquaredTo(l60);
-            if (distance == minDistance) {
-                closestWallLocations.add(l60);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l60);
-                minDistance = distance;
-            }
-        }
-
-        if (b61) {
-            int distance = currentLocation.distanceSquaredTo(l61);
-            if (distance == minDistance) {
-                closestWallLocations.add(l61);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l61);
-                minDistance = distance;
-            }
-        }
-
-        if (b62) {
-            int distance = currentLocation.distanceSquaredTo(l62);
-            if (distance == minDistance) {
-                closestWallLocations.add(l62);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l62);
-                minDistance = distance;
-            }
-        }
-
-        if (b63) {
-            int distance = currentLocation.distanceSquaredTo(l63);
-            if (distance == minDistance) {
-                closestWallLocations.add(l63);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l63);
-                minDistance = distance;
-            }
-        }
-
-        if (b64) {
-            int distance = currentLocation.distanceSquaredTo(l64);
-            if (distance == minDistance) {
-                closestWallLocations.add(l64);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l64);
-                minDistance = distance;
-            }
-        }
-
-        if (b65) {
-            int distance = currentLocation.distanceSquaredTo(l65);
-            if (distance == minDistance) {
-                closestWallLocations.add(l65);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l65);
-                minDistance = distance;
-            }
-        }
-
-        if (b66) {
-            int distance = currentLocation.distanceSquaredTo(l66);
-            if (distance == minDistance) {
-                closestWallLocations.add(l66);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l66);
-                minDistance = distance;
-            }
-        }
-
-        if (b67) {
-            int distance = currentLocation.distanceSquaredTo(l67);
-            if (distance == minDistance) {
-                closestWallLocations.add(l67);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l67);
-                minDistance = distance;
-            }
-        }
-
-        if (b68) {
-            int distance = currentLocation.distanceSquaredTo(l68);
-            if (distance == minDistance) {
-                closestWallLocations.add(l68);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l68);
-                minDistance = distance;
-            }
-        }
-
-        if (minDistance > 2) { return prev; }
-        int maxDot = -999999;
-        minDistance = 1000000;
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            Direction vertical = currentLocation.directionTo(closestWallLocation);
-
-            Direction tangent1 = vertical.rotateLeft().rotateLeft();
-            Direction tangent2 = vertical.rotateRight().rotateRight();
-
-            int dx = lastDirection.getDeltaX();
-            int dy = lastDirection.getDeltaY();
-
-            int dot1 = tangent1.getDeltaX() * dx + tangent1.getDeltaY() * dy;
-            int dot2 = tangent2.getDeltaX() * dx + tangent2.getDeltaY() * dy;
-
-            int distance1 = currentLocation.add(tangent1).distanceSquaredTo(targetLocation);
-            int distance2 = currentLocation.add(tangent2).distanceSquaredTo(targetLocation);
-
-            if (!rc.canMove(tangent1)) {
-                dot1 = -1000000;
-            }
-
-            if (!rc.canMove(tangent2)) {
-                dot2 = -1000000;
-            }
-
-            if (dot1 > maxDot) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 > maxDot) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-
-            if (dot1 == maxDot && distance1 < minDistance) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 == maxDot && distance2 < minDistance) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-        }
-        draws2();
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            rc.setIndicatorDot(closestWallLocation, 255, 0, 0);
-        }
-        return ans;
-    }
-
-    private void draws2() throws GameActionException {
-    
-        rc.setIndicatorDot(l30, 255, 0, 255);
-        if (b30) {
-            rc.setIndicatorDot(l30, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l31, 255, 0, 255);
-        if (b31) {
-            rc.setIndicatorDot(l31, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l32, 255, 0, 255);
-        if (b32) {
-            rc.setIndicatorDot(l32, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l33, 255, 0, 255);
-        if (b33) {
-            rc.setIndicatorDot(l33, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l35, 255, 0, 255);
-        if (b35) {
-            rc.setIndicatorDot(l35, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l36, 255, 0, 255);
-        if (b36) {
-            rc.setIndicatorDot(l36, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l37, 255, 0, 255);
-        if (b37) {
-            rc.setIndicatorDot(l37, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l38, 255, 0, 255);
-        if (b38) {
-            rc.setIndicatorDot(l38, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l39, 255, 0, 255);
-        if (b39) {
-            rc.setIndicatorDot(l39, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l40, 255, 0, 255);
-        if (b40) {
-            rc.setIndicatorDot(l40, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l41, 255, 0, 255);
-        if (b41) {
-            rc.setIndicatorDot(l41, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l42, 255, 0, 255);
-        if (b42) {
-            rc.setIndicatorDot(l42, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l43, 255, 0, 255);
-        if (b43) {
-            rc.setIndicatorDot(l43, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l44, 255, 0, 255);
-        if (b44) {
-            rc.setIndicatorDot(l44, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l45, 255, 0, 255);
-        if (b45) {
-            rc.setIndicatorDot(l45, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l46, 255, 0, 255);
-        if (b46) {
-            rc.setIndicatorDot(l46, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l47, 255, 0, 255);
-        if (b47) {
-            rc.setIndicatorDot(l47, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l48, 255, 0, 255);
-        if (b48) {
-            rc.setIndicatorDot(l48, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l49, 255, 0, 255);
-        if (b49) {
-            rc.setIndicatorDot(l49, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l50, 255, 0, 255);
-        if (b50) {
-            rc.setIndicatorDot(l50, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l51, 255, 0, 255);
-        if (b51) {
-            rc.setIndicatorDot(l51, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l52, 255, 0, 255);
-        if (b52) {
-            rc.setIndicatorDot(l52, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l53, 255, 0, 255);
-        if (b53) {
-            rc.setIndicatorDot(l53, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l54, 255, 0, 255);
-        if (b54) {
-            rc.setIndicatorDot(l54, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l55, 255, 0, 255);
-        if (b55) {
-            rc.setIndicatorDot(l55, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l56, 255, 0, 255);
-        if (b56) {
-            rc.setIndicatorDot(l56, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l57, 255, 0, 255);
-        if (b57) {
-            rc.setIndicatorDot(l57, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l58, 255, 0, 255);
-        if (b58) {
-            rc.setIndicatorDot(l58, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l59, 255, 0, 255);
-        if (b59) {
-            rc.setIndicatorDot(l59, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l60, 255, 0, 255);
-        if (b60) {
-            rc.setIndicatorDot(l60, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l61, 255, 0, 255);
-        if (b61) {
-            rc.setIndicatorDot(l61, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l62, 255, 0, 255);
-        if (b62) {
-            rc.setIndicatorDot(l62, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l63, 255, 0, 255);
-        if (b63) {
-            rc.setIndicatorDot(l63, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l64, 255, 0, 255);
-        if (b64) {
-            rc.setIndicatorDot(l64, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l65, 255, 0, 255);
-        if (b65) {
-            rc.setIndicatorDot(l65, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l66, 255, 0, 255);
-        if (b66) {
-            rc.setIndicatorDot(l66, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l67, 255, 0, 255);
-        if (b67) {
-            rc.setIndicatorDot(l67, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l68, 255, 0, 255);
-        if (b68) {
-            rc.setIndicatorDot(l68, 255, 255, 255);
-        }
-
+        bug.move(targetLocation);
+        return null;
     }
 
     private Direction getBestDirection3() throws GameActionException {
-        MapLocation best = currentLocation;
         double localBest = 1000000.0;
+        boolean temp1 = false;
+        boolean temp2 = false;
         l34 = currentLocation;
         v34 = 0;
         d34 = Direction.CENTER;
@@ -9500,16 +7325,17 @@ public class Navigation {
         r68 = false;
         o68 = false;
     
-        if (rc.onTheMap(l33) && rc.canSenseLocation(l33)) {
+        if (rc.onTheMap(l33)) {
             if (rc.senseCloud(l33)) {
                 p33 = 1.5;
                 b33 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l33).getCurrentDirection();
-                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && currentDirection.equals(Direction.CENTER))) {
-                    p33 = rc.senseMapInfo(l33).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l33)) {
+                MapInfo mapInfo = rc.senseMapInfo(l33);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l33), currentDirection) > 0))) {
+                    p33 = mapInfo.getCooldownMultiplier(team);
                     b33 = false;
                 }
             }
@@ -9525,22 +7351,24 @@ public class Navigation {
             r33 |= r43;
             r33 |= r34;
             r33 &= !b33;
-            o43 |= b33;
+            if (targetLocation.equals(l33)) {
+                temp1 = true;
+                temp2 = r33;
+            }
         }
-        else {
-            o43 |= b33;
-        }
+        o43 |= b33;
 
-        if (rc.onTheMap(l43) && rc.canSenseLocation(l43)) {
+        if (rc.onTheMap(l43)) {
             if (rc.senseCloud(l43)) {
                 p43 = 1.5;
                 b43 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l43).getCurrentDirection();
-                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && currentDirection.equals(Direction.CENTER))) {
-                    p43 = rc.senseMapInfo(l43).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l43)) {
+                MapInfo mapInfo = rc.senseMapInfo(l43);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l43), currentDirection) > 0))) {
+                    p43 = mapInfo.getCooldownMultiplier(team);
                     b43 = false;
                 }
             }
@@ -9556,22 +7384,24 @@ public class Navigation {
             r43 |= r34;
             r43 |= r33;
             r43 &= !b43;
-            o33 |= b43;
+            if (targetLocation.equals(l43)) {
+                temp1 = true;
+                temp2 = r43;
+            }
         }
-        else {
-            o33 |= b43;
-        }
+        o33 |= b43;
 
-        if (rc.onTheMap(l42) && rc.canSenseLocation(l42)) {
+        if (rc.onTheMap(l42)) {
             if (rc.senseCloud(l42)) {
                 p42 = 1.5;
                 b42 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l42).getCurrentDirection();
-                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && currentDirection.equals(Direction.CENTER))) {
-                    p42 = rc.senseMapInfo(l42).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l42)) {
+                MapInfo mapInfo = rc.senseMapInfo(l42);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l42), currentDirection) > 0))) {
+                    p42 = mapInfo.getCooldownMultiplier(team);
                     b42 = false;
                 }
             }
@@ -9592,24 +7422,25 @@ public class Navigation {
             r42 |= r34;
             r42 |= r33;
             r42 &= !b42;
-            o43 |= b42;
-            o33 |= b42;
+            if (targetLocation.equals(l42)) {
+                temp1 = true;
+                temp2 = r42;
+            }
         }
-        else {
-            o43 |= b42;
-            o33 |= b42;
-        }
+        o43 |= b42;
+        o33 |= b42;
 
-        if (rc.onTheMap(l44) && rc.canSenseLocation(l44)) {
+        if (rc.onTheMap(l44)) {
             if (rc.senseCloud(l44)) {
                 p44 = 1.5;
                 b44 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l44).getCurrentDirection();
-                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && currentDirection.equals(Direction.CENTER))) {
-                    p44 = rc.senseMapInfo(l44).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l44)) {
+                MapInfo mapInfo = rc.senseMapInfo(l44);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l44), currentDirection) > 0))) {
+                    p44 = mapInfo.getCooldownMultiplier(team);
                     b44 = false;
                 }
             }
@@ -9625,22 +7456,24 @@ public class Navigation {
             r44 |= r34;
             r44 |= r43;
             r44 &= !b44;
-            o43 |= b44;
+            if (targetLocation.equals(l44)) {
+                temp1 = true;
+                temp2 = r44;
+            }
         }
-        else {
-            o43 |= b44;
-        }
+        o43 |= b44;
 
-        if (rc.onTheMap(l24) && rc.canSenseLocation(l24)) {
+        if (rc.onTheMap(l24)) {
             if (rc.senseCloud(l24)) {
                 p24 = 1.5;
                 b24 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l24).getCurrentDirection();
-                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && currentDirection.equals(Direction.CENTER))) {
-                    p24 = rc.senseMapInfo(l24).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l24)) {
+                MapInfo mapInfo = rc.senseMapInfo(l24);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l24), currentDirection) > 0))) {
+                    p24 = mapInfo.getCooldownMultiplier(team);
                     b24 = false;
                 }
             }
@@ -9656,22 +7489,24 @@ public class Navigation {
             r24 |= r33;
             r24 |= r34;
             r24 &= !b24;
-            o33 |= b24;
+            if (targetLocation.equals(l24)) {
+                temp1 = true;
+                temp2 = r24;
+            }
         }
-        else {
-            o33 |= b24;
-        }
+        o33 |= b24;
 
-        if (rc.onTheMap(l32) && rc.canSenseLocation(l32)) {
+        if (rc.onTheMap(l32)) {
             if (rc.senseCloud(l32)) {
                 p32 = 1.5;
                 b32 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l32).getCurrentDirection();
-                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && currentDirection.equals(Direction.CENTER))) {
-                    p32 = rc.senseMapInfo(l32).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l32)) {
+                MapInfo mapInfo = rc.senseMapInfo(l32);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l32), currentDirection) > 0))) {
+                    p32 = mapInfo.getCooldownMultiplier(team);
                     b32 = false;
                 }
             }
@@ -9692,26 +7527,26 @@ public class Navigation {
             r32 |= r33;
             r32 |= r24;
             r32 &= !b32;
-            o42 |= b32;
-            o33 |= b32;
-            o24 |= b32;
+            if (targetLocation.equals(l32)) {
+                temp1 = true;
+                temp2 = r32;
+            }
         }
-        else {
-            o42 |= b32;
-            o33 |= b32;
-            o24 |= b32;
-        }
+        o42 |= b32;
+        o33 |= b32;
+        o24 |= b32;
 
-        if (rc.onTheMap(l52) && rc.canSenseLocation(l52)) {
+        if (rc.onTheMap(l52)) {
             if (rc.senseCloud(l52)) {
                 p52 = 1.5;
                 b52 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l52).getCurrentDirection();
-                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && currentDirection.equals(Direction.CENTER))) {
-                    p52 = rc.senseMapInfo(l52).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l52)) {
+                MapInfo mapInfo = rc.senseMapInfo(l52);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l52), currentDirection) > 0))) {
+                    p52 = mapInfo.getCooldownMultiplier(team);
                     b52 = false;
                 }
             }
@@ -9732,26 +7567,26 @@ public class Navigation {
             r52 |= r43;
             r52 |= r42;
             r52 &= !b52;
-            o44 |= b52;
-            o43 |= b52;
-            o42 |= b52;
+            if (targetLocation.equals(l52)) {
+                temp1 = true;
+                temp2 = r52;
+            }
         }
-        else {
-            o44 |= b52;
-            o43 |= b52;
-            o42 |= b52;
-        }
+        o44 |= b52;
+        o43 |= b52;
+        o42 |= b52;
 
-        if (rc.onTheMap(l53) && rc.canSenseLocation(l53)) {
+        if (rc.onTheMap(l53)) {
             if (rc.senseCloud(l53)) {
                 p53 = 1.5;
                 b53 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l53).getCurrentDirection();
-                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && currentDirection.equals(Direction.CENTER))) {
-                    p53 = rc.senseMapInfo(l53).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l53)) {
+                MapInfo mapInfo = rc.senseMapInfo(l53);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l53), currentDirection) > 0))) {
+                    p53 = mapInfo.getCooldownMultiplier(team);
                     b53 = false;
                 }
             }
@@ -9772,26 +7607,26 @@ public class Navigation {
             r53 |= r43;
             r53 |= r52;
             r53 &= !b53;
-            o44 |= b53;
-            o43 |= b53;
-            o52 |= b53;
+            if (targetLocation.equals(l53)) {
+                temp1 = true;
+                temp2 = r53;
+            }
         }
-        else {
-            o44 |= b53;
-            o43 |= b53;
-            o52 |= b53;
-        }
+        o44 |= b53;
+        o43 |= b53;
+        o52 |= b53;
 
-        if (rc.onTheMap(l51) && rc.canSenseLocation(l51)) {
+        if (rc.onTheMap(l51)) {
             if (rc.senseCloud(l51)) {
                 p51 = 1.5;
                 b51 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l51).getCurrentDirection();
-                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && currentDirection.equals(Direction.CENTER))) {
-                    p51 = rc.senseMapInfo(l51).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l51)) {
+                MapInfo mapInfo = rc.senseMapInfo(l51);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l51), currentDirection) > 0))) {
+                    p51 = mapInfo.getCooldownMultiplier(team);
                     b51 = false;
                 }
             }
@@ -9817,28 +7652,27 @@ public class Navigation {
             r51 |= r42;
             r51 |= r41;
             r51 &= !b51;
-            o52 |= b51;
-            o43 |= b51;
-            o42 |= b51;
-            o41 |= b51;
+            if (targetLocation.equals(l51)) {
+                temp1 = true;
+                temp2 = r51;
+            }
         }
-        else {
-            o52 |= b51;
-            o43 |= b51;
-            o42 |= b51;
-            o41 |= b51;
-        }
+        o52 |= b51;
+        o43 |= b51;
+        o42 |= b51;
+        o41 |= b51;
 
-        if (rc.onTheMap(l41) && rc.canSenseLocation(l41)) {
+        if (rc.onTheMap(l41)) {
             if (rc.senseCloud(l41)) {
                 p41 = 1.5;
                 b41 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l41).getCurrentDirection();
-                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && currentDirection.equals(Direction.CENTER))) {
-                    p41 = rc.senseMapInfo(l41).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l41)) {
+                MapInfo mapInfo = rc.senseMapInfo(l41);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l41), currentDirection) > 0))) {
+                    p41 = mapInfo.getCooldownMultiplier(team);
                     b41 = false;
                 }
             }
@@ -9864,28 +7698,27 @@ public class Navigation {
             r41 |= r33;
             r41 |= r32;
             r41 &= !b41;
-            o51 |= b41;
-            o42 |= b41;
-            o33 |= b41;
-            o32 |= b41;
+            if (targetLocation.equals(l41)) {
+                temp1 = true;
+                temp2 = r41;
+            }
         }
-        else {
-            o51 |= b41;
-            o42 |= b41;
-            o33 |= b41;
-            o32 |= b41;
-        }
+        o51 |= b41;
+        o42 |= b41;
+        o33 |= b41;
+        o32 |= b41;
 
-        if (rc.onTheMap(l23) && rc.canSenseLocation(l23)) {
+        if (rc.onTheMap(l23)) {
             if (rc.senseCloud(l23)) {
                 p23 = 1.5;
                 b23 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l23).getCurrentDirection();
-                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && currentDirection.equals(Direction.CENTER))) {
-                    p23 = rc.senseMapInfo(l23).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l23)) {
+                MapInfo mapInfo = rc.senseMapInfo(l23);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l23), currentDirection) > 0))) {
+                    p23 = mapInfo.getCooldownMultiplier(team);
                     b23 = false;
                 }
             }
@@ -9906,26 +7739,26 @@ public class Navigation {
             r23 |= r33;
             r23 |= r24;
             r23 &= !b23;
-            o32 |= b23;
-            o33 |= b23;
-            o24 |= b23;
+            if (targetLocation.equals(l23)) {
+                temp1 = true;
+                temp2 = r23;
+            }
         }
-        else {
-            o32 |= b23;
-            o33 |= b23;
-            o24 |= b23;
-        }
+        o32 |= b23;
+        o33 |= b23;
+        o24 |= b23;
 
-        if (rc.onTheMap(l14) && rc.canSenseLocation(l14)) {
+        if (rc.onTheMap(l14)) {
             if (rc.senseCloud(l14)) {
                 p14 = 1.5;
                 b14 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l14).getCurrentDirection();
-                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && currentDirection.equals(Direction.CENTER))) {
-                    p14 = rc.senseMapInfo(l14).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l14)) {
+                MapInfo mapInfo = rc.senseMapInfo(l14);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l14), currentDirection) > 0))) {
+                    p14 = mapInfo.getCooldownMultiplier(team);
                     b14 = false;
                 }
             }
@@ -9941,24 +7774,25 @@ public class Navigation {
             r14 |= r23;
             r14 |= r24;
             r14 &= !b14;
-            o23 |= b14;
-            o24 |= b14;
+            if (targetLocation.equals(l14)) {
+                temp1 = true;
+                temp2 = r14;
+            }
         }
-        else {
-            o23 |= b14;
-            o24 |= b14;
-        }
+        o23 |= b14;
+        o24 |= b14;
 
-        if (rc.onTheMap(l50) && rc.canSenseLocation(l50)) {
+        if (rc.onTheMap(l50)) {
             if (rc.senseCloud(l50)) {
                 p50 = 1.5;
                 b50 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l50).getCurrentDirection();
-                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && currentDirection.equals(Direction.CENTER))) {
-                    p50 = rc.senseMapInfo(l50).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l50)) {
+                MapInfo mapInfo = rc.senseMapInfo(l50);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l50), currentDirection) > 0))) {
+                    p50 = mapInfo.getCooldownMultiplier(team);
                     b50 = false;
                 }
             }
@@ -9979,26 +7813,26 @@ public class Navigation {
             r50 |= r42;
             r50 |= r41;
             r50 &= !b50;
-            o51 |= b50;
-            o42 |= b50;
-            o41 |= b50;
+            if (targetLocation.equals(l50)) {
+                temp1 = true;
+                temp2 = r50;
+            }
         }
-        else {
-            o51 |= b50;
-            o42 |= b50;
-            o41 |= b50;
-        }
+        o51 |= b50;
+        o42 |= b50;
+        o41 |= b50;
 
-        if (rc.onTheMap(l54) && rc.canSenseLocation(l54)) {
+        if (rc.onTheMap(l54)) {
             if (rc.senseCloud(l54)) {
                 p54 = 1.5;
                 b54 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l54).getCurrentDirection();
-                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && currentDirection.equals(Direction.CENTER))) {
-                    p54 = rc.senseMapInfo(l54).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l54)) {
+                MapInfo mapInfo = rc.senseMapInfo(l54);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l54), currentDirection) > 0))) {
+                    p54 = mapInfo.getCooldownMultiplier(team);
                     b54 = false;
                 }
             }
@@ -10014,24 +7848,25 @@ public class Navigation {
             r54 |= r44;
             r54 |= r53;
             r54 &= !b54;
-            o44 |= b54;
-            o53 |= b54;
+            if (targetLocation.equals(l54)) {
+                temp1 = true;
+                temp2 = r54;
+            }
         }
-        else {
-            o44 |= b54;
-            o53 |= b54;
-        }
+        o44 |= b54;
+        o53 |= b54;
 
-        if (rc.onTheMap(l31) && rc.canSenseLocation(l31)) {
+        if (rc.onTheMap(l31)) {
             if (rc.senseCloud(l31)) {
                 p31 = 1.5;
                 b31 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l31).getCurrentDirection();
-                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && currentDirection.equals(Direction.CENTER))) {
-                    p31 = rc.senseMapInfo(l31).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l31)) {
+                MapInfo mapInfo = rc.senseMapInfo(l31);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l31), currentDirection) > 0))) {
+                    p31 = mapInfo.getCooldownMultiplier(team);
                     b31 = false;
                 }
             }
@@ -10052,26 +7887,26 @@ public class Navigation {
             r31 |= r32;
             r31 |= r23;
             r31 &= !b31;
-            o41 |= b31;
-            o32 |= b31;
-            o23 |= b31;
+            if (targetLocation.equals(l31)) {
+                temp1 = true;
+                temp2 = r31;
+            }
         }
-        else {
-            o41 |= b31;
-            o32 |= b31;
-            o23 |= b31;
-        }
+        o41 |= b31;
+        o32 |= b31;
+        o23 |= b31;
 
-        if (rc.onTheMap(l60) && rc.canSenseLocation(l60)) {
+        if (rc.onTheMap(l60)) {
             if (rc.senseCloud(l60)) {
                 p60 = 1.5;
                 b60 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l60).getCurrentDirection();
-                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && currentDirection.equals(Direction.CENTER))) {
-                    p60 = rc.senseMapInfo(l60).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l60)) {
+                MapInfo mapInfo = rc.senseMapInfo(l60);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l60), currentDirection) > 0))) {
+                    p60 = mapInfo.getCooldownMultiplier(team);
                     b60 = false;
                 }
             }
@@ -10092,26 +7927,26 @@ public class Navigation {
             r60 |= r52;
             r60 |= r51;
             r60 &= !b60;
-            o53 |= b60;
-            o52 |= b60;
-            o51 |= b60;
+            if (targetLocation.equals(l60)) {
+                temp1 = true;
+                temp2 = r60;
+            }
         }
-        else {
-            o53 |= b60;
-            o52 |= b60;
-            o51 |= b60;
-        }
+        o53 |= b60;
+        o52 |= b60;
+        o51 |= b60;
 
-        if (rc.onTheMap(l59) && rc.canSenseLocation(l59)) {
+        if (rc.onTheMap(l59)) {
             if (rc.senseCloud(l59)) {
                 p59 = 1.5;
                 b59 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l59).getCurrentDirection();
-                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && currentDirection.equals(Direction.CENTER))) {
-                    p59 = rc.senseMapInfo(l59).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l59)) {
+                MapInfo mapInfo = rc.senseMapInfo(l59);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l59), currentDirection) > 0))) {
+                    p59 = mapInfo.getCooldownMultiplier(team);
                     b59 = false;
                 }
             }
@@ -10137,28 +7972,27 @@ public class Navigation {
             r59 |= r51;
             r59 |= r50;
             r59 &= !b59;
-            o60 |= b59;
-            o52 |= b59;
-            o51 |= b59;
-            o50 |= b59;
+            if (targetLocation.equals(l59)) {
+                temp1 = true;
+                temp2 = r59;
+            }
         }
-        else {
-            o60 |= b59;
-            o52 |= b59;
-            o51 |= b59;
-            o50 |= b59;
-        }
+        o60 |= b59;
+        o52 |= b59;
+        o51 |= b59;
+        o50 |= b59;
 
-        if (rc.onTheMap(l40) && rc.canSenseLocation(l40)) {
+        if (rc.onTheMap(l40)) {
             if (rc.senseCloud(l40)) {
                 p40 = 1.5;
                 b40 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l40).getCurrentDirection();
-                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && currentDirection.equals(Direction.CENTER))) {
-                    p40 = rc.senseMapInfo(l40).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l40)) {
+                MapInfo mapInfo = rc.senseMapInfo(l40);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l40), currentDirection) > 0))) {
+                    p40 = mapInfo.getCooldownMultiplier(team);
                     b40 = false;
                 }
             }
@@ -10184,28 +8018,27 @@ public class Navigation {
             r40 |= r32;
             r40 |= r31;
             r40 &= !b40;
-            o50 |= b40;
-            o41 |= b40;
-            o32 |= b40;
-            o31 |= b40;
+            if (targetLocation.equals(l40)) {
+                temp1 = true;
+                temp2 = r40;
+            }
         }
-        else {
-            o50 |= b40;
-            o41 |= b40;
-            o32 |= b40;
-            o31 |= b40;
-        }
+        o50 |= b40;
+        o41 |= b40;
+        o32 |= b40;
+        o31 |= b40;
 
-        if (rc.onTheMap(l22) && rc.canSenseLocation(l22)) {
+        if (rc.onTheMap(l22)) {
             if (rc.senseCloud(l22)) {
                 p22 = 1.5;
                 b22 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l22).getCurrentDirection();
-                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && currentDirection.equals(Direction.CENTER))) {
-                    p22 = rc.senseMapInfo(l22).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l22)) {
+                MapInfo mapInfo = rc.senseMapInfo(l22);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l22), currentDirection) > 0))) {
+                    p22 = mapInfo.getCooldownMultiplier(team);
                     b22 = false;
                 }
             }
@@ -10231,28 +8064,27 @@ public class Navigation {
             r22 |= r23;
             r22 |= r14;
             r22 &= !b22;
-            o31 |= b22;
-            o32 |= b22;
-            o23 |= b22;
-            o14 |= b22;
+            if (targetLocation.equals(l22)) {
+                temp1 = true;
+                temp2 = r22;
+            }
         }
-        else {
-            o31 |= b22;
-            o32 |= b22;
-            o23 |= b22;
-            o14 |= b22;
-        }
+        o31 |= b22;
+        o32 |= b22;
+        o23 |= b22;
+        o14 |= b22;
 
-        if (rc.onTheMap(l61) && rc.canSenseLocation(l61)) {
+        if (rc.onTheMap(l61)) {
             if (rc.senseCloud(l61)) {
                 p61 = 1.5;
                 b61 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l61).getCurrentDirection();
-                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && currentDirection.equals(Direction.CENTER))) {
-                    p61 = rc.senseMapInfo(l61).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l61)) {
+                MapInfo mapInfo = rc.senseMapInfo(l61);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l61), currentDirection) > 0))) {
+                    p61 = mapInfo.getCooldownMultiplier(team);
                     b61 = false;
                 }
             }
@@ -10278,28 +8110,27 @@ public class Navigation {
             r61 |= r52;
             r61 |= r60;
             r61 &= !b61;
-            o54 |= b61;
-            o53 |= b61;
-            o52 |= b61;
-            o60 |= b61;
+            if (targetLocation.equals(l61)) {
+                temp1 = true;
+                temp2 = r61;
+            }
         }
-        else {
-            o54 |= b61;
-            o53 |= b61;
-            o52 |= b61;
-            o60 |= b61;
-        }
+        o54 |= b61;
+        o53 |= b61;
+        o52 |= b61;
+        o60 |= b61;
 
-        if (rc.onTheMap(l62) && rc.canSenseLocation(l62)) {
+        if (rc.onTheMap(l62)) {
             if (rc.senseCloud(l62)) {
                 p62 = 1.5;
                 b62 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l62).getCurrentDirection();
-                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && currentDirection.equals(Direction.CENTER))) {
-                    p62 = rc.senseMapInfo(l62).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l62)) {
+                MapInfo mapInfo = rc.senseMapInfo(l62);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l62), currentDirection) > 0))) {
+                    p62 = mapInfo.getCooldownMultiplier(team);
                     b62 = false;
                 }
             }
@@ -10320,26 +8151,26 @@ public class Navigation {
             r62 |= r53;
             r62 |= r61;
             r62 &= !b62;
-            o54 |= b62;
-            o53 |= b62;
-            o61 |= b62;
+            if (targetLocation.equals(l62)) {
+                temp1 = true;
+                temp2 = r62;
+            }
         }
-        else {
-            o54 |= b62;
-            o53 |= b62;
-            o61 |= b62;
-        }
+        o54 |= b62;
+        o53 |= b62;
+        o61 |= b62;
 
-        if (rc.onTheMap(l58) && rc.canSenseLocation(l58)) {
+        if (rc.onTheMap(l58)) {
             if (rc.senseCloud(l58)) {
                 p58 = 1.5;
                 b58 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l58).getCurrentDirection();
-                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && currentDirection.equals(Direction.CENTER))) {
-                    p58 = rc.senseMapInfo(l58).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l58)) {
+                MapInfo mapInfo = rc.senseMapInfo(l58);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l58), currentDirection) > 0))) {
+                    p58 = mapInfo.getCooldownMultiplier(team);
                     b58 = false;
                 }
             }
@@ -10365,28 +8196,27 @@ public class Navigation {
             r58 |= r50;
             r58 |= r49;
             r58 &= !b58;
-            o59 |= b58;
-            o51 |= b58;
-            o50 |= b58;
-            o49 |= b58;
+            if (targetLocation.equals(l58)) {
+                temp1 = true;
+                temp2 = r58;
+            }
         }
-        else {
-            o59 |= b58;
-            o51 |= b58;
-            o50 |= b58;
-            o49 |= b58;
-        }
+        o59 |= b58;
+        o51 |= b58;
+        o50 |= b58;
+        o49 |= b58;
 
-        if (rc.onTheMap(l49) && rc.canSenseLocation(l49)) {
+        if (rc.onTheMap(l49)) {
             if (rc.senseCloud(l49)) {
                 p49 = 1.5;
                 b49 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l49).getCurrentDirection();
-                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && currentDirection.equals(Direction.CENTER))) {
-                    p49 = rc.senseMapInfo(l49).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l49)) {
+                MapInfo mapInfo = rc.senseMapInfo(l49);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l49), currentDirection) > 0))) {
+                    p49 = mapInfo.getCooldownMultiplier(team);
                     b49 = false;
                 }
             }
@@ -10412,28 +8242,27 @@ public class Navigation {
             r49 |= r41;
             r49 |= r40;
             r49 &= !b49;
-            o58 |= b49;
-            o50 |= b49;
-            o41 |= b49;
-            o40 |= b49;
+            if (targetLocation.equals(l49)) {
+                temp1 = true;
+                temp2 = r49;
+            }
         }
-        else {
-            o58 |= b49;
-            o50 |= b49;
-            o41 |= b49;
-            o40 |= b49;
-        }
+        o58 |= b49;
+        o50 |= b49;
+        o41 |= b49;
+        o40 |= b49;
 
-        if (rc.onTheMap(l13) && rc.canSenseLocation(l13)) {
+        if (rc.onTheMap(l13)) {
             if (rc.senseCloud(l13)) {
                 p13 = 1.5;
                 b13 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l13).getCurrentDirection();
-                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && currentDirection.equals(Direction.CENTER))) {
-                    p13 = rc.senseMapInfo(l13).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l13)) {
+                MapInfo mapInfo = rc.senseMapInfo(l13);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l13), currentDirection) > 0))) {
+                    p13 = mapInfo.getCooldownMultiplier(team);
                     b13 = false;
                 }
             }
@@ -10454,26 +8283,26 @@ public class Navigation {
             r13 |= r23;
             r13 |= r14;
             r13 &= !b13;
-            o22 |= b13;
-            o23 |= b13;
-            o14 |= b13;
+            if (targetLocation.equals(l13)) {
+                temp1 = true;
+                temp2 = r13;
+            }
         }
-        else {
-            o22 |= b13;
-            o23 |= b13;
-            o14 |= b13;
-        }
+        o22 |= b13;
+        o23 |= b13;
+        o14 |= b13;
 
-        if (rc.onTheMap(l63) && rc.canSenseLocation(l63)) {
+        if (rc.onTheMap(l63)) {
             if (rc.senseCloud(l63)) {
                 p63 = 1.5;
                 b63 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l63).getCurrentDirection();
-                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && currentDirection.equals(Direction.CENTER))) {
-                    p63 = rc.senseMapInfo(l63).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l63)) {
+                MapInfo mapInfo = rc.senseMapInfo(l63);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l63), currentDirection) > 0))) {
+                    p63 = mapInfo.getCooldownMultiplier(team);
                     b63 = false;
                 }
             }
@@ -10489,24 +8318,25 @@ public class Navigation {
             r63 |= r54;
             r63 |= r62;
             r63 &= !b63;
-            o54 |= b63;
-            o62 |= b63;
+            if (targetLocation.equals(l63)) {
+                temp1 = true;
+                temp2 = r63;
+            }
         }
-        else {
-            o54 |= b63;
-            o62 |= b63;
-        }
+        o54 |= b63;
+        o62 |= b63;
 
-        if (rc.onTheMap(l57) && rc.canSenseLocation(l57)) {
+        if (rc.onTheMap(l57)) {
             if (rc.senseCloud(l57)) {
                 p57 = 1.5;
                 b57 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l57).getCurrentDirection();
-                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && currentDirection.equals(Direction.CENTER))) {
-                    p57 = rc.senseMapInfo(l57).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l57)) {
+                MapInfo mapInfo = rc.senseMapInfo(l57);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l57), currentDirection) > 0))) {
+                    p57 = mapInfo.getCooldownMultiplier(team);
                     b57 = false;
                 }
             }
@@ -10527,26 +8357,26 @@ public class Navigation {
             r57 |= r50;
             r57 |= r49;
             r57 &= !b57;
-            o58 |= b57;
-            o50 |= b57;
-            o49 |= b57;
+            if (targetLocation.equals(l57)) {
+                temp1 = true;
+                temp2 = r57;
+            }
         }
-        else {
-            o58 |= b57;
-            o50 |= b57;
-            o49 |= b57;
-        }
+        o58 |= b57;
+        o50 |= b57;
+        o49 |= b57;
 
-        if (rc.onTheMap(l5) && rc.canSenseLocation(l5)) {
+        if (rc.onTheMap(l5)) {
             if (rc.senseCloud(l5)) {
                 p5 = 1.5;
                 b5 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l5).getCurrentDirection();
-                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && currentDirection.equals(Direction.CENTER))) {
-                    p5 = rc.senseMapInfo(l5).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l5)) {
+                MapInfo mapInfo = rc.senseMapInfo(l5);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l5), currentDirection) > 0))) {
+                    p5 = mapInfo.getCooldownMultiplier(team);
                     b5 = false;
                 }
             }
@@ -10562,24 +8392,25 @@ public class Navigation {
             r5 |= r13;
             r5 |= r14;
             r5 &= !b5;
-            o13 |= b5;
-            o14 |= b5;
+            if (targetLocation.equals(l5)) {
+                temp1 = true;
+                temp2 = r5;
+            }
         }
-        else {
-            o13 |= b5;
-            o14 |= b5;
-        }
+        o13 |= b5;
+        o14 |= b5;
 
-        if (rc.onTheMap(l66) && rc.canSenseLocation(l66)) {
+        if (rc.onTheMap(l66)) {
             if (rc.senseCloud(l66)) {
                 p66 = 1.5;
                 b66 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l66).getCurrentDirection();
-                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && currentDirection.equals(Direction.CENTER))) {
-                    p66 = rc.senseMapInfo(l66).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l66)) {
+                MapInfo mapInfo = rc.senseMapInfo(l66);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l66), currentDirection) > 0))) {
+                    p66 = mapInfo.getCooldownMultiplier(team);
                     b66 = false;
                 }
             }
@@ -10600,26 +8431,26 @@ public class Navigation {
             r66 |= r60;
             r66 |= r59;
             r66 &= !b66;
-            o61 |= b66;
-            o60 |= b66;
-            o59 |= b66;
+            if (targetLocation.equals(l66)) {
+                temp1 = true;
+                temp2 = r66;
+            }
         }
-        else {
-            o61 |= b66;
-            o60 |= b66;
-            o59 |= b66;
-        }
+        o61 |= b66;
+        o60 |= b66;
+        o59 |= b66;
 
-        if (rc.onTheMap(l30) && rc.canSenseLocation(l30)) {
+        if (rc.onTheMap(l30)) {
             if (rc.senseCloud(l30)) {
                 p30 = 1.5;
                 b30 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l30).getCurrentDirection();
-                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && currentDirection.equals(Direction.CENTER))) {
-                    p30 = rc.senseMapInfo(l30).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l30)) {
+                MapInfo mapInfo = rc.senseMapInfo(l30);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l30), currentDirection) > 0))) {
+                    p30 = mapInfo.getCooldownMultiplier(team);
                     b30 = false;
                 }
             }
@@ -10640,26 +8471,26 @@ public class Navigation {
             r30 |= r31;
             r30 |= r22;
             r30 &= !b30;
-            o40 |= b30;
-            o31 |= b30;
-            o22 |= b30;
+            if (targetLocation.equals(l30)) {
+                temp1 = true;
+                temp2 = r30;
+            }
         }
-        else {
-            o40 |= b30;
-            o31 |= b30;
-            o22 |= b30;
-        }
+        o40 |= b30;
+        o31 |= b30;
+        o22 |= b30;
 
-        if (rc.onTheMap(l39) && rc.canSenseLocation(l39)) {
+        if (rc.onTheMap(l39)) {
             if (rc.senseCloud(l39)) {
                 p39 = 1.5;
                 b39 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l39).getCurrentDirection();
-                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && currentDirection.equals(Direction.CENTER))) {
-                    p39 = rc.senseMapInfo(l39).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l39)) {
+                MapInfo mapInfo = rc.senseMapInfo(l39);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l39), currentDirection) > 0))) {
+                    p39 = mapInfo.getCooldownMultiplier(team);
                     b39 = false;
                 }
             }
@@ -10685,28 +8516,27 @@ public class Navigation {
             r39 |= r31;
             r39 |= r30;
             r39 &= !b39;
-            o49 |= b39;
-            o40 |= b39;
-            o31 |= b39;
-            o30 |= b39;
+            if (targetLocation.equals(l39)) {
+                temp1 = true;
+                temp2 = r39;
+            }
         }
-        else {
-            o49 |= b39;
-            o40 |= b39;
-            o31 |= b39;
-            o30 |= b39;
-        }
+        o49 |= b39;
+        o40 |= b39;
+        o31 |= b39;
+        o30 |= b39;
 
-        if (rc.onTheMap(l67) && rc.canSenseLocation(l67)) {
+        if (rc.onTheMap(l67)) {
             if (rc.senseCloud(l67)) {
                 p67 = 1.5;
                 b67 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l67).getCurrentDirection();
-                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && currentDirection.equals(Direction.CENTER))) {
-                    p67 = rc.senseMapInfo(l67).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l67)) {
+                MapInfo mapInfo = rc.senseMapInfo(l67);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l67), currentDirection) > 0))) {
+                    p67 = mapInfo.getCooldownMultiplier(team);
                     b67 = false;
                 }
             }
@@ -10732,28 +8562,27 @@ public class Navigation {
             r67 |= r60;
             r67 |= r66;
             r67 &= !b67;
-            o62 |= b67;
-            o61 |= b67;
-            o60 |= b67;
-            o66 |= b67;
+            if (targetLocation.equals(l67)) {
+                temp1 = true;
+                temp2 = r67;
+            }
         }
-        else {
-            o62 |= b67;
-            o61 |= b67;
-            o60 |= b67;
-            o66 |= b67;
-        }
+        o62 |= b67;
+        o61 |= b67;
+        o60 |= b67;
+        o66 |= b67;
 
-        if (rc.onTheMap(l21) && rc.canSenseLocation(l21)) {
+        if (rc.onTheMap(l21)) {
             if (rc.senseCloud(l21)) {
                 p21 = 1.5;
                 b21 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l21).getCurrentDirection();
-                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && currentDirection.equals(Direction.CENTER))) {
-                    p21 = rc.senseMapInfo(l21).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l21)) {
+                MapInfo mapInfo = rc.senseMapInfo(l21);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l21), currentDirection) > 0))) {
+                    p21 = mapInfo.getCooldownMultiplier(team);
                     b21 = false;
                 }
             }
@@ -10779,28 +8608,27 @@ public class Navigation {
             r21 |= r22;
             r21 |= r13;
             r21 &= !b21;
-            o30 |= b21;
-            o31 |= b21;
-            o22 |= b21;
-            o13 |= b21;
+            if (targetLocation.equals(l21)) {
+                temp1 = true;
+                temp2 = r21;
+            }
         }
-        else {
-            o30 |= b21;
-            o31 |= b21;
-            o22 |= b21;
-            o13 |= b21;
-        }
+        o30 |= b21;
+        o31 |= b21;
+        o22 |= b21;
+        o13 |= b21;
 
-        if (rc.onTheMap(l65) && rc.canSenseLocation(l65)) {
+        if (rc.onTheMap(l65)) {
             if (rc.senseCloud(l65)) {
                 p65 = 1.5;
                 b65 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l65).getCurrentDirection();
-                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && currentDirection.equals(Direction.CENTER))) {
-                    p65 = rc.senseMapInfo(l65).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l65)) {
+                MapInfo mapInfo = rc.senseMapInfo(l65);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l65), currentDirection) > 0))) {
+                    p65 = mapInfo.getCooldownMultiplier(team);
                     b65 = false;
                 }
             }
@@ -10826,28 +8654,27 @@ public class Navigation {
             r65 |= r59;
             r65 |= r58;
             r65 &= !b65;
-            o66 |= b65;
-            o60 |= b65;
-            o59 |= b65;
-            o58 |= b65;
+            if (targetLocation.equals(l65)) {
+                temp1 = true;
+                temp2 = r65;
+            }
         }
-        else {
-            o66 |= b65;
-            o60 |= b65;
-            o59 |= b65;
-            o58 |= b65;
-        }
+        o66 |= b65;
+        o60 |= b65;
+        o59 |= b65;
+        o58 |= b65;
 
-        if (rc.onTheMap(l68) && rc.canSenseLocation(l68)) {
+        if (rc.onTheMap(l68)) {
             if (rc.senseCloud(l68)) {
                 p68 = 1.5;
                 b68 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l68).getCurrentDirection();
-                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && currentDirection.equals(Direction.CENTER))) {
-                    p68 = rc.senseMapInfo(l68).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l68)) {
+                MapInfo mapInfo = rc.senseMapInfo(l68);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l68), currentDirection) > 0))) {
+                    p68 = mapInfo.getCooldownMultiplier(team);
                     b68 = false;
                 }
             }
@@ -10873,28 +8700,27 @@ public class Navigation {
             r68 |= r61;
             r68 |= r67;
             r68 &= !b68;
-            o63 |= b68;
-            o62 |= b68;
-            o61 |= b68;
-            o67 |= b68;
+            if (targetLocation.equals(l68)) {
+                temp1 = true;
+                temp2 = r68;
+            }
         }
-        else {
-            o63 |= b68;
-            o62 |= b68;
-            o61 |= b68;
-            o67 |= b68;
-        }
+        o63 |= b68;
+        o62 |= b68;
+        o61 |= b68;
+        o67 |= b68;
 
-        if (rc.onTheMap(l64) && rc.canSenseLocation(l64)) {
+        if (rc.onTheMap(l64)) {
             if (rc.senseCloud(l64)) {
                 p64 = 1.5;
                 b64 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l64).getCurrentDirection();
-                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && currentDirection.equals(Direction.CENTER))) {
-                    p64 = rc.senseMapInfo(l64).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l64)) {
+                MapInfo mapInfo = rc.senseMapInfo(l64);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l64), currentDirection) > 0))) {
+                    p64 = mapInfo.getCooldownMultiplier(team);
                     b64 = false;
                 }
             }
@@ -10920,28 +8746,27 @@ public class Navigation {
             r64 |= r58;
             r64 |= r57;
             r64 &= !b64;
-            o65 |= b64;
-            o59 |= b64;
-            o58 |= b64;
-            o57 |= b64;
+            if (targetLocation.equals(l64)) {
+                temp1 = true;
+                temp2 = r64;
+            }
         }
-        else {
-            o65 |= b64;
-            o59 |= b64;
-            o58 |= b64;
-            o57 |= b64;
-        }
+        o65 |= b64;
+        o59 |= b64;
+        o58 |= b64;
+        o57 |= b64;
 
-        if (rc.onTheMap(l12) && rc.canSenseLocation(l12)) {
+        if (rc.onTheMap(l12)) {
             if (rc.senseCloud(l12)) {
                 p12 = 1.5;
                 b12 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l12).getCurrentDirection();
-                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && currentDirection.equals(Direction.CENTER))) {
-                    p12 = rc.senseMapInfo(l12).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l12)) {
+                MapInfo mapInfo = rc.senseMapInfo(l12);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l12), currentDirection) > 0))) {
+                    p12 = mapInfo.getCooldownMultiplier(team);
                     b12 = false;
                 }
             }
@@ -10967,28 +8792,27 @@ public class Navigation {
             r12 |= r13;
             r12 |= r5;
             r12 &= !b12;
-            o21 |= b12;
-            o22 |= b12;
-            o13 |= b12;
-            o5 |= b12;
+            if (targetLocation.equals(l12)) {
+                temp1 = true;
+                temp2 = r12;
+            }
         }
-        else {
-            o21 |= b12;
-            o22 |= b12;
-            o13 |= b12;
-            o5 |= b12;
-        }
+        o21 |= b12;
+        o22 |= b12;
+        o13 |= b12;
+        o5 |= b12;
 
-        if (rc.onTheMap(l48) && rc.canSenseLocation(l48)) {
+        if (rc.onTheMap(l48)) {
             if (rc.senseCloud(l48)) {
                 p48 = 1.5;
                 b48 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l48).getCurrentDirection();
-                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && currentDirection.equals(Direction.CENTER))) {
-                    p48 = rc.senseMapInfo(l48).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l48)) {
+                MapInfo mapInfo = rc.senseMapInfo(l48);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l48), currentDirection) > 0))) {
+                    p48 = mapInfo.getCooldownMultiplier(team);
                     b48 = false;
                 }
             }
@@ -11014,19 +8838,18 @@ public class Navigation {
             r48 |= r40;
             r48 |= r39;
             r48 &= !b48;
-            o57 |= b48;
-            o49 |= b48;
-            o40 |= b48;
-            o39 |= b48;
+            if (targetLocation.equals(l48)) {
+                temp1 = true;
+                temp2 = r48;
+            }
         }
-        else {
-            o57 |= b48;
-            o49 |= b48;
-            o40 |= b48;
-            o39 |= b48;
-        }
+        o57 |= b48;
+        o49 |= b48;
+        o40 |= b48;
+        o39 |= b48;
 
-        int dx = targetLocation.x - l34.x;
+        if (temp1 && temp2) {
+            int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -11095,10 +8918,6 @@ public class Navigation {
                     case -1:
                         if (v33 < 10000) {
                             return d33;
-                        }
-                    case 0:
-                        if (v34 < 10000) {
-                            return d34;
                         }
                 } break;
 
@@ -11219,6 +9038,7 @@ public class Navigation {
                 } break;
 
         }
+        }
     
         o5 = r5;
         o12 = r12;
@@ -11240,7 +9060,6 @@ public class Navigation {
             if (dist5 < localBest) {
                 localBest = dist5;
                 ans = d5;
-                best = l5;
             }
         }
 
@@ -11249,7 +9068,6 @@ public class Navigation {
             if (dist12 < localBest) {
                 localBest = dist12;
                 ans = d12;
-                best = l12;
             }
         }
 
@@ -11258,7 +9076,6 @@ public class Navigation {
             if (dist21 < localBest) {
                 localBest = dist21;
                 ans = d21;
-                best = l21;
             }
         }
 
@@ -11267,7 +9084,6 @@ public class Navigation {
             if (dist30 < localBest) {
                 localBest = dist30;
                 ans = d30;
-                best = l30;
             }
         }
 
@@ -11276,7 +9092,6 @@ public class Navigation {
             if (dist39 < localBest) {
                 localBest = dist39;
                 ans = d39;
-                best = l39;
             }
         }
 
@@ -11285,7 +9100,6 @@ public class Navigation {
             if (dist48 < localBest) {
                 localBest = dist48;
                 ans = d48;
-                best = l48;
             }
         }
 
@@ -11294,7 +9108,6 @@ public class Navigation {
             if (dist57 < localBest) {
                 localBest = dist57;
                 ans = d57;
-                best = l57;
             }
         }
 
@@ -11303,7 +9116,6 @@ public class Navigation {
             if (dist63 < localBest) {
                 localBest = dist63;
                 ans = d63;
-                best = l63;
             }
         }
 
@@ -11312,7 +9124,6 @@ public class Navigation {
             if (dist64 < localBest) {
                 localBest = dist64;
                 ans = d64;
-                best = l64;
             }
         }
 
@@ -11321,7 +9132,6 @@ public class Navigation {
             if (dist65 < localBest) {
                 localBest = dist65;
                 ans = d65;
-                best = l65;
             }
         }
 
@@ -11330,7 +9140,6 @@ public class Navigation {
             if (dist66 < localBest) {
                 localBest = dist66;
                 ans = d66;
-                best = l66;
             }
         }
 
@@ -11339,7 +9148,6 @@ public class Navigation {
             if (dist67 < localBest) {
                 localBest = dist67;
                 ans = d67;
-                best = l67;
             }
         }
 
@@ -11348,716 +9156,23 @@ public class Navigation {
             if (dist68 < localBest) {
                 localBest = dist68;
                 ans = d68;
-                best = l68;
             }
         }
 
-        draws3();
-        rc.setIndicatorDot(best, 0, 0, 255);
         if (localBest < globalBest) {
             globalBest = localBest;
+            bug.reset();
             return ans;
         }
-        return getBestDirectionWallFollow3(ans);
-    }
 
-    private Direction getBestDirectionWallFollow3(Direction prev) throws GameActionException {
-        Direction ans = Direction.CENTER;
-        int minDistance = closestWallLocations.isEmpty() ? 1000000 : currentLocation.distanceSquaredTo(closestWallLocations.get(0));
-    
-        if (b5) {
-            int distance = currentLocation.distanceSquaredTo(l5);
-            if (distance == minDistance) {
-                closestWallLocations.add(l5);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l5);
-                minDistance = distance;
-            }
-        }
-
-        if (b12) {
-            int distance = currentLocation.distanceSquaredTo(l12);
-            if (distance == minDistance) {
-                closestWallLocations.add(l12);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l12);
-                minDistance = distance;
-            }
-        }
-
-        if (b13) {
-            int distance = currentLocation.distanceSquaredTo(l13);
-            if (distance == minDistance) {
-                closestWallLocations.add(l13);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l13);
-                minDistance = distance;
-            }
-        }
-
-        if (b14) {
-            int distance = currentLocation.distanceSquaredTo(l14);
-            if (distance == minDistance) {
-                closestWallLocations.add(l14);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l14);
-                minDistance = distance;
-            }
-        }
-
-        if (b21) {
-            int distance = currentLocation.distanceSquaredTo(l21);
-            if (distance == minDistance) {
-                closestWallLocations.add(l21);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l21);
-                minDistance = distance;
-            }
-        }
-
-        if (b22) {
-            int distance = currentLocation.distanceSquaredTo(l22);
-            if (distance == minDistance) {
-                closestWallLocations.add(l22);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l22);
-                minDistance = distance;
-            }
-        }
-
-        if (b23) {
-            int distance = currentLocation.distanceSquaredTo(l23);
-            if (distance == minDistance) {
-                closestWallLocations.add(l23);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l23);
-                minDistance = distance;
-            }
-        }
-
-        if (b24) {
-            int distance = currentLocation.distanceSquaredTo(l24);
-            if (distance == minDistance) {
-                closestWallLocations.add(l24);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l24);
-                minDistance = distance;
-            }
-        }
-
-        if (b30) {
-            int distance = currentLocation.distanceSquaredTo(l30);
-            if (distance == minDistance) {
-                closestWallLocations.add(l30);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l30);
-                minDistance = distance;
-            }
-        }
-
-        if (b31) {
-            int distance = currentLocation.distanceSquaredTo(l31);
-            if (distance == minDistance) {
-                closestWallLocations.add(l31);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l31);
-                minDistance = distance;
-            }
-        }
-
-        if (b32) {
-            int distance = currentLocation.distanceSquaredTo(l32);
-            if (distance == minDistance) {
-                closestWallLocations.add(l32);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l32);
-                minDistance = distance;
-            }
-        }
-
-        if (b33) {
-            int distance = currentLocation.distanceSquaredTo(l33);
-            if (distance == minDistance) {
-                closestWallLocations.add(l33);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l33);
-                minDistance = distance;
-            }
-        }
-
-        if (b39) {
-            int distance = currentLocation.distanceSquaredTo(l39);
-            if (distance == minDistance) {
-                closestWallLocations.add(l39);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l39);
-                minDistance = distance;
-            }
-        }
-
-        if (b40) {
-            int distance = currentLocation.distanceSquaredTo(l40);
-            if (distance == minDistance) {
-                closestWallLocations.add(l40);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l40);
-                minDistance = distance;
-            }
-        }
-
-        if (b41) {
-            int distance = currentLocation.distanceSquaredTo(l41);
-            if (distance == minDistance) {
-                closestWallLocations.add(l41);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l41);
-                minDistance = distance;
-            }
-        }
-
-        if (b42) {
-            int distance = currentLocation.distanceSquaredTo(l42);
-            if (distance == minDistance) {
-                closestWallLocations.add(l42);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l42);
-                minDistance = distance;
-            }
-        }
-
-        if (b43) {
-            int distance = currentLocation.distanceSquaredTo(l43);
-            if (distance == minDistance) {
-                closestWallLocations.add(l43);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l43);
-                minDistance = distance;
-            }
-        }
-
-        if (b44) {
-            int distance = currentLocation.distanceSquaredTo(l44);
-            if (distance == minDistance) {
-                closestWallLocations.add(l44);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l44);
-                minDistance = distance;
-            }
-        }
-
-        if (b48) {
-            int distance = currentLocation.distanceSquaredTo(l48);
-            if (distance == minDistance) {
-                closestWallLocations.add(l48);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l48);
-                minDistance = distance;
-            }
-        }
-
-        if (b49) {
-            int distance = currentLocation.distanceSquaredTo(l49);
-            if (distance == minDistance) {
-                closestWallLocations.add(l49);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l49);
-                minDistance = distance;
-            }
-        }
-
-        if (b50) {
-            int distance = currentLocation.distanceSquaredTo(l50);
-            if (distance == minDistance) {
-                closestWallLocations.add(l50);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l50);
-                minDistance = distance;
-            }
-        }
-
-        if (b51) {
-            int distance = currentLocation.distanceSquaredTo(l51);
-            if (distance == minDistance) {
-                closestWallLocations.add(l51);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l51);
-                minDistance = distance;
-            }
-        }
-
-        if (b52) {
-            int distance = currentLocation.distanceSquaredTo(l52);
-            if (distance == minDistance) {
-                closestWallLocations.add(l52);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l52);
-                minDistance = distance;
-            }
-        }
-
-        if (b53) {
-            int distance = currentLocation.distanceSquaredTo(l53);
-            if (distance == minDistance) {
-                closestWallLocations.add(l53);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l53);
-                minDistance = distance;
-            }
-        }
-
-        if (b54) {
-            int distance = currentLocation.distanceSquaredTo(l54);
-            if (distance == minDistance) {
-                closestWallLocations.add(l54);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l54);
-                minDistance = distance;
-            }
-        }
-
-        if (b57) {
-            int distance = currentLocation.distanceSquaredTo(l57);
-            if (distance == minDistance) {
-                closestWallLocations.add(l57);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l57);
-                minDistance = distance;
-            }
-        }
-
-        if (b58) {
-            int distance = currentLocation.distanceSquaredTo(l58);
-            if (distance == minDistance) {
-                closestWallLocations.add(l58);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l58);
-                minDistance = distance;
-            }
-        }
-
-        if (b59) {
-            int distance = currentLocation.distanceSquaredTo(l59);
-            if (distance == minDistance) {
-                closestWallLocations.add(l59);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l59);
-                minDistance = distance;
-            }
-        }
-
-        if (b60) {
-            int distance = currentLocation.distanceSquaredTo(l60);
-            if (distance == minDistance) {
-                closestWallLocations.add(l60);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l60);
-                minDistance = distance;
-            }
-        }
-
-        if (b61) {
-            int distance = currentLocation.distanceSquaredTo(l61);
-            if (distance == minDistance) {
-                closestWallLocations.add(l61);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l61);
-                minDistance = distance;
-            }
-        }
-
-        if (b62) {
-            int distance = currentLocation.distanceSquaredTo(l62);
-            if (distance == minDistance) {
-                closestWallLocations.add(l62);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l62);
-                minDistance = distance;
-            }
-        }
-
-        if (b63) {
-            int distance = currentLocation.distanceSquaredTo(l63);
-            if (distance == minDistance) {
-                closestWallLocations.add(l63);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l63);
-                minDistance = distance;
-            }
-        }
-
-        if (b64) {
-            int distance = currentLocation.distanceSquaredTo(l64);
-            if (distance == minDistance) {
-                closestWallLocations.add(l64);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l64);
-                minDistance = distance;
-            }
-        }
-
-        if (b65) {
-            int distance = currentLocation.distanceSquaredTo(l65);
-            if (distance == minDistance) {
-                closestWallLocations.add(l65);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l65);
-                minDistance = distance;
-            }
-        }
-
-        if (b66) {
-            int distance = currentLocation.distanceSquaredTo(l66);
-            if (distance == minDistance) {
-                closestWallLocations.add(l66);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l66);
-                minDistance = distance;
-            }
-        }
-
-        if (b67) {
-            int distance = currentLocation.distanceSquaredTo(l67);
-            if (distance == minDistance) {
-                closestWallLocations.add(l67);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l67);
-                minDistance = distance;
-            }
-        }
-
-        if (b68) {
-            int distance = currentLocation.distanceSquaredTo(l68);
-            if (distance == minDistance) {
-                closestWallLocations.add(l68);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l68);
-                minDistance = distance;
-            }
-        }
-
-        if (minDistance > 2) { return prev; }
-        int maxDot = -999999;
-        minDistance = 1000000;
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            Direction vertical = currentLocation.directionTo(closestWallLocation);
-
-            Direction tangent1 = vertical.rotateLeft().rotateLeft();
-            Direction tangent2 = vertical.rotateRight().rotateRight();
-
-            int dx = lastDirection.getDeltaX();
-            int dy = lastDirection.getDeltaY();
-
-            int dot1 = tangent1.getDeltaX() * dx + tangent1.getDeltaY() * dy;
-            int dot2 = tangent2.getDeltaX() * dx + tangent2.getDeltaY() * dy;
-
-            int distance1 = currentLocation.add(tangent1).distanceSquaredTo(targetLocation);
-            int distance2 = currentLocation.add(tangent2).distanceSquaredTo(targetLocation);
-
-            if (!rc.canMove(tangent1)) {
-                dot1 = -1000000;
-            }
-
-            if (!rc.canMove(tangent2)) {
-                dot2 = -1000000;
-            }
-
-            if (dot1 > maxDot) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 > maxDot) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-
-            if (dot1 == maxDot && distance1 < minDistance) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 == maxDot && distance2 < minDistance) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-        }
-        draws3();
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            rc.setIndicatorDot(closestWallLocation, 255, 0, 0);
-        }
-        return ans;
-    }
-
-    private void draws3() throws GameActionException {
-    
-        rc.setIndicatorDot(l5, 255, 0, 255);
-        if (b5) {
-            rc.setIndicatorDot(l5, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l12, 255, 0, 255);
-        if (b12) {
-            rc.setIndicatorDot(l12, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l13, 255, 0, 255);
-        if (b13) {
-            rc.setIndicatorDot(l13, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l14, 255, 0, 255);
-        if (b14) {
-            rc.setIndicatorDot(l14, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l21, 255, 0, 255);
-        if (b21) {
-            rc.setIndicatorDot(l21, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l22, 255, 0, 255);
-        if (b22) {
-            rc.setIndicatorDot(l22, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l23, 255, 0, 255);
-        if (b23) {
-            rc.setIndicatorDot(l23, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l24, 255, 0, 255);
-        if (b24) {
-            rc.setIndicatorDot(l24, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l30, 255, 0, 255);
-        if (b30) {
-            rc.setIndicatorDot(l30, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l31, 255, 0, 255);
-        if (b31) {
-            rc.setIndicatorDot(l31, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l32, 255, 0, 255);
-        if (b32) {
-            rc.setIndicatorDot(l32, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l33, 255, 0, 255);
-        if (b33) {
-            rc.setIndicatorDot(l33, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l39, 255, 0, 255);
-        if (b39) {
-            rc.setIndicatorDot(l39, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l40, 255, 0, 255);
-        if (b40) {
-            rc.setIndicatorDot(l40, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l41, 255, 0, 255);
-        if (b41) {
-            rc.setIndicatorDot(l41, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l42, 255, 0, 255);
-        if (b42) {
-            rc.setIndicatorDot(l42, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l43, 255, 0, 255);
-        if (b43) {
-            rc.setIndicatorDot(l43, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l44, 255, 0, 255);
-        if (b44) {
-            rc.setIndicatorDot(l44, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l48, 255, 0, 255);
-        if (b48) {
-            rc.setIndicatorDot(l48, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l49, 255, 0, 255);
-        if (b49) {
-            rc.setIndicatorDot(l49, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l50, 255, 0, 255);
-        if (b50) {
-            rc.setIndicatorDot(l50, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l51, 255, 0, 255);
-        if (b51) {
-            rc.setIndicatorDot(l51, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l52, 255, 0, 255);
-        if (b52) {
-            rc.setIndicatorDot(l52, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l53, 255, 0, 255);
-        if (b53) {
-            rc.setIndicatorDot(l53, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l54, 255, 0, 255);
-        if (b54) {
-            rc.setIndicatorDot(l54, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l57, 255, 0, 255);
-        if (b57) {
-            rc.setIndicatorDot(l57, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l58, 255, 0, 255);
-        if (b58) {
-            rc.setIndicatorDot(l58, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l59, 255, 0, 255);
-        if (b59) {
-            rc.setIndicatorDot(l59, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l60, 255, 0, 255);
-        if (b60) {
-            rc.setIndicatorDot(l60, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l61, 255, 0, 255);
-        if (b61) {
-            rc.setIndicatorDot(l61, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l62, 255, 0, 255);
-        if (b62) {
-            rc.setIndicatorDot(l62, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l63, 255, 0, 255);
-        if (b63) {
-            rc.setIndicatorDot(l63, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l64, 255, 0, 255);
-        if (b64) {
-            rc.setIndicatorDot(l64, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l65, 255, 0, 255);
-        if (b65) {
-            rc.setIndicatorDot(l65, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l66, 255, 0, 255);
-        if (b66) {
-            rc.setIndicatorDot(l66, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l67, 255, 0, 255);
-        if (b67) {
-            rc.setIndicatorDot(l67, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l68, 255, 0, 255);
-        if (b68) {
-            rc.setIndicatorDot(l68, 255, 255, 255);
-        }
-
+        bug.move(targetLocation);
+        return null;
     }
 
     private Direction getBestDirection4() throws GameActionException {
-        MapLocation best = currentLocation;
         double localBest = 1000000.0;
+        boolean temp1 = false;
+        boolean temp2 = false;
         l34 = currentLocation;
         v34 = 0;
         d34 = Direction.CENTER;
@@ -12329,16 +9444,17 @@ public class Navigation {
         r48 = false;
         o48 = false;
     
-        if (rc.onTheMap(l33) && rc.canSenseLocation(l33)) {
+        if (rc.onTheMap(l33)) {
             if (rc.senseCloud(l33)) {
                 p33 = 1.5;
                 b33 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l33).getCurrentDirection();
-                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && currentDirection.equals(Direction.CENTER))) {
-                    p33 = rc.senseMapInfo(l33).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l33)) {
+                MapInfo mapInfo = rc.senseMapInfo(l33);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l33), currentDirection) > 0))) {
+                    p33 = mapInfo.getCooldownMultiplier(team);
                     b33 = false;
                 }
             }
@@ -12359,24 +9475,25 @@ public class Navigation {
             r33 |= r34;
             r33 |= r25;
             r33 &= !b33;
-            o43 |= b33;
-            o25 |= b33;
+            if (targetLocation.equals(l33)) {
+                temp1 = true;
+                temp2 = r33;
+            }
         }
-        else {
-            o43 |= b33;
-            o25 |= b33;
-        }
+        o43 |= b33;
+        o25 |= b33;
 
-        if (rc.onTheMap(l25) && rc.canSenseLocation(l25)) {
+        if (rc.onTheMap(l25)) {
             if (rc.senseCloud(l25)) {
                 p25 = 1.5;
                 b25 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l25).getCurrentDirection();
-                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && currentDirection.equals(Direction.CENTER))) {
-                    p25 = rc.senseMapInfo(l25).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l25)) {
+                MapInfo mapInfo = rc.senseMapInfo(l25);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l25), currentDirection) > 0))) {
+                    p25 = mapInfo.getCooldownMultiplier(team);
                     b25 = false;
                 }
             }
@@ -12392,22 +9509,24 @@ public class Navigation {
             r25 |= r34;
             r25 |= r33;
             r25 &= !b25;
-            o33 |= b25;
+            if (targetLocation.equals(l25)) {
+                temp1 = true;
+                temp2 = r25;
+            }
         }
-        else {
-            o33 |= b25;
-        }
+        o33 |= b25;
 
-        if (rc.onTheMap(l43) && rc.canSenseLocation(l43)) {
+        if (rc.onTheMap(l43)) {
             if (rc.senseCloud(l43)) {
                 p43 = 1.5;
                 b43 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l43).getCurrentDirection();
-                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && currentDirection.equals(Direction.CENTER))) {
-                    p43 = rc.senseMapInfo(l43).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l43)) {
+                MapInfo mapInfo = rc.senseMapInfo(l43);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l43), currentDirection) > 0))) {
+                    p43 = mapInfo.getCooldownMultiplier(team);
                     b43 = false;
                 }
             }
@@ -12423,22 +9542,24 @@ public class Navigation {
             r43 |= r34;
             r43 |= r33;
             r43 &= !b43;
-            o33 |= b43;
+            if (targetLocation.equals(l43)) {
+                temp1 = true;
+                temp2 = r43;
+            }
         }
-        else {
-            o33 |= b43;
-        }
+        o33 |= b43;
 
-        if (rc.onTheMap(l42) && rc.canSenseLocation(l42)) {
+        if (rc.onTheMap(l42)) {
             if (rc.senseCloud(l42)) {
                 p42 = 1.5;
                 b42 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l42).getCurrentDirection();
-                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && currentDirection.equals(Direction.CENTER))) {
-                    p42 = rc.senseMapInfo(l42).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l42)) {
+                MapInfo mapInfo = rc.senseMapInfo(l42);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l42), currentDirection) > 0))) {
+                    p42 = mapInfo.getCooldownMultiplier(team);
                     b42 = false;
                 }
             }
@@ -12459,24 +9580,25 @@ public class Navigation {
             r42 |= r34;
             r42 |= r33;
             r42 &= !b42;
-            o43 |= b42;
-            o33 |= b42;
+            if (targetLocation.equals(l42)) {
+                temp1 = true;
+                temp2 = r42;
+            }
         }
-        else {
-            o43 |= b42;
-            o33 |= b42;
-        }
+        o43 |= b42;
+        o33 |= b42;
 
-        if (rc.onTheMap(l24) && rc.canSenseLocation(l24)) {
+        if (rc.onTheMap(l24)) {
             if (rc.senseCloud(l24)) {
                 p24 = 1.5;
                 b24 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l24).getCurrentDirection();
-                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && currentDirection.equals(Direction.CENTER))) {
-                    p24 = rc.senseMapInfo(l24).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l24)) {
+                MapInfo mapInfo = rc.senseMapInfo(l24);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l24), currentDirection) > 0))) {
+                    p24 = mapInfo.getCooldownMultiplier(team);
                     b24 = false;
                 }
             }
@@ -12497,24 +9619,25 @@ public class Navigation {
             r24 |= r34;
             r24 |= r25;
             r24 &= !b24;
-            o33 |= b24;
-            o25 |= b24;
+            if (targetLocation.equals(l24)) {
+                temp1 = true;
+                temp2 = r24;
+            }
         }
-        else {
-            o33 |= b24;
-            o25 |= b24;
-        }
+        o33 |= b24;
+        o25 |= b24;
 
-        if (rc.onTheMap(l52) && rc.canSenseLocation(l52)) {
+        if (rc.onTheMap(l52)) {
             if (rc.senseCloud(l52)) {
                 p52 = 1.5;
                 b52 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l52).getCurrentDirection();
-                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && currentDirection.equals(Direction.CENTER))) {
-                    p52 = rc.senseMapInfo(l52).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l52)) {
+                MapInfo mapInfo = rc.senseMapInfo(l52);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l52), currentDirection) > 0))) {
+                    p52 = mapInfo.getCooldownMultiplier(team);
                     b52 = false;
                 }
             }
@@ -12530,24 +9653,25 @@ public class Navigation {
             r52 |= r43;
             r52 |= r42;
             r52 &= !b52;
-            o43 |= b52;
-            o42 |= b52;
+            if (targetLocation.equals(l52)) {
+                temp1 = true;
+                temp2 = r52;
+            }
         }
-        else {
-            o43 |= b52;
-            o42 |= b52;
-        }
+        o43 |= b52;
+        o42 |= b52;
 
-        if (rc.onTheMap(l32) && rc.canSenseLocation(l32)) {
+        if (rc.onTheMap(l32)) {
             if (rc.senseCloud(l32)) {
                 p32 = 1.5;
                 b32 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l32).getCurrentDirection();
-                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && currentDirection.equals(Direction.CENTER))) {
-                    p32 = rc.senseMapInfo(l32).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l32)) {
+                MapInfo mapInfo = rc.senseMapInfo(l32);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l32), currentDirection) > 0))) {
+                    p32 = mapInfo.getCooldownMultiplier(team);
                     b32 = false;
                 }
             }
@@ -12568,26 +9692,26 @@ public class Navigation {
             r32 |= r33;
             r32 |= r24;
             r32 &= !b32;
-            o42 |= b32;
-            o33 |= b32;
-            o24 |= b32;
+            if (targetLocation.equals(l32)) {
+                temp1 = true;
+                temp2 = r32;
+            }
         }
-        else {
-            o42 |= b32;
-            o33 |= b32;
-            o24 |= b32;
-        }
+        o42 |= b32;
+        o33 |= b32;
+        o24 |= b32;
 
-        if (rc.onTheMap(l16) && rc.canSenseLocation(l16)) {
+        if (rc.onTheMap(l16)) {
             if (rc.senseCloud(l16)) {
                 p16 = 1.5;
                 b16 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l16).getCurrentDirection();
-                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && currentDirection.equals(Direction.CENTER))) {
-                    p16 = rc.senseMapInfo(l16).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l16)) {
+                MapInfo mapInfo = rc.senseMapInfo(l16);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l16), currentDirection) > 0))) {
+                    p16 = mapInfo.getCooldownMultiplier(team);
                     b16 = false;
                 }
             }
@@ -12603,24 +9727,25 @@ public class Navigation {
             r16 |= r25;
             r16 |= r24;
             r16 &= !b16;
-            o25 |= b16;
-            o24 |= b16;
+            if (targetLocation.equals(l16)) {
+                temp1 = true;
+                temp2 = r16;
+            }
         }
-        else {
-            o25 |= b16;
-            o24 |= b16;
-        }
+        o25 |= b16;
+        o24 |= b16;
 
-        if (rc.onTheMap(l51) && rc.canSenseLocation(l51)) {
+        if (rc.onTheMap(l51)) {
             if (rc.senseCloud(l51)) {
                 p51 = 1.5;
                 b51 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l51).getCurrentDirection();
-                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && currentDirection.equals(Direction.CENTER))) {
-                    p51 = rc.senseMapInfo(l51).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l51)) {
+                MapInfo mapInfo = rc.senseMapInfo(l51);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l51), currentDirection) > 0))) {
+                    p51 = mapInfo.getCooldownMultiplier(team);
                     b51 = false;
                 }
             }
@@ -12646,28 +9771,27 @@ public class Navigation {
             r51 |= r42;
             r51 |= r41;
             r51 &= !b51;
-            o52 |= b51;
-            o43 |= b51;
-            o42 |= b51;
-            o41 |= b51;
+            if (targetLocation.equals(l51)) {
+                temp1 = true;
+                temp2 = r51;
+            }
         }
-        else {
-            o52 |= b51;
-            o43 |= b51;
-            o42 |= b51;
-            o41 |= b51;
-        }
+        o52 |= b51;
+        o43 |= b51;
+        o42 |= b51;
+        o41 |= b51;
 
-        if (rc.onTheMap(l15) && rc.canSenseLocation(l15)) {
+        if (rc.onTheMap(l15)) {
             if (rc.senseCloud(l15)) {
                 p15 = 1.5;
                 b15 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l15).getCurrentDirection();
-                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && currentDirection.equals(Direction.CENTER))) {
-                    p15 = rc.senseMapInfo(l15).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l15)) {
+                MapInfo mapInfo = rc.senseMapInfo(l15);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l15), currentDirection) > 0))) {
+                    p15 = mapInfo.getCooldownMultiplier(team);
                     b15 = false;
                 }
             }
@@ -12693,28 +9817,27 @@ public class Navigation {
             r15 |= r16;
             r15 |= r23;
             r15 &= !b15;
-            o24 |= b15;
-            o25 |= b15;
-            o16 |= b15;
-            o23 |= b15;
+            if (targetLocation.equals(l15)) {
+                temp1 = true;
+                temp2 = r15;
+            }
         }
-        else {
-            o24 |= b15;
-            o25 |= b15;
-            o16 |= b15;
-            o23 |= b15;
-        }
+        o24 |= b15;
+        o25 |= b15;
+        o16 |= b15;
+        o23 |= b15;
 
-        if (rc.onTheMap(l23) && rc.canSenseLocation(l23)) {
+        if (rc.onTheMap(l23)) {
             if (rc.senseCloud(l23)) {
                 p23 = 1.5;
                 b23 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l23).getCurrentDirection();
-                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && currentDirection.equals(Direction.CENTER))) {
-                    p23 = rc.senseMapInfo(l23).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l23)) {
+                MapInfo mapInfo = rc.senseMapInfo(l23);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l23), currentDirection) > 0))) {
+                    p23 = mapInfo.getCooldownMultiplier(team);
                     b23 = false;
                 }
             }
@@ -12740,28 +9863,27 @@ public class Navigation {
             r23 |= r24;
             r23 |= r15;
             r23 &= !b23;
-            o32 |= b23;
-            o33 |= b23;
-            o24 |= b23;
-            o15 |= b23;
+            if (targetLocation.equals(l23)) {
+                temp1 = true;
+                temp2 = r23;
+            }
         }
-        else {
-            o32 |= b23;
-            o33 |= b23;
-            o24 |= b23;
-            o15 |= b23;
-        }
+        o32 |= b23;
+        o33 |= b23;
+        o24 |= b23;
+        o15 |= b23;
 
-        if (rc.onTheMap(l41) && rc.canSenseLocation(l41)) {
+        if (rc.onTheMap(l41)) {
             if (rc.senseCloud(l41)) {
                 p41 = 1.5;
                 b41 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l41).getCurrentDirection();
-                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && currentDirection.equals(Direction.CENTER))) {
-                    p41 = rc.senseMapInfo(l41).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l41)) {
+                MapInfo mapInfo = rc.senseMapInfo(l41);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l41), currentDirection) > 0))) {
+                    p41 = mapInfo.getCooldownMultiplier(team);
                     b41 = false;
                 }
             }
@@ -12787,28 +9909,27 @@ public class Navigation {
             r41 |= r33;
             r41 |= r32;
             r41 &= !b41;
-            o51 |= b41;
-            o42 |= b41;
-            o33 |= b41;
-            o32 |= b41;
+            if (targetLocation.equals(l41)) {
+                temp1 = true;
+                temp2 = r41;
+            }
         }
-        else {
-            o51 |= b41;
-            o42 |= b41;
-            o33 |= b41;
-            o32 |= b41;
-        }
+        o51 |= b41;
+        o42 |= b41;
+        o33 |= b41;
+        o32 |= b41;
 
-        if (rc.onTheMap(l50) && rc.canSenseLocation(l50)) {
+        if (rc.onTheMap(l50)) {
             if (rc.senseCloud(l50)) {
                 p50 = 1.5;
                 b50 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l50).getCurrentDirection();
-                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && currentDirection.equals(Direction.CENTER))) {
-                    p50 = rc.senseMapInfo(l50).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l50)) {
+                MapInfo mapInfo = rc.senseMapInfo(l50);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l50), currentDirection) > 0))) {
+                    p50 = mapInfo.getCooldownMultiplier(team);
                     b50 = false;
                 }
             }
@@ -12829,26 +9950,26 @@ public class Navigation {
             r50 |= r42;
             r50 |= r41;
             r50 &= !b50;
-            o51 |= b50;
-            o42 |= b50;
-            o41 |= b50;
+            if (targetLocation.equals(l50)) {
+                temp1 = true;
+                temp2 = r50;
+            }
         }
-        else {
-            o51 |= b50;
-            o42 |= b50;
-            o41 |= b50;
-        }
+        o51 |= b50;
+        o42 |= b50;
+        o41 |= b50;
 
-        if (rc.onTheMap(l14) && rc.canSenseLocation(l14)) {
+        if (rc.onTheMap(l14)) {
             if (rc.senseCloud(l14)) {
                 p14 = 1.5;
                 b14 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l14).getCurrentDirection();
-                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && currentDirection.equals(Direction.CENTER))) {
-                    p14 = rc.senseMapInfo(l14).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l14)) {
+                MapInfo mapInfo = rc.senseMapInfo(l14);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l14), currentDirection) > 0))) {
+                    p14 = mapInfo.getCooldownMultiplier(team);
                     b14 = false;
                 }
             }
@@ -12869,26 +9990,26 @@ public class Navigation {
             r14 |= r24;
             r14 |= r15;
             r14 &= !b14;
-            o23 |= b14;
-            o24 |= b14;
-            o15 |= b14;
+            if (targetLocation.equals(l14)) {
+                temp1 = true;
+                temp2 = r14;
+            }
         }
-        else {
-            o23 |= b14;
-            o24 |= b14;
-            o15 |= b14;
-        }
+        o23 |= b14;
+        o24 |= b14;
+        o15 |= b14;
 
-        if (rc.onTheMap(l60) && rc.canSenseLocation(l60)) {
+        if (rc.onTheMap(l60)) {
             if (rc.senseCloud(l60)) {
                 p60 = 1.5;
                 b60 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l60).getCurrentDirection();
-                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && currentDirection.equals(Direction.CENTER))) {
-                    p60 = rc.senseMapInfo(l60).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l60)) {
+                MapInfo mapInfo = rc.senseMapInfo(l60);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l60), currentDirection) > 0))) {
+                    p60 = mapInfo.getCooldownMultiplier(team);
                     b60 = false;
                 }
             }
@@ -12904,24 +10025,25 @@ public class Navigation {
             r60 |= r52;
             r60 |= r51;
             r60 &= !b60;
-            o52 |= b60;
-            o51 |= b60;
+            if (targetLocation.equals(l60)) {
+                temp1 = true;
+                temp2 = r60;
+            }
         }
-        else {
-            o52 |= b60;
-            o51 |= b60;
-        }
+        o52 |= b60;
+        o51 |= b60;
 
-        if (rc.onTheMap(l31) && rc.canSenseLocation(l31)) {
+        if (rc.onTheMap(l31)) {
             if (rc.senseCloud(l31)) {
                 p31 = 1.5;
                 b31 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l31).getCurrentDirection();
-                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && currentDirection.equals(Direction.CENTER))) {
-                    p31 = rc.senseMapInfo(l31).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l31)) {
+                MapInfo mapInfo = rc.senseMapInfo(l31);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l31), currentDirection) > 0))) {
+                    p31 = mapInfo.getCooldownMultiplier(team);
                     b31 = false;
                 }
             }
@@ -12942,26 +10064,26 @@ public class Navigation {
             r31 |= r32;
             r31 |= r23;
             r31 &= !b31;
-            o41 |= b31;
-            o32 |= b31;
-            o23 |= b31;
+            if (targetLocation.equals(l31)) {
+                temp1 = true;
+                temp2 = r31;
+            }
         }
-        else {
-            o41 |= b31;
-            o32 |= b31;
-            o23 |= b31;
-        }
+        o41 |= b31;
+        o32 |= b31;
+        o23 |= b31;
 
-        if (rc.onTheMap(l8) && rc.canSenseLocation(l8)) {
+        if (rc.onTheMap(l8)) {
             if (rc.senseCloud(l8)) {
                 p8 = 1.5;
                 b8 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l8).getCurrentDirection();
-                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && currentDirection.equals(Direction.CENTER))) {
-                    p8 = rc.senseMapInfo(l8).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l8)) {
+                MapInfo mapInfo = rc.senseMapInfo(l8);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l8), currentDirection) > 0))) {
+                    p8 = mapInfo.getCooldownMultiplier(team);
                     b8 = false;
                 }
             }
@@ -12977,24 +10099,25 @@ public class Navigation {
             r8 |= r16;
             r8 |= r15;
             r8 &= !b8;
-            o16 |= b8;
-            o15 |= b8;
+            if (targetLocation.equals(l8)) {
+                temp1 = true;
+                temp2 = r8;
+            }
         }
-        else {
-            o16 |= b8;
-            o15 |= b8;
-        }
+        o16 |= b8;
+        o15 |= b8;
 
-        if (rc.onTheMap(l59) && rc.canSenseLocation(l59)) {
+        if (rc.onTheMap(l59)) {
             if (rc.senseCloud(l59)) {
                 p59 = 1.5;
                 b59 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l59).getCurrentDirection();
-                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && currentDirection.equals(Direction.CENTER))) {
-                    p59 = rc.senseMapInfo(l59).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l59)) {
+                MapInfo mapInfo = rc.senseMapInfo(l59);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l59), currentDirection) > 0))) {
+                    p59 = mapInfo.getCooldownMultiplier(team);
                     b59 = false;
                 }
             }
@@ -13020,28 +10143,27 @@ public class Navigation {
             r59 |= r51;
             r59 |= r50;
             r59 &= !b59;
-            o60 |= b59;
-            o52 |= b59;
-            o51 |= b59;
-            o50 |= b59;
+            if (targetLocation.equals(l59)) {
+                temp1 = true;
+                temp2 = r59;
+            }
         }
-        else {
-            o60 |= b59;
-            o52 |= b59;
-            o51 |= b59;
-            o50 |= b59;
-        }
+        o60 |= b59;
+        o52 |= b59;
+        o51 |= b59;
+        o50 |= b59;
 
-        if (rc.onTheMap(l22) && rc.canSenseLocation(l22)) {
+        if (rc.onTheMap(l22)) {
             if (rc.senseCloud(l22)) {
                 p22 = 1.5;
                 b22 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l22).getCurrentDirection();
-                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && currentDirection.equals(Direction.CENTER))) {
-                    p22 = rc.senseMapInfo(l22).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l22)) {
+                MapInfo mapInfo = rc.senseMapInfo(l22);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l22), currentDirection) > 0))) {
+                    p22 = mapInfo.getCooldownMultiplier(team);
                     b22 = false;
                 }
             }
@@ -13067,28 +10189,27 @@ public class Navigation {
             r22 |= r23;
             r22 |= r14;
             r22 &= !b22;
-            o31 |= b22;
-            o32 |= b22;
-            o23 |= b22;
-            o14 |= b22;
+            if (targetLocation.equals(l22)) {
+                temp1 = true;
+                temp2 = r22;
+            }
         }
-        else {
-            o31 |= b22;
-            o32 |= b22;
-            o23 |= b22;
-            o14 |= b22;
-        }
+        o31 |= b22;
+        o32 |= b22;
+        o23 |= b22;
+        o14 |= b22;
 
-        if (rc.onTheMap(l7) && rc.canSenseLocation(l7)) {
+        if (rc.onTheMap(l7)) {
             if (rc.senseCloud(l7)) {
                 p7 = 1.5;
                 b7 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l7).getCurrentDirection();
-                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && currentDirection.equals(Direction.CENTER))) {
-                    p7 = rc.senseMapInfo(l7).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l7)) {
+                MapInfo mapInfo = rc.senseMapInfo(l7);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l7), currentDirection) > 0))) {
+                    p7 = mapInfo.getCooldownMultiplier(team);
                     b7 = false;
                 }
             }
@@ -13114,28 +10235,27 @@ public class Navigation {
             r7 |= r8;
             r7 |= r14;
             r7 &= !b7;
-            o15 |= b7;
-            o16 |= b7;
-            o8 |= b7;
-            o14 |= b7;
+            if (targetLocation.equals(l7)) {
+                temp1 = true;
+                temp2 = r7;
+            }
         }
-        else {
-            o15 |= b7;
-            o16 |= b7;
-            o8 |= b7;
-            o14 |= b7;
-        }
+        o15 |= b7;
+        o16 |= b7;
+        o8 |= b7;
+        o14 |= b7;
 
-        if (rc.onTheMap(l40) && rc.canSenseLocation(l40)) {
+        if (rc.onTheMap(l40)) {
             if (rc.senseCloud(l40)) {
                 p40 = 1.5;
                 b40 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l40).getCurrentDirection();
-                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && currentDirection.equals(Direction.CENTER))) {
-                    p40 = rc.senseMapInfo(l40).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l40)) {
+                MapInfo mapInfo = rc.senseMapInfo(l40);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l40), currentDirection) > 0))) {
+                    p40 = mapInfo.getCooldownMultiplier(team);
                     b40 = false;
                 }
             }
@@ -13161,28 +10281,27 @@ public class Navigation {
             r40 |= r32;
             r40 |= r31;
             r40 &= !b40;
-            o50 |= b40;
-            o41 |= b40;
-            o32 |= b40;
-            o31 |= b40;
+            if (targetLocation.equals(l40)) {
+                temp1 = true;
+                temp2 = r40;
+            }
         }
-        else {
-            o50 |= b40;
-            o41 |= b40;
-            o32 |= b40;
-            o31 |= b40;
-        }
+        o50 |= b40;
+        o41 |= b40;
+        o32 |= b40;
+        o31 |= b40;
 
-        if (rc.onTheMap(l13) && rc.canSenseLocation(l13)) {
+        if (rc.onTheMap(l13)) {
             if (rc.senseCloud(l13)) {
                 p13 = 1.5;
                 b13 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l13).getCurrentDirection();
-                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && currentDirection.equals(Direction.CENTER))) {
-                    p13 = rc.senseMapInfo(l13).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l13)) {
+                MapInfo mapInfo = rc.senseMapInfo(l13);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l13), currentDirection) > 0))) {
+                    p13 = mapInfo.getCooldownMultiplier(team);
                     b13 = false;
                 }
             }
@@ -13208,28 +10327,27 @@ public class Navigation {
             r13 |= r14;
             r13 |= r6;
             r13 &= !b13;
-            o22 |= b13;
-            o23 |= b13;
-            o14 |= b13;
-            o6 |= b13;
+            if (targetLocation.equals(l13)) {
+                temp1 = true;
+                temp2 = r13;
+            }
         }
-        else {
-            o22 |= b13;
-            o23 |= b13;
-            o14 |= b13;
-            o6 |= b13;
-        }
+        o22 |= b13;
+        o23 |= b13;
+        o14 |= b13;
+        o6 |= b13;
 
-        if (rc.onTheMap(l58) && rc.canSenseLocation(l58)) {
+        if (rc.onTheMap(l58)) {
             if (rc.senseCloud(l58)) {
                 p58 = 1.5;
                 b58 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l58).getCurrentDirection();
-                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && currentDirection.equals(Direction.CENTER))) {
-                    p58 = rc.senseMapInfo(l58).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l58)) {
+                MapInfo mapInfo = rc.senseMapInfo(l58);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l58), currentDirection) > 0))) {
+                    p58 = mapInfo.getCooldownMultiplier(team);
                     b58 = false;
                 }
             }
@@ -13255,28 +10373,27 @@ public class Navigation {
             r58 |= r50;
             r58 |= r49;
             r58 &= !b58;
-            o59 |= b58;
-            o51 |= b58;
-            o50 |= b58;
-            o49 |= b58;
+            if (targetLocation.equals(l58)) {
+                temp1 = true;
+                temp2 = r58;
+            }
         }
-        else {
-            o59 |= b58;
-            o51 |= b58;
-            o50 |= b58;
-            o49 |= b58;
-        }
+        o59 |= b58;
+        o51 |= b58;
+        o50 |= b58;
+        o49 |= b58;
 
-        if (rc.onTheMap(l49) && rc.canSenseLocation(l49)) {
+        if (rc.onTheMap(l49)) {
             if (rc.senseCloud(l49)) {
                 p49 = 1.5;
                 b49 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l49).getCurrentDirection();
-                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && currentDirection.equals(Direction.CENTER))) {
-                    p49 = rc.senseMapInfo(l49).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l49)) {
+                MapInfo mapInfo = rc.senseMapInfo(l49);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l49), currentDirection) > 0))) {
+                    p49 = mapInfo.getCooldownMultiplier(team);
                     b49 = false;
                 }
             }
@@ -13302,28 +10419,27 @@ public class Navigation {
             r49 |= r41;
             r49 |= r40;
             r49 &= !b49;
-            o58 |= b49;
-            o50 |= b49;
-            o41 |= b49;
-            o40 |= b49;
+            if (targetLocation.equals(l49)) {
+                temp1 = true;
+                temp2 = r49;
+            }
         }
-        else {
-            o58 |= b49;
-            o50 |= b49;
-            o41 |= b49;
-            o40 |= b49;
-        }
+        o58 |= b49;
+        o50 |= b49;
+        o41 |= b49;
+        o40 |= b49;
 
-        if (rc.onTheMap(l6) && rc.canSenseLocation(l6)) {
+        if (rc.onTheMap(l6)) {
             if (rc.senseCloud(l6)) {
                 p6 = 1.5;
                 b6 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l6).getCurrentDirection();
-                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && currentDirection.equals(Direction.CENTER))) {
-                    p6 = rc.senseMapInfo(l6).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l6)) {
+                MapInfo mapInfo = rc.senseMapInfo(l6);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l6), currentDirection) > 0))) {
+                    p6 = mapInfo.getCooldownMultiplier(team);
                     b6 = false;
                 }
             }
@@ -13349,28 +10465,27 @@ public class Navigation {
             r6 |= r7;
             r6 |= r13;
             r6 &= !b6;
-            o14 |= b6;
-            o15 |= b6;
-            o7 |= b6;
-            o13 |= b6;
+            if (targetLocation.equals(l6)) {
+                temp1 = true;
+                temp2 = r6;
+            }
         }
-        else {
-            o14 |= b6;
-            o15 |= b6;
-            o7 |= b6;
-            o13 |= b6;
-        }
+        o14 |= b6;
+        o15 |= b6;
+        o7 |= b6;
+        o13 |= b6;
 
-        if (rc.onTheMap(l5) && rc.canSenseLocation(l5)) {
+        if (rc.onTheMap(l5)) {
             if (rc.senseCloud(l5)) {
                 p5 = 1.5;
                 b5 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l5).getCurrentDirection();
-                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && currentDirection.equals(Direction.CENTER))) {
-                    p5 = rc.senseMapInfo(l5).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l5)) {
+                MapInfo mapInfo = rc.senseMapInfo(l5);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l5), currentDirection) > 0))) {
+                    p5 = mapInfo.getCooldownMultiplier(team);
                     b5 = false;
                 }
             }
@@ -13391,26 +10506,26 @@ public class Navigation {
             r5 |= r14;
             r5 |= r6;
             r5 &= !b5;
-            o13 |= b5;
-            o14 |= b5;
-            o6 |= b5;
+            if (targetLocation.equals(l5)) {
+                temp1 = true;
+                temp2 = r5;
+            }
         }
-        else {
-            o13 |= b5;
-            o14 |= b5;
-            o6 |= b5;
-        }
+        o13 |= b5;
+        o14 |= b5;
+        o6 |= b5;
 
-        if (rc.onTheMap(l57) && rc.canSenseLocation(l57)) {
+        if (rc.onTheMap(l57)) {
             if (rc.senseCloud(l57)) {
                 p57 = 1.5;
                 b57 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l57).getCurrentDirection();
-                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && currentDirection.equals(Direction.CENTER))) {
-                    p57 = rc.senseMapInfo(l57).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l57)) {
+                MapInfo mapInfo = rc.senseMapInfo(l57);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l57), currentDirection) > 0))) {
+                    p57 = mapInfo.getCooldownMultiplier(team);
                     b57 = false;
                 }
             }
@@ -13431,26 +10546,26 @@ public class Navigation {
             r57 |= r50;
             r57 |= r49;
             r57 &= !b57;
-            o58 |= b57;
-            o50 |= b57;
-            o49 |= b57;
+            if (targetLocation.equals(l57)) {
+                temp1 = true;
+                temp2 = r57;
+            }
         }
-        else {
-            o58 |= b57;
-            o50 |= b57;
-            o49 |= b57;
-        }
+        o58 |= b57;
+        o50 |= b57;
+        o49 |= b57;
 
-        if (rc.onTheMap(l2) && rc.canSenseLocation(l2)) {
+        if (rc.onTheMap(l2)) {
             if (rc.senseCloud(l2)) {
                 p2 = 1.5;
                 b2 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l2).getCurrentDirection();
-                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && currentDirection.equals(Direction.CENTER))) {
-                    p2 = rc.senseMapInfo(l2).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l2)) {
+                MapInfo mapInfo = rc.senseMapInfo(l2);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l2), currentDirection) > 0))) {
+                    p2 = mapInfo.getCooldownMultiplier(team);
                     b2 = false;
                 }
             }
@@ -13466,24 +10581,25 @@ public class Navigation {
             r2 |= r8;
             r2 |= r7;
             r2 &= !b2;
-            o8 |= b2;
-            o7 |= b2;
+            if (targetLocation.equals(l2)) {
+                temp1 = true;
+                temp2 = r2;
+            }
         }
-        else {
-            o8 |= b2;
-            o7 |= b2;
-        }
+        o8 |= b2;
+        o7 |= b2;
 
-        if (rc.onTheMap(l66) && rc.canSenseLocation(l66)) {
+        if (rc.onTheMap(l66)) {
             if (rc.senseCloud(l66)) {
                 p66 = 1.5;
                 b66 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l66).getCurrentDirection();
-                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && currentDirection.equals(Direction.CENTER))) {
-                    p66 = rc.senseMapInfo(l66).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l66)) {
+                MapInfo mapInfo = rc.senseMapInfo(l66);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l66), currentDirection) > 0))) {
+                    p66 = mapInfo.getCooldownMultiplier(team);
                     b66 = false;
                 }
             }
@@ -13499,24 +10615,25 @@ public class Navigation {
             r66 |= r60;
             r66 |= r59;
             r66 &= !b66;
-            o60 |= b66;
-            o59 |= b66;
+            if (targetLocation.equals(l66)) {
+                temp1 = true;
+                temp2 = r66;
+            }
         }
-        else {
-            o60 |= b66;
-            o59 |= b66;
-        }
+        o60 |= b66;
+        o59 |= b66;
 
-        if (rc.onTheMap(l30) && rc.canSenseLocation(l30)) {
+        if (rc.onTheMap(l30)) {
             if (rc.senseCloud(l30)) {
                 p30 = 1.5;
                 b30 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l30).getCurrentDirection();
-                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && currentDirection.equals(Direction.CENTER))) {
-                    p30 = rc.senseMapInfo(l30).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l30)) {
+                MapInfo mapInfo = rc.senseMapInfo(l30);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l30), currentDirection) > 0))) {
+                    p30 = mapInfo.getCooldownMultiplier(team);
                     b30 = false;
                 }
             }
@@ -13537,26 +10654,26 @@ public class Navigation {
             r30 |= r31;
             r30 |= r22;
             r30 &= !b30;
-            o40 |= b30;
-            o31 |= b30;
-            o22 |= b30;
+            if (targetLocation.equals(l30)) {
+                temp1 = true;
+                temp2 = r30;
+            }
         }
-        else {
-            o40 |= b30;
-            o31 |= b30;
-            o22 |= b30;
-        }
+        o40 |= b30;
+        o31 |= b30;
+        o22 |= b30;
 
-        if (rc.onTheMap(l21) && rc.canSenseLocation(l21)) {
+        if (rc.onTheMap(l21)) {
             if (rc.senseCloud(l21)) {
                 p21 = 1.5;
                 b21 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l21).getCurrentDirection();
-                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && currentDirection.equals(Direction.CENTER))) {
-                    p21 = rc.senseMapInfo(l21).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l21)) {
+                MapInfo mapInfo = rc.senseMapInfo(l21);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l21), currentDirection) > 0))) {
+                    p21 = mapInfo.getCooldownMultiplier(team);
                     b21 = false;
                 }
             }
@@ -13582,28 +10699,27 @@ public class Navigation {
             r21 |= r22;
             r21 |= r13;
             r21 &= !b21;
-            o30 |= b21;
-            o31 |= b21;
-            o22 |= b21;
-            o13 |= b21;
+            if (targetLocation.equals(l21)) {
+                temp1 = true;
+                temp2 = r21;
+            }
         }
-        else {
-            o30 |= b21;
-            o31 |= b21;
-            o22 |= b21;
-            o13 |= b21;
-        }
+        o30 |= b21;
+        o31 |= b21;
+        o22 |= b21;
+        o13 |= b21;
 
-        if (rc.onTheMap(l1) && rc.canSenseLocation(l1)) {
+        if (rc.onTheMap(l1)) {
             if (rc.senseCloud(l1)) {
                 p1 = 1.5;
                 b1 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l1).getCurrentDirection();
-                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && currentDirection.equals(Direction.CENTER))) {
-                    p1 = rc.senseMapInfo(l1).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l1)) {
+                MapInfo mapInfo = rc.senseMapInfo(l1);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l1), currentDirection) > 0))) {
+                    p1 = mapInfo.getCooldownMultiplier(team);
                     b1 = false;
                 }
             }
@@ -13629,28 +10745,27 @@ public class Navigation {
             r1 |= r2;
             r1 |= r6;
             r1 &= !b1;
-            o7 |= b1;
-            o8 |= b1;
-            o2 |= b1;
-            o6 |= b1;
+            if (targetLocation.equals(l1)) {
+                temp1 = true;
+                temp2 = r1;
+            }
         }
-        else {
-            o7 |= b1;
-            o8 |= b1;
-            o2 |= b1;
-            o6 |= b1;
-        }
+        o7 |= b1;
+        o8 |= b1;
+        o2 |= b1;
+        o6 |= b1;
 
-        if (rc.onTheMap(l39) && rc.canSenseLocation(l39)) {
+        if (rc.onTheMap(l39)) {
             if (rc.senseCloud(l39)) {
                 p39 = 1.5;
                 b39 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l39).getCurrentDirection();
-                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && currentDirection.equals(Direction.CENTER))) {
-                    p39 = rc.senseMapInfo(l39).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l39)) {
+                MapInfo mapInfo = rc.senseMapInfo(l39);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l39), currentDirection) > 0))) {
+                    p39 = mapInfo.getCooldownMultiplier(team);
                     b39 = false;
                 }
             }
@@ -13676,28 +10791,27 @@ public class Navigation {
             r39 |= r31;
             r39 |= r30;
             r39 &= !b39;
-            o49 |= b39;
-            o40 |= b39;
-            o31 |= b39;
-            o30 |= b39;
+            if (targetLocation.equals(l39)) {
+                temp1 = true;
+                temp2 = r39;
+            }
         }
-        else {
-            o49 |= b39;
-            o40 |= b39;
-            o31 |= b39;
-            o30 |= b39;
-        }
+        o49 |= b39;
+        o40 |= b39;
+        o31 |= b39;
+        o30 |= b39;
 
-        if (rc.onTheMap(l65) && rc.canSenseLocation(l65)) {
+        if (rc.onTheMap(l65)) {
             if (rc.senseCloud(l65)) {
                 p65 = 1.5;
                 b65 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l65).getCurrentDirection();
-                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && currentDirection.equals(Direction.CENTER))) {
-                    p65 = rc.senseMapInfo(l65).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l65)) {
+                MapInfo mapInfo = rc.senseMapInfo(l65);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l65), currentDirection) > 0))) {
+                    p65 = mapInfo.getCooldownMultiplier(team);
                     b65 = false;
                 }
             }
@@ -13723,28 +10837,27 @@ public class Navigation {
             r65 |= r59;
             r65 |= r58;
             r65 &= !b65;
-            o66 |= b65;
-            o60 |= b65;
-            o59 |= b65;
-            o58 |= b65;
+            if (targetLocation.equals(l65)) {
+                temp1 = true;
+                temp2 = r65;
+            }
         }
-        else {
-            o66 |= b65;
-            o60 |= b65;
-            o59 |= b65;
-            o58 |= b65;
-        }
+        o66 |= b65;
+        o60 |= b65;
+        o59 |= b65;
+        o58 |= b65;
 
-        if (rc.onTheMap(l64) && rc.canSenseLocation(l64)) {
+        if (rc.onTheMap(l64)) {
             if (rc.senseCloud(l64)) {
                 p64 = 1.5;
                 b64 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l64).getCurrentDirection();
-                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && currentDirection.equals(Direction.CENTER))) {
-                    p64 = rc.senseMapInfo(l64).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l64)) {
+                MapInfo mapInfo = rc.senseMapInfo(l64);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l64), currentDirection) > 0))) {
+                    p64 = mapInfo.getCooldownMultiplier(team);
                     b64 = false;
                 }
             }
@@ -13770,28 +10883,27 @@ public class Navigation {
             r64 |= r58;
             r64 |= r57;
             r64 &= !b64;
-            o65 |= b64;
-            o59 |= b64;
-            o58 |= b64;
-            o57 |= b64;
+            if (targetLocation.equals(l64)) {
+                temp1 = true;
+                temp2 = r64;
+            }
         }
-        else {
-            o65 |= b64;
-            o59 |= b64;
-            o58 |= b64;
-            o57 |= b64;
-        }
+        o65 |= b64;
+        o59 |= b64;
+        o58 |= b64;
+        o57 |= b64;
 
-        if (rc.onTheMap(l12) && rc.canSenseLocation(l12)) {
+        if (rc.onTheMap(l12)) {
             if (rc.senseCloud(l12)) {
                 p12 = 1.5;
                 b12 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l12).getCurrentDirection();
-                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && currentDirection.equals(Direction.CENTER))) {
-                    p12 = rc.senseMapInfo(l12).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l12)) {
+                MapInfo mapInfo = rc.senseMapInfo(l12);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l12), currentDirection) > 0))) {
+                    p12 = mapInfo.getCooldownMultiplier(team);
                     b12 = false;
                 }
             }
@@ -13817,28 +10929,27 @@ public class Navigation {
             r12 |= r13;
             r12 |= r5;
             r12 &= !b12;
-            o21 |= b12;
-            o22 |= b12;
-            o13 |= b12;
-            o5 |= b12;
+            if (targetLocation.equals(l12)) {
+                temp1 = true;
+                temp2 = r12;
+            }
         }
-        else {
-            o21 |= b12;
-            o22 |= b12;
-            o13 |= b12;
-            o5 |= b12;
-        }
+        o21 |= b12;
+        o22 |= b12;
+        o13 |= b12;
+        o5 |= b12;
 
-        if (rc.onTheMap(l0) && rc.canSenseLocation(l0)) {
+        if (rc.onTheMap(l0)) {
             if (rc.senseCloud(l0)) {
                 p0 = 1.5;
                 b0 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l0).getCurrentDirection();
-                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && currentDirection.equals(Direction.CENTER))) {
-                    p0 = rc.senseMapInfo(l0).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l0)) {
+                MapInfo mapInfo = rc.senseMapInfo(l0);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l0), currentDirection) > 0))) {
+                    p0 = mapInfo.getCooldownMultiplier(team);
                     b0 = false;
                 }
             }
@@ -13864,28 +10975,27 @@ public class Navigation {
             r0 |= r1;
             r0 |= r5;
             r0 &= !b0;
-            o6 |= b0;
-            o7 |= b0;
-            o1 |= b0;
-            o5 |= b0;
+            if (targetLocation.equals(l0)) {
+                temp1 = true;
+                temp2 = r0;
+            }
         }
-        else {
-            o6 |= b0;
-            o7 |= b0;
-            o1 |= b0;
-            o5 |= b0;
-        }
+        o6 |= b0;
+        o7 |= b0;
+        o1 |= b0;
+        o5 |= b0;
 
-        if (rc.onTheMap(l48) && rc.canSenseLocation(l48)) {
+        if (rc.onTheMap(l48)) {
             if (rc.senseCloud(l48)) {
                 p48 = 1.5;
                 b48 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l48).getCurrentDirection();
-                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && currentDirection.equals(Direction.CENTER))) {
-                    p48 = rc.senseMapInfo(l48).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l48)) {
+                MapInfo mapInfo = rc.senseMapInfo(l48);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l48), currentDirection) > 0))) {
+                    p48 = mapInfo.getCooldownMultiplier(team);
                     b48 = false;
                 }
             }
@@ -13911,19 +11021,18 @@ public class Navigation {
             r48 |= r40;
             r48 |= r39;
             r48 &= !b48;
-            o57 |= b48;
-            o49 |= b48;
-            o40 |= b48;
-            o39 |= b48;
+            if (targetLocation.equals(l48)) {
+                temp1 = true;
+                temp2 = r48;
+            }
         }
-        else {
-            o57 |= b48;
-            o49 |= b48;
-            o40 |= b48;
-            o39 |= b48;
-        }
+        o57 |= b48;
+        o49 |= b48;
+        o40 |= b48;
+        o39 |= b48;
 
-        int dx = targetLocation.x - l34.x;
+        if (temp1 && temp2) {
+            int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -14029,10 +11138,6 @@ public class Navigation {
                         if (v33 < 10000) {
                             return d33;
                         }
-                    case 0:
-                        if (v34 < 10000) {
-                            return d34;
-                        }
                 } break;
 
             case 1:
@@ -14120,6 +11225,7 @@ public class Navigation {
                 } break;
 
         }
+        }
     
         o0 = r0;
         o1 = r1;
@@ -14141,7 +11247,6 @@ public class Navigation {
             if (dist0 < localBest) {
                 localBest = dist0;
                 ans = d0;
-                best = l0;
             }
         }
 
@@ -14150,7 +11255,6 @@ public class Navigation {
             if (dist1 < localBest) {
                 localBest = dist1;
                 ans = d1;
-                best = l1;
             }
         }
 
@@ -14159,7 +11263,6 @@ public class Navigation {
             if (dist2 < localBest) {
                 localBest = dist2;
                 ans = d2;
-                best = l2;
             }
         }
 
@@ -14168,7 +11271,6 @@ public class Navigation {
             if (dist5 < localBest) {
                 localBest = dist5;
                 ans = d5;
-                best = l5;
             }
         }
 
@@ -14177,7 +11279,6 @@ public class Navigation {
             if (dist12 < localBest) {
                 localBest = dist12;
                 ans = d12;
-                best = l12;
             }
         }
 
@@ -14186,7 +11287,6 @@ public class Navigation {
             if (dist21 < localBest) {
                 localBest = dist21;
                 ans = d21;
-                best = l21;
             }
         }
 
@@ -14195,7 +11295,6 @@ public class Navigation {
             if (dist30 < localBest) {
                 localBest = dist30;
                 ans = d30;
-                best = l30;
             }
         }
 
@@ -14204,7 +11303,6 @@ public class Navigation {
             if (dist39 < localBest) {
                 localBest = dist39;
                 ans = d39;
-                best = l39;
             }
         }
 
@@ -14213,7 +11311,6 @@ public class Navigation {
             if (dist48 < localBest) {
                 localBest = dist48;
                 ans = d48;
-                best = l48;
             }
         }
 
@@ -14222,7 +11319,6 @@ public class Navigation {
             if (dist57 < localBest) {
                 localBest = dist57;
                 ans = d57;
-                best = l57;
             }
         }
 
@@ -14231,7 +11327,6 @@ public class Navigation {
             if (dist64 < localBest) {
                 localBest = dist64;
                 ans = d64;
-                best = l64;
             }
         }
 
@@ -14240,7 +11335,6 @@ public class Navigation {
             if (dist65 < localBest) {
                 localBest = dist65;
                 ans = d65;
-                best = l65;
             }
         }
 
@@ -14249,733 +11343,23 @@ public class Navigation {
             if (dist66 < localBest) {
                 localBest = dist66;
                 ans = d66;
-                best = l66;
             }
         }
 
-        draws4();
-        rc.setIndicatorDot(best, 0, 0, 255);
         if (localBest < globalBest) {
             globalBest = localBest;
+            bug.reset();
             return ans;
         }
-        return getBestDirectionWallFollow4(ans);
-    }
 
-    private Direction getBestDirectionWallFollow4(Direction prev) throws GameActionException {
-        Direction ans = Direction.CENTER;
-        int minDistance = closestWallLocations.isEmpty() ? 1000000 : currentLocation.distanceSquaredTo(closestWallLocations.get(0));
-    
-        if (b0) {
-            int distance = currentLocation.distanceSquaredTo(l0);
-            if (distance == minDistance) {
-                closestWallLocations.add(l0);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l0);
-                minDistance = distance;
-            }
-        }
-
-        if (b1) {
-            int distance = currentLocation.distanceSquaredTo(l1);
-            if (distance == minDistance) {
-                closestWallLocations.add(l1);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l1);
-                minDistance = distance;
-            }
-        }
-
-        if (b2) {
-            int distance = currentLocation.distanceSquaredTo(l2);
-            if (distance == minDistance) {
-                closestWallLocations.add(l2);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l2);
-                minDistance = distance;
-            }
-        }
-
-        if (b5) {
-            int distance = currentLocation.distanceSquaredTo(l5);
-            if (distance == minDistance) {
-                closestWallLocations.add(l5);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l5);
-                minDistance = distance;
-            }
-        }
-
-        if (b6) {
-            int distance = currentLocation.distanceSquaredTo(l6);
-            if (distance == minDistance) {
-                closestWallLocations.add(l6);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l6);
-                minDistance = distance;
-            }
-        }
-
-        if (b7) {
-            int distance = currentLocation.distanceSquaredTo(l7);
-            if (distance == minDistance) {
-                closestWallLocations.add(l7);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l7);
-                minDistance = distance;
-            }
-        }
-
-        if (b8) {
-            int distance = currentLocation.distanceSquaredTo(l8);
-            if (distance == minDistance) {
-                closestWallLocations.add(l8);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l8);
-                minDistance = distance;
-            }
-        }
-
-        if (b12) {
-            int distance = currentLocation.distanceSquaredTo(l12);
-            if (distance == minDistance) {
-                closestWallLocations.add(l12);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l12);
-                minDistance = distance;
-            }
-        }
-
-        if (b13) {
-            int distance = currentLocation.distanceSquaredTo(l13);
-            if (distance == minDistance) {
-                closestWallLocations.add(l13);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l13);
-                minDistance = distance;
-            }
-        }
-
-        if (b14) {
-            int distance = currentLocation.distanceSquaredTo(l14);
-            if (distance == minDistance) {
-                closestWallLocations.add(l14);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l14);
-                minDistance = distance;
-            }
-        }
-
-        if (b15) {
-            int distance = currentLocation.distanceSquaredTo(l15);
-            if (distance == minDistance) {
-                closestWallLocations.add(l15);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l15);
-                minDistance = distance;
-            }
-        }
-
-        if (b16) {
-            int distance = currentLocation.distanceSquaredTo(l16);
-            if (distance == minDistance) {
-                closestWallLocations.add(l16);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l16);
-                minDistance = distance;
-            }
-        }
-
-        if (b21) {
-            int distance = currentLocation.distanceSquaredTo(l21);
-            if (distance == minDistance) {
-                closestWallLocations.add(l21);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l21);
-                minDistance = distance;
-            }
-        }
-
-        if (b22) {
-            int distance = currentLocation.distanceSquaredTo(l22);
-            if (distance == minDistance) {
-                closestWallLocations.add(l22);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l22);
-                minDistance = distance;
-            }
-        }
-
-        if (b23) {
-            int distance = currentLocation.distanceSquaredTo(l23);
-            if (distance == minDistance) {
-                closestWallLocations.add(l23);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l23);
-                minDistance = distance;
-            }
-        }
-
-        if (b24) {
-            int distance = currentLocation.distanceSquaredTo(l24);
-            if (distance == minDistance) {
-                closestWallLocations.add(l24);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l24);
-                minDistance = distance;
-            }
-        }
-
-        if (b25) {
-            int distance = currentLocation.distanceSquaredTo(l25);
-            if (distance == minDistance) {
-                closestWallLocations.add(l25);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l25);
-                minDistance = distance;
-            }
-        }
-
-        if (b30) {
-            int distance = currentLocation.distanceSquaredTo(l30);
-            if (distance == minDistance) {
-                closestWallLocations.add(l30);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l30);
-                minDistance = distance;
-            }
-        }
-
-        if (b31) {
-            int distance = currentLocation.distanceSquaredTo(l31);
-            if (distance == minDistance) {
-                closestWallLocations.add(l31);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l31);
-                minDistance = distance;
-            }
-        }
-
-        if (b32) {
-            int distance = currentLocation.distanceSquaredTo(l32);
-            if (distance == minDistance) {
-                closestWallLocations.add(l32);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l32);
-                minDistance = distance;
-            }
-        }
-
-        if (b33) {
-            int distance = currentLocation.distanceSquaredTo(l33);
-            if (distance == minDistance) {
-                closestWallLocations.add(l33);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l33);
-                minDistance = distance;
-            }
-        }
-
-        if (b39) {
-            int distance = currentLocation.distanceSquaredTo(l39);
-            if (distance == minDistance) {
-                closestWallLocations.add(l39);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l39);
-                minDistance = distance;
-            }
-        }
-
-        if (b40) {
-            int distance = currentLocation.distanceSquaredTo(l40);
-            if (distance == minDistance) {
-                closestWallLocations.add(l40);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l40);
-                minDistance = distance;
-            }
-        }
-
-        if (b41) {
-            int distance = currentLocation.distanceSquaredTo(l41);
-            if (distance == minDistance) {
-                closestWallLocations.add(l41);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l41);
-                minDistance = distance;
-            }
-        }
-
-        if (b42) {
-            int distance = currentLocation.distanceSquaredTo(l42);
-            if (distance == minDistance) {
-                closestWallLocations.add(l42);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l42);
-                minDistance = distance;
-            }
-        }
-
-        if (b43) {
-            int distance = currentLocation.distanceSquaredTo(l43);
-            if (distance == minDistance) {
-                closestWallLocations.add(l43);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l43);
-                minDistance = distance;
-            }
-        }
-
-        if (b48) {
-            int distance = currentLocation.distanceSquaredTo(l48);
-            if (distance == minDistance) {
-                closestWallLocations.add(l48);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l48);
-                minDistance = distance;
-            }
-        }
-
-        if (b49) {
-            int distance = currentLocation.distanceSquaredTo(l49);
-            if (distance == minDistance) {
-                closestWallLocations.add(l49);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l49);
-                minDistance = distance;
-            }
-        }
-
-        if (b50) {
-            int distance = currentLocation.distanceSquaredTo(l50);
-            if (distance == minDistance) {
-                closestWallLocations.add(l50);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l50);
-                minDistance = distance;
-            }
-        }
-
-        if (b51) {
-            int distance = currentLocation.distanceSquaredTo(l51);
-            if (distance == minDistance) {
-                closestWallLocations.add(l51);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l51);
-                minDistance = distance;
-            }
-        }
-
-        if (b52) {
-            int distance = currentLocation.distanceSquaredTo(l52);
-            if (distance == minDistance) {
-                closestWallLocations.add(l52);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l52);
-                minDistance = distance;
-            }
-        }
-
-        if (b57) {
-            int distance = currentLocation.distanceSquaredTo(l57);
-            if (distance == minDistance) {
-                closestWallLocations.add(l57);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l57);
-                minDistance = distance;
-            }
-        }
-
-        if (b58) {
-            int distance = currentLocation.distanceSquaredTo(l58);
-            if (distance == minDistance) {
-                closestWallLocations.add(l58);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l58);
-                minDistance = distance;
-            }
-        }
-
-        if (b59) {
-            int distance = currentLocation.distanceSquaredTo(l59);
-            if (distance == minDistance) {
-                closestWallLocations.add(l59);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l59);
-                minDistance = distance;
-            }
-        }
-
-        if (b60) {
-            int distance = currentLocation.distanceSquaredTo(l60);
-            if (distance == minDistance) {
-                closestWallLocations.add(l60);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l60);
-                minDistance = distance;
-            }
-        }
-
-        if (b64) {
-            int distance = currentLocation.distanceSquaredTo(l64);
-            if (distance == minDistance) {
-                closestWallLocations.add(l64);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l64);
-                minDistance = distance;
-            }
-        }
-
-        if (b65) {
-            int distance = currentLocation.distanceSquaredTo(l65);
-            if (distance == minDistance) {
-                closestWallLocations.add(l65);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l65);
-                minDistance = distance;
-            }
-        }
-
-        if (b66) {
-            int distance = currentLocation.distanceSquaredTo(l66);
-            if (distance == minDistance) {
-                closestWallLocations.add(l66);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l66);
-                minDistance = distance;
-            }
-        }
-
-        if (minDistance > 2) { return prev; }
-        int maxDot = -999999;
-        minDistance = 1000000;
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            Direction vertical = currentLocation.directionTo(closestWallLocation);
-
-            Direction tangent1 = vertical.rotateLeft().rotateLeft();
-            Direction tangent2 = vertical.rotateRight().rotateRight();
-
-            int dx = lastDirection.getDeltaX();
-            int dy = lastDirection.getDeltaY();
-
-            int dot1 = tangent1.getDeltaX() * dx + tangent1.getDeltaY() * dy;
-            int dot2 = tangent2.getDeltaX() * dx + tangent2.getDeltaY() * dy;
-
-            int distance1 = currentLocation.add(tangent1).distanceSquaredTo(targetLocation);
-            int distance2 = currentLocation.add(tangent2).distanceSquaredTo(targetLocation);
-
-            if (!rc.canMove(tangent1)) {
-                dot1 = -1000000;
-            }
-
-            if (!rc.canMove(tangent2)) {
-                dot2 = -1000000;
-            }
-
-            if (dot1 > maxDot) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 > maxDot) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-
-            if (dot1 == maxDot && distance1 < minDistance) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 == maxDot && distance2 < minDistance) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-        }
-        draws4();
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            rc.setIndicatorDot(closestWallLocation, 255, 0, 0);
-        }
-        return ans;
-    }
-
-    private void draws4() throws GameActionException {
-    
-        rc.setIndicatorDot(l0, 255, 0, 255);
-        if (b0) {
-            rc.setIndicatorDot(l0, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l1, 255, 0, 255);
-        if (b1) {
-            rc.setIndicatorDot(l1, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l2, 255, 0, 255);
-        if (b2) {
-            rc.setIndicatorDot(l2, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l5, 255, 0, 255);
-        if (b5) {
-            rc.setIndicatorDot(l5, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l6, 255, 0, 255);
-        if (b6) {
-            rc.setIndicatorDot(l6, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l7, 255, 0, 255);
-        if (b7) {
-            rc.setIndicatorDot(l7, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l8, 255, 0, 255);
-        if (b8) {
-            rc.setIndicatorDot(l8, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l12, 255, 0, 255);
-        if (b12) {
-            rc.setIndicatorDot(l12, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l13, 255, 0, 255);
-        if (b13) {
-            rc.setIndicatorDot(l13, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l14, 255, 0, 255);
-        if (b14) {
-            rc.setIndicatorDot(l14, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l15, 255, 0, 255);
-        if (b15) {
-            rc.setIndicatorDot(l15, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l16, 255, 0, 255);
-        if (b16) {
-            rc.setIndicatorDot(l16, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l21, 255, 0, 255);
-        if (b21) {
-            rc.setIndicatorDot(l21, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l22, 255, 0, 255);
-        if (b22) {
-            rc.setIndicatorDot(l22, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l23, 255, 0, 255);
-        if (b23) {
-            rc.setIndicatorDot(l23, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l24, 255, 0, 255);
-        if (b24) {
-            rc.setIndicatorDot(l24, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l25, 255, 0, 255);
-        if (b25) {
-            rc.setIndicatorDot(l25, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l30, 255, 0, 255);
-        if (b30) {
-            rc.setIndicatorDot(l30, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l31, 255, 0, 255);
-        if (b31) {
-            rc.setIndicatorDot(l31, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l32, 255, 0, 255);
-        if (b32) {
-            rc.setIndicatorDot(l32, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l33, 255, 0, 255);
-        if (b33) {
-            rc.setIndicatorDot(l33, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l39, 255, 0, 255);
-        if (b39) {
-            rc.setIndicatorDot(l39, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l40, 255, 0, 255);
-        if (b40) {
-            rc.setIndicatorDot(l40, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l41, 255, 0, 255);
-        if (b41) {
-            rc.setIndicatorDot(l41, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l42, 255, 0, 255);
-        if (b42) {
-            rc.setIndicatorDot(l42, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l43, 255, 0, 255);
-        if (b43) {
-            rc.setIndicatorDot(l43, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l48, 255, 0, 255);
-        if (b48) {
-            rc.setIndicatorDot(l48, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l49, 255, 0, 255);
-        if (b49) {
-            rc.setIndicatorDot(l49, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l50, 255, 0, 255);
-        if (b50) {
-            rc.setIndicatorDot(l50, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l51, 255, 0, 255);
-        if (b51) {
-            rc.setIndicatorDot(l51, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l52, 255, 0, 255);
-        if (b52) {
-            rc.setIndicatorDot(l52, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l57, 255, 0, 255);
-        if (b57) {
-            rc.setIndicatorDot(l57, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l58, 255, 0, 255);
-        if (b58) {
-            rc.setIndicatorDot(l58, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l59, 255, 0, 255);
-        if (b59) {
-            rc.setIndicatorDot(l59, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l60, 255, 0, 255);
-        if (b60) {
-            rc.setIndicatorDot(l60, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l64, 255, 0, 255);
-        if (b64) {
-            rc.setIndicatorDot(l64, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l65, 255, 0, 255);
-        if (b65) {
-            rc.setIndicatorDot(l65, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l66, 255, 0, 255);
-        if (b66) {
-            rc.setIndicatorDot(l66, 255, 255, 255);
-        }
-
+        bug.move(targetLocation);
+        return null;
     }
 
     private Direction getBestDirection5() throws GameActionException {
-        MapLocation best = currentLocation;
         double localBest = 1000000.0;
+        boolean temp1 = false;
+        boolean temp2 = false;
         l34 = currentLocation;
         v34 = 0;
         d34 = Direction.CENTER;
@@ -15240,16 +11624,17 @@ public class Navigation {
         r12 = false;
         o12 = false;
     
-        if (rc.onTheMap(l33) && rc.canSenseLocation(l33)) {
+        if (rc.onTheMap(l33)) {
             if (rc.senseCloud(l33)) {
                 p33 = 1.5;
                 b33 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l33).getCurrentDirection();
-                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && currentDirection.equals(Direction.CENTER))) {
-                    p33 = rc.senseMapInfo(l33).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l33)) {
+                MapInfo mapInfo = rc.senseMapInfo(l33);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l33), currentDirection) > 0))) {
+                    p33 = mapInfo.getCooldownMultiplier(team);
                     b33 = false;
                 }
             }
@@ -15265,22 +11650,24 @@ public class Navigation {
             r33 |= r34;
             r33 |= r25;
             r33 &= !b33;
-            o25 |= b33;
+            if (targetLocation.equals(l33)) {
+                temp1 = true;
+                temp2 = r33;
+            }
         }
-        else {
-            o25 |= b33;
-        }
+        o25 |= b33;
 
-        if (rc.onTheMap(l25) && rc.canSenseLocation(l25)) {
+        if (rc.onTheMap(l25)) {
             if (rc.senseCloud(l25)) {
                 p25 = 1.5;
                 b25 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l25).getCurrentDirection();
-                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && currentDirection.equals(Direction.CENTER))) {
-                    p25 = rc.senseMapInfo(l25).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l25)) {
+                MapInfo mapInfo = rc.senseMapInfo(l25);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l25), currentDirection) > 0))) {
+                    p25 = mapInfo.getCooldownMultiplier(team);
                     b25 = false;
                 }
             }
@@ -15296,22 +11683,24 @@ public class Navigation {
             r25 |= r34;
             r25 |= r33;
             r25 &= !b25;
-            o33 |= b25;
+            if (targetLocation.equals(l25)) {
+                temp1 = true;
+                temp2 = r25;
+            }
         }
-        else {
-            o33 |= b25;
-        }
+        o33 |= b25;
 
-        if (rc.onTheMap(l42) && rc.canSenseLocation(l42)) {
+        if (rc.onTheMap(l42)) {
             if (rc.senseCloud(l42)) {
                 p42 = 1.5;
                 b42 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l42).getCurrentDirection();
-                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && currentDirection.equals(Direction.CENTER))) {
-                    p42 = rc.senseMapInfo(l42).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l42)) {
+                MapInfo mapInfo = rc.senseMapInfo(l42);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l42), currentDirection) > 0))) {
+                    p42 = mapInfo.getCooldownMultiplier(team);
                     b42 = false;
                 }
             }
@@ -15327,22 +11716,24 @@ public class Navigation {
             r42 |= r34;
             r42 |= r33;
             r42 &= !b42;
-            o33 |= b42;
+            if (targetLocation.equals(l42)) {
+                temp1 = true;
+                temp2 = r42;
+            }
         }
-        else {
-            o33 |= b42;
-        }
+        o33 |= b42;
 
-        if (rc.onTheMap(l26) && rc.canSenseLocation(l26)) {
+        if (rc.onTheMap(l26)) {
             if (rc.senseCloud(l26)) {
                 p26 = 1.5;
                 b26 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l26).getCurrentDirection();
-                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && currentDirection.equals(Direction.CENTER))) {
-                    p26 = rc.senseMapInfo(l26).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l26)) {
+                MapInfo mapInfo = rc.senseMapInfo(l26);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l26), currentDirection) > 0))) {
+                    p26 = mapInfo.getCooldownMultiplier(team);
                     b26 = false;
                 }
             }
@@ -15358,22 +11749,24 @@ public class Navigation {
             r26 |= r25;
             r26 |= r34;
             r26 &= !b26;
-            o25 |= b26;
+            if (targetLocation.equals(l26)) {
+                temp1 = true;
+                temp2 = r26;
+            }
         }
-        else {
-            o25 |= b26;
-        }
+        o25 |= b26;
 
-        if (rc.onTheMap(l24) && rc.canSenseLocation(l24)) {
+        if (rc.onTheMap(l24)) {
             if (rc.senseCloud(l24)) {
                 p24 = 1.5;
                 b24 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l24).getCurrentDirection();
-                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && currentDirection.equals(Direction.CENTER))) {
-                    p24 = rc.senseMapInfo(l24).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l24)) {
+                MapInfo mapInfo = rc.senseMapInfo(l24);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l24), currentDirection) > 0))) {
+                    p24 = mapInfo.getCooldownMultiplier(team);
                     b24 = false;
                 }
             }
@@ -15394,24 +11787,25 @@ public class Navigation {
             r24 |= r34;
             r24 |= r25;
             r24 &= !b24;
-            o33 |= b24;
-            o25 |= b24;
+            if (targetLocation.equals(l24)) {
+                temp1 = true;
+                temp2 = r24;
+            }
         }
-        else {
-            o33 |= b24;
-            o25 |= b24;
-        }
+        o33 |= b24;
+        o25 |= b24;
 
-        if (rc.onTheMap(l16) && rc.canSenseLocation(l16)) {
+        if (rc.onTheMap(l16)) {
             if (rc.senseCloud(l16)) {
                 p16 = 1.5;
                 b16 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l16).getCurrentDirection();
-                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && currentDirection.equals(Direction.CENTER))) {
-                    p16 = rc.senseMapInfo(l16).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l16)) {
+                MapInfo mapInfo = rc.senseMapInfo(l16);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l16), currentDirection) > 0))) {
+                    p16 = mapInfo.getCooldownMultiplier(team);
                     b16 = false;
                 }
             }
@@ -15432,26 +11826,26 @@ public class Navigation {
             r16 |= r26;
             r16 |= r24;
             r16 &= !b16;
-            o25 |= b16;
-            o26 |= b16;
-            o24 |= b16;
+            if (targetLocation.equals(l16)) {
+                temp1 = true;
+                temp2 = r16;
+            }
         }
-        else {
-            o25 |= b16;
-            o26 |= b16;
-            o24 |= b16;
-        }
+        o25 |= b16;
+        o26 |= b16;
+        o24 |= b16;
 
-        if (rc.onTheMap(l32) && rc.canSenseLocation(l32)) {
+        if (rc.onTheMap(l32)) {
             if (rc.senseCloud(l32)) {
                 p32 = 1.5;
                 b32 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l32).getCurrentDirection();
-                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && currentDirection.equals(Direction.CENTER))) {
-                    p32 = rc.senseMapInfo(l32).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l32)) {
+                MapInfo mapInfo = rc.senseMapInfo(l32);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l32), currentDirection) > 0))) {
+                    p32 = mapInfo.getCooldownMultiplier(team);
                     b32 = false;
                 }
             }
@@ -15472,26 +11866,26 @@ public class Navigation {
             r32 |= r33;
             r32 |= r24;
             r32 &= !b32;
-            o42 |= b32;
-            o33 |= b32;
-            o24 |= b32;
+            if (targetLocation.equals(l32)) {
+                temp1 = true;
+                temp2 = r32;
+            }
         }
-        else {
-            o42 |= b32;
-            o33 |= b32;
-            o24 |= b32;
-        }
+        o42 |= b32;
+        o33 |= b32;
+        o24 |= b32;
 
-        if (rc.onTheMap(l15) && rc.canSenseLocation(l15)) {
+        if (rc.onTheMap(l15)) {
             if (rc.senseCloud(l15)) {
                 p15 = 1.5;
                 b15 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l15).getCurrentDirection();
-                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && currentDirection.equals(Direction.CENTER))) {
-                    p15 = rc.senseMapInfo(l15).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l15)) {
+                MapInfo mapInfo = rc.senseMapInfo(l15);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l15), currentDirection) > 0))) {
+                    p15 = mapInfo.getCooldownMultiplier(team);
                     b15 = false;
                 }
             }
@@ -15517,28 +11911,27 @@ public class Navigation {
             r15 |= r16;
             r15 |= r23;
             r15 &= !b15;
-            o24 |= b15;
-            o25 |= b15;
-            o16 |= b15;
-            o23 |= b15;
+            if (targetLocation.equals(l15)) {
+                temp1 = true;
+                temp2 = r15;
+            }
         }
-        else {
-            o24 |= b15;
-            o25 |= b15;
-            o16 |= b15;
-            o23 |= b15;
-        }
+        o24 |= b15;
+        o25 |= b15;
+        o16 |= b15;
+        o23 |= b15;
 
-        if (rc.onTheMap(l41) && rc.canSenseLocation(l41)) {
+        if (rc.onTheMap(l41)) {
             if (rc.senseCloud(l41)) {
                 p41 = 1.5;
                 b41 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l41).getCurrentDirection();
-                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && currentDirection.equals(Direction.CENTER))) {
-                    p41 = rc.senseMapInfo(l41).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l41)) {
+                MapInfo mapInfo = rc.senseMapInfo(l41);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l41), currentDirection) > 0))) {
+                    p41 = mapInfo.getCooldownMultiplier(team);
                     b41 = false;
                 }
             }
@@ -15559,26 +11952,26 @@ public class Navigation {
             r41 |= r33;
             r41 |= r32;
             r41 &= !b41;
-            o42 |= b41;
-            o33 |= b41;
-            o32 |= b41;
+            if (targetLocation.equals(l41)) {
+                temp1 = true;
+                temp2 = r41;
+            }
         }
-        else {
-            o42 |= b41;
-            o33 |= b41;
-            o32 |= b41;
-        }
+        o42 |= b41;
+        o33 |= b41;
+        o32 |= b41;
 
-        if (rc.onTheMap(l23) && rc.canSenseLocation(l23)) {
+        if (rc.onTheMap(l23)) {
             if (rc.senseCloud(l23)) {
                 p23 = 1.5;
                 b23 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l23).getCurrentDirection();
-                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && currentDirection.equals(Direction.CENTER))) {
-                    p23 = rc.senseMapInfo(l23).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l23)) {
+                MapInfo mapInfo = rc.senseMapInfo(l23);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l23), currentDirection) > 0))) {
+                    p23 = mapInfo.getCooldownMultiplier(team);
                     b23 = false;
                 }
             }
@@ -15604,28 +11997,27 @@ public class Navigation {
             r23 |= r24;
             r23 |= r15;
             r23 &= !b23;
-            o32 |= b23;
-            o33 |= b23;
-            o24 |= b23;
-            o15 |= b23;
+            if (targetLocation.equals(l23)) {
+                temp1 = true;
+                temp2 = r23;
+            }
         }
-        else {
-            o32 |= b23;
-            o33 |= b23;
-            o24 |= b23;
-            o15 |= b23;
-        }
+        o32 |= b23;
+        o33 |= b23;
+        o24 |= b23;
+        o15 |= b23;
 
-        if (rc.onTheMap(l17) && rc.canSenseLocation(l17)) {
+        if (rc.onTheMap(l17)) {
             if (rc.senseCloud(l17)) {
                 p17 = 1.5;
                 b17 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l17).getCurrentDirection();
-                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && currentDirection.equals(Direction.CENTER))) {
-                    p17 = rc.senseMapInfo(l17).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l17)) {
+                MapInfo mapInfo = rc.senseMapInfo(l17);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l17), currentDirection) > 0))) {
+                    p17 = mapInfo.getCooldownMultiplier(team);
                     b17 = false;
                 }
             }
@@ -15646,26 +12038,26 @@ public class Navigation {
             r17 |= r16;
             r17 |= r25;
             r17 &= !b17;
-            o26 |= b17;
-            o16 |= b17;
-            o25 |= b17;
+            if (targetLocation.equals(l17)) {
+                temp1 = true;
+                temp2 = r17;
+            }
         }
-        else {
-            o26 |= b17;
-            o16 |= b17;
-            o25 |= b17;
-        }
+        o26 |= b17;
+        o16 |= b17;
+        o25 |= b17;
 
-        if (rc.onTheMap(l18) && rc.canSenseLocation(l18)) {
+        if (rc.onTheMap(l18)) {
             if (rc.senseCloud(l18)) {
                 p18 = 1.5;
                 b18 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l18).getCurrentDirection();
-                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && currentDirection.equals(Direction.CENTER))) {
-                    p18 = rc.senseMapInfo(l18).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l18)) {
+                MapInfo mapInfo = rc.senseMapInfo(l18);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l18), currentDirection) > 0))) {
+                    p18 = mapInfo.getCooldownMultiplier(team);
                     b18 = false;
                 }
             }
@@ -15681,24 +12073,25 @@ public class Navigation {
             r18 |= r17;
             r18 |= r26;
             r18 &= !b18;
-            o17 |= b18;
-            o26 |= b18;
+            if (targetLocation.equals(l18)) {
+                temp1 = true;
+                temp2 = r18;
+            }
         }
-        else {
-            o17 |= b18;
-            o26 |= b18;
-        }
+        o17 |= b18;
+        o26 |= b18;
 
-        if (rc.onTheMap(l50) && rc.canSenseLocation(l50)) {
+        if (rc.onTheMap(l50)) {
             if (rc.senseCloud(l50)) {
                 p50 = 1.5;
                 b50 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l50).getCurrentDirection();
-                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && currentDirection.equals(Direction.CENTER))) {
-                    p50 = rc.senseMapInfo(l50).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l50)) {
+                MapInfo mapInfo = rc.senseMapInfo(l50);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l50), currentDirection) > 0))) {
+                    p50 = mapInfo.getCooldownMultiplier(team);
                     b50 = false;
                 }
             }
@@ -15714,24 +12107,25 @@ public class Navigation {
             r50 |= r42;
             r50 |= r41;
             r50 &= !b50;
-            o42 |= b50;
-            o41 |= b50;
+            if (targetLocation.equals(l50)) {
+                temp1 = true;
+                temp2 = r50;
+            }
         }
-        else {
-            o42 |= b50;
-            o41 |= b50;
-        }
+        o42 |= b50;
+        o41 |= b50;
 
-        if (rc.onTheMap(l14) && rc.canSenseLocation(l14)) {
+        if (rc.onTheMap(l14)) {
             if (rc.senseCloud(l14)) {
                 p14 = 1.5;
                 b14 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l14).getCurrentDirection();
-                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && currentDirection.equals(Direction.CENTER))) {
-                    p14 = rc.senseMapInfo(l14).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l14)) {
+                MapInfo mapInfo = rc.senseMapInfo(l14);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l14), currentDirection) > 0))) {
+                    p14 = mapInfo.getCooldownMultiplier(team);
                     b14 = false;
                 }
             }
@@ -15752,26 +12146,26 @@ public class Navigation {
             r14 |= r24;
             r14 |= r15;
             r14 &= !b14;
-            o23 |= b14;
-            o24 |= b14;
-            o15 |= b14;
+            if (targetLocation.equals(l14)) {
+                temp1 = true;
+                temp2 = r14;
+            }
         }
-        else {
-            o23 |= b14;
-            o24 |= b14;
-            o15 |= b14;
-        }
+        o23 |= b14;
+        o24 |= b14;
+        o15 |= b14;
 
-        if (rc.onTheMap(l8) && rc.canSenseLocation(l8)) {
+        if (rc.onTheMap(l8)) {
             if (rc.senseCloud(l8)) {
                 p8 = 1.5;
                 b8 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l8).getCurrentDirection();
-                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && currentDirection.equals(Direction.CENTER))) {
-                    p8 = rc.senseMapInfo(l8).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l8)) {
+                MapInfo mapInfo = rc.senseMapInfo(l8);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l8), currentDirection) > 0))) {
+                    p8 = mapInfo.getCooldownMultiplier(team);
                     b8 = false;
                 }
             }
@@ -15792,26 +12186,26 @@ public class Navigation {
             r8 |= r17;
             r8 |= r15;
             r8 &= !b8;
-            o16 |= b8;
-            o17 |= b8;
-            o15 |= b8;
+            if (targetLocation.equals(l8)) {
+                temp1 = true;
+                temp2 = r8;
+            }
         }
-        else {
-            o16 |= b8;
-            o17 |= b8;
-            o15 |= b8;
-        }
+        o16 |= b8;
+        o17 |= b8;
+        o15 |= b8;
 
-        if (rc.onTheMap(l31) && rc.canSenseLocation(l31)) {
+        if (rc.onTheMap(l31)) {
             if (rc.senseCloud(l31)) {
                 p31 = 1.5;
                 b31 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l31).getCurrentDirection();
-                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && currentDirection.equals(Direction.CENTER))) {
-                    p31 = rc.senseMapInfo(l31).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l31)) {
+                MapInfo mapInfo = rc.senseMapInfo(l31);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l31), currentDirection) > 0))) {
+                    p31 = mapInfo.getCooldownMultiplier(team);
                     b31 = false;
                 }
             }
@@ -15832,26 +12226,26 @@ public class Navigation {
             r31 |= r32;
             r31 |= r23;
             r31 &= !b31;
-            o41 |= b31;
-            o32 |= b31;
-            o23 |= b31;
+            if (targetLocation.equals(l31)) {
+                temp1 = true;
+                temp2 = r31;
+            }
         }
-        else {
-            o41 |= b31;
-            o32 |= b31;
-            o23 |= b31;
-        }
+        o41 |= b31;
+        o32 |= b31;
+        o23 |= b31;
 
-        if (rc.onTheMap(l7) && rc.canSenseLocation(l7)) {
+        if (rc.onTheMap(l7)) {
             if (rc.senseCloud(l7)) {
                 p7 = 1.5;
                 b7 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l7).getCurrentDirection();
-                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && currentDirection.equals(Direction.CENTER))) {
-                    p7 = rc.senseMapInfo(l7).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l7)) {
+                MapInfo mapInfo = rc.senseMapInfo(l7);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l7), currentDirection) > 0))) {
+                    p7 = mapInfo.getCooldownMultiplier(team);
                     b7 = false;
                 }
             }
@@ -15877,28 +12271,27 @@ public class Navigation {
             r7 |= r8;
             r7 |= r14;
             r7 &= !b7;
-            o15 |= b7;
-            o16 |= b7;
-            o8 |= b7;
-            o14 |= b7;
+            if (targetLocation.equals(l7)) {
+                temp1 = true;
+                temp2 = r7;
+            }
         }
-        else {
-            o15 |= b7;
-            o16 |= b7;
-            o8 |= b7;
-            o14 |= b7;
-        }
+        o15 |= b7;
+        o16 |= b7;
+        o8 |= b7;
+        o14 |= b7;
 
-        if (rc.onTheMap(l9) && rc.canSenseLocation(l9)) {
+        if (rc.onTheMap(l9)) {
             if (rc.senseCloud(l9)) {
                 p9 = 1.5;
                 b9 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l9).getCurrentDirection();
-                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && currentDirection.equals(Direction.CENTER))) {
-                    p9 = rc.senseMapInfo(l9).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l9)) {
+                MapInfo mapInfo = rc.senseMapInfo(l9);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l9), currentDirection) > 0))) {
+                    p9 = mapInfo.getCooldownMultiplier(team);
                     b9 = false;
                 }
             }
@@ -15924,28 +12317,27 @@ public class Navigation {
             r9 |= r8;
             r9 |= r16;
             r9 &= !b9;
-            o17 |= b9;
-            o18 |= b9;
-            o8 |= b9;
-            o16 |= b9;
+            if (targetLocation.equals(l9)) {
+                temp1 = true;
+                temp2 = r9;
+            }
         }
-        else {
-            o17 |= b9;
-            o18 |= b9;
-            o8 |= b9;
-            o16 |= b9;
-        }
+        o17 |= b9;
+        o18 |= b9;
+        o8 |= b9;
+        o16 |= b9;
 
-        if (rc.onTheMap(l40) && rc.canSenseLocation(l40)) {
+        if (rc.onTheMap(l40)) {
             if (rc.senseCloud(l40)) {
                 p40 = 1.5;
                 b40 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l40).getCurrentDirection();
-                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && currentDirection.equals(Direction.CENTER))) {
-                    p40 = rc.senseMapInfo(l40).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l40)) {
+                MapInfo mapInfo = rc.senseMapInfo(l40);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l40), currentDirection) > 0))) {
+                    p40 = mapInfo.getCooldownMultiplier(team);
                     b40 = false;
                 }
             }
@@ -15971,28 +12363,27 @@ public class Navigation {
             r40 |= r32;
             r40 |= r31;
             r40 &= !b40;
-            o50 |= b40;
-            o41 |= b40;
-            o32 |= b40;
-            o31 |= b40;
+            if (targetLocation.equals(l40)) {
+                temp1 = true;
+                temp2 = r40;
+            }
         }
-        else {
-            o50 |= b40;
-            o41 |= b40;
-            o32 |= b40;
-            o31 |= b40;
-        }
+        o50 |= b40;
+        o41 |= b40;
+        o32 |= b40;
+        o31 |= b40;
 
-        if (rc.onTheMap(l22) && rc.canSenseLocation(l22)) {
+        if (rc.onTheMap(l22)) {
             if (rc.senseCloud(l22)) {
                 p22 = 1.5;
                 b22 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l22).getCurrentDirection();
-                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && currentDirection.equals(Direction.CENTER))) {
-                    p22 = rc.senseMapInfo(l22).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l22)) {
+                MapInfo mapInfo = rc.senseMapInfo(l22);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l22), currentDirection) > 0))) {
+                    p22 = mapInfo.getCooldownMultiplier(team);
                     b22 = false;
                 }
             }
@@ -16018,28 +12409,27 @@ public class Navigation {
             r22 |= r23;
             r22 |= r14;
             r22 &= !b22;
-            o31 |= b22;
-            o32 |= b22;
-            o23 |= b22;
-            o14 |= b22;
+            if (targetLocation.equals(l22)) {
+                temp1 = true;
+                temp2 = r22;
+            }
         }
-        else {
-            o31 |= b22;
-            o32 |= b22;
-            o23 |= b22;
-            o14 |= b22;
-        }
+        o31 |= b22;
+        o32 |= b22;
+        o23 |= b22;
+        o14 |= b22;
 
-        if (rc.onTheMap(l6) && rc.canSenseLocation(l6)) {
+        if (rc.onTheMap(l6)) {
             if (rc.senseCloud(l6)) {
                 p6 = 1.5;
                 b6 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l6).getCurrentDirection();
-                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && currentDirection.equals(Direction.CENTER))) {
-                    p6 = rc.senseMapInfo(l6).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l6)) {
+                MapInfo mapInfo = rc.senseMapInfo(l6);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l6), currentDirection) > 0))) {
+                    p6 = mapInfo.getCooldownMultiplier(team);
                     b6 = false;
                 }
             }
@@ -16065,28 +12455,27 @@ public class Navigation {
             r6 |= r7;
             r6 |= r13;
             r6 &= !b6;
-            o14 |= b6;
-            o15 |= b6;
-            o7 |= b6;
-            o13 |= b6;
+            if (targetLocation.equals(l6)) {
+                temp1 = true;
+                temp2 = r6;
+            }
         }
-        else {
-            o14 |= b6;
-            o15 |= b6;
-            o7 |= b6;
-            o13 |= b6;
-        }
+        o14 |= b6;
+        o15 |= b6;
+        o7 |= b6;
+        o13 |= b6;
 
-        if (rc.onTheMap(l13) && rc.canSenseLocation(l13)) {
+        if (rc.onTheMap(l13)) {
             if (rc.senseCloud(l13)) {
                 p13 = 1.5;
                 b13 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l13).getCurrentDirection();
-                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && currentDirection.equals(Direction.CENTER))) {
-                    p13 = rc.senseMapInfo(l13).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l13)) {
+                MapInfo mapInfo = rc.senseMapInfo(l13);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l13), currentDirection) > 0))) {
+                    p13 = mapInfo.getCooldownMultiplier(team);
                     b13 = false;
                 }
             }
@@ -16112,28 +12501,27 @@ public class Navigation {
             r13 |= r14;
             r13 |= r6;
             r13 &= !b13;
-            o22 |= b13;
-            o23 |= b13;
-            o14 |= b13;
-            o6 |= b13;
+            if (targetLocation.equals(l13)) {
+                temp1 = true;
+                temp2 = r13;
+            }
         }
-        else {
-            o22 |= b13;
-            o23 |= b13;
-            o14 |= b13;
-            o6 |= b13;
-        }
+        o22 |= b13;
+        o23 |= b13;
+        o14 |= b13;
+        o6 |= b13;
 
-        if (rc.onTheMap(l49) && rc.canSenseLocation(l49)) {
+        if (rc.onTheMap(l49)) {
             if (rc.senseCloud(l49)) {
                 p49 = 1.5;
                 b49 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l49).getCurrentDirection();
-                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && currentDirection.equals(Direction.CENTER))) {
-                    p49 = rc.senseMapInfo(l49).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l49)) {
+                MapInfo mapInfo = rc.senseMapInfo(l49);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l49), currentDirection) > 0))) {
+                    p49 = mapInfo.getCooldownMultiplier(team);
                     b49 = false;
                 }
             }
@@ -16154,26 +12542,26 @@ public class Navigation {
             r49 |= r41;
             r49 |= r40;
             r49 &= !b49;
-            o50 |= b49;
-            o41 |= b49;
-            o40 |= b49;
+            if (targetLocation.equals(l49)) {
+                temp1 = true;
+                temp2 = r49;
+            }
         }
-        else {
-            o50 |= b49;
-            o41 |= b49;
-            o40 |= b49;
-        }
+        o50 |= b49;
+        o41 |= b49;
+        o40 |= b49;
 
-        if (rc.onTheMap(l10) && rc.canSenseLocation(l10)) {
+        if (rc.onTheMap(l10)) {
             if (rc.senseCloud(l10)) {
                 p10 = 1.5;
                 b10 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l10).getCurrentDirection();
-                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && currentDirection.equals(Direction.CENTER))) {
-                    p10 = rc.senseMapInfo(l10).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l10)) {
+                MapInfo mapInfo = rc.senseMapInfo(l10);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l10), currentDirection) > 0))) {
+                    p10 = mapInfo.getCooldownMultiplier(team);
                     b10 = false;
                 }
             }
@@ -16194,26 +12582,26 @@ public class Navigation {
             r10 |= r9;
             r10 |= r17;
             r10 &= !b10;
-            o18 |= b10;
-            o9 |= b10;
-            o17 |= b10;
+            if (targetLocation.equals(l10)) {
+                temp1 = true;
+                temp2 = r10;
+            }
         }
-        else {
-            o18 |= b10;
-            o9 |= b10;
-            o17 |= b10;
-        }
+        o18 |= b10;
+        o9 |= b10;
+        o17 |= b10;
 
-        if (rc.onTheMap(l57) && rc.canSenseLocation(l57)) {
+        if (rc.onTheMap(l57)) {
             if (rc.senseCloud(l57)) {
                 p57 = 1.5;
                 b57 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l57).getCurrentDirection();
-                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && currentDirection.equals(Direction.CENTER))) {
-                    p57 = rc.senseMapInfo(l57).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l57)) {
+                MapInfo mapInfo = rc.senseMapInfo(l57);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l57), currentDirection) > 0))) {
+                    p57 = mapInfo.getCooldownMultiplier(team);
                     b57 = false;
                 }
             }
@@ -16229,24 +12617,25 @@ public class Navigation {
             r57 |= r50;
             r57 |= r49;
             r57 &= !b57;
-            o50 |= b57;
-            o49 |= b57;
+            if (targetLocation.equals(l57)) {
+                temp1 = true;
+                temp2 = r57;
+            }
         }
-        else {
-            o50 |= b57;
-            o49 |= b57;
-        }
+        o50 |= b57;
+        o49 |= b57;
 
-        if (rc.onTheMap(l5) && rc.canSenseLocation(l5)) {
+        if (rc.onTheMap(l5)) {
             if (rc.senseCloud(l5)) {
                 p5 = 1.5;
                 b5 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l5).getCurrentDirection();
-                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && currentDirection.equals(Direction.CENTER))) {
-                    p5 = rc.senseMapInfo(l5).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l5)) {
+                MapInfo mapInfo = rc.senseMapInfo(l5);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l5), currentDirection) > 0))) {
+                    p5 = mapInfo.getCooldownMultiplier(team);
                     b5 = false;
                 }
             }
@@ -16267,26 +12656,26 @@ public class Navigation {
             r5 |= r14;
             r5 |= r6;
             r5 &= !b5;
-            o13 |= b5;
-            o14 |= b5;
-            o6 |= b5;
+            if (targetLocation.equals(l5)) {
+                temp1 = true;
+                temp2 = r5;
+            }
         }
-        else {
-            o13 |= b5;
-            o14 |= b5;
-            o6 |= b5;
-        }
+        o13 |= b5;
+        o14 |= b5;
+        o6 |= b5;
 
-        if (rc.onTheMap(l11) && rc.canSenseLocation(l11)) {
+        if (rc.onTheMap(l11)) {
             if (rc.senseCloud(l11)) {
                 p11 = 1.5;
                 b11 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l11).getCurrentDirection();
-                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && currentDirection.equals(Direction.CENTER))) {
-                    p11 = rc.senseMapInfo(l11).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l11)) {
+                MapInfo mapInfo = rc.senseMapInfo(l11);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l11), currentDirection) > 0))) {
+                    p11 = mapInfo.getCooldownMultiplier(team);
                     b11 = false;
                 }
             }
@@ -16302,24 +12691,25 @@ public class Navigation {
             r11 |= r10;
             r11 |= r18;
             r11 &= !b11;
-            o10 |= b11;
-            o18 |= b11;
+            if (targetLocation.equals(l11)) {
+                temp1 = true;
+                temp2 = r11;
+            }
         }
-        else {
-            o10 |= b11;
-            o18 |= b11;
-        }
+        o10 |= b11;
+        o18 |= b11;
 
-        if (rc.onTheMap(l30) && rc.canSenseLocation(l30)) {
+        if (rc.onTheMap(l30)) {
             if (rc.senseCloud(l30)) {
                 p30 = 1.5;
                 b30 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l30).getCurrentDirection();
-                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && currentDirection.equals(Direction.CENTER))) {
-                    p30 = rc.senseMapInfo(l30).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l30)) {
+                MapInfo mapInfo = rc.senseMapInfo(l30);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l30), currentDirection) > 0))) {
+                    p30 = mapInfo.getCooldownMultiplier(team);
                     b30 = false;
                 }
             }
@@ -16340,26 +12730,26 @@ public class Navigation {
             r30 |= r31;
             r30 |= r22;
             r30 &= !b30;
-            o40 |= b30;
-            o31 |= b30;
-            o22 |= b30;
+            if (targetLocation.equals(l30)) {
+                temp1 = true;
+                temp2 = r30;
+            }
         }
-        else {
-            o40 |= b30;
-            o31 |= b30;
-            o22 |= b30;
-        }
+        o40 |= b30;
+        o31 |= b30;
+        o22 |= b30;
 
-        if (rc.onTheMap(l2) && rc.canSenseLocation(l2)) {
+        if (rc.onTheMap(l2)) {
             if (rc.senseCloud(l2)) {
                 p2 = 1.5;
                 b2 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l2).getCurrentDirection();
-                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && currentDirection.equals(Direction.CENTER))) {
-                    p2 = rc.senseMapInfo(l2).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l2)) {
+                MapInfo mapInfo = rc.senseMapInfo(l2);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l2), currentDirection) > 0))) {
+                    p2 = mapInfo.getCooldownMultiplier(team);
                     b2 = false;
                 }
             }
@@ -16380,26 +12770,26 @@ public class Navigation {
             r2 |= r9;
             r2 |= r7;
             r2 &= !b2;
-            o8 |= b2;
-            o9 |= b2;
-            o7 |= b2;
+            if (targetLocation.equals(l2)) {
+                temp1 = true;
+                temp2 = r2;
+            }
         }
-        else {
-            o8 |= b2;
-            o9 |= b2;
-            o7 |= b2;
-        }
+        o8 |= b2;
+        o9 |= b2;
+        o7 |= b2;
 
-        if (rc.onTheMap(l1) && rc.canSenseLocation(l1)) {
+        if (rc.onTheMap(l1)) {
             if (rc.senseCloud(l1)) {
                 p1 = 1.5;
                 b1 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l1).getCurrentDirection();
-                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && currentDirection.equals(Direction.CENTER))) {
-                    p1 = rc.senseMapInfo(l1).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l1)) {
+                MapInfo mapInfo = rc.senseMapInfo(l1);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l1), currentDirection) > 0))) {
+                    p1 = mapInfo.getCooldownMultiplier(team);
                     b1 = false;
                 }
             }
@@ -16425,28 +12815,27 @@ public class Navigation {
             r1 |= r2;
             r1 |= r6;
             r1 &= !b1;
-            o7 |= b1;
-            o8 |= b1;
-            o2 |= b1;
-            o6 |= b1;
+            if (targetLocation.equals(l1)) {
+                temp1 = true;
+                temp2 = r1;
+            }
         }
-        else {
-            o7 |= b1;
-            o8 |= b1;
-            o2 |= b1;
-            o6 |= b1;
-        }
+        o7 |= b1;
+        o8 |= b1;
+        o2 |= b1;
+        o6 |= b1;
 
-        if (rc.onTheMap(l39) && rc.canSenseLocation(l39)) {
+        if (rc.onTheMap(l39)) {
             if (rc.senseCloud(l39)) {
                 p39 = 1.5;
                 b39 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l39).getCurrentDirection();
-                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && currentDirection.equals(Direction.CENTER))) {
-                    p39 = rc.senseMapInfo(l39).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l39)) {
+                MapInfo mapInfo = rc.senseMapInfo(l39);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l39), currentDirection) > 0))) {
+                    p39 = mapInfo.getCooldownMultiplier(team);
                     b39 = false;
                 }
             }
@@ -16472,28 +12861,27 @@ public class Navigation {
             r39 |= r31;
             r39 |= r30;
             r39 &= !b39;
-            o49 |= b39;
-            o40 |= b39;
-            o31 |= b39;
-            o30 |= b39;
+            if (targetLocation.equals(l39)) {
+                temp1 = true;
+                temp2 = r39;
+            }
         }
-        else {
-            o49 |= b39;
-            o40 |= b39;
-            o31 |= b39;
-            o30 |= b39;
-        }
+        o49 |= b39;
+        o40 |= b39;
+        o31 |= b39;
+        o30 |= b39;
 
-        if (rc.onTheMap(l21) && rc.canSenseLocation(l21)) {
+        if (rc.onTheMap(l21)) {
             if (rc.senseCloud(l21)) {
                 p21 = 1.5;
                 b21 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l21).getCurrentDirection();
-                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && currentDirection.equals(Direction.CENTER))) {
-                    p21 = rc.senseMapInfo(l21).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l21)) {
+                MapInfo mapInfo = rc.senseMapInfo(l21);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l21), currentDirection) > 0))) {
+                    p21 = mapInfo.getCooldownMultiplier(team);
                     b21 = false;
                 }
             }
@@ -16519,28 +12907,27 @@ public class Navigation {
             r21 |= r22;
             r21 |= r13;
             r21 &= !b21;
-            o30 |= b21;
-            o31 |= b21;
-            o22 |= b21;
-            o13 |= b21;
+            if (targetLocation.equals(l21)) {
+                temp1 = true;
+                temp2 = r21;
+            }
         }
-        else {
-            o30 |= b21;
-            o31 |= b21;
-            o22 |= b21;
-            o13 |= b21;
-        }
+        o30 |= b21;
+        o31 |= b21;
+        o22 |= b21;
+        o13 |= b21;
 
-        if (rc.onTheMap(l3) && rc.canSenseLocation(l3)) {
+        if (rc.onTheMap(l3)) {
             if (rc.senseCloud(l3)) {
                 p3 = 1.5;
                 b3 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l3).getCurrentDirection();
-                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && currentDirection.equals(Direction.CENTER))) {
-                    p3 = rc.senseMapInfo(l3).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l3)) {
+                MapInfo mapInfo = rc.senseMapInfo(l3);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l3), currentDirection) > 0))) {
+                    p3 = mapInfo.getCooldownMultiplier(team);
                     b3 = false;
                 }
             }
@@ -16566,28 +12953,27 @@ public class Navigation {
             r3 |= r2;
             r3 |= r8;
             r3 &= !b3;
-            o9 |= b3;
-            o10 |= b3;
-            o2 |= b3;
-            o8 |= b3;
+            if (targetLocation.equals(l3)) {
+                temp1 = true;
+                temp2 = r3;
+            }
         }
-        else {
-            o9 |= b3;
-            o10 |= b3;
-            o2 |= b3;
-            o8 |= b3;
-        }
+        o9 |= b3;
+        o10 |= b3;
+        o2 |= b3;
+        o8 |= b3;
 
-        if (rc.onTheMap(l4) && rc.canSenseLocation(l4)) {
+        if (rc.onTheMap(l4)) {
             if (rc.senseCloud(l4)) {
                 p4 = 1.5;
                 b4 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l4).getCurrentDirection();
-                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && currentDirection.equals(Direction.CENTER))) {
-                    p4 = rc.senseMapInfo(l4).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l4)) {
+                MapInfo mapInfo = rc.senseMapInfo(l4);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l4), currentDirection) > 0))) {
+                    p4 = mapInfo.getCooldownMultiplier(team);
                     b4 = false;
                 }
             }
@@ -16613,28 +12999,27 @@ public class Navigation {
             r4 |= r3;
             r4 |= r9;
             r4 &= !b4;
-            o10 |= b4;
-            o11 |= b4;
-            o3 |= b4;
-            o9 |= b4;
+            if (targetLocation.equals(l4)) {
+                temp1 = true;
+                temp2 = r4;
+            }
         }
-        else {
-            o10 |= b4;
-            o11 |= b4;
-            o3 |= b4;
-            o9 |= b4;
-        }
+        o10 |= b4;
+        o11 |= b4;
+        o3 |= b4;
+        o9 |= b4;
 
-        if (rc.onTheMap(l48) && rc.canSenseLocation(l48)) {
+        if (rc.onTheMap(l48)) {
             if (rc.senseCloud(l48)) {
                 p48 = 1.5;
                 b48 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l48).getCurrentDirection();
-                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && currentDirection.equals(Direction.CENTER))) {
-                    p48 = rc.senseMapInfo(l48).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l48)) {
+                MapInfo mapInfo = rc.senseMapInfo(l48);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l48), currentDirection) > 0))) {
+                    p48 = mapInfo.getCooldownMultiplier(team);
                     b48 = false;
                 }
             }
@@ -16660,28 +13045,27 @@ public class Navigation {
             r48 |= r40;
             r48 |= r39;
             r48 &= !b48;
-            o57 |= b48;
-            o49 |= b48;
-            o40 |= b48;
-            o39 |= b48;
+            if (targetLocation.equals(l48)) {
+                temp1 = true;
+                temp2 = r48;
+            }
         }
-        else {
-            o57 |= b48;
-            o49 |= b48;
-            o40 |= b48;
-            o39 |= b48;
-        }
+        o57 |= b48;
+        o49 |= b48;
+        o40 |= b48;
+        o39 |= b48;
 
-        if (rc.onTheMap(l0) && rc.canSenseLocation(l0)) {
+        if (rc.onTheMap(l0)) {
             if (rc.senseCloud(l0)) {
                 p0 = 1.5;
                 b0 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l0).getCurrentDirection();
-                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && currentDirection.equals(Direction.CENTER))) {
-                    p0 = rc.senseMapInfo(l0).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l0)) {
+                MapInfo mapInfo = rc.senseMapInfo(l0);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l0), currentDirection) > 0))) {
+                    p0 = mapInfo.getCooldownMultiplier(team);
                     b0 = false;
                 }
             }
@@ -16707,28 +13091,27 @@ public class Navigation {
             r0 |= r1;
             r0 |= r5;
             r0 &= !b0;
-            o6 |= b0;
-            o7 |= b0;
-            o1 |= b0;
-            o5 |= b0;
+            if (targetLocation.equals(l0)) {
+                temp1 = true;
+                temp2 = r0;
+            }
         }
-        else {
-            o6 |= b0;
-            o7 |= b0;
-            o1 |= b0;
-            o5 |= b0;
-        }
+        o6 |= b0;
+        o7 |= b0;
+        o1 |= b0;
+        o5 |= b0;
 
-        if (rc.onTheMap(l12) && rc.canSenseLocation(l12)) {
+        if (rc.onTheMap(l12)) {
             if (rc.senseCloud(l12)) {
                 p12 = 1.5;
                 b12 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l12).getCurrentDirection();
-                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && currentDirection.equals(Direction.CENTER))) {
-                    p12 = rc.senseMapInfo(l12).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l12)) {
+                MapInfo mapInfo = rc.senseMapInfo(l12);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l12), currentDirection) > 0))) {
+                    p12 = mapInfo.getCooldownMultiplier(team);
                     b12 = false;
                 }
             }
@@ -16754,19 +13137,18 @@ public class Navigation {
             r12 |= r13;
             r12 |= r5;
             r12 &= !b12;
-            o21 |= b12;
-            o22 |= b12;
-            o13 |= b12;
-            o5 |= b12;
+            if (targetLocation.equals(l12)) {
+                temp1 = true;
+                temp2 = r12;
+            }
         }
-        else {
-            o21 |= b12;
-            o22 |= b12;
-            o13 |= b12;
-            o5 |= b12;
-        }
+        o21 |= b12;
+        o22 |= b12;
+        o13 |= b12;
+        o5 |= b12;
 
-        int dx = targetLocation.x - l34.x;
+        if (temp1 && temp2) {
+            int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -16904,10 +13286,6 @@ public class Navigation {
                         if (v33 < 10000) {
                             return d33;
                         }
-                    case 0:
-                        if (v34 < 10000) {
-                            return d34;
-                        }
                 } break;
 
             case 1:
@@ -16959,6 +13337,7 @@ public class Navigation {
                 } break;
 
         }
+        }
     
         o0 = r0;
         o1 = r1;
@@ -16980,7 +13359,6 @@ public class Navigation {
             if (dist0 < localBest) {
                 localBest = dist0;
                 ans = d0;
-                best = l0;
             }
         }
 
@@ -16989,7 +13367,6 @@ public class Navigation {
             if (dist1 < localBest) {
                 localBest = dist1;
                 ans = d1;
-                best = l1;
             }
         }
 
@@ -16998,7 +13375,6 @@ public class Navigation {
             if (dist2 < localBest) {
                 localBest = dist2;
                 ans = d2;
-                best = l2;
             }
         }
 
@@ -17007,7 +13383,6 @@ public class Navigation {
             if (dist3 < localBest) {
                 localBest = dist3;
                 ans = d3;
-                best = l3;
             }
         }
 
@@ -17016,7 +13391,6 @@ public class Navigation {
             if (dist4 < localBest) {
                 localBest = dist4;
                 ans = d4;
-                best = l4;
             }
         }
 
@@ -17025,7 +13399,6 @@ public class Navigation {
             if (dist5 < localBest) {
                 localBest = dist5;
                 ans = d5;
-                best = l5;
             }
         }
 
@@ -17034,7 +13407,6 @@ public class Navigation {
             if (dist11 < localBest) {
                 localBest = dist11;
                 ans = d11;
-                best = l11;
             }
         }
 
@@ -17043,7 +13415,6 @@ public class Navigation {
             if (dist12 < localBest) {
                 localBest = dist12;
                 ans = d12;
-                best = l12;
             }
         }
 
@@ -17052,7 +13423,6 @@ public class Navigation {
             if (dist21 < localBest) {
                 localBest = dist21;
                 ans = d21;
-                best = l21;
             }
         }
 
@@ -17061,7 +13431,6 @@ public class Navigation {
             if (dist30 < localBest) {
                 localBest = dist30;
                 ans = d30;
-                best = l30;
             }
         }
 
@@ -17070,7 +13439,6 @@ public class Navigation {
             if (dist39 < localBest) {
                 localBest = dist39;
                 ans = d39;
-                best = l39;
             }
         }
 
@@ -17079,7 +13447,6 @@ public class Navigation {
             if (dist48 < localBest) {
                 localBest = dist48;
                 ans = d48;
-                best = l48;
             }
         }
 
@@ -17088,716 +13455,23 @@ public class Navigation {
             if (dist57 < localBest) {
                 localBest = dist57;
                 ans = d57;
-                best = l57;
             }
         }
 
-        draws5();
-        rc.setIndicatorDot(best, 0, 0, 255);
         if (localBest < globalBest) {
             globalBest = localBest;
+            bug.reset();
             return ans;
         }
-        return getBestDirectionWallFollow5(ans);
-    }
 
-    private Direction getBestDirectionWallFollow5(Direction prev) throws GameActionException {
-        Direction ans = Direction.CENTER;
-        int minDistance = closestWallLocations.isEmpty() ? 1000000 : currentLocation.distanceSquaredTo(closestWallLocations.get(0));
-    
-        if (b0) {
-            int distance = currentLocation.distanceSquaredTo(l0);
-            if (distance == minDistance) {
-                closestWallLocations.add(l0);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l0);
-                minDistance = distance;
-            }
-        }
-
-        if (b1) {
-            int distance = currentLocation.distanceSquaredTo(l1);
-            if (distance == minDistance) {
-                closestWallLocations.add(l1);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l1);
-                minDistance = distance;
-            }
-        }
-
-        if (b2) {
-            int distance = currentLocation.distanceSquaredTo(l2);
-            if (distance == minDistance) {
-                closestWallLocations.add(l2);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l2);
-                minDistance = distance;
-            }
-        }
-
-        if (b3) {
-            int distance = currentLocation.distanceSquaredTo(l3);
-            if (distance == minDistance) {
-                closestWallLocations.add(l3);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l3);
-                minDistance = distance;
-            }
-        }
-
-        if (b4) {
-            int distance = currentLocation.distanceSquaredTo(l4);
-            if (distance == minDistance) {
-                closestWallLocations.add(l4);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l4);
-                minDistance = distance;
-            }
-        }
-
-        if (b5) {
-            int distance = currentLocation.distanceSquaredTo(l5);
-            if (distance == minDistance) {
-                closestWallLocations.add(l5);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l5);
-                minDistance = distance;
-            }
-        }
-
-        if (b6) {
-            int distance = currentLocation.distanceSquaredTo(l6);
-            if (distance == minDistance) {
-                closestWallLocations.add(l6);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l6);
-                minDistance = distance;
-            }
-        }
-
-        if (b7) {
-            int distance = currentLocation.distanceSquaredTo(l7);
-            if (distance == minDistance) {
-                closestWallLocations.add(l7);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l7);
-                minDistance = distance;
-            }
-        }
-
-        if (b8) {
-            int distance = currentLocation.distanceSquaredTo(l8);
-            if (distance == minDistance) {
-                closestWallLocations.add(l8);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l8);
-                minDistance = distance;
-            }
-        }
-
-        if (b9) {
-            int distance = currentLocation.distanceSquaredTo(l9);
-            if (distance == minDistance) {
-                closestWallLocations.add(l9);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l9);
-                minDistance = distance;
-            }
-        }
-
-        if (b10) {
-            int distance = currentLocation.distanceSquaredTo(l10);
-            if (distance == minDistance) {
-                closestWallLocations.add(l10);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l10);
-                minDistance = distance;
-            }
-        }
-
-        if (b11) {
-            int distance = currentLocation.distanceSquaredTo(l11);
-            if (distance == minDistance) {
-                closestWallLocations.add(l11);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l11);
-                minDistance = distance;
-            }
-        }
-
-        if (b12) {
-            int distance = currentLocation.distanceSquaredTo(l12);
-            if (distance == minDistance) {
-                closestWallLocations.add(l12);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l12);
-                minDistance = distance;
-            }
-        }
-
-        if (b13) {
-            int distance = currentLocation.distanceSquaredTo(l13);
-            if (distance == minDistance) {
-                closestWallLocations.add(l13);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l13);
-                minDistance = distance;
-            }
-        }
-
-        if (b14) {
-            int distance = currentLocation.distanceSquaredTo(l14);
-            if (distance == minDistance) {
-                closestWallLocations.add(l14);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l14);
-                minDistance = distance;
-            }
-        }
-
-        if (b15) {
-            int distance = currentLocation.distanceSquaredTo(l15);
-            if (distance == minDistance) {
-                closestWallLocations.add(l15);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l15);
-                minDistance = distance;
-            }
-        }
-
-        if (b16) {
-            int distance = currentLocation.distanceSquaredTo(l16);
-            if (distance == minDistance) {
-                closestWallLocations.add(l16);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l16);
-                minDistance = distance;
-            }
-        }
-
-        if (b17) {
-            int distance = currentLocation.distanceSquaredTo(l17);
-            if (distance == minDistance) {
-                closestWallLocations.add(l17);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l17);
-                minDistance = distance;
-            }
-        }
-
-        if (b18) {
-            int distance = currentLocation.distanceSquaredTo(l18);
-            if (distance == minDistance) {
-                closestWallLocations.add(l18);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l18);
-                minDistance = distance;
-            }
-        }
-
-        if (b21) {
-            int distance = currentLocation.distanceSquaredTo(l21);
-            if (distance == minDistance) {
-                closestWallLocations.add(l21);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l21);
-                minDistance = distance;
-            }
-        }
-
-        if (b22) {
-            int distance = currentLocation.distanceSquaredTo(l22);
-            if (distance == minDistance) {
-                closestWallLocations.add(l22);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l22);
-                minDistance = distance;
-            }
-        }
-
-        if (b23) {
-            int distance = currentLocation.distanceSquaredTo(l23);
-            if (distance == minDistance) {
-                closestWallLocations.add(l23);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l23);
-                minDistance = distance;
-            }
-        }
-
-        if (b24) {
-            int distance = currentLocation.distanceSquaredTo(l24);
-            if (distance == minDistance) {
-                closestWallLocations.add(l24);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l24);
-                minDistance = distance;
-            }
-        }
-
-        if (b25) {
-            int distance = currentLocation.distanceSquaredTo(l25);
-            if (distance == minDistance) {
-                closestWallLocations.add(l25);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l25);
-                minDistance = distance;
-            }
-        }
-
-        if (b26) {
-            int distance = currentLocation.distanceSquaredTo(l26);
-            if (distance == minDistance) {
-                closestWallLocations.add(l26);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l26);
-                minDistance = distance;
-            }
-        }
-
-        if (b30) {
-            int distance = currentLocation.distanceSquaredTo(l30);
-            if (distance == minDistance) {
-                closestWallLocations.add(l30);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l30);
-                minDistance = distance;
-            }
-        }
-
-        if (b31) {
-            int distance = currentLocation.distanceSquaredTo(l31);
-            if (distance == minDistance) {
-                closestWallLocations.add(l31);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l31);
-                minDistance = distance;
-            }
-        }
-
-        if (b32) {
-            int distance = currentLocation.distanceSquaredTo(l32);
-            if (distance == minDistance) {
-                closestWallLocations.add(l32);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l32);
-                minDistance = distance;
-            }
-        }
-
-        if (b33) {
-            int distance = currentLocation.distanceSquaredTo(l33);
-            if (distance == minDistance) {
-                closestWallLocations.add(l33);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l33);
-                minDistance = distance;
-            }
-        }
-
-        if (b39) {
-            int distance = currentLocation.distanceSquaredTo(l39);
-            if (distance == minDistance) {
-                closestWallLocations.add(l39);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l39);
-                minDistance = distance;
-            }
-        }
-
-        if (b40) {
-            int distance = currentLocation.distanceSquaredTo(l40);
-            if (distance == minDistance) {
-                closestWallLocations.add(l40);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l40);
-                minDistance = distance;
-            }
-        }
-
-        if (b41) {
-            int distance = currentLocation.distanceSquaredTo(l41);
-            if (distance == minDistance) {
-                closestWallLocations.add(l41);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l41);
-                minDistance = distance;
-            }
-        }
-
-        if (b42) {
-            int distance = currentLocation.distanceSquaredTo(l42);
-            if (distance == minDistance) {
-                closestWallLocations.add(l42);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l42);
-                minDistance = distance;
-            }
-        }
-
-        if (b48) {
-            int distance = currentLocation.distanceSquaredTo(l48);
-            if (distance == minDistance) {
-                closestWallLocations.add(l48);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l48);
-                minDistance = distance;
-            }
-        }
-
-        if (b49) {
-            int distance = currentLocation.distanceSquaredTo(l49);
-            if (distance == minDistance) {
-                closestWallLocations.add(l49);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l49);
-                minDistance = distance;
-            }
-        }
-
-        if (b50) {
-            int distance = currentLocation.distanceSquaredTo(l50);
-            if (distance == minDistance) {
-                closestWallLocations.add(l50);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l50);
-                minDistance = distance;
-            }
-        }
-
-        if (b57) {
-            int distance = currentLocation.distanceSquaredTo(l57);
-            if (distance == minDistance) {
-                closestWallLocations.add(l57);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l57);
-                minDistance = distance;
-            }
-        }
-
-        if (minDistance > 2) { return prev; }
-        int maxDot = -999999;
-        minDistance = 1000000;
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            Direction vertical = currentLocation.directionTo(closestWallLocation);
-
-            Direction tangent1 = vertical.rotateLeft().rotateLeft();
-            Direction tangent2 = vertical.rotateRight().rotateRight();
-
-            int dx = lastDirection.getDeltaX();
-            int dy = lastDirection.getDeltaY();
-
-            int dot1 = tangent1.getDeltaX() * dx + tangent1.getDeltaY() * dy;
-            int dot2 = tangent2.getDeltaX() * dx + tangent2.getDeltaY() * dy;
-
-            int distance1 = currentLocation.add(tangent1).distanceSquaredTo(targetLocation);
-            int distance2 = currentLocation.add(tangent2).distanceSquaredTo(targetLocation);
-
-            if (!rc.canMove(tangent1)) {
-                dot1 = -1000000;
-            }
-
-            if (!rc.canMove(tangent2)) {
-                dot2 = -1000000;
-            }
-
-            if (dot1 > maxDot) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 > maxDot) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-
-            if (dot1 == maxDot && distance1 < minDistance) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 == maxDot && distance2 < minDistance) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-        }
-        draws5();
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            rc.setIndicatorDot(closestWallLocation, 255, 0, 0);
-        }
-        return ans;
-    }
-
-    private void draws5() throws GameActionException {
-    
-        rc.setIndicatorDot(l0, 255, 0, 255);
-        if (b0) {
-            rc.setIndicatorDot(l0, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l1, 255, 0, 255);
-        if (b1) {
-            rc.setIndicatorDot(l1, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l2, 255, 0, 255);
-        if (b2) {
-            rc.setIndicatorDot(l2, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l3, 255, 0, 255);
-        if (b3) {
-            rc.setIndicatorDot(l3, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l4, 255, 0, 255);
-        if (b4) {
-            rc.setIndicatorDot(l4, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l5, 255, 0, 255);
-        if (b5) {
-            rc.setIndicatorDot(l5, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l6, 255, 0, 255);
-        if (b6) {
-            rc.setIndicatorDot(l6, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l7, 255, 0, 255);
-        if (b7) {
-            rc.setIndicatorDot(l7, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l8, 255, 0, 255);
-        if (b8) {
-            rc.setIndicatorDot(l8, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l9, 255, 0, 255);
-        if (b9) {
-            rc.setIndicatorDot(l9, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l10, 255, 0, 255);
-        if (b10) {
-            rc.setIndicatorDot(l10, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l11, 255, 0, 255);
-        if (b11) {
-            rc.setIndicatorDot(l11, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l12, 255, 0, 255);
-        if (b12) {
-            rc.setIndicatorDot(l12, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l13, 255, 0, 255);
-        if (b13) {
-            rc.setIndicatorDot(l13, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l14, 255, 0, 255);
-        if (b14) {
-            rc.setIndicatorDot(l14, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l15, 255, 0, 255);
-        if (b15) {
-            rc.setIndicatorDot(l15, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l16, 255, 0, 255);
-        if (b16) {
-            rc.setIndicatorDot(l16, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l17, 255, 0, 255);
-        if (b17) {
-            rc.setIndicatorDot(l17, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l18, 255, 0, 255);
-        if (b18) {
-            rc.setIndicatorDot(l18, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l21, 255, 0, 255);
-        if (b21) {
-            rc.setIndicatorDot(l21, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l22, 255, 0, 255);
-        if (b22) {
-            rc.setIndicatorDot(l22, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l23, 255, 0, 255);
-        if (b23) {
-            rc.setIndicatorDot(l23, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l24, 255, 0, 255);
-        if (b24) {
-            rc.setIndicatorDot(l24, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l25, 255, 0, 255);
-        if (b25) {
-            rc.setIndicatorDot(l25, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l26, 255, 0, 255);
-        if (b26) {
-            rc.setIndicatorDot(l26, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l30, 255, 0, 255);
-        if (b30) {
-            rc.setIndicatorDot(l30, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l31, 255, 0, 255);
-        if (b31) {
-            rc.setIndicatorDot(l31, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l32, 255, 0, 255);
-        if (b32) {
-            rc.setIndicatorDot(l32, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l33, 255, 0, 255);
-        if (b33) {
-            rc.setIndicatorDot(l33, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l39, 255, 0, 255);
-        if (b39) {
-            rc.setIndicatorDot(l39, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l40, 255, 0, 255);
-        if (b40) {
-            rc.setIndicatorDot(l40, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l41, 255, 0, 255);
-        if (b41) {
-            rc.setIndicatorDot(l41, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l42, 255, 0, 255);
-        if (b42) {
-            rc.setIndicatorDot(l42, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l48, 255, 0, 255);
-        if (b48) {
-            rc.setIndicatorDot(l48, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l49, 255, 0, 255);
-        if (b49) {
-            rc.setIndicatorDot(l49, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l50, 255, 0, 255);
-        if (b50) {
-            rc.setIndicatorDot(l50, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l57, 255, 0, 255);
-        if (b57) {
-            rc.setIndicatorDot(l57, 255, 255, 255);
-        }
-
+        bug.move(targetLocation);
+        return null;
     }
 
     private Direction getBestDirection6() throws GameActionException {
-        MapLocation best = currentLocation;
         double localBest = 1000000.0;
+        boolean temp1 = false;
+        boolean temp2 = false;
         l34 = currentLocation;
         v34 = 0;
         d34 = Direction.CENTER;
@@ -18069,16 +13743,17 @@ public class Navigation {
         r0 = false;
         o0 = false;
     
-        if (rc.onTheMap(l33) && rc.canSenseLocation(l33)) {
+        if (rc.onTheMap(l33)) {
             if (rc.senseCloud(l33)) {
                 p33 = 1.5;
                 b33 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l33).getCurrentDirection();
-                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && currentDirection.equals(Direction.CENTER))) {
-                    p33 = rc.senseMapInfo(l33).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l33)) {
+                MapInfo mapInfo = rc.senseMapInfo(l33);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l33), currentDirection) > 0))) {
+                    p33 = mapInfo.getCooldownMultiplier(team);
                     b33 = false;
                 }
             }
@@ -18094,22 +13769,24 @@ public class Navigation {
             r33 |= r34;
             r33 |= r25;
             r33 &= !b33;
-            o25 |= b33;
+            if (targetLocation.equals(l33)) {
+                temp1 = true;
+                temp2 = r33;
+            }
         }
-        else {
-            o25 |= b33;
-        }
+        o25 |= b33;
 
-        if (rc.onTheMap(l25) && rc.canSenseLocation(l25)) {
+        if (rc.onTheMap(l25)) {
             if (rc.senseCloud(l25)) {
                 p25 = 1.5;
                 b25 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l25).getCurrentDirection();
-                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && currentDirection.equals(Direction.CENTER))) {
-                    p25 = rc.senseMapInfo(l25).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l25)) {
+                MapInfo mapInfo = rc.senseMapInfo(l25);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l25), currentDirection) > 0))) {
+                    p25 = mapInfo.getCooldownMultiplier(team);
                     b25 = false;
                 }
             }
@@ -18130,24 +13807,25 @@ public class Navigation {
             r25 |= r35;
             r25 |= r33;
             r25 &= !b25;
-            o35 |= b25;
-            o33 |= b25;
+            if (targetLocation.equals(l25)) {
+                temp1 = true;
+                temp2 = r25;
+            }
         }
-        else {
-            o35 |= b25;
-            o33 |= b25;
-        }
+        o35 |= b25;
+        o33 |= b25;
 
-        if (rc.onTheMap(l35) && rc.canSenseLocation(l35)) {
+        if (rc.onTheMap(l35)) {
             if (rc.senseCloud(l35)) {
                 p35 = 1.5;
                 b35 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l35).getCurrentDirection();
-                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && currentDirection.equals(Direction.CENTER))) {
-                    p35 = rc.senseMapInfo(l35).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l35)) {
+                MapInfo mapInfo = rc.senseMapInfo(l35);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l35), currentDirection) > 0))) {
+                    p35 = mapInfo.getCooldownMultiplier(team);
                     b35 = false;
                 }
             }
@@ -18163,22 +13841,24 @@ public class Navigation {
             r35 |= r25;
             r35 |= r34;
             r35 &= !b35;
-            o25 |= b35;
+            if (targetLocation.equals(l35)) {
+                temp1 = true;
+                temp2 = r35;
+            }
         }
-        else {
-            o25 |= b35;
-        }
+        o25 |= b35;
 
-        if (rc.onTheMap(l24) && rc.canSenseLocation(l24)) {
+        if (rc.onTheMap(l24)) {
             if (rc.senseCloud(l24)) {
                 p24 = 1.5;
                 b24 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l24).getCurrentDirection();
-                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && currentDirection.equals(Direction.CENTER))) {
-                    p24 = rc.senseMapInfo(l24).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l24)) {
+                MapInfo mapInfo = rc.senseMapInfo(l24);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l24), currentDirection) > 0))) {
+                    p24 = mapInfo.getCooldownMultiplier(team);
                     b24 = false;
                 }
             }
@@ -18199,24 +13879,25 @@ public class Navigation {
             r24 |= r34;
             r24 |= r25;
             r24 &= !b24;
-            o33 |= b24;
-            o25 |= b24;
+            if (targetLocation.equals(l24)) {
+                temp1 = true;
+                temp2 = r24;
+            }
         }
-        else {
-            o33 |= b24;
-            o25 |= b24;
-        }
+        o33 |= b24;
+        o25 |= b24;
 
-        if (rc.onTheMap(l26) && rc.canSenseLocation(l26)) {
+        if (rc.onTheMap(l26)) {
             if (rc.senseCloud(l26)) {
                 p26 = 1.5;
                 b26 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l26).getCurrentDirection();
-                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && currentDirection.equals(Direction.CENTER))) {
-                    p26 = rc.senseMapInfo(l26).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l26)) {
+                MapInfo mapInfo = rc.senseMapInfo(l26);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l26), currentDirection) > 0))) {
+                    p26 = mapInfo.getCooldownMultiplier(team);
                     b26 = false;
                 }
             }
@@ -18237,24 +13918,25 @@ public class Navigation {
             r26 |= r25;
             r26 |= r34;
             r26 &= !b26;
-            o35 |= b26;
-            o25 |= b26;
+            if (targetLocation.equals(l26)) {
+                temp1 = true;
+                temp2 = r26;
+            }
         }
-        else {
-            o35 |= b26;
-            o25 |= b26;
-        }
+        o35 |= b26;
+        o25 |= b26;
 
-        if (rc.onTheMap(l36) && rc.canSenseLocation(l36)) {
+        if (rc.onTheMap(l36)) {
             if (rc.senseCloud(l36)) {
                 p36 = 1.5;
                 b36 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l36).getCurrentDirection();
-                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && currentDirection.equals(Direction.CENTER))) {
-                    p36 = rc.senseMapInfo(l36).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l36)) {
+                MapInfo mapInfo = rc.senseMapInfo(l36);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l36), currentDirection) > 0))) {
+                    p36 = mapInfo.getCooldownMultiplier(team);
                     b36 = false;
                 }
             }
@@ -18270,24 +13952,25 @@ public class Navigation {
             r36 |= r26;
             r36 |= r35;
             r36 &= !b36;
-            o26 |= b36;
-            o35 |= b36;
+            if (targetLocation.equals(l36)) {
+                temp1 = true;
+                temp2 = r36;
+            }
         }
-        else {
-            o26 |= b36;
-            o35 |= b36;
-        }
+        o26 |= b36;
+        o35 |= b36;
 
-        if (rc.onTheMap(l16) && rc.canSenseLocation(l16)) {
+        if (rc.onTheMap(l16)) {
             if (rc.senseCloud(l16)) {
                 p16 = 1.5;
                 b16 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l16).getCurrentDirection();
-                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && currentDirection.equals(Direction.CENTER))) {
-                    p16 = rc.senseMapInfo(l16).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l16)) {
+                MapInfo mapInfo = rc.senseMapInfo(l16);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l16), currentDirection) > 0))) {
+                    p16 = mapInfo.getCooldownMultiplier(team);
                     b16 = false;
                 }
             }
@@ -18308,26 +13991,26 @@ public class Navigation {
             r16 |= r26;
             r16 |= r24;
             r16 &= !b16;
-            o25 |= b16;
-            o26 |= b16;
-            o24 |= b16;
+            if (targetLocation.equals(l16)) {
+                temp1 = true;
+                temp2 = r16;
+            }
         }
-        else {
-            o25 |= b16;
-            o26 |= b16;
-            o24 |= b16;
-        }
+        o25 |= b16;
+        o26 |= b16;
+        o24 |= b16;
 
-        if (rc.onTheMap(l32) && rc.canSenseLocation(l32)) {
+        if (rc.onTheMap(l32)) {
             if (rc.senseCloud(l32)) {
                 p32 = 1.5;
                 b32 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l32).getCurrentDirection();
-                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && currentDirection.equals(Direction.CENTER))) {
-                    p32 = rc.senseMapInfo(l32).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l32)) {
+                MapInfo mapInfo = rc.senseMapInfo(l32);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l32), currentDirection) > 0))) {
+                    p32 = mapInfo.getCooldownMultiplier(team);
                     b32 = false;
                 }
             }
@@ -18343,24 +14026,25 @@ public class Navigation {
             r32 |= r33;
             r32 |= r24;
             r32 &= !b32;
-            o33 |= b32;
-            o24 |= b32;
+            if (targetLocation.equals(l32)) {
+                temp1 = true;
+                temp2 = r32;
+            }
         }
-        else {
-            o33 |= b32;
-            o24 |= b32;
-        }
+        o33 |= b32;
+        o24 |= b32;
 
-        if (rc.onTheMap(l27) && rc.canSenseLocation(l27)) {
+        if (rc.onTheMap(l27)) {
             if (rc.senseCloud(l27)) {
                 p27 = 1.5;
                 b27 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l27).getCurrentDirection();
-                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && currentDirection.equals(Direction.CENTER))) {
-                    p27 = rc.senseMapInfo(l27).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l27)) {
+                MapInfo mapInfo = rc.senseMapInfo(l27);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l27), currentDirection) > 0))) {
+                    p27 = mapInfo.getCooldownMultiplier(team);
                     b27 = false;
                 }
             }
@@ -18386,28 +14070,27 @@ public class Navigation {
             r27 |= r26;
             r27 |= r35;
             r27 &= !b27;
-            o36 |= b27;
-            o17 |= b27;
-            o26 |= b27;
-            o35 |= b27;
+            if (targetLocation.equals(l27)) {
+                temp1 = true;
+                temp2 = r27;
+            }
         }
-        else {
-            o36 |= b27;
-            o17 |= b27;
-            o26 |= b27;
-            o35 |= b27;
-        }
+        o36 |= b27;
+        o17 |= b27;
+        o26 |= b27;
+        o35 |= b27;
 
-        if (rc.onTheMap(l15) && rc.canSenseLocation(l15)) {
+        if (rc.onTheMap(l15)) {
             if (rc.senseCloud(l15)) {
                 p15 = 1.5;
                 b15 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l15).getCurrentDirection();
-                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && currentDirection.equals(Direction.CENTER))) {
-                    p15 = rc.senseMapInfo(l15).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l15)) {
+                MapInfo mapInfo = rc.senseMapInfo(l15);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l15), currentDirection) > 0))) {
+                    p15 = mapInfo.getCooldownMultiplier(team);
                     b15 = false;
                 }
             }
@@ -18433,28 +14116,27 @@ public class Navigation {
             r15 |= r16;
             r15 |= r23;
             r15 &= !b15;
-            o24 |= b15;
-            o25 |= b15;
-            o16 |= b15;
-            o23 |= b15;
+            if (targetLocation.equals(l15)) {
+                temp1 = true;
+                temp2 = r15;
+            }
         }
-        else {
-            o24 |= b15;
-            o25 |= b15;
-            o16 |= b15;
-            o23 |= b15;
-        }
+        o24 |= b15;
+        o25 |= b15;
+        o16 |= b15;
+        o23 |= b15;
 
-        if (rc.onTheMap(l23) && rc.canSenseLocation(l23)) {
+        if (rc.onTheMap(l23)) {
             if (rc.senseCloud(l23)) {
                 p23 = 1.5;
                 b23 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l23).getCurrentDirection();
-                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && currentDirection.equals(Direction.CENTER))) {
-                    p23 = rc.senseMapInfo(l23).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l23)) {
+                MapInfo mapInfo = rc.senseMapInfo(l23);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l23), currentDirection) > 0))) {
+                    p23 = mapInfo.getCooldownMultiplier(team);
                     b23 = false;
                 }
             }
@@ -18480,28 +14162,27 @@ public class Navigation {
             r23 |= r24;
             r23 |= r15;
             r23 &= !b23;
-            o32 |= b23;
-            o33 |= b23;
-            o24 |= b23;
-            o15 |= b23;
+            if (targetLocation.equals(l23)) {
+                temp1 = true;
+                temp2 = r23;
+            }
         }
-        else {
-            o32 |= b23;
-            o33 |= b23;
-            o24 |= b23;
-            o15 |= b23;
-        }
+        o32 |= b23;
+        o33 |= b23;
+        o24 |= b23;
+        o15 |= b23;
 
-        if (rc.onTheMap(l17) && rc.canSenseLocation(l17)) {
+        if (rc.onTheMap(l17)) {
             if (rc.senseCloud(l17)) {
                 p17 = 1.5;
                 b17 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l17).getCurrentDirection();
-                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && currentDirection.equals(Direction.CENTER))) {
-                    p17 = rc.senseMapInfo(l17).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l17)) {
+                MapInfo mapInfo = rc.senseMapInfo(l17);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l17), currentDirection) > 0))) {
+                    p17 = mapInfo.getCooldownMultiplier(team);
                     b17 = false;
                 }
             }
@@ -18527,28 +14208,27 @@ public class Navigation {
             r17 |= r16;
             r17 |= r25;
             r17 &= !b17;
-            o26 |= b17;
-            o27 |= b17;
-            o16 |= b17;
-            o25 |= b17;
+            if (targetLocation.equals(l17)) {
+                temp1 = true;
+                temp2 = r17;
+            }
         }
-        else {
-            o26 |= b17;
-            o27 |= b17;
-            o16 |= b17;
-            o25 |= b17;
-        }
+        o26 |= b17;
+        o27 |= b17;
+        o16 |= b17;
+        o25 |= b17;
 
-        if (rc.onTheMap(l14) && rc.canSenseLocation(l14)) {
+        if (rc.onTheMap(l14)) {
             if (rc.senseCloud(l14)) {
                 p14 = 1.5;
                 b14 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l14).getCurrentDirection();
-                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && currentDirection.equals(Direction.CENTER))) {
-                    p14 = rc.senseMapInfo(l14).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l14)) {
+                MapInfo mapInfo = rc.senseMapInfo(l14);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l14), currentDirection) > 0))) {
+                    p14 = mapInfo.getCooldownMultiplier(team);
                     b14 = false;
                 }
             }
@@ -18569,26 +14249,26 @@ public class Navigation {
             r14 |= r24;
             r14 |= r15;
             r14 &= !b14;
-            o23 |= b14;
-            o24 |= b14;
-            o15 |= b14;
+            if (targetLocation.equals(l14)) {
+                temp1 = true;
+                temp2 = r14;
+            }
         }
-        else {
-            o23 |= b14;
-            o24 |= b14;
-            o15 |= b14;
-        }
+        o23 |= b14;
+        o24 |= b14;
+        o15 |= b14;
 
-        if (rc.onTheMap(l18) && rc.canSenseLocation(l18)) {
+        if (rc.onTheMap(l18)) {
             if (rc.senseCloud(l18)) {
                 p18 = 1.5;
                 b18 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l18).getCurrentDirection();
-                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && currentDirection.equals(Direction.CENTER))) {
-                    p18 = rc.senseMapInfo(l18).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l18)) {
+                MapInfo mapInfo = rc.senseMapInfo(l18);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l18), currentDirection) > 0))) {
+                    p18 = mapInfo.getCooldownMultiplier(team);
                     b18 = false;
                 }
             }
@@ -18609,26 +14289,26 @@ public class Navigation {
             r18 |= r17;
             r18 |= r26;
             r18 &= !b18;
-            o27 |= b18;
-            o17 |= b18;
-            o26 |= b18;
+            if (targetLocation.equals(l18)) {
+                temp1 = true;
+                temp2 = r18;
+            }
         }
-        else {
-            o27 |= b18;
-            o17 |= b18;
-            o26 |= b18;
-        }
+        o27 |= b18;
+        o17 |= b18;
+        o26 |= b18;
 
-        if (rc.onTheMap(l37) && rc.canSenseLocation(l37)) {
+        if (rc.onTheMap(l37)) {
             if (rc.senseCloud(l37)) {
                 p37 = 1.5;
                 b37 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l37).getCurrentDirection();
-                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && currentDirection.equals(Direction.CENTER))) {
-                    p37 = rc.senseMapInfo(l37).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l37)) {
+                MapInfo mapInfo = rc.senseMapInfo(l37);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l37), currentDirection) > 0))) {
+                    p37 = mapInfo.getCooldownMultiplier(team);
                     b37 = false;
                 }
             }
@@ -18644,24 +14324,25 @@ public class Navigation {
             r37 |= r27;
             r37 |= r36;
             r37 &= !b37;
-            o27 |= b37;
-            o36 |= b37;
+            if (targetLocation.equals(l37)) {
+                temp1 = true;
+                temp2 = r37;
+            }
         }
-        else {
-            o27 |= b37;
-            o36 |= b37;
-        }
+        o27 |= b37;
+        o36 |= b37;
 
-        if (rc.onTheMap(l8) && rc.canSenseLocation(l8)) {
+        if (rc.onTheMap(l8)) {
             if (rc.senseCloud(l8)) {
                 p8 = 1.5;
                 b8 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l8).getCurrentDirection();
-                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && currentDirection.equals(Direction.CENTER))) {
-                    p8 = rc.senseMapInfo(l8).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l8)) {
+                MapInfo mapInfo = rc.senseMapInfo(l8);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l8), currentDirection) > 0))) {
+                    p8 = mapInfo.getCooldownMultiplier(team);
                     b8 = false;
                 }
             }
@@ -18682,26 +14363,26 @@ public class Navigation {
             r8 |= r17;
             r8 |= r15;
             r8 &= !b8;
-            o16 |= b8;
-            o17 |= b8;
-            o15 |= b8;
+            if (targetLocation.equals(l8)) {
+                temp1 = true;
+                temp2 = r8;
+            }
         }
-        else {
-            o16 |= b8;
-            o17 |= b8;
-            o15 |= b8;
-        }
+        o16 |= b8;
+        o17 |= b8;
+        o15 |= b8;
 
-        if (rc.onTheMap(l31) && rc.canSenseLocation(l31)) {
+        if (rc.onTheMap(l31)) {
             if (rc.senseCloud(l31)) {
                 p31 = 1.5;
                 b31 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l31).getCurrentDirection();
-                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && currentDirection.equals(Direction.CENTER))) {
-                    p31 = rc.senseMapInfo(l31).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l31)) {
+                MapInfo mapInfo = rc.senseMapInfo(l31);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l31), currentDirection) > 0))) {
+                    p31 = mapInfo.getCooldownMultiplier(team);
                     b31 = false;
                 }
             }
@@ -18717,24 +14398,25 @@ public class Navigation {
             r31 |= r32;
             r31 |= r23;
             r31 &= !b31;
-            o32 |= b31;
-            o23 |= b31;
+            if (targetLocation.equals(l31)) {
+                temp1 = true;
+                temp2 = r31;
+            }
         }
-        else {
-            o32 |= b31;
-            o23 |= b31;
-        }
+        o32 |= b31;
+        o23 |= b31;
 
-        if (rc.onTheMap(l28) && rc.canSenseLocation(l28)) {
+        if (rc.onTheMap(l28)) {
             if (rc.senseCloud(l28)) {
                 p28 = 1.5;
                 b28 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l28).getCurrentDirection();
-                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && currentDirection.equals(Direction.CENTER))) {
-                    p28 = rc.senseMapInfo(l28).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l28)) {
+                MapInfo mapInfo = rc.senseMapInfo(l28);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l28), currentDirection) > 0))) {
+                    p28 = mapInfo.getCooldownMultiplier(team);
                     b28 = false;
                 }
             }
@@ -18760,28 +14442,27 @@ public class Navigation {
             r28 |= r27;
             r28 |= r36;
             r28 &= !b28;
-            o37 |= b28;
-            o18 |= b28;
-            o27 |= b28;
-            o36 |= b28;
+            if (targetLocation.equals(l28)) {
+                temp1 = true;
+                temp2 = r28;
+            }
         }
-        else {
-            o37 |= b28;
-            o18 |= b28;
-            o27 |= b28;
-            o36 |= b28;
-        }
+        o37 |= b28;
+        o18 |= b28;
+        o27 |= b28;
+        o36 |= b28;
 
-        if (rc.onTheMap(l9) && rc.canSenseLocation(l9)) {
+        if (rc.onTheMap(l9)) {
             if (rc.senseCloud(l9)) {
                 p9 = 1.5;
                 b9 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l9).getCurrentDirection();
-                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && currentDirection.equals(Direction.CENTER))) {
-                    p9 = rc.senseMapInfo(l9).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l9)) {
+                MapInfo mapInfo = rc.senseMapInfo(l9);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l9), currentDirection) > 0))) {
+                    p9 = mapInfo.getCooldownMultiplier(team);
                     b9 = false;
                 }
             }
@@ -18807,28 +14488,27 @@ public class Navigation {
             r9 |= r8;
             r9 |= r16;
             r9 &= !b9;
-            o17 |= b9;
-            o18 |= b9;
-            o8 |= b9;
-            o16 |= b9;
+            if (targetLocation.equals(l9)) {
+                temp1 = true;
+                temp2 = r9;
+            }
         }
-        else {
-            o17 |= b9;
-            o18 |= b9;
-            o8 |= b9;
-            o16 |= b9;
-        }
+        o17 |= b9;
+        o18 |= b9;
+        o8 |= b9;
+        o16 |= b9;
 
-        if (rc.onTheMap(l22) && rc.canSenseLocation(l22)) {
+        if (rc.onTheMap(l22)) {
             if (rc.senseCloud(l22)) {
                 p22 = 1.5;
                 b22 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l22).getCurrentDirection();
-                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && currentDirection.equals(Direction.CENTER))) {
-                    p22 = rc.senseMapInfo(l22).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l22)) {
+                MapInfo mapInfo = rc.senseMapInfo(l22);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l22), currentDirection) > 0))) {
+                    p22 = mapInfo.getCooldownMultiplier(team);
                     b22 = false;
                 }
             }
@@ -18854,28 +14534,27 @@ public class Navigation {
             r22 |= r23;
             r22 |= r14;
             r22 &= !b22;
-            o31 |= b22;
-            o32 |= b22;
-            o23 |= b22;
-            o14 |= b22;
+            if (targetLocation.equals(l22)) {
+                temp1 = true;
+                temp2 = r22;
+            }
         }
-        else {
-            o31 |= b22;
-            o32 |= b22;
-            o23 |= b22;
-            o14 |= b22;
-        }
+        o31 |= b22;
+        o32 |= b22;
+        o23 |= b22;
+        o14 |= b22;
 
-        if (rc.onTheMap(l7) && rc.canSenseLocation(l7)) {
+        if (rc.onTheMap(l7)) {
             if (rc.senseCloud(l7)) {
                 p7 = 1.5;
                 b7 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l7).getCurrentDirection();
-                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && currentDirection.equals(Direction.CENTER))) {
-                    p7 = rc.senseMapInfo(l7).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l7)) {
+                MapInfo mapInfo = rc.senseMapInfo(l7);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l7), currentDirection) > 0))) {
+                    p7 = mapInfo.getCooldownMultiplier(team);
                     b7 = false;
                 }
             }
@@ -18901,28 +14580,27 @@ public class Navigation {
             r7 |= r8;
             r7 |= r14;
             r7 &= !b7;
-            o15 |= b7;
-            o16 |= b7;
-            o8 |= b7;
-            o14 |= b7;
+            if (targetLocation.equals(l7)) {
+                temp1 = true;
+                temp2 = r7;
+            }
         }
-        else {
-            o15 |= b7;
-            o16 |= b7;
-            o8 |= b7;
-            o14 |= b7;
-        }
+        o15 |= b7;
+        o16 |= b7;
+        o8 |= b7;
+        o14 |= b7;
 
-        if (rc.onTheMap(l13) && rc.canSenseLocation(l13)) {
+        if (rc.onTheMap(l13)) {
             if (rc.senseCloud(l13)) {
                 p13 = 1.5;
                 b13 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l13).getCurrentDirection();
-                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && currentDirection.equals(Direction.CENTER))) {
-                    p13 = rc.senseMapInfo(l13).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l13)) {
+                MapInfo mapInfo = rc.senseMapInfo(l13);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l13), currentDirection) > 0))) {
+                    p13 = mapInfo.getCooldownMultiplier(team);
                     b13 = false;
                 }
             }
@@ -18948,28 +14626,27 @@ public class Navigation {
             r13 |= r14;
             r13 |= r6;
             r13 &= !b13;
-            o22 |= b13;
-            o23 |= b13;
-            o14 |= b13;
-            o6 |= b13;
+            if (targetLocation.equals(l13)) {
+                temp1 = true;
+                temp2 = r13;
+            }
         }
-        else {
-            o22 |= b13;
-            o23 |= b13;
-            o14 |= b13;
-            o6 |= b13;
-        }
+        o22 |= b13;
+        o23 |= b13;
+        o14 |= b13;
+        o6 |= b13;
 
-        if (rc.onTheMap(l19) && rc.canSenseLocation(l19)) {
+        if (rc.onTheMap(l19)) {
             if (rc.senseCloud(l19)) {
                 p19 = 1.5;
                 b19 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l19).getCurrentDirection();
-                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && currentDirection.equals(Direction.CENTER))) {
-                    p19 = rc.senseMapInfo(l19).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l19)) {
+                MapInfo mapInfo = rc.senseMapInfo(l19);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l19), currentDirection) > 0))) {
+                    p19 = mapInfo.getCooldownMultiplier(team);
                     b19 = false;
                 }
             }
@@ -18995,28 +14672,27 @@ public class Navigation {
             r19 |= r18;
             r19 |= r27;
             r19 &= !b19;
-            o28 |= b19;
-            o10 |= b19;
-            o18 |= b19;
-            o27 |= b19;
+            if (targetLocation.equals(l19)) {
+                temp1 = true;
+                temp2 = r19;
+            }
         }
-        else {
-            o28 |= b19;
-            o10 |= b19;
-            o18 |= b19;
-            o27 |= b19;
-        }
+        o28 |= b19;
+        o10 |= b19;
+        o18 |= b19;
+        o27 |= b19;
 
-        if (rc.onTheMap(l10) && rc.canSenseLocation(l10)) {
+        if (rc.onTheMap(l10)) {
             if (rc.senseCloud(l10)) {
                 p10 = 1.5;
                 b10 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l10).getCurrentDirection();
-                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && currentDirection.equals(Direction.CENTER))) {
-                    p10 = rc.senseMapInfo(l10).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l10)) {
+                MapInfo mapInfo = rc.senseMapInfo(l10);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l10), currentDirection) > 0))) {
+                    p10 = mapInfo.getCooldownMultiplier(team);
                     b10 = false;
                 }
             }
@@ -19042,28 +14718,27 @@ public class Navigation {
             r10 |= r9;
             r10 |= r17;
             r10 &= !b10;
-            o18 |= b10;
-            o19 |= b10;
-            o9 |= b10;
-            o17 |= b10;
+            if (targetLocation.equals(l10)) {
+                temp1 = true;
+                temp2 = r10;
+            }
         }
-        else {
-            o18 |= b10;
-            o19 |= b10;
-            o9 |= b10;
-            o17 |= b10;
-        }
+        o18 |= b10;
+        o19 |= b10;
+        o9 |= b10;
+        o17 |= b10;
 
-        if (rc.onTheMap(l6) && rc.canSenseLocation(l6)) {
+        if (rc.onTheMap(l6)) {
             if (rc.senseCloud(l6)) {
                 p6 = 1.5;
                 b6 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l6).getCurrentDirection();
-                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && currentDirection.equals(Direction.CENTER))) {
-                    p6 = rc.senseMapInfo(l6).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l6)) {
+                MapInfo mapInfo = rc.senseMapInfo(l6);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l6), currentDirection) > 0))) {
+                    p6 = mapInfo.getCooldownMultiplier(team);
                     b6 = false;
                 }
             }
@@ -19089,28 +14764,27 @@ public class Navigation {
             r6 |= r7;
             r6 |= r13;
             r6 &= !b6;
-            o14 |= b6;
-            o15 |= b6;
-            o7 |= b6;
-            o13 |= b6;
+            if (targetLocation.equals(l6)) {
+                temp1 = true;
+                temp2 = r6;
+            }
         }
-        else {
-            o14 |= b6;
-            o15 |= b6;
-            o7 |= b6;
-            o13 |= b6;
-        }
+        o14 |= b6;
+        o15 |= b6;
+        o7 |= b6;
+        o13 |= b6;
 
-        if (rc.onTheMap(l11) && rc.canSenseLocation(l11)) {
+        if (rc.onTheMap(l11)) {
             if (rc.senseCloud(l11)) {
                 p11 = 1.5;
                 b11 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l11).getCurrentDirection();
-                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && currentDirection.equals(Direction.CENTER))) {
-                    p11 = rc.senseMapInfo(l11).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l11)) {
+                MapInfo mapInfo = rc.senseMapInfo(l11);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l11), currentDirection) > 0))) {
+                    p11 = mapInfo.getCooldownMultiplier(team);
                     b11 = false;
                 }
             }
@@ -19131,26 +14805,26 @@ public class Navigation {
             r11 |= r10;
             r11 |= r18;
             r11 &= !b11;
-            o19 |= b11;
-            o10 |= b11;
-            o18 |= b11;
+            if (targetLocation.equals(l11)) {
+                temp1 = true;
+                temp2 = r11;
+            }
         }
-        else {
-            o19 |= b11;
-            o10 |= b11;
-            o18 |= b11;
-        }
+        o19 |= b11;
+        o10 |= b11;
+        o18 |= b11;
 
-        if (rc.onTheMap(l5) && rc.canSenseLocation(l5)) {
+        if (rc.onTheMap(l5)) {
             if (rc.senseCloud(l5)) {
                 p5 = 1.5;
                 b5 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l5).getCurrentDirection();
-                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && currentDirection.equals(Direction.CENTER))) {
-                    p5 = rc.senseMapInfo(l5).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l5)) {
+                MapInfo mapInfo = rc.senseMapInfo(l5);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l5), currentDirection) > 0))) {
+                    p5 = mapInfo.getCooldownMultiplier(team);
                     b5 = false;
                 }
             }
@@ -19171,26 +14845,26 @@ public class Navigation {
             r5 |= r14;
             r5 |= r6;
             r5 &= !b5;
-            o13 |= b5;
-            o14 |= b5;
-            o6 |= b5;
+            if (targetLocation.equals(l5)) {
+                temp1 = true;
+                temp2 = r5;
+            }
         }
-        else {
-            o13 |= b5;
-            o14 |= b5;
-            o6 |= b5;
-        }
+        o13 |= b5;
+        o14 |= b5;
+        o6 |= b5;
 
-        if (rc.onTheMap(l30) && rc.canSenseLocation(l30)) {
+        if (rc.onTheMap(l30)) {
             if (rc.senseCloud(l30)) {
                 p30 = 1.5;
                 b30 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l30).getCurrentDirection();
-                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && currentDirection.equals(Direction.CENTER))) {
-                    p30 = rc.senseMapInfo(l30).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l30)) {
+                MapInfo mapInfo = rc.senseMapInfo(l30);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l30), currentDirection) > 0))) {
+                    p30 = mapInfo.getCooldownMultiplier(team);
                     b30 = false;
                 }
             }
@@ -19206,24 +14880,25 @@ public class Navigation {
             r30 |= r31;
             r30 |= r22;
             r30 &= !b30;
-            o31 |= b30;
-            o22 |= b30;
+            if (targetLocation.equals(l30)) {
+                temp1 = true;
+                temp2 = r30;
+            }
         }
-        else {
-            o31 |= b30;
-            o22 |= b30;
-        }
+        o31 |= b30;
+        o22 |= b30;
 
-        if (rc.onTheMap(l38) && rc.canSenseLocation(l38)) {
+        if (rc.onTheMap(l38)) {
             if (rc.senseCloud(l38)) {
                 p38 = 1.5;
                 b38 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l38).getCurrentDirection();
-                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && currentDirection.equals(Direction.CENTER))) {
-                    p38 = rc.senseMapInfo(l38).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l38)) {
+                MapInfo mapInfo = rc.senseMapInfo(l38);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l38), currentDirection) > 0))) {
+                    p38 = mapInfo.getCooldownMultiplier(team);
                     b38 = false;
                 }
             }
@@ -19239,24 +14914,25 @@ public class Navigation {
             r38 |= r28;
             r38 |= r37;
             r38 &= !b38;
-            o28 |= b38;
-            o37 |= b38;
+            if (targetLocation.equals(l38)) {
+                temp1 = true;
+                temp2 = r38;
+            }
         }
-        else {
-            o28 |= b38;
-            o37 |= b38;
-        }
+        o28 |= b38;
+        o37 |= b38;
 
-        if (rc.onTheMap(l2) && rc.canSenseLocation(l2)) {
+        if (rc.onTheMap(l2)) {
             if (rc.senseCloud(l2)) {
                 p2 = 1.5;
                 b2 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l2).getCurrentDirection();
-                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && currentDirection.equals(Direction.CENTER))) {
-                    p2 = rc.senseMapInfo(l2).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l2)) {
+                MapInfo mapInfo = rc.senseMapInfo(l2);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l2), currentDirection) > 0))) {
+                    p2 = mapInfo.getCooldownMultiplier(team);
                     b2 = false;
                 }
             }
@@ -19277,26 +14953,26 @@ public class Navigation {
             r2 |= r9;
             r2 |= r7;
             r2 &= !b2;
-            o8 |= b2;
-            o9 |= b2;
-            o7 |= b2;
+            if (targetLocation.equals(l2)) {
+                temp1 = true;
+                temp2 = r2;
+            }
         }
-        else {
-            o8 |= b2;
-            o9 |= b2;
-            o7 |= b2;
-        }
+        o8 |= b2;
+        o9 |= b2;
+        o7 |= b2;
 
-        if (rc.onTheMap(l21) && rc.canSenseLocation(l21)) {
+        if (rc.onTheMap(l21)) {
             if (rc.senseCloud(l21)) {
                 p21 = 1.5;
                 b21 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l21).getCurrentDirection();
-                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && currentDirection.equals(Direction.CENTER))) {
-                    p21 = rc.senseMapInfo(l21).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l21)) {
+                MapInfo mapInfo = rc.senseMapInfo(l21);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l21), currentDirection) > 0))) {
+                    p21 = mapInfo.getCooldownMultiplier(team);
                     b21 = false;
                 }
             }
@@ -19322,28 +14998,27 @@ public class Navigation {
             r21 |= r22;
             r21 |= r13;
             r21 &= !b21;
-            o30 |= b21;
-            o31 |= b21;
-            o22 |= b21;
-            o13 |= b21;
+            if (targetLocation.equals(l21)) {
+                temp1 = true;
+                temp2 = r21;
+            }
         }
-        else {
-            o30 |= b21;
-            o31 |= b21;
-            o22 |= b21;
-            o13 |= b21;
-        }
+        o30 |= b21;
+        o31 |= b21;
+        o22 |= b21;
+        o13 |= b21;
 
-        if (rc.onTheMap(l3) && rc.canSenseLocation(l3)) {
+        if (rc.onTheMap(l3)) {
             if (rc.senseCloud(l3)) {
                 p3 = 1.5;
                 b3 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l3).getCurrentDirection();
-                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && currentDirection.equals(Direction.CENTER))) {
-                    p3 = rc.senseMapInfo(l3).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l3)) {
+                MapInfo mapInfo = rc.senseMapInfo(l3);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l3), currentDirection) > 0))) {
+                    p3 = mapInfo.getCooldownMultiplier(team);
                     b3 = false;
                 }
             }
@@ -19369,28 +15044,27 @@ public class Navigation {
             r3 |= r2;
             r3 |= r8;
             r3 &= !b3;
-            o9 |= b3;
-            o10 |= b3;
-            o2 |= b3;
-            o8 |= b3;
+            if (targetLocation.equals(l3)) {
+                temp1 = true;
+                temp2 = r3;
+            }
         }
-        else {
-            o9 |= b3;
-            o10 |= b3;
-            o2 |= b3;
-            o8 |= b3;
-        }
+        o9 |= b3;
+        o10 |= b3;
+        o2 |= b3;
+        o8 |= b3;
 
-        if (rc.onTheMap(l1) && rc.canSenseLocation(l1)) {
+        if (rc.onTheMap(l1)) {
             if (rc.senseCloud(l1)) {
                 p1 = 1.5;
                 b1 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l1).getCurrentDirection();
-                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && currentDirection.equals(Direction.CENTER))) {
-                    p1 = rc.senseMapInfo(l1).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l1)) {
+                MapInfo mapInfo = rc.senseMapInfo(l1);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l1), currentDirection) > 0))) {
+                    p1 = mapInfo.getCooldownMultiplier(team);
                     b1 = false;
                 }
             }
@@ -19416,28 +15090,27 @@ public class Navigation {
             r1 |= r2;
             r1 |= r6;
             r1 &= !b1;
-            o7 |= b1;
-            o8 |= b1;
-            o2 |= b1;
-            o6 |= b1;
+            if (targetLocation.equals(l1)) {
+                temp1 = true;
+                temp2 = r1;
+            }
         }
-        else {
-            o7 |= b1;
-            o8 |= b1;
-            o2 |= b1;
-            o6 |= b1;
-        }
+        o7 |= b1;
+        o8 |= b1;
+        o2 |= b1;
+        o6 |= b1;
 
-        if (rc.onTheMap(l29) && rc.canSenseLocation(l29)) {
+        if (rc.onTheMap(l29)) {
             if (rc.senseCloud(l29)) {
                 p29 = 1.5;
                 b29 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l29).getCurrentDirection();
-                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && currentDirection.equals(Direction.CENTER))) {
-                    p29 = rc.senseMapInfo(l29).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l29)) {
+                MapInfo mapInfo = rc.senseMapInfo(l29);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l29), currentDirection) > 0))) {
+                    p29 = mapInfo.getCooldownMultiplier(team);
                     b29 = false;
                 }
             }
@@ -19463,28 +15136,27 @@ public class Navigation {
             r29 |= r28;
             r29 |= r37;
             r29 &= !b29;
-            o38 |= b29;
-            o19 |= b29;
-            o28 |= b29;
-            o37 |= b29;
+            if (targetLocation.equals(l29)) {
+                temp1 = true;
+                temp2 = r29;
+            }
         }
-        else {
-            o38 |= b29;
-            o19 |= b29;
-            o28 |= b29;
-            o37 |= b29;
-        }
+        o38 |= b29;
+        o19 |= b29;
+        o28 |= b29;
+        o37 |= b29;
 
-        if (rc.onTheMap(l20) && rc.canSenseLocation(l20)) {
+        if (rc.onTheMap(l20)) {
             if (rc.senseCloud(l20)) {
                 p20 = 1.5;
                 b20 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l20).getCurrentDirection();
-                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && currentDirection.equals(Direction.CENTER))) {
-                    p20 = rc.senseMapInfo(l20).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l20)) {
+                MapInfo mapInfo = rc.senseMapInfo(l20);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l20), currentDirection) > 0))) {
+                    p20 = mapInfo.getCooldownMultiplier(team);
                     b20 = false;
                 }
             }
@@ -19510,28 +15182,27 @@ public class Navigation {
             r20 |= r19;
             r20 |= r28;
             r20 &= !b20;
-            o29 |= b20;
-            o11 |= b20;
-            o19 |= b20;
-            o28 |= b20;
+            if (targetLocation.equals(l20)) {
+                temp1 = true;
+                temp2 = r20;
+            }
         }
-        else {
-            o29 |= b20;
-            o11 |= b20;
-            o19 |= b20;
-            o28 |= b20;
-        }
+        o29 |= b20;
+        o11 |= b20;
+        o19 |= b20;
+        o28 |= b20;
 
-        if (rc.onTheMap(l12) && rc.canSenseLocation(l12)) {
+        if (rc.onTheMap(l12)) {
             if (rc.senseCloud(l12)) {
                 p12 = 1.5;
                 b12 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l12).getCurrentDirection();
-                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && currentDirection.equals(Direction.CENTER))) {
-                    p12 = rc.senseMapInfo(l12).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l12)) {
+                MapInfo mapInfo = rc.senseMapInfo(l12);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l12), currentDirection) > 0))) {
+                    p12 = mapInfo.getCooldownMultiplier(team);
                     b12 = false;
                 }
             }
@@ -19557,28 +15228,27 @@ public class Navigation {
             r12 |= r13;
             r12 |= r5;
             r12 &= !b12;
-            o21 |= b12;
-            o22 |= b12;
-            o13 |= b12;
-            o5 |= b12;
+            if (targetLocation.equals(l12)) {
+                temp1 = true;
+                temp2 = r12;
+            }
         }
-        else {
-            o21 |= b12;
-            o22 |= b12;
-            o13 |= b12;
-            o5 |= b12;
-        }
+        o21 |= b12;
+        o22 |= b12;
+        o13 |= b12;
+        o5 |= b12;
 
-        if (rc.onTheMap(l4) && rc.canSenseLocation(l4)) {
+        if (rc.onTheMap(l4)) {
             if (rc.senseCloud(l4)) {
                 p4 = 1.5;
                 b4 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l4).getCurrentDirection();
-                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && currentDirection.equals(Direction.CENTER))) {
-                    p4 = rc.senseMapInfo(l4).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l4)) {
+                MapInfo mapInfo = rc.senseMapInfo(l4);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l4), currentDirection) > 0))) {
+                    p4 = mapInfo.getCooldownMultiplier(team);
                     b4 = false;
                 }
             }
@@ -19604,28 +15274,27 @@ public class Navigation {
             r4 |= r3;
             r4 |= r9;
             r4 &= !b4;
-            o10 |= b4;
-            o11 |= b4;
-            o3 |= b4;
-            o9 |= b4;
+            if (targetLocation.equals(l4)) {
+                temp1 = true;
+                temp2 = r4;
+            }
         }
-        else {
-            o10 |= b4;
-            o11 |= b4;
-            o3 |= b4;
-            o9 |= b4;
-        }
+        o10 |= b4;
+        o11 |= b4;
+        o3 |= b4;
+        o9 |= b4;
 
-        if (rc.onTheMap(l0) && rc.canSenseLocation(l0)) {
+        if (rc.onTheMap(l0)) {
             if (rc.senseCloud(l0)) {
                 p0 = 1.5;
                 b0 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l0).getCurrentDirection();
-                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && currentDirection.equals(Direction.CENTER))) {
-                    p0 = rc.senseMapInfo(l0).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l0)) {
+                MapInfo mapInfo = rc.senseMapInfo(l0);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l0), currentDirection) > 0))) {
+                    p0 = mapInfo.getCooldownMultiplier(team);
                     b0 = false;
                 }
             }
@@ -19651,19 +15320,18 @@ public class Navigation {
             r0 |= r1;
             r0 |= r5;
             r0 &= !b0;
-            o6 |= b0;
-            o7 |= b0;
-            o1 |= b0;
-            o5 |= b0;
+            if (targetLocation.equals(l0)) {
+                temp1 = true;
+                temp2 = r0;
+            }
         }
-        else {
-            o6 |= b0;
-            o7 |= b0;
-            o1 |= b0;
-            o5 |= b0;
-        }
+        o6 |= b0;
+        o7 |= b0;
+        o1 |= b0;
+        o5 |= b0;
 
-        int dx = targetLocation.x - l34.x;
+        if (temp1 && temp2) {
+            int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -19821,10 +15489,6 @@ public class Navigation {
                         if (v33 < 10000) {
                             return d33;
                         }
-                    case 0:
-                        if (v34 < 10000) {
-                            return d34;
-                        }
                     case 1:
                         if (v35 < 10000) {
                             return d35;
@@ -19860,6 +15524,7 @@ public class Navigation {
                 } break;
 
         }
+        }
     
         o0 = r0;
         o1 = r1;
@@ -19881,7 +15546,6 @@ public class Navigation {
             if (dist0 < localBest) {
                 localBest = dist0;
                 ans = d0;
-                best = l0;
             }
         }
 
@@ -19890,7 +15554,6 @@ public class Navigation {
             if (dist1 < localBest) {
                 localBest = dist1;
                 ans = d1;
-                best = l1;
             }
         }
 
@@ -19899,7 +15562,6 @@ public class Navigation {
             if (dist2 < localBest) {
                 localBest = dist2;
                 ans = d2;
-                best = l2;
             }
         }
 
@@ -19908,7 +15570,6 @@ public class Navigation {
             if (dist3 < localBest) {
                 localBest = dist3;
                 ans = d3;
-                best = l3;
             }
         }
 
@@ -19917,7 +15578,6 @@ public class Navigation {
             if (dist4 < localBest) {
                 localBest = dist4;
                 ans = d4;
-                best = l4;
             }
         }
 
@@ -19926,7 +15586,6 @@ public class Navigation {
             if (dist5 < localBest) {
                 localBest = dist5;
                 ans = d5;
-                best = l5;
             }
         }
 
@@ -19935,7 +15594,6 @@ public class Navigation {
             if (dist11 < localBest) {
                 localBest = dist11;
                 ans = d11;
-                best = l11;
             }
         }
 
@@ -19944,7 +15602,6 @@ public class Navigation {
             if (dist12 < localBest) {
                 localBest = dist12;
                 ans = d12;
-                best = l12;
             }
         }
 
@@ -19953,7 +15610,6 @@ public class Navigation {
             if (dist20 < localBest) {
                 localBest = dist20;
                 ans = d20;
-                best = l20;
             }
         }
 
@@ -19962,7 +15618,6 @@ public class Navigation {
             if (dist21 < localBest) {
                 localBest = dist21;
                 ans = d21;
-                best = l21;
             }
         }
 
@@ -19971,7 +15626,6 @@ public class Navigation {
             if (dist29 < localBest) {
                 localBest = dist29;
                 ans = d29;
-                best = l29;
             }
         }
 
@@ -19980,7 +15634,6 @@ public class Navigation {
             if (dist30 < localBest) {
                 localBest = dist30;
                 ans = d30;
-                best = l30;
             }
         }
 
@@ -19989,733 +15642,23 @@ public class Navigation {
             if (dist38 < localBest) {
                 localBest = dist38;
                 ans = d38;
-                best = l38;
             }
         }
 
-        draws6();
-        rc.setIndicatorDot(best, 0, 0, 255);
         if (localBest < globalBest) {
             globalBest = localBest;
+            bug.reset();
             return ans;
         }
-        return getBestDirectionWallFollow6(ans);
-    }
 
-    private Direction getBestDirectionWallFollow6(Direction prev) throws GameActionException {
-        Direction ans = Direction.CENTER;
-        int minDistance = closestWallLocations.isEmpty() ? 1000000 : currentLocation.distanceSquaredTo(closestWallLocations.get(0));
-    
-        if (b0) {
-            int distance = currentLocation.distanceSquaredTo(l0);
-            if (distance == minDistance) {
-                closestWallLocations.add(l0);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l0);
-                minDistance = distance;
-            }
-        }
-
-        if (b1) {
-            int distance = currentLocation.distanceSquaredTo(l1);
-            if (distance == minDistance) {
-                closestWallLocations.add(l1);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l1);
-                minDistance = distance;
-            }
-        }
-
-        if (b2) {
-            int distance = currentLocation.distanceSquaredTo(l2);
-            if (distance == minDistance) {
-                closestWallLocations.add(l2);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l2);
-                minDistance = distance;
-            }
-        }
-
-        if (b3) {
-            int distance = currentLocation.distanceSquaredTo(l3);
-            if (distance == minDistance) {
-                closestWallLocations.add(l3);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l3);
-                minDistance = distance;
-            }
-        }
-
-        if (b4) {
-            int distance = currentLocation.distanceSquaredTo(l4);
-            if (distance == minDistance) {
-                closestWallLocations.add(l4);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l4);
-                minDistance = distance;
-            }
-        }
-
-        if (b5) {
-            int distance = currentLocation.distanceSquaredTo(l5);
-            if (distance == minDistance) {
-                closestWallLocations.add(l5);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l5);
-                minDistance = distance;
-            }
-        }
-
-        if (b6) {
-            int distance = currentLocation.distanceSquaredTo(l6);
-            if (distance == minDistance) {
-                closestWallLocations.add(l6);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l6);
-                minDistance = distance;
-            }
-        }
-
-        if (b7) {
-            int distance = currentLocation.distanceSquaredTo(l7);
-            if (distance == minDistance) {
-                closestWallLocations.add(l7);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l7);
-                minDistance = distance;
-            }
-        }
-
-        if (b8) {
-            int distance = currentLocation.distanceSquaredTo(l8);
-            if (distance == minDistance) {
-                closestWallLocations.add(l8);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l8);
-                minDistance = distance;
-            }
-        }
-
-        if (b9) {
-            int distance = currentLocation.distanceSquaredTo(l9);
-            if (distance == minDistance) {
-                closestWallLocations.add(l9);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l9);
-                minDistance = distance;
-            }
-        }
-
-        if (b10) {
-            int distance = currentLocation.distanceSquaredTo(l10);
-            if (distance == minDistance) {
-                closestWallLocations.add(l10);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l10);
-                minDistance = distance;
-            }
-        }
-
-        if (b11) {
-            int distance = currentLocation.distanceSquaredTo(l11);
-            if (distance == minDistance) {
-                closestWallLocations.add(l11);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l11);
-                minDistance = distance;
-            }
-        }
-
-        if (b12) {
-            int distance = currentLocation.distanceSquaredTo(l12);
-            if (distance == minDistance) {
-                closestWallLocations.add(l12);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l12);
-                minDistance = distance;
-            }
-        }
-
-        if (b13) {
-            int distance = currentLocation.distanceSquaredTo(l13);
-            if (distance == minDistance) {
-                closestWallLocations.add(l13);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l13);
-                minDistance = distance;
-            }
-        }
-
-        if (b14) {
-            int distance = currentLocation.distanceSquaredTo(l14);
-            if (distance == minDistance) {
-                closestWallLocations.add(l14);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l14);
-                minDistance = distance;
-            }
-        }
-
-        if (b15) {
-            int distance = currentLocation.distanceSquaredTo(l15);
-            if (distance == minDistance) {
-                closestWallLocations.add(l15);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l15);
-                minDistance = distance;
-            }
-        }
-
-        if (b16) {
-            int distance = currentLocation.distanceSquaredTo(l16);
-            if (distance == minDistance) {
-                closestWallLocations.add(l16);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l16);
-                minDistance = distance;
-            }
-        }
-
-        if (b17) {
-            int distance = currentLocation.distanceSquaredTo(l17);
-            if (distance == minDistance) {
-                closestWallLocations.add(l17);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l17);
-                minDistance = distance;
-            }
-        }
-
-        if (b18) {
-            int distance = currentLocation.distanceSquaredTo(l18);
-            if (distance == minDistance) {
-                closestWallLocations.add(l18);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l18);
-                minDistance = distance;
-            }
-        }
-
-        if (b19) {
-            int distance = currentLocation.distanceSquaredTo(l19);
-            if (distance == minDistance) {
-                closestWallLocations.add(l19);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l19);
-                minDistance = distance;
-            }
-        }
-
-        if (b20) {
-            int distance = currentLocation.distanceSquaredTo(l20);
-            if (distance == minDistance) {
-                closestWallLocations.add(l20);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l20);
-                minDistance = distance;
-            }
-        }
-
-        if (b21) {
-            int distance = currentLocation.distanceSquaredTo(l21);
-            if (distance == minDistance) {
-                closestWallLocations.add(l21);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l21);
-                minDistance = distance;
-            }
-        }
-
-        if (b22) {
-            int distance = currentLocation.distanceSquaredTo(l22);
-            if (distance == minDistance) {
-                closestWallLocations.add(l22);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l22);
-                minDistance = distance;
-            }
-        }
-
-        if (b23) {
-            int distance = currentLocation.distanceSquaredTo(l23);
-            if (distance == minDistance) {
-                closestWallLocations.add(l23);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l23);
-                minDistance = distance;
-            }
-        }
-
-        if (b24) {
-            int distance = currentLocation.distanceSquaredTo(l24);
-            if (distance == minDistance) {
-                closestWallLocations.add(l24);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l24);
-                minDistance = distance;
-            }
-        }
-
-        if (b25) {
-            int distance = currentLocation.distanceSquaredTo(l25);
-            if (distance == minDistance) {
-                closestWallLocations.add(l25);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l25);
-                minDistance = distance;
-            }
-        }
-
-        if (b26) {
-            int distance = currentLocation.distanceSquaredTo(l26);
-            if (distance == minDistance) {
-                closestWallLocations.add(l26);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l26);
-                minDistance = distance;
-            }
-        }
-
-        if (b27) {
-            int distance = currentLocation.distanceSquaredTo(l27);
-            if (distance == minDistance) {
-                closestWallLocations.add(l27);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l27);
-                minDistance = distance;
-            }
-        }
-
-        if (b28) {
-            int distance = currentLocation.distanceSquaredTo(l28);
-            if (distance == minDistance) {
-                closestWallLocations.add(l28);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l28);
-                minDistance = distance;
-            }
-        }
-
-        if (b29) {
-            int distance = currentLocation.distanceSquaredTo(l29);
-            if (distance == minDistance) {
-                closestWallLocations.add(l29);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l29);
-                minDistance = distance;
-            }
-        }
-
-        if (b30) {
-            int distance = currentLocation.distanceSquaredTo(l30);
-            if (distance == minDistance) {
-                closestWallLocations.add(l30);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l30);
-                minDistance = distance;
-            }
-        }
-
-        if (b31) {
-            int distance = currentLocation.distanceSquaredTo(l31);
-            if (distance == minDistance) {
-                closestWallLocations.add(l31);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l31);
-                minDistance = distance;
-            }
-        }
-
-        if (b32) {
-            int distance = currentLocation.distanceSquaredTo(l32);
-            if (distance == minDistance) {
-                closestWallLocations.add(l32);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l32);
-                minDistance = distance;
-            }
-        }
-
-        if (b33) {
-            int distance = currentLocation.distanceSquaredTo(l33);
-            if (distance == minDistance) {
-                closestWallLocations.add(l33);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l33);
-                minDistance = distance;
-            }
-        }
-
-        if (b35) {
-            int distance = currentLocation.distanceSquaredTo(l35);
-            if (distance == minDistance) {
-                closestWallLocations.add(l35);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l35);
-                minDistance = distance;
-            }
-        }
-
-        if (b36) {
-            int distance = currentLocation.distanceSquaredTo(l36);
-            if (distance == minDistance) {
-                closestWallLocations.add(l36);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l36);
-                minDistance = distance;
-            }
-        }
-
-        if (b37) {
-            int distance = currentLocation.distanceSquaredTo(l37);
-            if (distance == minDistance) {
-                closestWallLocations.add(l37);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l37);
-                minDistance = distance;
-            }
-        }
-
-        if (b38) {
-            int distance = currentLocation.distanceSquaredTo(l38);
-            if (distance == minDistance) {
-                closestWallLocations.add(l38);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l38);
-                minDistance = distance;
-            }
-        }
-
-        if (minDistance > 2) { return prev; }
-        int maxDot = -999999;
-        minDistance = 1000000;
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            Direction vertical = currentLocation.directionTo(closestWallLocation);
-
-            Direction tangent1 = vertical.rotateLeft().rotateLeft();
-            Direction tangent2 = vertical.rotateRight().rotateRight();
-
-            int dx = lastDirection.getDeltaX();
-            int dy = lastDirection.getDeltaY();
-
-            int dot1 = tangent1.getDeltaX() * dx + tangent1.getDeltaY() * dy;
-            int dot2 = tangent2.getDeltaX() * dx + tangent2.getDeltaY() * dy;
-
-            int distance1 = currentLocation.add(tangent1).distanceSquaredTo(targetLocation);
-            int distance2 = currentLocation.add(tangent2).distanceSquaredTo(targetLocation);
-
-            if (!rc.canMove(tangent1)) {
-                dot1 = -1000000;
-            }
-
-            if (!rc.canMove(tangent2)) {
-                dot2 = -1000000;
-            }
-
-            if (dot1 > maxDot) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 > maxDot) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-
-            if (dot1 == maxDot && distance1 < minDistance) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 == maxDot && distance2 < minDistance) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-        }
-        draws6();
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            rc.setIndicatorDot(closestWallLocation, 255, 0, 0);
-        }
-        return ans;
-    }
-
-    private void draws6() throws GameActionException {
-    
-        rc.setIndicatorDot(l0, 255, 0, 255);
-        if (b0) {
-            rc.setIndicatorDot(l0, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l1, 255, 0, 255);
-        if (b1) {
-            rc.setIndicatorDot(l1, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l2, 255, 0, 255);
-        if (b2) {
-            rc.setIndicatorDot(l2, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l3, 255, 0, 255);
-        if (b3) {
-            rc.setIndicatorDot(l3, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l4, 255, 0, 255);
-        if (b4) {
-            rc.setIndicatorDot(l4, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l5, 255, 0, 255);
-        if (b5) {
-            rc.setIndicatorDot(l5, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l6, 255, 0, 255);
-        if (b6) {
-            rc.setIndicatorDot(l6, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l7, 255, 0, 255);
-        if (b7) {
-            rc.setIndicatorDot(l7, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l8, 255, 0, 255);
-        if (b8) {
-            rc.setIndicatorDot(l8, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l9, 255, 0, 255);
-        if (b9) {
-            rc.setIndicatorDot(l9, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l10, 255, 0, 255);
-        if (b10) {
-            rc.setIndicatorDot(l10, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l11, 255, 0, 255);
-        if (b11) {
-            rc.setIndicatorDot(l11, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l12, 255, 0, 255);
-        if (b12) {
-            rc.setIndicatorDot(l12, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l13, 255, 0, 255);
-        if (b13) {
-            rc.setIndicatorDot(l13, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l14, 255, 0, 255);
-        if (b14) {
-            rc.setIndicatorDot(l14, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l15, 255, 0, 255);
-        if (b15) {
-            rc.setIndicatorDot(l15, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l16, 255, 0, 255);
-        if (b16) {
-            rc.setIndicatorDot(l16, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l17, 255, 0, 255);
-        if (b17) {
-            rc.setIndicatorDot(l17, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l18, 255, 0, 255);
-        if (b18) {
-            rc.setIndicatorDot(l18, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l19, 255, 0, 255);
-        if (b19) {
-            rc.setIndicatorDot(l19, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l20, 255, 0, 255);
-        if (b20) {
-            rc.setIndicatorDot(l20, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l21, 255, 0, 255);
-        if (b21) {
-            rc.setIndicatorDot(l21, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l22, 255, 0, 255);
-        if (b22) {
-            rc.setIndicatorDot(l22, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l23, 255, 0, 255);
-        if (b23) {
-            rc.setIndicatorDot(l23, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l24, 255, 0, 255);
-        if (b24) {
-            rc.setIndicatorDot(l24, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l25, 255, 0, 255);
-        if (b25) {
-            rc.setIndicatorDot(l25, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l26, 255, 0, 255);
-        if (b26) {
-            rc.setIndicatorDot(l26, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l27, 255, 0, 255);
-        if (b27) {
-            rc.setIndicatorDot(l27, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l28, 255, 0, 255);
-        if (b28) {
-            rc.setIndicatorDot(l28, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l29, 255, 0, 255);
-        if (b29) {
-            rc.setIndicatorDot(l29, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l30, 255, 0, 255);
-        if (b30) {
-            rc.setIndicatorDot(l30, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l31, 255, 0, 255);
-        if (b31) {
-            rc.setIndicatorDot(l31, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l32, 255, 0, 255);
-        if (b32) {
-            rc.setIndicatorDot(l32, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l33, 255, 0, 255);
-        if (b33) {
-            rc.setIndicatorDot(l33, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l35, 255, 0, 255);
-        if (b35) {
-            rc.setIndicatorDot(l35, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l36, 255, 0, 255);
-        if (b36) {
-            rc.setIndicatorDot(l36, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l37, 255, 0, 255);
-        if (b37) {
-            rc.setIndicatorDot(l37, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l38, 255, 0, 255);
-        if (b38) {
-            rc.setIndicatorDot(l38, 255, 255, 255);
-        }
-
+        bug.move(targetLocation);
+        return null;
     }
 
     private Direction getBestDirection7() throws GameActionException {
-        MapLocation best = currentLocation;
         double localBest = 1000000.0;
+        boolean temp1 = false;
+        boolean temp2 = false;
         l34 = currentLocation;
         v34 = 0;
         d34 = Direction.CENTER;
@@ -20980,16 +15923,17 @@ public class Navigation {
         r4 = false;
         o4 = false;
     
-        if (rc.onTheMap(l25) && rc.canSenseLocation(l25)) {
+        if (rc.onTheMap(l25)) {
             if (rc.senseCloud(l25)) {
                 p25 = 1.5;
                 b25 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l25).getCurrentDirection();
-                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && currentDirection.equals(Direction.CENTER))) {
-                    p25 = rc.senseMapInfo(l25).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l25)) {
+                MapInfo mapInfo = rc.senseMapInfo(l25);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l25), currentDirection) > 0))) {
+                    p25 = mapInfo.getCooldownMultiplier(team);
                     b25 = false;
                 }
             }
@@ -21005,22 +15949,24 @@ public class Navigation {
             r25 |= r34;
             r25 |= r35;
             r25 &= !b25;
-            o35 |= b25;
+            if (targetLocation.equals(l25)) {
+                temp1 = true;
+                temp2 = r25;
+            }
         }
-        else {
-            o35 |= b25;
-        }
+        o35 |= b25;
 
-        if (rc.onTheMap(l35) && rc.canSenseLocation(l35)) {
+        if (rc.onTheMap(l35)) {
             if (rc.senseCloud(l35)) {
                 p35 = 1.5;
                 b35 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l35).getCurrentDirection();
-                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && currentDirection.equals(Direction.CENTER))) {
-                    p35 = rc.senseMapInfo(l35).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l35)) {
+                MapInfo mapInfo = rc.senseMapInfo(l35);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l35), currentDirection) > 0))) {
+                    p35 = mapInfo.getCooldownMultiplier(team);
                     b35 = false;
                 }
             }
@@ -21036,22 +15982,24 @@ public class Navigation {
             r35 |= r25;
             r35 |= r34;
             r35 &= !b35;
-            o25 |= b35;
+            if (targetLocation.equals(l35)) {
+                temp1 = true;
+                temp2 = r35;
+            }
         }
-        else {
-            o25 |= b35;
-        }
+        o25 |= b35;
 
-        if (rc.onTheMap(l24) && rc.canSenseLocation(l24)) {
+        if (rc.onTheMap(l24)) {
             if (rc.senseCloud(l24)) {
                 p24 = 1.5;
                 b24 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l24).getCurrentDirection();
-                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && currentDirection.equals(Direction.CENTER))) {
-                    p24 = rc.senseMapInfo(l24).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l24)) {
+                MapInfo mapInfo = rc.senseMapInfo(l24);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l24), currentDirection) > 0))) {
+                    p24 = mapInfo.getCooldownMultiplier(team);
                     b24 = false;
                 }
             }
@@ -21067,22 +16015,24 @@ public class Navigation {
             r24 |= r34;
             r24 |= r25;
             r24 &= !b24;
-            o25 |= b24;
+            if (targetLocation.equals(l24)) {
+                temp1 = true;
+                temp2 = r24;
+            }
         }
-        else {
-            o25 |= b24;
-        }
+        o25 |= b24;
 
-        if (rc.onTheMap(l44) && rc.canSenseLocation(l44)) {
+        if (rc.onTheMap(l44)) {
             if (rc.senseCloud(l44)) {
                 p44 = 1.5;
                 b44 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l44).getCurrentDirection();
-                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && currentDirection.equals(Direction.CENTER))) {
-                    p44 = rc.senseMapInfo(l44).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l44)) {
+                MapInfo mapInfo = rc.senseMapInfo(l44);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l44), currentDirection) > 0))) {
+                    p44 = mapInfo.getCooldownMultiplier(team);
                     b44 = false;
                 }
             }
@@ -21098,22 +16048,24 @@ public class Navigation {
             r44 |= r35;
             r44 |= r34;
             r44 &= !b44;
-            o35 |= b44;
+            if (targetLocation.equals(l44)) {
+                temp1 = true;
+                temp2 = r44;
+            }
         }
-        else {
-            o35 |= b44;
-        }
+        o35 |= b44;
 
-        if (rc.onTheMap(l26) && rc.canSenseLocation(l26)) {
+        if (rc.onTheMap(l26)) {
             if (rc.senseCloud(l26)) {
                 p26 = 1.5;
                 b26 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l26).getCurrentDirection();
-                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && currentDirection.equals(Direction.CENTER))) {
-                    p26 = rc.senseMapInfo(l26).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l26)) {
+                MapInfo mapInfo = rc.senseMapInfo(l26);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l26), currentDirection) > 0))) {
+                    p26 = mapInfo.getCooldownMultiplier(team);
                     b26 = false;
                 }
             }
@@ -21134,24 +16086,25 @@ public class Navigation {
             r26 |= r25;
             r26 |= r34;
             r26 &= !b26;
-            o35 |= b26;
-            o25 |= b26;
+            if (targetLocation.equals(l26)) {
+                temp1 = true;
+                temp2 = r26;
+            }
         }
-        else {
-            o35 |= b26;
-            o25 |= b26;
-        }
+        o35 |= b26;
+        o25 |= b26;
 
-        if (rc.onTheMap(l36) && rc.canSenseLocation(l36)) {
+        if (rc.onTheMap(l36)) {
             if (rc.senseCloud(l36)) {
                 p36 = 1.5;
                 b36 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l36).getCurrentDirection();
-                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && currentDirection.equals(Direction.CENTER))) {
-                    p36 = rc.senseMapInfo(l36).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l36)) {
+                MapInfo mapInfo = rc.senseMapInfo(l36);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l36), currentDirection) > 0))) {
+                    p36 = mapInfo.getCooldownMultiplier(team);
                     b36 = false;
                 }
             }
@@ -21172,26 +16125,26 @@ public class Navigation {
             r36 |= r35;
             r36 |= r44;
             r36 &= !b36;
-            o26 |= b36;
-            o35 |= b36;
-            o44 |= b36;
+            if (targetLocation.equals(l36)) {
+                temp1 = true;
+                temp2 = r36;
+            }
         }
-        else {
-            o26 |= b36;
-            o35 |= b36;
-            o44 |= b36;
-        }
+        o26 |= b36;
+        o35 |= b36;
+        o44 |= b36;
 
-        if (rc.onTheMap(l16) && rc.canSenseLocation(l16)) {
+        if (rc.onTheMap(l16)) {
             if (rc.senseCloud(l16)) {
                 p16 = 1.5;
                 b16 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l16).getCurrentDirection();
-                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && currentDirection.equals(Direction.CENTER))) {
-                    p16 = rc.senseMapInfo(l16).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l16)) {
+                MapInfo mapInfo = rc.senseMapInfo(l16);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l16), currentDirection) > 0))) {
+                    p16 = mapInfo.getCooldownMultiplier(team);
                     b16 = false;
                 }
             }
@@ -21212,26 +16165,26 @@ public class Navigation {
             r16 |= r26;
             r16 |= r24;
             r16 &= !b16;
-            o25 |= b16;
-            o26 |= b16;
-            o24 |= b16;
+            if (targetLocation.equals(l16)) {
+                temp1 = true;
+                temp2 = r16;
+            }
         }
-        else {
-            o25 |= b16;
-            o26 |= b16;
-            o24 |= b16;
-        }
+        o25 |= b16;
+        o26 |= b16;
+        o24 |= b16;
 
-        if (rc.onTheMap(l27) && rc.canSenseLocation(l27)) {
+        if (rc.onTheMap(l27)) {
             if (rc.senseCloud(l27)) {
                 p27 = 1.5;
                 b27 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l27).getCurrentDirection();
-                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && currentDirection.equals(Direction.CENTER))) {
-                    p27 = rc.senseMapInfo(l27).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l27)) {
+                MapInfo mapInfo = rc.senseMapInfo(l27);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l27), currentDirection) > 0))) {
+                    p27 = mapInfo.getCooldownMultiplier(team);
                     b27 = false;
                 }
             }
@@ -21257,28 +16210,27 @@ public class Navigation {
             r27 |= r26;
             r27 |= r35;
             r27 &= !b27;
-            o36 |= b27;
-            o17 |= b27;
-            o26 |= b27;
-            o35 |= b27;
+            if (targetLocation.equals(l27)) {
+                temp1 = true;
+                temp2 = r27;
+            }
         }
-        else {
-            o36 |= b27;
-            o17 |= b27;
-            o26 |= b27;
-            o35 |= b27;
-        }
+        o36 |= b27;
+        o17 |= b27;
+        o26 |= b27;
+        o35 |= b27;
 
-        if (rc.onTheMap(l15) && rc.canSenseLocation(l15)) {
+        if (rc.onTheMap(l15)) {
             if (rc.senseCloud(l15)) {
                 p15 = 1.5;
                 b15 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l15).getCurrentDirection();
-                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && currentDirection.equals(Direction.CENTER))) {
-                    p15 = rc.senseMapInfo(l15).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l15)) {
+                MapInfo mapInfo = rc.senseMapInfo(l15);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l15), currentDirection) > 0))) {
+                    p15 = mapInfo.getCooldownMultiplier(team);
                     b15 = false;
                 }
             }
@@ -21299,26 +16251,26 @@ public class Navigation {
             r15 |= r25;
             r15 |= r16;
             r15 &= !b15;
-            o24 |= b15;
-            o25 |= b15;
-            o16 |= b15;
+            if (targetLocation.equals(l15)) {
+                temp1 = true;
+                temp2 = r15;
+            }
         }
-        else {
-            o24 |= b15;
-            o25 |= b15;
-            o16 |= b15;
-        }
+        o24 |= b15;
+        o25 |= b15;
+        o16 |= b15;
 
-        if (rc.onTheMap(l17) && rc.canSenseLocation(l17)) {
+        if (rc.onTheMap(l17)) {
             if (rc.senseCloud(l17)) {
                 p17 = 1.5;
                 b17 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l17).getCurrentDirection();
-                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && currentDirection.equals(Direction.CENTER))) {
-                    p17 = rc.senseMapInfo(l17).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l17)) {
+                MapInfo mapInfo = rc.senseMapInfo(l17);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l17), currentDirection) > 0))) {
+                    p17 = mapInfo.getCooldownMultiplier(team);
                     b17 = false;
                 }
             }
@@ -21344,28 +16296,27 @@ public class Navigation {
             r17 |= r16;
             r17 |= r25;
             r17 &= !b17;
-            o26 |= b17;
-            o27 |= b17;
-            o16 |= b17;
-            o25 |= b17;
+            if (targetLocation.equals(l17)) {
+                temp1 = true;
+                temp2 = r17;
+            }
         }
-        else {
-            o26 |= b17;
-            o27 |= b17;
-            o16 |= b17;
-            o25 |= b17;
-        }
+        o26 |= b17;
+        o27 |= b17;
+        o16 |= b17;
+        o25 |= b17;
 
-        if (rc.onTheMap(l45) && rc.canSenseLocation(l45)) {
+        if (rc.onTheMap(l45)) {
             if (rc.senseCloud(l45)) {
                 p45 = 1.5;
                 b45 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l45).getCurrentDirection();
-                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && currentDirection.equals(Direction.CENTER))) {
-                    p45 = rc.senseMapInfo(l45).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l45)) {
+                MapInfo mapInfo = rc.senseMapInfo(l45);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l45), currentDirection) > 0))) {
+                    p45 = mapInfo.getCooldownMultiplier(team);
                     b45 = false;
                 }
             }
@@ -21386,26 +16337,26 @@ public class Navigation {
             r45 |= r35;
             r45 |= r44;
             r45 &= !b45;
-            o36 |= b45;
-            o35 |= b45;
-            o44 |= b45;
+            if (targetLocation.equals(l45)) {
+                temp1 = true;
+                temp2 = r45;
+            }
         }
-        else {
-            o36 |= b45;
-            o35 |= b45;
-            o44 |= b45;
-        }
+        o36 |= b45;
+        o35 |= b45;
+        o44 |= b45;
 
-        if (rc.onTheMap(l54) && rc.canSenseLocation(l54)) {
+        if (rc.onTheMap(l54)) {
             if (rc.senseCloud(l54)) {
                 p54 = 1.5;
                 b54 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l54).getCurrentDirection();
-                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && currentDirection.equals(Direction.CENTER))) {
-                    p54 = rc.senseMapInfo(l54).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l54)) {
+                MapInfo mapInfo = rc.senseMapInfo(l54);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l54), currentDirection) > 0))) {
+                    p54 = mapInfo.getCooldownMultiplier(team);
                     b54 = false;
                 }
             }
@@ -21421,24 +16372,25 @@ public class Navigation {
             r54 |= r45;
             r54 |= r44;
             r54 &= !b54;
-            o45 |= b54;
-            o44 |= b54;
+            if (targetLocation.equals(l54)) {
+                temp1 = true;
+                temp2 = r54;
+            }
         }
-        else {
-            o45 |= b54;
-            o44 |= b54;
-        }
+        o45 |= b54;
+        o44 |= b54;
 
-        if (rc.onTheMap(l14) && rc.canSenseLocation(l14)) {
+        if (rc.onTheMap(l14)) {
             if (rc.senseCloud(l14)) {
                 p14 = 1.5;
                 b14 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l14).getCurrentDirection();
-                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && currentDirection.equals(Direction.CENTER))) {
-                    p14 = rc.senseMapInfo(l14).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l14)) {
+                MapInfo mapInfo = rc.senseMapInfo(l14);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l14), currentDirection) > 0))) {
+                    p14 = mapInfo.getCooldownMultiplier(team);
                     b14 = false;
                 }
             }
@@ -21454,24 +16406,25 @@ public class Navigation {
             r14 |= r24;
             r14 |= r15;
             r14 &= !b14;
-            o24 |= b14;
-            o15 |= b14;
+            if (targetLocation.equals(l14)) {
+                temp1 = true;
+                temp2 = r14;
+            }
         }
-        else {
-            o24 |= b14;
-            o15 |= b14;
-        }
+        o24 |= b14;
+        o15 |= b14;
 
-        if (rc.onTheMap(l18) && rc.canSenseLocation(l18)) {
+        if (rc.onTheMap(l18)) {
             if (rc.senseCloud(l18)) {
                 p18 = 1.5;
                 b18 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l18).getCurrentDirection();
-                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && currentDirection.equals(Direction.CENTER))) {
-                    p18 = rc.senseMapInfo(l18).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l18)) {
+                MapInfo mapInfo = rc.senseMapInfo(l18);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l18), currentDirection) > 0))) {
+                    p18 = mapInfo.getCooldownMultiplier(team);
                     b18 = false;
                 }
             }
@@ -21492,26 +16445,26 @@ public class Navigation {
             r18 |= r17;
             r18 |= r26;
             r18 &= !b18;
-            o27 |= b18;
-            o17 |= b18;
-            o26 |= b18;
+            if (targetLocation.equals(l18)) {
+                temp1 = true;
+                temp2 = r18;
+            }
         }
-        else {
-            o27 |= b18;
-            o17 |= b18;
-            o26 |= b18;
-        }
+        o27 |= b18;
+        o17 |= b18;
+        o26 |= b18;
 
-        if (rc.onTheMap(l37) && rc.canSenseLocation(l37)) {
+        if (rc.onTheMap(l37)) {
             if (rc.senseCloud(l37)) {
                 p37 = 1.5;
                 b37 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l37).getCurrentDirection();
-                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && currentDirection.equals(Direction.CENTER))) {
-                    p37 = rc.senseMapInfo(l37).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l37)) {
+                MapInfo mapInfo = rc.senseMapInfo(l37);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l37), currentDirection) > 0))) {
+                    p37 = mapInfo.getCooldownMultiplier(team);
                     b37 = false;
                 }
             }
@@ -21532,26 +16485,26 @@ public class Navigation {
             r37 |= r36;
             r37 |= r45;
             r37 &= !b37;
-            o27 |= b37;
-            o36 |= b37;
-            o45 |= b37;
+            if (targetLocation.equals(l37)) {
+                temp1 = true;
+                temp2 = r37;
+            }
         }
-        else {
-            o27 |= b37;
-            o36 |= b37;
-            o45 |= b37;
-        }
+        o27 |= b37;
+        o36 |= b37;
+        o45 |= b37;
 
-        if (rc.onTheMap(l8) && rc.canSenseLocation(l8)) {
+        if (rc.onTheMap(l8)) {
             if (rc.senseCloud(l8)) {
                 p8 = 1.5;
                 b8 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l8).getCurrentDirection();
-                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && currentDirection.equals(Direction.CENTER))) {
-                    p8 = rc.senseMapInfo(l8).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l8)) {
+                MapInfo mapInfo = rc.senseMapInfo(l8);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l8), currentDirection) > 0))) {
+                    p8 = mapInfo.getCooldownMultiplier(team);
                     b8 = false;
                 }
             }
@@ -21572,26 +16525,26 @@ public class Navigation {
             r8 |= r17;
             r8 |= r15;
             r8 &= !b8;
-            o16 |= b8;
-            o17 |= b8;
-            o15 |= b8;
+            if (targetLocation.equals(l8)) {
+                temp1 = true;
+                temp2 = r8;
+            }
         }
-        else {
-            o16 |= b8;
-            o17 |= b8;
-            o15 |= b8;
-        }
+        o16 |= b8;
+        o17 |= b8;
+        o15 |= b8;
 
-        if (rc.onTheMap(l28) && rc.canSenseLocation(l28)) {
+        if (rc.onTheMap(l28)) {
             if (rc.senseCloud(l28)) {
                 p28 = 1.5;
                 b28 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l28).getCurrentDirection();
-                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && currentDirection.equals(Direction.CENTER))) {
-                    p28 = rc.senseMapInfo(l28).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l28)) {
+                MapInfo mapInfo = rc.senseMapInfo(l28);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l28), currentDirection) > 0))) {
+                    p28 = mapInfo.getCooldownMultiplier(team);
                     b28 = false;
                 }
             }
@@ -21617,28 +16570,27 @@ public class Navigation {
             r28 |= r27;
             r28 |= r36;
             r28 &= !b28;
-            o37 |= b28;
-            o18 |= b28;
-            o27 |= b28;
-            o36 |= b28;
+            if (targetLocation.equals(l28)) {
+                temp1 = true;
+                temp2 = r28;
+            }
         }
-        else {
-            o37 |= b28;
-            o18 |= b28;
-            o27 |= b28;
-            o36 |= b28;
-        }
+        o37 |= b28;
+        o18 |= b28;
+        o27 |= b28;
+        o36 |= b28;
 
-        if (rc.onTheMap(l46) && rc.canSenseLocation(l46)) {
+        if (rc.onTheMap(l46)) {
             if (rc.senseCloud(l46)) {
                 p46 = 1.5;
                 b46 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l46).getCurrentDirection();
-                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && currentDirection.equals(Direction.CENTER))) {
-                    p46 = rc.senseMapInfo(l46).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l46)) {
+                MapInfo mapInfo = rc.senseMapInfo(l46);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l46), currentDirection) > 0))) {
+                    p46 = mapInfo.getCooldownMultiplier(team);
                     b46 = false;
                 }
             }
@@ -21664,28 +16616,27 @@ public class Navigation {
             r46 |= r45;
             r46 |= r54;
             r46 &= !b46;
-            o37 |= b46;
-            o36 |= b46;
-            o45 |= b46;
-            o54 |= b46;
+            if (targetLocation.equals(l46)) {
+                temp1 = true;
+                temp2 = r46;
+            }
         }
-        else {
-            o37 |= b46;
-            o36 |= b46;
-            o45 |= b46;
-            o54 |= b46;
-        }
+        o37 |= b46;
+        o36 |= b46;
+        o45 |= b46;
+        o54 |= b46;
 
-        if (rc.onTheMap(l7) && rc.canSenseLocation(l7)) {
+        if (rc.onTheMap(l7)) {
             if (rc.senseCloud(l7)) {
                 p7 = 1.5;
                 b7 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l7).getCurrentDirection();
-                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && currentDirection.equals(Direction.CENTER))) {
-                    p7 = rc.senseMapInfo(l7).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l7)) {
+                MapInfo mapInfo = rc.senseMapInfo(l7);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l7), currentDirection) > 0))) {
+                    p7 = mapInfo.getCooldownMultiplier(team);
                     b7 = false;
                 }
             }
@@ -21711,28 +16662,27 @@ public class Navigation {
             r7 |= r8;
             r7 |= r14;
             r7 &= !b7;
-            o15 |= b7;
-            o16 |= b7;
-            o8 |= b7;
-            o14 |= b7;
+            if (targetLocation.equals(l7)) {
+                temp1 = true;
+                temp2 = r7;
+            }
         }
-        else {
-            o15 |= b7;
-            o16 |= b7;
-            o8 |= b7;
-            o14 |= b7;
-        }
+        o15 |= b7;
+        o16 |= b7;
+        o8 |= b7;
+        o14 |= b7;
 
-        if (rc.onTheMap(l9) && rc.canSenseLocation(l9)) {
+        if (rc.onTheMap(l9)) {
             if (rc.senseCloud(l9)) {
                 p9 = 1.5;
                 b9 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l9).getCurrentDirection();
-                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && currentDirection.equals(Direction.CENTER))) {
-                    p9 = rc.senseMapInfo(l9).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l9)) {
+                MapInfo mapInfo = rc.senseMapInfo(l9);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l9), currentDirection) > 0))) {
+                    p9 = mapInfo.getCooldownMultiplier(team);
                     b9 = false;
                 }
             }
@@ -21758,28 +16708,27 @@ public class Navigation {
             r9 |= r8;
             r9 |= r16;
             r9 &= !b9;
-            o17 |= b9;
-            o18 |= b9;
-            o8 |= b9;
-            o16 |= b9;
+            if (targetLocation.equals(l9)) {
+                temp1 = true;
+                temp2 = r9;
+            }
         }
-        else {
-            o17 |= b9;
-            o18 |= b9;
-            o8 |= b9;
-            o16 |= b9;
-        }
+        o17 |= b9;
+        o18 |= b9;
+        o8 |= b9;
+        o16 |= b9;
 
-        if (rc.onTheMap(l19) && rc.canSenseLocation(l19)) {
+        if (rc.onTheMap(l19)) {
             if (rc.senseCloud(l19)) {
                 p19 = 1.5;
                 b19 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l19).getCurrentDirection();
-                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && currentDirection.equals(Direction.CENTER))) {
-                    p19 = rc.senseMapInfo(l19).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l19)) {
+                MapInfo mapInfo = rc.senseMapInfo(l19);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l19), currentDirection) > 0))) {
+                    p19 = mapInfo.getCooldownMultiplier(team);
                     b19 = false;
                 }
             }
@@ -21805,28 +16754,27 @@ public class Navigation {
             r19 |= r18;
             r19 |= r27;
             r19 &= !b19;
-            o28 |= b19;
-            o10 |= b19;
-            o18 |= b19;
-            o27 |= b19;
+            if (targetLocation.equals(l19)) {
+                temp1 = true;
+                temp2 = r19;
+            }
         }
-        else {
-            o28 |= b19;
-            o10 |= b19;
-            o18 |= b19;
-            o27 |= b19;
-        }
+        o28 |= b19;
+        o10 |= b19;
+        o18 |= b19;
+        o27 |= b19;
 
-        if (rc.onTheMap(l10) && rc.canSenseLocation(l10)) {
+        if (rc.onTheMap(l10)) {
             if (rc.senseCloud(l10)) {
                 p10 = 1.5;
                 b10 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l10).getCurrentDirection();
-                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && currentDirection.equals(Direction.CENTER))) {
-                    p10 = rc.senseMapInfo(l10).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l10)) {
+                MapInfo mapInfo = rc.senseMapInfo(l10);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l10), currentDirection) > 0))) {
+                    p10 = mapInfo.getCooldownMultiplier(team);
                     b10 = false;
                 }
             }
@@ -21852,28 +16800,27 @@ public class Navigation {
             r10 |= r9;
             r10 |= r17;
             r10 &= !b10;
-            o18 |= b10;
-            o19 |= b10;
-            o9 |= b10;
-            o17 |= b10;
+            if (targetLocation.equals(l10)) {
+                temp1 = true;
+                temp2 = r10;
+            }
         }
-        else {
-            o18 |= b10;
-            o19 |= b10;
-            o9 |= b10;
-            o17 |= b10;
-        }
+        o18 |= b10;
+        o19 |= b10;
+        o9 |= b10;
+        o17 |= b10;
 
-        if (rc.onTheMap(l6) && rc.canSenseLocation(l6)) {
+        if (rc.onTheMap(l6)) {
             if (rc.senseCloud(l6)) {
                 p6 = 1.5;
                 b6 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l6).getCurrentDirection();
-                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && currentDirection.equals(Direction.CENTER))) {
-                    p6 = rc.senseMapInfo(l6).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l6)) {
+                MapInfo mapInfo = rc.senseMapInfo(l6);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l6), currentDirection) > 0))) {
+                    p6 = mapInfo.getCooldownMultiplier(team);
                     b6 = false;
                 }
             }
@@ -21894,26 +16841,26 @@ public class Navigation {
             r6 |= r15;
             r6 |= r7;
             r6 &= !b6;
-            o14 |= b6;
-            o15 |= b6;
-            o7 |= b6;
+            if (targetLocation.equals(l6)) {
+                temp1 = true;
+                temp2 = r6;
+            }
         }
-        else {
-            o14 |= b6;
-            o15 |= b6;
-            o7 |= b6;
-        }
+        o14 |= b6;
+        o15 |= b6;
+        o7 |= b6;
 
-        if (rc.onTheMap(l55) && rc.canSenseLocation(l55)) {
+        if (rc.onTheMap(l55)) {
             if (rc.senseCloud(l55)) {
                 p55 = 1.5;
                 b55 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l55).getCurrentDirection();
-                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && currentDirection.equals(Direction.CENTER))) {
-                    p55 = rc.senseMapInfo(l55).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l55)) {
+                MapInfo mapInfo = rc.senseMapInfo(l55);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l55), currentDirection) > 0))) {
+                    p55 = mapInfo.getCooldownMultiplier(team);
                     b55 = false;
                 }
             }
@@ -21934,26 +16881,26 @@ public class Navigation {
             r55 |= r45;
             r55 |= r54;
             r55 &= !b55;
-            o46 |= b55;
-            o45 |= b55;
-            o54 |= b55;
+            if (targetLocation.equals(l55)) {
+                temp1 = true;
+                temp2 = r55;
+            }
         }
-        else {
-            o46 |= b55;
-            o45 |= b55;
-            o54 |= b55;
-        }
+        o46 |= b55;
+        o45 |= b55;
+        o54 |= b55;
 
-        if (rc.onTheMap(l5) && rc.canSenseLocation(l5)) {
+        if (rc.onTheMap(l5)) {
             if (rc.senseCloud(l5)) {
                 p5 = 1.5;
                 b5 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l5).getCurrentDirection();
-                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && currentDirection.equals(Direction.CENTER))) {
-                    p5 = rc.senseMapInfo(l5).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l5)) {
+                MapInfo mapInfo = rc.senseMapInfo(l5);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l5), currentDirection) > 0))) {
+                    p5 = mapInfo.getCooldownMultiplier(team);
                     b5 = false;
                 }
             }
@@ -21969,24 +16916,25 @@ public class Navigation {
             r5 |= r14;
             r5 |= r6;
             r5 &= !b5;
-            o14 |= b5;
-            o6 |= b5;
+            if (targetLocation.equals(l5)) {
+                temp1 = true;
+                temp2 = r5;
+            }
         }
-        else {
-            o14 |= b5;
-            o6 |= b5;
-        }
+        o14 |= b5;
+        o6 |= b5;
 
-        if (rc.onTheMap(l11) && rc.canSenseLocation(l11)) {
+        if (rc.onTheMap(l11)) {
             if (rc.senseCloud(l11)) {
                 p11 = 1.5;
                 b11 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l11).getCurrentDirection();
-                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && currentDirection.equals(Direction.CENTER))) {
-                    p11 = rc.senseMapInfo(l11).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l11)) {
+                MapInfo mapInfo = rc.senseMapInfo(l11);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l11), currentDirection) > 0))) {
+                    p11 = mapInfo.getCooldownMultiplier(team);
                     b11 = false;
                 }
             }
@@ -22007,26 +16955,26 @@ public class Navigation {
             r11 |= r10;
             r11 |= r18;
             r11 &= !b11;
-            o19 |= b11;
-            o10 |= b11;
-            o18 |= b11;
+            if (targetLocation.equals(l11)) {
+                temp1 = true;
+                temp2 = r11;
+            }
         }
-        else {
-            o19 |= b11;
-            o10 |= b11;
-            o18 |= b11;
-        }
+        o19 |= b11;
+        o10 |= b11;
+        o18 |= b11;
 
-        if (rc.onTheMap(l63) && rc.canSenseLocation(l63)) {
+        if (rc.onTheMap(l63)) {
             if (rc.senseCloud(l63)) {
                 p63 = 1.5;
                 b63 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l63).getCurrentDirection();
-                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && currentDirection.equals(Direction.CENTER))) {
-                    p63 = rc.senseMapInfo(l63).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l63)) {
+                MapInfo mapInfo = rc.senseMapInfo(l63);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l63), currentDirection) > 0))) {
+                    p63 = mapInfo.getCooldownMultiplier(team);
                     b63 = false;
                 }
             }
@@ -22042,24 +16990,25 @@ public class Navigation {
             r63 |= r55;
             r63 |= r54;
             r63 &= !b63;
-            o55 |= b63;
-            o54 |= b63;
+            if (targetLocation.equals(l63)) {
+                temp1 = true;
+                temp2 = r63;
+            }
         }
-        else {
-            o55 |= b63;
-            o54 |= b63;
-        }
+        o55 |= b63;
+        o54 |= b63;
 
-        if (rc.onTheMap(l2) && rc.canSenseLocation(l2)) {
+        if (rc.onTheMap(l2)) {
             if (rc.senseCloud(l2)) {
                 p2 = 1.5;
                 b2 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l2).getCurrentDirection();
-                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && currentDirection.equals(Direction.CENTER))) {
-                    p2 = rc.senseMapInfo(l2).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l2)) {
+                MapInfo mapInfo = rc.senseMapInfo(l2);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l2), currentDirection) > 0))) {
+                    p2 = mapInfo.getCooldownMultiplier(team);
                     b2 = false;
                 }
             }
@@ -22080,26 +17029,26 @@ public class Navigation {
             r2 |= r9;
             r2 |= r7;
             r2 &= !b2;
-            o8 |= b2;
-            o9 |= b2;
-            o7 |= b2;
+            if (targetLocation.equals(l2)) {
+                temp1 = true;
+                temp2 = r2;
+            }
         }
-        else {
-            o8 |= b2;
-            o9 |= b2;
-            o7 |= b2;
-        }
+        o8 |= b2;
+        o9 |= b2;
+        o7 |= b2;
 
-        if (rc.onTheMap(l38) && rc.canSenseLocation(l38)) {
+        if (rc.onTheMap(l38)) {
             if (rc.senseCloud(l38)) {
                 p38 = 1.5;
                 b38 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l38).getCurrentDirection();
-                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && currentDirection.equals(Direction.CENTER))) {
-                    p38 = rc.senseMapInfo(l38).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l38)) {
+                MapInfo mapInfo = rc.senseMapInfo(l38);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l38), currentDirection) > 0))) {
+                    p38 = mapInfo.getCooldownMultiplier(team);
                     b38 = false;
                 }
             }
@@ -22120,26 +17069,26 @@ public class Navigation {
             r38 |= r37;
             r38 |= r46;
             r38 &= !b38;
-            o28 |= b38;
-            o37 |= b38;
-            o46 |= b38;
+            if (targetLocation.equals(l38)) {
+                temp1 = true;
+                temp2 = r38;
+            }
         }
-        else {
-            o28 |= b38;
-            o37 |= b38;
-            o46 |= b38;
-        }
+        o28 |= b38;
+        o37 |= b38;
+        o46 |= b38;
 
-        if (rc.onTheMap(l29) && rc.canSenseLocation(l29)) {
+        if (rc.onTheMap(l29)) {
             if (rc.senseCloud(l29)) {
                 p29 = 1.5;
                 b29 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l29).getCurrentDirection();
-                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && currentDirection.equals(Direction.CENTER))) {
-                    p29 = rc.senseMapInfo(l29).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l29)) {
+                MapInfo mapInfo = rc.senseMapInfo(l29);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l29), currentDirection) > 0))) {
+                    p29 = mapInfo.getCooldownMultiplier(team);
                     b29 = false;
                 }
             }
@@ -22165,28 +17114,27 @@ public class Navigation {
             r29 |= r28;
             r29 |= r37;
             r29 &= !b29;
-            o38 |= b29;
-            o19 |= b29;
-            o28 |= b29;
-            o37 |= b29;
+            if (targetLocation.equals(l29)) {
+                temp1 = true;
+                temp2 = r29;
+            }
         }
-        else {
-            o38 |= b29;
-            o19 |= b29;
-            o28 |= b29;
-            o37 |= b29;
-        }
+        o38 |= b29;
+        o19 |= b29;
+        o28 |= b29;
+        o37 |= b29;
 
-        if (rc.onTheMap(l1) && rc.canSenseLocation(l1)) {
+        if (rc.onTheMap(l1)) {
             if (rc.senseCloud(l1)) {
                 p1 = 1.5;
                 b1 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l1).getCurrentDirection();
-                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && currentDirection.equals(Direction.CENTER))) {
-                    p1 = rc.senseMapInfo(l1).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l1)) {
+                MapInfo mapInfo = rc.senseMapInfo(l1);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l1), currentDirection) > 0))) {
+                    p1 = mapInfo.getCooldownMultiplier(team);
                     b1 = false;
                 }
             }
@@ -22212,28 +17160,27 @@ public class Navigation {
             r1 |= r2;
             r1 |= r6;
             r1 &= !b1;
-            o7 |= b1;
-            o8 |= b1;
-            o2 |= b1;
-            o6 |= b1;
+            if (targetLocation.equals(l1)) {
+                temp1 = true;
+                temp2 = r1;
+            }
         }
-        else {
-            o7 |= b1;
-            o8 |= b1;
-            o2 |= b1;
-            o6 |= b1;
-        }
+        o7 |= b1;
+        o8 |= b1;
+        o2 |= b1;
+        o6 |= b1;
 
-        if (rc.onTheMap(l3) && rc.canSenseLocation(l3)) {
+        if (rc.onTheMap(l3)) {
             if (rc.senseCloud(l3)) {
                 p3 = 1.5;
                 b3 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l3).getCurrentDirection();
-                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && currentDirection.equals(Direction.CENTER))) {
-                    p3 = rc.senseMapInfo(l3).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l3)) {
+                MapInfo mapInfo = rc.senseMapInfo(l3);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l3), currentDirection) > 0))) {
+                    p3 = mapInfo.getCooldownMultiplier(team);
                     b3 = false;
                 }
             }
@@ -22259,28 +17206,27 @@ public class Navigation {
             r3 |= r2;
             r3 |= r8;
             r3 &= !b3;
-            o9 |= b3;
-            o10 |= b3;
-            o2 |= b3;
-            o8 |= b3;
+            if (targetLocation.equals(l3)) {
+                temp1 = true;
+                temp2 = r3;
+            }
         }
-        else {
-            o9 |= b3;
-            o10 |= b3;
-            o2 |= b3;
-            o8 |= b3;
-        }
+        o9 |= b3;
+        o10 |= b3;
+        o2 |= b3;
+        o8 |= b3;
 
-        if (rc.onTheMap(l47) && rc.canSenseLocation(l47)) {
+        if (rc.onTheMap(l47)) {
             if (rc.senseCloud(l47)) {
                 p47 = 1.5;
                 b47 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l47).getCurrentDirection();
-                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && currentDirection.equals(Direction.CENTER))) {
-                    p47 = rc.senseMapInfo(l47).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l47)) {
+                MapInfo mapInfo = rc.senseMapInfo(l47);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l47), currentDirection) > 0))) {
+                    p47 = mapInfo.getCooldownMultiplier(team);
                     b47 = false;
                 }
             }
@@ -22306,28 +17252,27 @@ public class Navigation {
             r47 |= r46;
             r47 |= r55;
             r47 &= !b47;
-            o38 |= b47;
-            o37 |= b47;
-            o46 |= b47;
-            o55 |= b47;
+            if (targetLocation.equals(l47)) {
+                temp1 = true;
+                temp2 = r47;
+            }
         }
-        else {
-            o38 |= b47;
-            o37 |= b47;
-            o46 |= b47;
-            o55 |= b47;
-        }
+        o38 |= b47;
+        o37 |= b47;
+        o46 |= b47;
+        o55 |= b47;
 
-        if (rc.onTheMap(l56) && rc.canSenseLocation(l56)) {
+        if (rc.onTheMap(l56)) {
             if (rc.senseCloud(l56)) {
                 p56 = 1.5;
                 b56 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l56).getCurrentDirection();
-                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && currentDirection.equals(Direction.CENTER))) {
-                    p56 = rc.senseMapInfo(l56).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l56)) {
+                MapInfo mapInfo = rc.senseMapInfo(l56);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l56), currentDirection) > 0))) {
+                    p56 = mapInfo.getCooldownMultiplier(team);
                     b56 = false;
                 }
             }
@@ -22353,28 +17298,27 @@ public class Navigation {
             r56 |= r55;
             r56 |= r63;
             r56 &= !b56;
-            o47 |= b56;
-            o46 |= b56;
-            o55 |= b56;
-            o63 |= b56;
+            if (targetLocation.equals(l56)) {
+                temp1 = true;
+                temp2 = r56;
+            }
         }
-        else {
-            o47 |= b56;
-            o46 |= b56;
-            o55 |= b56;
-            o63 |= b56;
-        }
+        o47 |= b56;
+        o46 |= b56;
+        o55 |= b56;
+        o63 |= b56;
 
-        if (rc.onTheMap(l0) && rc.canSenseLocation(l0)) {
+        if (rc.onTheMap(l0)) {
             if (rc.senseCloud(l0)) {
                 p0 = 1.5;
                 b0 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l0).getCurrentDirection();
-                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && currentDirection.equals(Direction.CENTER))) {
-                    p0 = rc.senseMapInfo(l0).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l0)) {
+                MapInfo mapInfo = rc.senseMapInfo(l0);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l0), currentDirection) > 0))) {
+                    p0 = mapInfo.getCooldownMultiplier(team);
                     b0 = false;
                 }
             }
@@ -22400,28 +17344,27 @@ public class Navigation {
             r0 |= r1;
             r0 |= r5;
             r0 &= !b0;
-            o6 |= b0;
-            o7 |= b0;
-            o1 |= b0;
-            o5 |= b0;
+            if (targetLocation.equals(l0)) {
+                temp1 = true;
+                temp2 = r0;
+            }
         }
-        else {
-            o6 |= b0;
-            o7 |= b0;
-            o1 |= b0;
-            o5 |= b0;
-        }
+        o6 |= b0;
+        o7 |= b0;
+        o1 |= b0;
+        o5 |= b0;
 
-        if (rc.onTheMap(l20) && rc.canSenseLocation(l20)) {
+        if (rc.onTheMap(l20)) {
             if (rc.senseCloud(l20)) {
                 p20 = 1.5;
                 b20 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l20).getCurrentDirection();
-                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && currentDirection.equals(Direction.CENTER))) {
-                    p20 = rc.senseMapInfo(l20).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l20)) {
+                MapInfo mapInfo = rc.senseMapInfo(l20);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l20), currentDirection) > 0))) {
+                    p20 = mapInfo.getCooldownMultiplier(team);
                     b20 = false;
                 }
             }
@@ -22447,28 +17390,27 @@ public class Navigation {
             r20 |= r19;
             r20 |= r28;
             r20 &= !b20;
-            o29 |= b20;
-            o11 |= b20;
-            o19 |= b20;
-            o28 |= b20;
+            if (targetLocation.equals(l20)) {
+                temp1 = true;
+                temp2 = r20;
+            }
         }
-        else {
-            o29 |= b20;
-            o11 |= b20;
-            o19 |= b20;
-            o28 |= b20;
-        }
+        o29 |= b20;
+        o11 |= b20;
+        o19 |= b20;
+        o28 |= b20;
 
-        if (rc.onTheMap(l4) && rc.canSenseLocation(l4)) {
+        if (rc.onTheMap(l4)) {
             if (rc.senseCloud(l4)) {
                 p4 = 1.5;
                 b4 = false;
             } 
 
-            else {
-                Direction currentDirection = rc.senseMapInfo(l4).getCurrentDirection();
-                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && currentDirection.equals(Direction.CENTER))) {
-                    p4 = rc.senseMapInfo(l4).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l4)) {
+                MapInfo mapInfo = rc.senseMapInfo(l4);
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l4), currentDirection) > 0))) {
+                    p4 = mapInfo.getCooldownMultiplier(team);
                     b4 = false;
                 }
             }
@@ -22494,19 +17436,18 @@ public class Navigation {
             r4 |= r3;
             r4 |= r9;
             r4 &= !b4;
-            o10 |= b4;
-            o11 |= b4;
-            o3 |= b4;
-            o9 |= b4;
+            if (targetLocation.equals(l4)) {
+                temp1 = true;
+                temp2 = r4;
+            }
         }
-        else {
-            o10 |= b4;
-            o11 |= b4;
-            o3 |= b4;
-            o9 |= b4;
-        }
+        o10 |= b4;
+        o11 |= b4;
+        o3 |= b4;
+        o9 |= b4;
 
-        int dx = targetLocation.x - l34.x;
+        if (temp1 && temp2) {
+            int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -22628,10 +17569,6 @@ public class Navigation {
 
             case 0:
                 switch(dy) {
-                    case 0:
-                        if (v34 < 10000) {
-                            return d34;
-                        }
                     case 1:
                         if (v35 < 10000) {
                             return d35;
@@ -22699,6 +17636,7 @@ public class Navigation {
                 } break;
 
         }
+        }
     
         o0 = r0;
         o1 = r1;
@@ -22720,7 +17658,6 @@ public class Navigation {
             if (dist0 < localBest) {
                 localBest = dist0;
                 ans = d0;
-                best = l0;
             }
         }
 
@@ -22729,7 +17666,6 @@ public class Navigation {
             if (dist1 < localBest) {
                 localBest = dist1;
                 ans = d1;
-                best = l1;
             }
         }
 
@@ -22738,7 +17674,6 @@ public class Navigation {
             if (dist2 < localBest) {
                 localBest = dist2;
                 ans = d2;
-                best = l2;
             }
         }
 
@@ -22747,7 +17682,6 @@ public class Navigation {
             if (dist3 < localBest) {
                 localBest = dist3;
                 ans = d3;
-                best = l3;
             }
         }
 
@@ -22756,7 +17690,6 @@ public class Navigation {
             if (dist4 < localBest) {
                 localBest = dist4;
                 ans = d4;
-                best = l4;
             }
         }
 
@@ -22765,7 +17698,6 @@ public class Navigation {
             if (dist5 < localBest) {
                 localBest = dist5;
                 ans = d5;
-                best = l5;
             }
         }
 
@@ -22774,7 +17706,6 @@ public class Navigation {
             if (dist11 < localBest) {
                 localBest = dist11;
                 ans = d11;
-                best = l11;
             }
         }
 
@@ -22783,7 +17714,6 @@ public class Navigation {
             if (dist20 < localBest) {
                 localBest = dist20;
                 ans = d20;
-                best = l20;
             }
         }
 
@@ -22792,7 +17722,6 @@ public class Navigation {
             if (dist29 < localBest) {
                 localBest = dist29;
                 ans = d29;
-                best = l29;
             }
         }
 
@@ -22801,7 +17730,6 @@ public class Navigation {
             if (dist38 < localBest) {
                 localBest = dist38;
                 ans = d38;
-                best = l38;
             }
         }
 
@@ -22810,7 +17738,6 @@ public class Navigation {
             if (dist47 < localBest) {
                 localBest = dist47;
                 ans = d47;
-                best = l47;
             }
         }
 
@@ -22819,7 +17746,6 @@ public class Navigation {
             if (dist56 < localBest) {
                 localBest = dist56;
                 ans = d56;
-                best = l56;
             }
         }
 
@@ -22828,722 +17754,28 @@ public class Navigation {
             if (dist63 < localBest) {
                 localBest = dist63;
                 ans = d63;
-                best = l63;
             }
         }
 
-        draws7();
-        rc.setIndicatorDot(best, 0, 0, 255);
         if (localBest < globalBest) {
             globalBest = localBest;
+            bug.reset();
             return ans;
         }
-        return getBestDirectionWallFollow7(ans);
-    }
 
-    private Direction getBestDirectionWallFollow7(Direction prev) throws GameActionException {
-        Direction ans = Direction.CENTER;
-        int minDistance = closestWallLocations.isEmpty() ? 1000000 : currentLocation.distanceSquaredTo(closestWallLocations.get(0));
-    
-        if (b0) {
-            int distance = currentLocation.distanceSquaredTo(l0);
-            if (distance == minDistance) {
-                closestWallLocations.add(l0);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l0);
-                minDistance = distance;
-            }
-        }
-
-        if (b1) {
-            int distance = currentLocation.distanceSquaredTo(l1);
-            if (distance == minDistance) {
-                closestWallLocations.add(l1);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l1);
-                minDistance = distance;
-            }
-        }
-
-        if (b2) {
-            int distance = currentLocation.distanceSquaredTo(l2);
-            if (distance == minDistance) {
-                closestWallLocations.add(l2);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l2);
-                minDistance = distance;
-            }
-        }
-
-        if (b3) {
-            int distance = currentLocation.distanceSquaredTo(l3);
-            if (distance == minDistance) {
-                closestWallLocations.add(l3);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l3);
-                minDistance = distance;
-            }
-        }
-
-        if (b4) {
-            int distance = currentLocation.distanceSquaredTo(l4);
-            if (distance == minDistance) {
-                closestWallLocations.add(l4);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l4);
-                minDistance = distance;
-            }
-        }
-
-        if (b5) {
-            int distance = currentLocation.distanceSquaredTo(l5);
-            if (distance == minDistance) {
-                closestWallLocations.add(l5);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l5);
-                minDistance = distance;
-            }
-        }
-
-        if (b6) {
-            int distance = currentLocation.distanceSquaredTo(l6);
-            if (distance == minDistance) {
-                closestWallLocations.add(l6);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l6);
-                minDistance = distance;
-            }
-        }
-
-        if (b7) {
-            int distance = currentLocation.distanceSquaredTo(l7);
-            if (distance == minDistance) {
-                closestWallLocations.add(l7);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l7);
-                minDistance = distance;
-            }
-        }
-
-        if (b8) {
-            int distance = currentLocation.distanceSquaredTo(l8);
-            if (distance == minDistance) {
-                closestWallLocations.add(l8);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l8);
-                minDistance = distance;
-            }
-        }
-
-        if (b9) {
-            int distance = currentLocation.distanceSquaredTo(l9);
-            if (distance == minDistance) {
-                closestWallLocations.add(l9);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l9);
-                minDistance = distance;
-            }
-        }
-
-        if (b10) {
-            int distance = currentLocation.distanceSquaredTo(l10);
-            if (distance == minDistance) {
-                closestWallLocations.add(l10);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l10);
-                minDistance = distance;
-            }
-        }
-
-        if (b11) {
-            int distance = currentLocation.distanceSquaredTo(l11);
-            if (distance == minDistance) {
-                closestWallLocations.add(l11);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l11);
-                minDistance = distance;
-            }
-        }
-
-        if (b14) {
-            int distance = currentLocation.distanceSquaredTo(l14);
-            if (distance == minDistance) {
-                closestWallLocations.add(l14);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l14);
-                minDistance = distance;
-            }
-        }
-
-        if (b15) {
-            int distance = currentLocation.distanceSquaredTo(l15);
-            if (distance == minDistance) {
-                closestWallLocations.add(l15);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l15);
-                minDistance = distance;
-            }
-        }
-
-        if (b16) {
-            int distance = currentLocation.distanceSquaredTo(l16);
-            if (distance == minDistance) {
-                closestWallLocations.add(l16);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l16);
-                minDistance = distance;
-            }
-        }
-
-        if (b17) {
-            int distance = currentLocation.distanceSquaredTo(l17);
-            if (distance == minDistance) {
-                closestWallLocations.add(l17);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l17);
-                minDistance = distance;
-            }
-        }
-
-        if (b18) {
-            int distance = currentLocation.distanceSquaredTo(l18);
-            if (distance == minDistance) {
-                closestWallLocations.add(l18);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l18);
-                minDistance = distance;
-            }
-        }
-
-        if (b19) {
-            int distance = currentLocation.distanceSquaredTo(l19);
-            if (distance == minDistance) {
-                closestWallLocations.add(l19);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l19);
-                minDistance = distance;
-            }
-        }
-
-        if (b20) {
-            int distance = currentLocation.distanceSquaredTo(l20);
-            if (distance == minDistance) {
-                closestWallLocations.add(l20);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l20);
-                minDistance = distance;
-            }
-        }
-
-        if (b24) {
-            int distance = currentLocation.distanceSquaredTo(l24);
-            if (distance == minDistance) {
-                closestWallLocations.add(l24);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l24);
-                minDistance = distance;
-            }
-        }
-
-        if (b25) {
-            int distance = currentLocation.distanceSquaredTo(l25);
-            if (distance == minDistance) {
-                closestWallLocations.add(l25);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l25);
-                minDistance = distance;
-            }
-        }
-
-        if (b26) {
-            int distance = currentLocation.distanceSquaredTo(l26);
-            if (distance == minDistance) {
-                closestWallLocations.add(l26);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l26);
-                minDistance = distance;
-            }
-        }
-
-        if (b27) {
-            int distance = currentLocation.distanceSquaredTo(l27);
-            if (distance == minDistance) {
-                closestWallLocations.add(l27);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l27);
-                minDistance = distance;
-            }
-        }
-
-        if (b28) {
-            int distance = currentLocation.distanceSquaredTo(l28);
-            if (distance == minDistance) {
-                closestWallLocations.add(l28);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l28);
-                minDistance = distance;
-            }
-        }
-
-        if (b29) {
-            int distance = currentLocation.distanceSquaredTo(l29);
-            if (distance == minDistance) {
-                closestWallLocations.add(l29);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l29);
-                minDistance = distance;
-            }
-        }
-
-        if (b35) {
-            int distance = currentLocation.distanceSquaredTo(l35);
-            if (distance == minDistance) {
-                closestWallLocations.add(l35);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l35);
-                minDistance = distance;
-            }
-        }
-
-        if (b36) {
-            int distance = currentLocation.distanceSquaredTo(l36);
-            if (distance == minDistance) {
-                closestWallLocations.add(l36);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l36);
-                minDistance = distance;
-            }
-        }
-
-        if (b37) {
-            int distance = currentLocation.distanceSquaredTo(l37);
-            if (distance == minDistance) {
-                closestWallLocations.add(l37);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l37);
-                minDistance = distance;
-            }
-        }
-
-        if (b38) {
-            int distance = currentLocation.distanceSquaredTo(l38);
-            if (distance == minDistance) {
-                closestWallLocations.add(l38);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l38);
-                minDistance = distance;
-            }
-        }
-
-        if (b44) {
-            int distance = currentLocation.distanceSquaredTo(l44);
-            if (distance == minDistance) {
-                closestWallLocations.add(l44);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l44);
-                minDistance = distance;
-            }
-        }
-
-        if (b45) {
-            int distance = currentLocation.distanceSquaredTo(l45);
-            if (distance == minDistance) {
-                closestWallLocations.add(l45);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l45);
-                minDistance = distance;
-            }
-        }
-
-        if (b46) {
-            int distance = currentLocation.distanceSquaredTo(l46);
-            if (distance == minDistance) {
-                closestWallLocations.add(l46);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l46);
-                minDistance = distance;
-            }
-        }
-
-        if (b47) {
-            int distance = currentLocation.distanceSquaredTo(l47);
-            if (distance == minDistance) {
-                closestWallLocations.add(l47);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l47);
-                minDistance = distance;
-            }
-        }
-
-        if (b54) {
-            int distance = currentLocation.distanceSquaredTo(l54);
-            if (distance == minDistance) {
-                closestWallLocations.add(l54);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l54);
-                minDistance = distance;
-            }
-        }
-
-        if (b55) {
-            int distance = currentLocation.distanceSquaredTo(l55);
-            if (distance == minDistance) {
-                closestWallLocations.add(l55);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l55);
-                minDistance = distance;
-            }
-        }
-
-        if (b56) {
-            int distance = currentLocation.distanceSquaredTo(l56);
-            if (distance == minDistance) {
-                closestWallLocations.add(l56);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l56);
-                minDistance = distance;
-            }
-        }
-
-        if (b63) {
-            int distance = currentLocation.distanceSquaredTo(l63);
-            if (distance == minDistance) {
-                closestWallLocations.add(l63);
-            }
-            if (distance < minDistance) {
-                closestWallLocations.clear();
-                closestWallLocations.add(l63);
-                minDistance = distance;
-            }
-        }
-
-        if (minDistance > 2) { return prev; }
-        int maxDot = -999999;
-        minDistance = 1000000;
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            Direction vertical = currentLocation.directionTo(closestWallLocation);
-
-            Direction tangent1 = vertical.rotateLeft().rotateLeft();
-            Direction tangent2 = vertical.rotateRight().rotateRight();
-
-            int dx = lastDirection.getDeltaX();
-            int dy = lastDirection.getDeltaY();
-
-            int dot1 = tangent1.getDeltaX() * dx + tangent1.getDeltaY() * dy;
-            int dot2 = tangent2.getDeltaX() * dx + tangent2.getDeltaY() * dy;
-
-            int distance1 = currentLocation.add(tangent1).distanceSquaredTo(targetLocation);
-            int distance2 = currentLocation.add(tangent2).distanceSquaredTo(targetLocation);
-
-            if (!rc.canMove(tangent1)) {
-                dot1 = -1000000;
-            }
-
-            if (!rc.canMove(tangent2)) {
-                dot2 = -1000000;
-            }
-
-            if (dot1 > maxDot) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 > maxDot) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-
-            if (dot1 == maxDot && distance1 < minDistance) {
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }
-
-            if (dot2 == maxDot && distance2 < minDistance) {
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }
-        }
-        draws7();
-        for (MapLocation closestWallLocation : closestWallLocations) {
-            rc.setIndicatorDot(closestWallLocation, 255, 0, 0);
-        }
-        return ans;
-    }
-
-    private void draws7() throws GameActionException {
-    
-        rc.setIndicatorDot(l0, 255, 0, 255);
-        if (b0) {
-            rc.setIndicatorDot(l0, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l1, 255, 0, 255);
-        if (b1) {
-            rc.setIndicatorDot(l1, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l2, 255, 0, 255);
-        if (b2) {
-            rc.setIndicatorDot(l2, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l3, 255, 0, 255);
-        if (b3) {
-            rc.setIndicatorDot(l3, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l4, 255, 0, 255);
-        if (b4) {
-            rc.setIndicatorDot(l4, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l5, 255, 0, 255);
-        if (b5) {
-            rc.setIndicatorDot(l5, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l6, 255, 0, 255);
-        if (b6) {
-            rc.setIndicatorDot(l6, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l7, 255, 0, 255);
-        if (b7) {
-            rc.setIndicatorDot(l7, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l8, 255, 0, 255);
-        if (b8) {
-            rc.setIndicatorDot(l8, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l9, 255, 0, 255);
-        if (b9) {
-            rc.setIndicatorDot(l9, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l10, 255, 0, 255);
-        if (b10) {
-            rc.setIndicatorDot(l10, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l11, 255, 0, 255);
-        if (b11) {
-            rc.setIndicatorDot(l11, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l14, 255, 0, 255);
-        if (b14) {
-            rc.setIndicatorDot(l14, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l15, 255, 0, 255);
-        if (b15) {
-            rc.setIndicatorDot(l15, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l16, 255, 0, 255);
-        if (b16) {
-            rc.setIndicatorDot(l16, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l17, 255, 0, 255);
-        if (b17) {
-            rc.setIndicatorDot(l17, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l18, 255, 0, 255);
-        if (b18) {
-            rc.setIndicatorDot(l18, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l19, 255, 0, 255);
-        if (b19) {
-            rc.setIndicatorDot(l19, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l20, 255, 0, 255);
-        if (b20) {
-            rc.setIndicatorDot(l20, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l24, 255, 0, 255);
-        if (b24) {
-            rc.setIndicatorDot(l24, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l25, 255, 0, 255);
-        if (b25) {
-            rc.setIndicatorDot(l25, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l26, 255, 0, 255);
-        if (b26) {
-            rc.setIndicatorDot(l26, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l27, 255, 0, 255);
-        if (b27) {
-            rc.setIndicatorDot(l27, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l28, 255, 0, 255);
-        if (b28) {
-            rc.setIndicatorDot(l28, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l29, 255, 0, 255);
-        if (b29) {
-            rc.setIndicatorDot(l29, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l35, 255, 0, 255);
-        if (b35) {
-            rc.setIndicatorDot(l35, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l36, 255, 0, 255);
-        if (b36) {
-            rc.setIndicatorDot(l36, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l37, 255, 0, 255);
-        if (b37) {
-            rc.setIndicatorDot(l37, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l38, 255, 0, 255);
-        if (b38) {
-            rc.setIndicatorDot(l38, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l44, 255, 0, 255);
-        if (b44) {
-            rc.setIndicatorDot(l44, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l45, 255, 0, 255);
-        if (b45) {
-            rc.setIndicatorDot(l45, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l46, 255, 0, 255);
-        if (b46) {
-            rc.setIndicatorDot(l46, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l47, 255, 0, 255);
-        if (b47) {
-            rc.setIndicatorDot(l47, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l54, 255, 0, 255);
-        if (b54) {
-            rc.setIndicatorDot(l54, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l55, 255, 0, 255);
-        if (b55) {
-            rc.setIndicatorDot(l55, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l56, 255, 0, 255);
-        if (b56) {
-            rc.setIndicatorDot(l56, 255, 255, 255);
-        }
-
-        rc.setIndicatorDot(l63, 255, 0, 255);
-        if (b63) {
-            rc.setIndicatorDot(l63, 255, 255, 255);
-        }
-
+        bug.move(targetLocation);
+        return null;
     }
 
     public Direction getBestDirection(MapLocation targetLocation) throws GameActionException {
+        previousLocation = currentLocation;
         currentLocation = rc.getLocation();
+        lastDirection = previousLocation == null ? Direction.CENTER : previousLocation.directionTo(currentLocation);
 
-        globalBest = 1000000;
         if (!targetLocation.equals(this.targetLocation)) {
             globalBest = 1000000;
             this.targetLocation = targetLocation;
             lastDirection = Direction.CENTER;
-            closestWallLocations.clear();
         }
 
         int dx, dy;
@@ -23565,41 +17797,33 @@ public class Navigation {
             if (dy > 0) {
                 ans = getBestDirection0();
             }
-
             else {
                 ans = getBestDirection4();
             }
         }
-
         else if (prod > Math.cos(Math.toRadians(67.5))) {
              if (dx > 0 && dy > 0) {
                 ans = getBestDirection1();
              }
-
              if (dx > 0 && dy < 0) {
                 ans = getBestDirection3();
              }
-
              if (dx < 0 && dy < 0) {
                 ans = getBestDirection5();
              }
-
              if (dx < 0 && dy > 0) {
                 ans = getBestDirection7();
              }
         }
-
         else {
             if (dx > 0) {
                 ans = getBestDirection2();
             }
-
             else {
                 ans = getBestDirection6();
             }
         }
 
-        lastDirection = ans;
         return ans;
     }
 

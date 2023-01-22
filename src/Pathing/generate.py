@@ -76,16 +76,17 @@ for i in range(8):
 
         if (u.x, u.y) != (0, 0):
             relaxations[i] += f'''
-        if (rc.onTheMap(l{u.i}) && rc.canSenseLocation(l{u.i})) {{
+        if (rc.onTheMap(l{u.i})) {{
             if (rc.senseCloud(l{u.i})) {{
                 p{u.i} = 1.5;
                 b{u.i} = false;
             }} 
 
-            else {{
-                Direction currentDirection = rc.senseMapInfo(l{u.i}).getCurrentDirection();
-                if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && currentDirection.equals(Direction.CENTER))) {{
-                    p{u.i} = rc.senseMapInfo(l{u.i}).getCooldownMultiplier(team);
+            else if (rc.canSenseLocation(l{u.i})) {{
+                MapInfo mapInfo = rc.senseMapInfo(l{u.i});
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && (currentDirection.equals(Direction.CENTER) || dot(currentLocation.directionTo(l{u.i}), currentDirection) > 0))) {{
+                    p{u.i} = mapInfo.getCooldownMultiplier(team);
                     b{u.i} = false;
                 }}
             }}'''
@@ -129,15 +130,17 @@ for i in range(8):
             r{u.i} |= r{v.i};'''
                     if v.i != 34:
                         temp_str2 += f'''
-            o{v.i} |= b{u.i};'''
+        o{v.i} |= b{u.i};'''
 
         if (u.x, u.y) != (0, 0):
             relaxations[i] += f'''
             {temp_str1}
-            r{u.i} &= !b{u.i};{temp_str2}
-        }}
-        else {{{temp_str2}
-        }}
+            r{u.i} &= !b{u.i};
+            if (targetLocation.equals(l{u.i})) {{
+                temp1 = true;
+                temp2 = r{u.i};
+            }}
+        }}{temp_str2}
 '''
     
     insides[i] += f'''    int dx = targetLocation.x - l{C[M][M].i}.x;
@@ -164,7 +167,8 @@ for i in range(8):
             if x ** 2 + y ** 2 <= RADIUS_SQUARED:
                 c = C[x+M][y+M]
 
-                insides[i] += f'''
+                if c.i != 34:
+                    insides[i] += f'''
                     case {y}:
                         if (v{c.i} < 10000) {{
                             return d{c.i};
@@ -177,7 +181,6 @@ for i in range(8):
             if (dist{c.i} < localBest) {{
                 localBest = dist{c.i};
                 ans = d{c.i};
-                best = l{c.i};
             }}
         }}
 '''
@@ -211,42 +214,6 @@ for i in range(8):
                 getEdges[i] += f'''
         o{c.i} = r{c.i};'''
 
-findWall = [''] * 8;
-draws = [''] * 8;
-
-for i in range(8):
-    for x in range(-M, M+1):
-        for y in range(-M, M+1):
-            if i == 0 and not (y >= 0): continue
-            if i == 1 and not (-x <= y): continue
-            if i == 2 and not (x >= 0): continue
-            if i == 3 and not (x >= y): continue
-            if i == 4 and not (y <= 0): continue
-            if i == 5 and not (-x >= y): continue
-            if i == 6 and not (x <= 0): continue
-            if i == 7 and not (x <= y): continue
-            if x ** 2 + y ** 2 <= RADIUS_SQUARED and (x != 0 or y != 0):
-                c = C[x+M][y+M]
-                findWall[i] += f'''
-        if (b{c.i}) {{
-            int distance = currentLocation.distanceSquaredTo(l{c.i});
-            if (distance == minDistance) {{
-                closestWallLocations.add(l{c.i});
-            }}
-            if (distance < minDistance) {{
-                closestWallLocations.clear();
-                closestWallLocations.add(l{c.i});
-                minDistance = distance;
-            }}
-        }}
-'''
-                draws[i] += f'''
-        rc.setIndicatorDot(l{c.i}, 255, 0, 255);
-        if (b{c.i}) {{
-            rc.setIndicatorDot(l{c.i}, 255, 255, 255);
-        }}
-'''
-
 file_name = 'Navigation'
 
 f = open(f'{file_name}.java', 'w')
@@ -255,12 +222,10 @@ f.write(f'''package Pathing;
 
 import battlecode.common.*;
 
-import java.util.ArrayList;
-
 public class {file_name} {{
-
-    private RobotController rc;
-    private Team team;
+    private final RobotController rc;
+    private final Team team;
+    private final Bug bug;
 
     private MapLocation previousLocation;
     private MapLocation currentLocation;
@@ -268,116 +233,53 @@ public class {file_name} {{
     private MapLocation targetLocation;
 
     private Direction lastDirection;
-    private ArrayList<MapLocation> closestWallLocations;
 
     private double globalBest = 1000000;
 
     public {file_name} (RobotController rc) {{
         this.rc = rc;
         team = rc.getTeam();
-
-        closestWallLocations = new ArrayList<MapLocation>();
+        bug = new Bug(rc);
     }}
     {declare}''')
 
 for i in range(8):
     f.write(f'''
     private Direction getBestDirection{i}() throws GameActionException {{
-        MapLocation best = currentLocation;
         double localBest = 1000000.0;
+        boolean temp1 = false;
+        boolean temp2 = false;
         l{C[M][M].i} = currentLocation;
         v{C[M][M].i} = 0;
         d{C[M][M].i} = Direction.CENTER;
         r{C[M][M].i} = true;{assigns[i]}
     {relaxations[i]}
-    {insides[i]}
+        if (temp1 && temp2) {{
+        {insides[i]}
+        }}
     {getEdges[i]}
     {outsides[i]}
-        draws{i}();
-        rc.setIndicatorDot(best, 0, 0, 255);
         if (localBest < globalBest) {{
             globalBest = localBest;
+            bug.reset();
             return ans;
         }}
-        return getBestDirectionWallFollow{i}(ans);
-    }}
 
-    private Direction getBestDirectionWallFollow{i}(Direction prev) throws GameActionException {{
-        Direction ans = Direction.CENTER;
-        int minDistance = closestWallLocations.isEmpty() ? 1000000 : currentLocation.distanceSquaredTo(closestWallLocations.get(0));
-    {findWall[i]}
-        if (minDistance > 2) {{ return prev; }}
-        int maxDot = -999999;
-        minDistance = 1000000;
-        for (MapLocation closestWallLocation : closestWallLocations) {{
-            Direction vertical = currentLocation.directionTo(closestWallLocation);
-
-            Direction tangent1 = vertical.rotateLeft().rotateLeft();
-            Direction tangent2 = vertical.rotateRight().rotateRight();
-
-            int dx = lastDirection.getDeltaX();
-            int dy = lastDirection.getDeltaY();
-
-            int dot1 = tangent1.getDeltaX() * dx + tangent1.getDeltaY() * dy;
-            int dot2 = tangent2.getDeltaX() * dx + tangent2.getDeltaY() * dy;
-
-            int distance1 = currentLocation.add(tangent1).distanceSquaredTo(targetLocation);
-            int distance2 = currentLocation.add(tangent2).distanceSquaredTo(targetLocation);
-
-            if (!rc.canMove(tangent1)) {{
-                dot1 = -1000000;
-            }}
-
-            if (!rc.canMove(tangent2)) {{
-                dot2 = -1000000;
-            }}
-
-            if (dot1 > maxDot) {{
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }}
-
-            if (dot2 > maxDot) {{
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }}
-
-            if (dot1 == maxDot && distance1 < minDistance) {{
-                maxDot = dot1;
-                minDistance = distance1;
-                ans = tangent1;
-            }}
-
-            if (dot2 == maxDot && distance2 < minDistance) {{
-                maxDot = dot2;
-                minDistance = distance2;
-                ans = tangent2;
-            }}
-        }}
-        draws{i}();
-        for (MapLocation closestWallLocation : closestWallLocations) {{
-            rc.setIndicatorDot(closestWallLocation, 255, 0, 0);
-        }}
-        return ans;
-    }}
-
-    private void draws{i}() throws GameActionException {{
-    {draws[i]}
+        bug.move(targetLocation);
+        return null;
     }}
 ''')
 
 f.write(f'''
     public Direction getBestDirection(MapLocation targetLocation) throws GameActionException {{
+        previousLocation = currentLocation;
         currentLocation = rc.getLocation();
+        lastDirection = previousLocation == null ? Direction.CENTER : previousLocation.directionTo(currentLocation);
 
-        globalBest = 1000000;
         if (!targetLocation.equals(this.targetLocation)) {{
             globalBest = 1000000;
             this.targetLocation = targetLocation;
             lastDirection = Direction.CENTER;
-            closestWallLocations.clear();
         }}
 
         int dx, dy;
@@ -399,41 +301,33 @@ f.write(f'''
             if (dy > 0) {{
                 ans = getBestDirection0();
             }}
-
             else {{
                 ans = getBestDirection4();
             }}
         }}
-
         else if (prod > Math.cos(Math.toRadians(67.5))) {{
              if (dx > 0 && dy > 0) {{
                 ans = getBestDirection1();
              }}
-
              if (dx > 0 && dy < 0) {{
                 ans = getBestDirection3();
              }}
-
              if (dx < 0 && dy < 0) {{
                 ans = getBestDirection5();
              }}
-
              if (dx < 0 && dy > 0) {{
                 ans = getBestDirection7();
              }}
         }}
-
         else {{
             if (dx > 0) {{
                 ans = getBestDirection2();
             }}
-
             else {{
                 ans = getBestDirection6();
             }}
         }}
 
-        lastDirection = ans;
         return ans;
     }}
 
