@@ -1,4 +1,4 @@
-package Pathing;
+package MeteorV2;
 
 import battlecode.common.*;
 
@@ -15,6 +15,8 @@ public class Navigation {
     private Direction lastDirection;
 
     private double globalBest = 1000000;
+
+    private int temp10;
 
     public Navigation (RobotController rc) {
         this.rc = rc;
@@ -573,8 +575,6 @@ public class Navigation {
 
     private Direction getBestDirection0() throws GameActionException {
         double localBest = 1000000.0;
-        boolean temp1 = false;
-        boolean temp2 = false;
         boolean temp3 = false;
         l34 = currentLocation;
         v34 = 0;
@@ -879,11 +879,6 @@ public class Navigation {
                 r25 |= r34;
                 r25 |= r35;
                 r25 &= !b25;
-
-                if (targetLocation.equals(l25) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r25;
-                }
             }
         }
         
@@ -927,11 +922,6 @@ public class Navigation {
                 r35 |= r34;
                 r35 |= r43;
                 r35 &= !b35;
-
-                if (targetLocation.equals(l35) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r35;
-                }
             }
         }
         
@@ -970,11 +960,6 @@ public class Navigation {
                 r43 |= r35;
                 r43 |= r34;
                 r43 &= !b43;
-
-                if (targetLocation.equals(l43) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r43;
-                }
             }
         }
         
@@ -1018,11 +1003,6 @@ public class Navigation {
                 r26 |= r25;
                 r26 |= r34;
                 r26 &= !b26;
-
-                if (targetLocation.equals(l26) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r26;
-                }
             }
         }
         
@@ -1067,11 +1047,6 @@ public class Navigation {
                 r44 |= r34;
                 r44 |= r43;
                 r44 &= !b44;
-
-                if (targetLocation.equals(l44) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r44;
-                }
             }
         }
         
@@ -1110,11 +1085,6 @@ public class Navigation {
                 r52 |= r44;
                 r52 |= r43;
                 r52 &= !b52;
-
-                if (targetLocation.equals(l52) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r52;
-                }
             }
         }
         
@@ -1159,11 +1129,6 @@ public class Navigation {
                 r36 |= r35;
                 r36 |= r44;
                 r36 &= !b36;
-
-                if (targetLocation.equals(l36) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r36;
-                }
             }
         }
         
@@ -1203,11 +1168,6 @@ public class Navigation {
                 r16 |= r25;
                 r16 |= r26;
                 r16 &= !b16;
-
-                if (targetLocation.equals(l16) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r16;
-                }
             }
         }
         
@@ -1258,11 +1218,6 @@ public class Navigation {
                 r53 |= r43;
                 r53 |= r52;
                 r53 &= !b53;
-
-                if (targetLocation.equals(l53) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r53;
-                }
             }
         }
         
@@ -1315,11 +1270,6 @@ public class Navigation {
                 r27 |= r26;
                 r27 |= r35;
                 r27 &= !b27;
-
-                if (targetLocation.equals(l27) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r27;
-                }
             }
         }
         
@@ -1372,11 +1322,6 @@ public class Navigation {
                 r17 |= r16;
                 r17 |= r25;
                 r17 &= !b17;
-
-                if (targetLocation.equals(l17) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r17;
-                }
             }
         }
         
@@ -1429,11 +1374,6 @@ public class Navigation {
                 r45 |= r44;
                 r45 |= r53;
                 r45 &= !b45;
-
-                if (targetLocation.equals(l45) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r45;
-                }
             }
         }
         
@@ -1480,11 +1420,6 @@ public class Navigation {
                 r18 |= r17;
                 r18 |= r26;
                 r18 &= !b18;
-
-                if (targetLocation.equals(l18) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r18;
-                }
             }
         }
         
@@ -1530,11 +1465,6 @@ public class Navigation {
                 r54 |= r44;
                 r54 |= r53;
                 r54 &= !b54;
-
-                if (targetLocation.equals(l54) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r54;
-                }
             }
         }
         
@@ -1574,11 +1504,6 @@ public class Navigation {
                 r60 |= r53;
                 r60 |= r52;
                 r60 &= !b60;
-
-                if (targetLocation.equals(l60) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r60;
-                }
             }
         }
         
@@ -1623,11 +1548,6 @@ public class Navigation {
                 r37 |= r36;
                 r37 |= r45;
                 r37 &= !b37;
-
-                if (targetLocation.equals(l37) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r37;
-                }
             }
         }
         
@@ -1667,11 +1587,6 @@ public class Navigation {
                 r8 |= r16;
                 r8 |= r17;
                 r8 &= !b8;
-
-                if (targetLocation.equals(l8) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r8;
-                }
             }
         }
         
@@ -1722,11 +1637,6 @@ public class Navigation {
                 r61 |= r52;
                 r61 |= r60;
                 r61 &= !b61;
-
-                if (targetLocation.equals(l61) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r61;
-                }
             }
         }
         
@@ -1779,11 +1689,6 @@ public class Navigation {
                 r46 |= r45;
                 r46 |= r54;
                 r46 &= !b46;
-
-                if (targetLocation.equals(l46) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r46;
-                }
             }
         }
         
@@ -1836,11 +1741,6 @@ public class Navigation {
                 r9 |= r8;
                 r9 |= r16;
                 r9 &= !b9;
-
-                if (targetLocation.equals(l9) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r9;
-                }
             }
         }
         
@@ -1893,11 +1793,6 @@ public class Navigation {
                 r28 |= r27;
                 r28 |= r36;
                 r28 &= !b28;
-
-                if (targetLocation.equals(l28) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r28;
-                }
             }
         }
         
@@ -1950,11 +1845,6 @@ public class Navigation {
                 r10 |= r9;
                 r10 |= r17;
                 r10 &= !b10;
-
-                if (targetLocation.equals(l10) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r10;
-                }
             }
         }
         
@@ -2007,11 +1897,6 @@ public class Navigation {
                 r62 |= r53;
                 r62 |= r61;
                 r62 &= !b62;
-
-                if (targetLocation.equals(l62) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r62;
-                }
             }
         }
         
@@ -2064,11 +1949,6 @@ public class Navigation {
                 r55 |= r54;
                 r55 |= r62;
                 r55 &= !b55;
-
-                if (targetLocation.equals(l55) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r55;
-                }
             }
         }
         
@@ -2121,11 +2001,6 @@ public class Navigation {
                 r19 |= r18;
                 r19 |= r27;
                 r19 &= !b19;
-
-                if (targetLocation.equals(l19) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r19;
-                }
             }
         }
         
@@ -2172,11 +2047,6 @@ public class Navigation {
                 r63 |= r54;
                 r63 |= r62;
                 r63 &= !b63;
-
-                if (targetLocation.equals(l63) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r63;
-                }
             }
         }
         
@@ -2222,11 +2092,6 @@ public class Navigation {
                 r11 |= r10;
                 r11 |= r18;
                 r11 &= !b11;
-
-                if (targetLocation.equals(l11) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r11;
-                }
             }
         }
         
@@ -2266,11 +2131,6 @@ public class Navigation {
                 r2 |= r8;
                 r2 |= r9;
                 r2 &= !b2;
-
-                if (targetLocation.equals(l2) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r2;
-                }
             }
         }
         
@@ -2309,11 +2169,6 @@ public class Navigation {
                 r66 |= r61;
                 r66 |= r60;
                 r66 &= !b66;
-
-                if (targetLocation.equals(l66) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r66;
-                }
             }
         }
         
@@ -2358,11 +2213,6 @@ public class Navigation {
                 r38 |= r37;
                 r38 |= r46;
                 r38 &= !b38;
-
-                if (targetLocation.equals(l38) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r38;
-                }
             }
         }
         
@@ -2414,11 +2264,6 @@ public class Navigation {
                 r3 |= r2;
                 r3 |= r8;
                 r3 &= !b3;
-
-                if (targetLocation.equals(l3) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r3;
-                }
             }
         }
         
@@ -2471,11 +2316,6 @@ public class Navigation {
                 r47 |= r46;
                 r47 |= r55;
                 r47 &= !b47;
-
-                if (targetLocation.equals(l47) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r47;
-                }
             }
         }
         
@@ -2528,11 +2368,6 @@ public class Navigation {
                 r29 |= r28;
                 r29 |= r37;
                 r29 &= !b29;
-
-                if (targetLocation.equals(l29) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r29;
-                }
             }
         }
         
@@ -2585,11 +2420,6 @@ public class Navigation {
                 r67 |= r60;
                 r67 |= r66;
                 r67 &= !b67;
-
-                if (targetLocation.equals(l67) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r67;
-                }
             }
         }
         
@@ -2642,11 +2472,6 @@ public class Navigation {
                 r68 |= r61;
                 r68 |= r67;
                 r68 &= !b68;
-
-                if (targetLocation.equals(l68) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r68;
-                }
             }
         }
         
@@ -2699,11 +2524,6 @@ public class Navigation {
                 r4 |= r3;
                 r4 |= r9;
                 r4 &= !b4;
-
-                if (targetLocation.equals(l4) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r4;
-                }
             }
         }
         
@@ -2756,11 +2576,6 @@ public class Navigation {
                 r56 |= r55;
                 r56 |= r63;
                 r56 &= !b56;
-
-                if (targetLocation.equals(l56) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r56;
-                }
             }
         }
         
@@ -2813,11 +2628,6 @@ public class Navigation {
                 r20 |= r19;
                 r20 |= r28;
                 r20 &= !b20;
-
-                if (targetLocation.equals(l20) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r20;
-                }
             }
         }
         
@@ -2826,23 +2636,25 @@ public class Navigation {
         o19 |= b20;
         o28 |= b20;
 
-        if (temp1 && temp2) {
-            int dx = targetLocation.x - l34.x;
+        int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
             case -4:
                 switch(dy) {
                     case 0:
-                        if (v2 < 10000) {
+                        if (r2) {
+                            bug.reset();
                             return d2;
                         }
                     case 1:
-                        if (v3 < 10000) {
+                        if (r3) {
+                            bug.reset();
                             return d3;
                         }
                     case 2:
-                        if (v4 < 10000) {
+                        if (r4) {
+                            bug.reset();
                             return d4;
                         }
                 } break;
@@ -2850,19 +2662,23 @@ public class Navigation {
             case -3:
                 switch(dy) {
                     case 0:
-                        if (v8 < 10000) {
+                        if (r8) {
+                            bug.reset();
                             return d8;
                         }
                     case 1:
-                        if (v9 < 10000) {
+                        if (r9) {
+                            bug.reset();
                             return d9;
                         }
                     case 2:
-                        if (v10 < 10000) {
+                        if (r10) {
+                            bug.reset();
                             return d10;
                         }
                     case 3:
-                        if (v11 < 10000) {
+                        if (r11) {
+                            bug.reset();
                             return d11;
                         }
                 } break;
@@ -2870,23 +2686,28 @@ public class Navigation {
             case -2:
                 switch(dy) {
                     case 0:
-                        if (v16 < 10000) {
+                        if (r16) {
+                            bug.reset();
                             return d16;
                         }
                     case 1:
-                        if (v17 < 10000) {
+                        if (r17) {
+                            bug.reset();
                             return d17;
                         }
                     case 2:
-                        if (v18 < 10000) {
+                        if (r18) {
+                            bug.reset();
                             return d18;
                         }
                     case 3:
-                        if (v19 < 10000) {
+                        if (r19) {
+                            bug.reset();
                             return d19;
                         }
                     case 4:
-                        if (v20 < 10000) {
+                        if (r20) {
+                            bug.reset();
                             return d20;
                         }
                 } break;
@@ -2894,23 +2715,28 @@ public class Navigation {
             case -1:
                 switch(dy) {
                     case 0:
-                        if (v25 < 10000) {
+                        if (r25) {
+                            bug.reset();
                             return d25;
                         }
                     case 1:
-                        if (v26 < 10000) {
+                        if (r26) {
+                            bug.reset();
                             return d26;
                         }
                     case 2:
-                        if (v27 < 10000) {
+                        if (r27) {
+                            bug.reset();
                             return d27;
                         }
                     case 3:
-                        if (v28 < 10000) {
+                        if (r28) {
+                            bug.reset();
                             return d28;
                         }
                     case 4:
-                        if (v29 < 10000) {
+                        if (r29) {
+                            bug.reset();
                             return d29;
                         }
                 } break;
@@ -2918,19 +2744,23 @@ public class Navigation {
             case 0:
                 switch(dy) {
                     case 1:
-                        if (v35 < 10000) {
+                        if (r35) {
+                            bug.reset();
                             return d35;
                         }
                     case 2:
-                        if (v36 < 10000) {
+                        if (r36) {
+                            bug.reset();
                             return d36;
                         }
                     case 3:
-                        if (v37 < 10000) {
+                        if (r37) {
+                            bug.reset();
                             return d37;
                         }
                     case 4:
-                        if (v38 < 10000) {
+                        if (r38) {
+                            bug.reset();
                             return d38;
                         }
                 } break;
@@ -2938,23 +2768,28 @@ public class Navigation {
             case 1:
                 switch(dy) {
                     case 0:
-                        if (v43 < 10000) {
+                        if (r43) {
+                            bug.reset();
                             return d43;
                         }
                     case 1:
-                        if (v44 < 10000) {
+                        if (r44) {
+                            bug.reset();
                             return d44;
                         }
                     case 2:
-                        if (v45 < 10000) {
+                        if (r45) {
+                            bug.reset();
                             return d45;
                         }
                     case 3:
-                        if (v46 < 10000) {
+                        if (r46) {
+                            bug.reset();
                             return d46;
                         }
                     case 4:
-                        if (v47 < 10000) {
+                        if (r47) {
+                            bug.reset();
                             return d47;
                         }
                 } break;
@@ -2962,23 +2797,28 @@ public class Navigation {
             case 2:
                 switch(dy) {
                     case 0:
-                        if (v52 < 10000) {
+                        if (r52) {
+                            bug.reset();
                             return d52;
                         }
                     case 1:
-                        if (v53 < 10000) {
+                        if (r53) {
+                            bug.reset();
                             return d53;
                         }
                     case 2:
-                        if (v54 < 10000) {
+                        if (r54) {
+                            bug.reset();
                             return d54;
                         }
                     case 3:
-                        if (v55 < 10000) {
+                        if (r55) {
+                            bug.reset();
                             return d55;
                         }
                     case 4:
-                        if (v56 < 10000) {
+                        if (r56) {
+                            bug.reset();
                             return d56;
                         }
                 } break;
@@ -2986,19 +2826,23 @@ public class Navigation {
             case 3:
                 switch(dy) {
                     case 0:
-                        if (v60 < 10000) {
+                        if (r60) {
+                            bug.reset();
                             return d60;
                         }
                     case 1:
-                        if (v61 < 10000) {
+                        if (r61) {
+                            bug.reset();
                             return d61;
                         }
                     case 2:
-                        if (v62 < 10000) {
+                        if (r62) {
+                            bug.reset();
                             return d62;
                         }
                     case 3:
-                        if (v63 < 10000) {
+                        if (r63) {
+                            bug.reset();
                             return d63;
                         }
                 } break;
@@ -3006,20 +2850,22 @@ public class Navigation {
             case 4:
                 switch(dy) {
                     case 0:
-                        if (v66 < 10000) {
+                        if (r66) {
+                            bug.reset();
                             return d66;
                         }
                     case 1:
-                        if (v67 < 10000) {
+                        if (r67) {
+                            bug.reset();
                             return d67;
                         }
                     case 2:
-                        if (v68 < 10000) {
+                        if (r68) {
+                            bug.reset();
                             return d68;
                         }
                 } break;
 
-        }
         }
     
         o2 = r2;
@@ -3345,6 +3191,12 @@ public class Navigation {
             globalBest = localBest;
             bug.reset();
             return ans;
+        }
+
+        temp10 += 1;
+        if (temp10 > 50) {
+            globalBest = 1000000;
+            temp10 = 0;
         }
 
         bug.move(targetLocation, lastDirection);
@@ -3353,8 +3205,6 @@ public class Navigation {
 
     private Direction getBestDirection1() throws GameActionException {
         double localBest = 1000000.0;
-        boolean temp1 = false;
-        boolean temp2 = false;
         boolean temp3 = false;
         l34 = currentLocation;
         v34 = 0;
@@ -3652,11 +3502,6 @@ public class Navigation {
                 r35 |= r34;
                 r35 |= r43;
                 r35 &= !b35;
-
-                if (targetLocation.equals(l35) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r35;
-                }
             }
         }
         
@@ -3694,11 +3539,6 @@ public class Navigation {
                 r43 |= r35;
                 r43 |= r34;
                 r43 &= !b43;
-
-                if (targetLocation.equals(l43) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r43;
-                }
             }
         }
         
@@ -3736,11 +3576,6 @@ public class Navigation {
                 r42 |= r43;
                 r42 |= r34;
                 r42 &= !b42;
-
-                if (targetLocation.equals(l42) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r42;
-                }
             }
         }
         
@@ -3784,11 +3619,6 @@ public class Navigation {
                 r44 |= r34;
                 r44 |= r43;
                 r44 &= !b44;
-
-                if (targetLocation.equals(l44) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r44;
-                }
             }
         }
         
@@ -3827,11 +3657,6 @@ public class Navigation {
                 r26 |= r35;
                 r26 |= r34;
                 r26 &= !b26;
-
-                if (targetLocation.equals(l26) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r26;
-                }
             }
         }
         
@@ -3875,11 +3700,6 @@ public class Navigation {
                 r36 |= r35;
                 r36 |= r44;
                 r36 &= !b36;
-
-                if (targetLocation.equals(l36) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r36;
-                }
             }
         }
         
@@ -3925,11 +3745,6 @@ public class Navigation {
                 r52 |= r43;
                 r52 |= r42;
                 r52 &= !b52;
-
-                if (targetLocation.equals(l52) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r52;
-                }
             }
         }
         
@@ -3981,11 +3796,6 @@ public class Navigation {
                 r53 |= r43;
                 r53 |= r52;
                 r53 &= !b53;
-
-                if (targetLocation.equals(l53) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r53;
-                }
             }
         }
         
@@ -4032,11 +3842,6 @@ public class Navigation {
                 r51 |= r43;
                 r51 |= r42;
                 r51 &= !b51;
-
-                if (targetLocation.equals(l51) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r51;
-                }
             }
         }
         
@@ -4082,11 +3887,6 @@ public class Navigation {
                 r27 |= r26;
                 r27 |= r35;
                 r27 &= !b27;
-
-                if (targetLocation.equals(l27) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r27;
-                }
             }
         }
         
@@ -4138,11 +3938,6 @@ public class Navigation {
                 r45 |= r44;
                 r45 |= r53;
                 r45 &= !b45;
-
-                if (targetLocation.equals(l45) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r45;
-                }
             }
         }
         
@@ -4183,11 +3978,6 @@ public class Navigation {
                 r18 |= r27;
                 r18 |= r26;
                 r18 &= !b18;
-
-                if (targetLocation.equals(l18) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r18;
-                }
             }
         }
         
@@ -4226,11 +4016,6 @@ public class Navigation {
                 r50 |= r51;
                 r50 |= r42;
                 r50 &= !b50;
-
-                if (targetLocation.equals(l50) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r50;
-                }
             }
         }
         
@@ -4275,11 +4060,6 @@ public class Navigation {
                 r54 |= r44;
                 r54 |= r53;
                 r54 &= !b54;
-
-                if (targetLocation.equals(l54) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r54;
-                }
             }
         }
         
@@ -4325,11 +4105,6 @@ public class Navigation {
                 r37 |= r36;
                 r37 |= r45;
                 r37 &= !b37;
-
-                if (targetLocation.equals(l37) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r37;
-                }
             }
         }
         
@@ -4375,11 +4150,6 @@ public class Navigation {
                 r60 |= r52;
                 r60 |= r51;
                 r60 &= !b60;
-
-                if (targetLocation.equals(l60) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r60;
-                }
             }
         }
         
@@ -4431,11 +4201,6 @@ public class Navigation {
                 r59 |= r51;
                 r59 |= r50;
                 r59 &= !b59;
-
-                if (targetLocation.equals(l59) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r59;
-                }
             }
         }
         
@@ -4488,11 +4253,6 @@ public class Navigation {
                 r28 |= r27;
                 r28 |= r36;
                 r28 &= !b28;
-
-                if (targetLocation.equals(l28) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r28;
-                }
             }
         }
         
@@ -4545,11 +4305,6 @@ public class Navigation {
                 r46 |= r45;
                 r46 |= r54;
                 r46 &= !b46;
-
-                if (targetLocation.equals(l46) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r46;
-                }
             }
         }
         
@@ -4602,11 +4357,6 @@ public class Navigation {
                 r61 |= r52;
                 r61 |= r60;
                 r61 &= !b61;
-
-                if (targetLocation.equals(l61) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r61;
-                }
             }
         }
         
@@ -4659,11 +4409,6 @@ public class Navigation {
                 r62 |= r53;
                 r62 |= r61;
                 r62 &= !b62;
-
-                if (targetLocation.equals(l62) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r62;
-                }
             }
         }
         
@@ -4710,11 +4455,6 @@ public class Navigation {
                 r58 |= r51;
                 r58 |= r50;
                 r58 &= !b58;
-
-                if (targetLocation.equals(l58) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r58;
-                }
             }
         }
         
@@ -4760,11 +4500,6 @@ public class Navigation {
                 r19 |= r18;
                 r19 |= r27;
                 r19 &= !b19;
-
-                if (targetLocation.equals(l19) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r19;
-                }
             }
         }
         
@@ -4816,11 +4551,6 @@ public class Navigation {
                 r55 |= r54;
                 r55 |= r62;
                 r55 &= !b55;
-
-                if (targetLocation.equals(l55) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r55;
-                }
             }
         }
         
@@ -4867,11 +4597,6 @@ public class Navigation {
                 r63 |= r54;
                 r63 |= r62;
                 r63 &= !b63;
-
-                if (targetLocation.equals(l63) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r63;
-                }
             }
         }
         
@@ -4911,11 +4636,6 @@ public class Navigation {
                 r57 |= r58;
                 r57 |= r50;
                 r57 &= !b57;
-
-                if (targetLocation.equals(l57) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r57;
-                }
             }
         }
         
@@ -4954,11 +4674,6 @@ public class Navigation {
                 r11 |= r19;
                 r11 |= r18;
                 r11 &= !b11;
-
-                if (targetLocation.equals(l11) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r11;
-                }
             }
         }
         
@@ -5003,11 +4718,6 @@ public class Navigation {
                 r66 |= r60;
                 r66 |= r59;
                 r66 &= !b66;
-
-                if (targetLocation.equals(l66) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r66;
-                }
             }
         }
         
@@ -5053,11 +4763,6 @@ public class Navigation {
                 r38 |= r37;
                 r38 |= r46;
                 r38 &= !b38;
-
-                if (targetLocation.equals(l38) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r38;
-                }
             }
         }
         
@@ -5109,11 +4814,6 @@ public class Navigation {
                 r29 |= r28;
                 r29 |= r37;
                 r29 &= !b29;
-
-                if (targetLocation.equals(l29) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r29;
-                }
             }
         }
         
@@ -5166,11 +4866,6 @@ public class Navigation {
                 r67 |= r60;
                 r67 |= r66;
                 r67 &= !b67;
-
-                if (targetLocation.equals(l67) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r67;
-                }
             }
         }
         
@@ -5223,11 +4918,6 @@ public class Navigation {
                 r47 |= r46;
                 r47 |= r55;
                 r47 &= !b47;
-
-                if (targetLocation.equals(l47) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r47;
-                }
             }
         }
         
@@ -5280,11 +4970,6 @@ public class Navigation {
                 r65 |= r59;
                 r65 |= r58;
                 r65 &= !b65;
-
-                if (targetLocation.equals(l65) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r65;
-                }
             }
         }
         
@@ -5337,11 +5022,6 @@ public class Navigation {
                 r68 |= r61;
                 r68 |= r67;
                 r68 &= !b68;
-
-                if (targetLocation.equals(l68) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r68;
-                }
             }
         }
         
@@ -5394,11 +5074,6 @@ public class Navigation {
                 r64 |= r58;
                 r64 |= r57;
                 r64 &= !b64;
-
-                if (targetLocation.equals(l64) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r64;
-                }
             }
         }
         
@@ -5451,11 +5126,6 @@ public class Navigation {
                 r56 |= r55;
                 r56 |= r63;
                 r56 &= !b56;
-
-                if (targetLocation.equals(l56) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r56;
-                }
             }
         }
         
@@ -5508,11 +5178,6 @@ public class Navigation {
                 r20 |= r19;
                 r20 |= r28;
                 r20 &= !b20;
-
-                if (targetLocation.equals(l20) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r20;
-                }
             }
         }
         
@@ -5521,8 +5186,7 @@ public class Navigation {
         o19 |= b20;
         o28 |= b20;
 
-        if (temp1 && temp2) {
-            int dx = targetLocation.x - l34.x;
+        int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -5533,7 +5197,8 @@ public class Navigation {
             case -3:
                 switch(dy) {
                     case 3:
-                        if (v11 < 10000) {
+                        if (r11) {
+                            bug.reset();
                             return d11;
                         }
                 } break;
@@ -5541,15 +5206,18 @@ public class Navigation {
             case -2:
                 switch(dy) {
                     case 2:
-                        if (v18 < 10000) {
+                        if (r18) {
+                            bug.reset();
                             return d18;
                         }
                     case 3:
-                        if (v19 < 10000) {
+                        if (r19) {
+                            bug.reset();
                             return d19;
                         }
                     case 4:
-                        if (v20 < 10000) {
+                        if (r20) {
+                            bug.reset();
                             return d20;
                         }
                 } break;
@@ -5557,19 +5225,23 @@ public class Navigation {
             case -1:
                 switch(dy) {
                     case 1:
-                        if (v26 < 10000) {
+                        if (r26) {
+                            bug.reset();
                             return d26;
                         }
                     case 2:
-                        if (v27 < 10000) {
+                        if (r27) {
+                            bug.reset();
                             return d27;
                         }
                     case 3:
-                        if (v28 < 10000) {
+                        if (r28) {
+                            bug.reset();
                             return d28;
                         }
                     case 4:
-                        if (v29 < 10000) {
+                        if (r29) {
+                            bug.reset();
                             return d29;
                         }
                 } break;
@@ -5577,19 +5249,23 @@ public class Navigation {
             case 0:
                 switch(dy) {
                     case 1:
-                        if (v35 < 10000) {
+                        if (r35) {
+                            bug.reset();
                             return d35;
                         }
                     case 2:
-                        if (v36 < 10000) {
+                        if (r36) {
+                            bug.reset();
                             return d36;
                         }
                     case 3:
-                        if (v37 < 10000) {
+                        if (r37) {
+                            bug.reset();
                             return d37;
                         }
                     case 4:
-                        if (v38 < 10000) {
+                        if (r38) {
+                            bug.reset();
                             return d38;
                         }
                 } break;
@@ -5597,27 +5273,33 @@ public class Navigation {
             case 1:
                 switch(dy) {
                     case -1:
-                        if (v42 < 10000) {
+                        if (r42) {
+                            bug.reset();
                             return d42;
                         }
                     case 0:
-                        if (v43 < 10000) {
+                        if (r43) {
+                            bug.reset();
                             return d43;
                         }
                     case 1:
-                        if (v44 < 10000) {
+                        if (r44) {
+                            bug.reset();
                             return d44;
                         }
                     case 2:
-                        if (v45 < 10000) {
+                        if (r45) {
+                            bug.reset();
                             return d45;
                         }
                     case 3:
-                        if (v46 < 10000) {
+                        if (r46) {
+                            bug.reset();
                             return d46;
                         }
                     case 4:
-                        if (v47 < 10000) {
+                        if (r47) {
+                            bug.reset();
                             return d47;
                         }
                 } break;
@@ -5625,31 +5307,38 @@ public class Navigation {
             case 2:
                 switch(dy) {
                     case -2:
-                        if (v50 < 10000) {
+                        if (r50) {
+                            bug.reset();
                             return d50;
                         }
                     case -1:
-                        if (v51 < 10000) {
+                        if (r51) {
+                            bug.reset();
                             return d51;
                         }
                     case 0:
-                        if (v52 < 10000) {
+                        if (r52) {
+                            bug.reset();
                             return d52;
                         }
                     case 1:
-                        if (v53 < 10000) {
+                        if (r53) {
+                            bug.reset();
                             return d53;
                         }
                     case 2:
-                        if (v54 < 10000) {
+                        if (r54) {
+                            bug.reset();
                             return d54;
                         }
                     case 3:
-                        if (v55 < 10000) {
+                        if (r55) {
+                            bug.reset();
                             return d55;
                         }
                     case 4:
-                        if (v56 < 10000) {
+                        if (r56) {
+                            bug.reset();
                             return d56;
                         }
                 } break;
@@ -5657,31 +5346,38 @@ public class Navigation {
             case 3:
                 switch(dy) {
                     case -3:
-                        if (v57 < 10000) {
+                        if (r57) {
+                            bug.reset();
                             return d57;
                         }
                     case -2:
-                        if (v58 < 10000) {
+                        if (r58) {
+                            bug.reset();
                             return d58;
                         }
                     case -1:
-                        if (v59 < 10000) {
+                        if (r59) {
+                            bug.reset();
                             return d59;
                         }
                     case 0:
-                        if (v60 < 10000) {
+                        if (r60) {
+                            bug.reset();
                             return d60;
                         }
                     case 1:
-                        if (v61 < 10000) {
+                        if (r61) {
+                            bug.reset();
                             return d61;
                         }
                     case 2:
-                        if (v62 < 10000) {
+                        if (r62) {
+                            bug.reset();
                             return d62;
                         }
                     case 3:
-                        if (v63 < 10000) {
+                        if (r63) {
+                            bug.reset();
                             return d63;
                         }
                 } break;
@@ -5689,28 +5385,32 @@ public class Navigation {
             case 4:
                 switch(dy) {
                     case -2:
-                        if (v64 < 10000) {
+                        if (r64) {
+                            bug.reset();
                             return d64;
                         }
                     case -1:
-                        if (v65 < 10000) {
+                        if (r65) {
+                            bug.reset();
                             return d65;
                         }
                     case 0:
-                        if (v66 < 10000) {
+                        if (r66) {
+                            bug.reset();
                             return d66;
                         }
                     case 1:
-                        if (v67 < 10000) {
+                        if (r67) {
+                            bug.reset();
                             return d67;
                         }
                     case 2:
-                        if (v68 < 10000) {
+                        if (r68) {
+                            bug.reset();
                             return d68;
                         }
                 } break;
 
-        }
         }
     
         o11 = r11;
@@ -6028,6 +5728,12 @@ public class Navigation {
             globalBest = localBest;
             bug.reset();
             return ans;
+        }
+
+        temp10 += 1;
+        if (temp10 > 50) {
+            globalBest = 1000000;
+            temp10 = 0;
         }
 
         bug.move(targetLocation, lastDirection);
@@ -6036,8 +5742,6 @@ public class Navigation {
 
     private Direction getBestDirection2() throws GameActionException {
         double localBest = 1000000.0;
-        boolean temp1 = false;
-        boolean temp2 = false;
         boolean temp3 = false;
         l34 = currentLocation;
         v34 = 0;
@@ -6342,11 +6046,6 @@ public class Navigation {
                 r33 |= r43;
                 r33 |= r34;
                 r33 &= !b33;
-
-                if (targetLocation.equals(l33) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r33;
-                }
             }
         }
         
@@ -6384,11 +6083,6 @@ public class Navigation {
                 r35 |= r34;
                 r35 |= r43;
                 r35 &= !b35;
-
-                if (targetLocation.equals(l35) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r35;
-                }
             }
         }
         
@@ -6432,11 +6126,6 @@ public class Navigation {
                 r43 |= r34;
                 r43 |= r33;
                 r43 &= !b43;
-
-                if (targetLocation.equals(l43) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r43;
-                }
             }
         }
         
@@ -6481,11 +6170,6 @@ public class Navigation {
                 r42 |= r34;
                 r42 |= r33;
                 r42 &= !b42;
-
-                if (targetLocation.equals(l42) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r42;
-                }
             }
         }
         
@@ -6530,11 +6214,6 @@ public class Navigation {
                 r44 |= r34;
                 r44 |= r43;
                 r44 &= !b44;
-
-                if (targetLocation.equals(l44) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r44;
-                }
             }
         }
         
@@ -6573,11 +6252,6 @@ public class Navigation {
                 r32 |= r42;
                 r32 |= r33;
                 r32 &= !b32;
-
-                if (targetLocation.equals(l32) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r32;
-                }
             }
         }
         
@@ -6622,11 +6296,6 @@ public class Navigation {
                 r52 |= r43;
                 r52 |= r42;
                 r52 &= !b52;
-
-                if (targetLocation.equals(l52) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r52;
-                }
             }
         }
         
@@ -6666,11 +6335,6 @@ public class Navigation {
                 r36 |= r35;
                 r36 |= r44;
                 r36 &= !b36;
-
-                if (targetLocation.equals(l36) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r36;
-                }
             }
         }
         
@@ -6721,11 +6385,6 @@ public class Navigation {
                 r51 |= r42;
                 r51 |= r41;
                 r51 &= !b51;
-
-                if (targetLocation.equals(l51) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r51;
-                }
             }
         }
         
@@ -6778,11 +6437,6 @@ public class Navigation {
                 r45 |= r44;
                 r45 |= r53;
                 r45 &= !b45;
-
-                if (targetLocation.equals(l45) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r45;
-                }
             }
         }
         
@@ -6835,11 +6489,6 @@ public class Navigation {
                 r53 |= r43;
                 r53 |= r52;
                 r53 &= !b53;
-
-                if (targetLocation.equals(l53) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r53;
-                }
             }
         }
         
@@ -6892,11 +6541,6 @@ public class Navigation {
                 r41 |= r33;
                 r41 |= r32;
                 r41 &= !b41;
-
-                if (targetLocation.equals(l41) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r41;
-                }
             }
         }
         
@@ -6943,11 +6587,6 @@ public class Navigation {
                 r50 |= r42;
                 r50 |= r41;
                 r50 &= !b50;
-
-                if (targetLocation.equals(l50) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r50;
-                }
             }
         }
         
@@ -6993,11 +6632,6 @@ public class Navigation {
                 r54 |= r44;
                 r54 |= r53;
                 r54 &= !b54;
-
-                if (targetLocation.equals(l54) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r54;
-                }
             }
         }
         
@@ -7037,11 +6671,6 @@ public class Navigation {
                 r31 |= r41;
                 r31 |= r32;
                 r31 &= !b31;
-
-                if (targetLocation.equals(l31) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r31;
-                }
             }
         }
         
@@ -7086,11 +6715,6 @@ public class Navigation {
                 r60 |= r52;
                 r60 |= r51;
                 r60 &= !b60;
-
-                if (targetLocation.equals(l60) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r60;
-                }
             }
         }
         
@@ -7130,11 +6754,6 @@ public class Navigation {
                 r37 |= r36;
                 r37 |= r45;
                 r37 &= !b37;
-
-                if (targetLocation.equals(l37) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r37;
-                }
             }
         }
         
@@ -7185,11 +6804,6 @@ public class Navigation {
                 r40 |= r32;
                 r40 |= r31;
                 r40 &= !b40;
-
-                if (targetLocation.equals(l40) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r40;
-                }
             }
         }
         
@@ -7242,11 +6856,6 @@ public class Navigation {
                 r46 |= r45;
                 r46 |= r54;
                 r46 &= !b46;
-
-                if (targetLocation.equals(l46) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r46;
-                }
             }
         }
         
@@ -7299,11 +6908,6 @@ public class Navigation {
                 r61 |= r52;
                 r61 |= r60;
                 r61 &= !b61;
-
-                if (targetLocation.equals(l61) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r61;
-                }
             }
         }
         
@@ -7356,11 +6960,6 @@ public class Navigation {
                 r59 |= r51;
                 r59 |= r50;
                 r59 &= !b59;
-
-                if (targetLocation.equals(l59) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r59;
-                }
             }
         }
         
@@ -7413,11 +7012,6 @@ public class Navigation {
                 r62 |= r53;
                 r62 |= r61;
                 r62 &= !b62;
-
-                if (targetLocation.equals(l62) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r62;
-                }
             }
         }
         
@@ -7470,11 +7064,6 @@ public class Navigation {
                 r58 |= r50;
                 r58 |= r49;
                 r58 &= !b58;
-
-                if (targetLocation.equals(l58) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r58;
-                }
             }
         }
         
@@ -7527,11 +7116,6 @@ public class Navigation {
                 r49 |= r41;
                 r49 |= r40;
                 r49 &= !b49;
-
-                if (targetLocation.equals(l49) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r49;
-                }
             }
         }
         
@@ -7584,11 +7168,6 @@ public class Navigation {
                 r55 |= r54;
                 r55 |= r62;
                 r55 &= !b55;
-
-                if (targetLocation.equals(l55) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r55;
-                }
             }
         }
         
@@ -7635,11 +7214,6 @@ public class Navigation {
                 r63 |= r54;
                 r63 |= r62;
                 r63 &= !b63;
-
-                if (targetLocation.equals(l63) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r63;
-                }
             }
         }
         
@@ -7685,11 +7259,6 @@ public class Navigation {
                 r57 |= r50;
                 r57 |= r49;
                 r57 &= !b57;
-
-                if (targetLocation.equals(l57) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r57;
-                }
             }
         }
         
@@ -7729,11 +7298,6 @@ public class Navigation {
                 r38 |= r37;
                 r38 |= r46;
                 r38 &= !b38;
-
-                if (targetLocation.equals(l38) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r38;
-                }
             }
         }
         
@@ -7772,11 +7336,6 @@ public class Navigation {
                 r30 |= r40;
                 r30 |= r31;
                 r30 &= !b30;
-
-                if (targetLocation.equals(l30) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r30;
-                }
             }
         }
         
@@ -7821,11 +7380,6 @@ public class Navigation {
                 r66 |= r60;
                 r66 |= r59;
                 r66 &= !b66;
-
-                if (targetLocation.equals(l66) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r66;
-                }
             }
         }
         
@@ -7877,11 +7431,6 @@ public class Navigation {
                 r39 |= r31;
                 r39 |= r30;
                 r39 &= !b39;
-
-                if (targetLocation.equals(l39) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r39;
-                }
             }
         }
         
@@ -7934,11 +7483,6 @@ public class Navigation {
                 r47 |= r46;
                 r47 |= r55;
                 r47 &= !b47;
-
-                if (targetLocation.equals(l47) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r47;
-                }
             }
         }
         
@@ -7991,11 +7535,6 @@ public class Navigation {
                 r65 |= r59;
                 r65 |= r58;
                 r65 &= !b65;
-
-                if (targetLocation.equals(l65) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r65;
-                }
             }
         }
         
@@ -8048,11 +7587,6 @@ public class Navigation {
                 r67 |= r60;
                 r67 |= r66;
                 r67 &= !b67;
-
-                if (targetLocation.equals(l67) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r67;
-                }
             }
         }
         
@@ -8105,11 +7639,6 @@ public class Navigation {
                 r64 |= r58;
                 r64 |= r57;
                 r64 &= !b64;
-
-                if (targetLocation.equals(l64) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r64;
-                }
             }
         }
         
@@ -8162,11 +7691,6 @@ public class Navigation {
                 r48 |= r40;
                 r48 |= r39;
                 r48 &= !b48;
-
-                if (targetLocation.equals(l48) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r48;
-                }
             }
         }
         
@@ -8219,11 +7743,6 @@ public class Navigation {
                 r68 |= r61;
                 r68 |= r67;
                 r68 &= !b68;
-
-                if (targetLocation.equals(l68) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r68;
-                }
             }
         }
         
@@ -8276,11 +7795,6 @@ public class Navigation {
                 r56 |= r55;
                 r56 |= r63;
                 r56 &= !b56;
-
-                if (targetLocation.equals(l56) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r56;
-                }
             }
         }
         
@@ -8289,8 +7803,7 @@ public class Navigation {
         o55 |= b56;
         o63 |= b56;
 
-        if (temp1 && temp2) {
-            int dx = targetLocation.x - l34.x;
+        int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -8313,35 +7826,43 @@ public class Navigation {
             case 0:
                 switch(dy) {
                     case -4:
-                        if (v30 < 10000) {
+                        if (r30) {
+                            bug.reset();
                             return d30;
                         }
                     case -3:
-                        if (v31 < 10000) {
+                        if (r31) {
+                            bug.reset();
                             return d31;
                         }
                     case -2:
-                        if (v32 < 10000) {
+                        if (r32) {
+                            bug.reset();
                             return d32;
                         }
                     case -1:
-                        if (v33 < 10000) {
+                        if (r33) {
+                            bug.reset();
                             return d33;
                         }
                     case 1:
-                        if (v35 < 10000) {
+                        if (r35) {
+                            bug.reset();
                             return d35;
                         }
                     case 2:
-                        if (v36 < 10000) {
+                        if (r36) {
+                            bug.reset();
                             return d36;
                         }
                     case 3:
-                        if (v37 < 10000) {
+                        if (r37) {
+                            bug.reset();
                             return d37;
                         }
                     case 4:
-                        if (v38 < 10000) {
+                        if (r38) {
+                            bug.reset();
                             return d38;
                         }
                 } break;
@@ -8349,39 +7870,48 @@ public class Navigation {
             case 1:
                 switch(dy) {
                     case -4:
-                        if (v39 < 10000) {
+                        if (r39) {
+                            bug.reset();
                             return d39;
                         }
                     case -3:
-                        if (v40 < 10000) {
+                        if (r40) {
+                            bug.reset();
                             return d40;
                         }
                     case -2:
-                        if (v41 < 10000) {
+                        if (r41) {
+                            bug.reset();
                             return d41;
                         }
                     case -1:
-                        if (v42 < 10000) {
+                        if (r42) {
+                            bug.reset();
                             return d42;
                         }
                     case 0:
-                        if (v43 < 10000) {
+                        if (r43) {
+                            bug.reset();
                             return d43;
                         }
                     case 1:
-                        if (v44 < 10000) {
+                        if (r44) {
+                            bug.reset();
                             return d44;
                         }
                     case 2:
-                        if (v45 < 10000) {
+                        if (r45) {
+                            bug.reset();
                             return d45;
                         }
                     case 3:
-                        if (v46 < 10000) {
+                        if (r46) {
+                            bug.reset();
                             return d46;
                         }
                     case 4:
-                        if (v47 < 10000) {
+                        if (r47) {
+                            bug.reset();
                             return d47;
                         }
                 } break;
@@ -8389,39 +7919,48 @@ public class Navigation {
             case 2:
                 switch(dy) {
                     case -4:
-                        if (v48 < 10000) {
+                        if (r48) {
+                            bug.reset();
                             return d48;
                         }
                     case -3:
-                        if (v49 < 10000) {
+                        if (r49) {
+                            bug.reset();
                             return d49;
                         }
                     case -2:
-                        if (v50 < 10000) {
+                        if (r50) {
+                            bug.reset();
                             return d50;
                         }
                     case -1:
-                        if (v51 < 10000) {
+                        if (r51) {
+                            bug.reset();
                             return d51;
                         }
                     case 0:
-                        if (v52 < 10000) {
+                        if (r52) {
+                            bug.reset();
                             return d52;
                         }
                     case 1:
-                        if (v53 < 10000) {
+                        if (r53) {
+                            bug.reset();
                             return d53;
                         }
                     case 2:
-                        if (v54 < 10000) {
+                        if (r54) {
+                            bug.reset();
                             return d54;
                         }
                     case 3:
-                        if (v55 < 10000) {
+                        if (r55) {
+                            bug.reset();
                             return d55;
                         }
                     case 4:
-                        if (v56 < 10000) {
+                        if (r56) {
+                            bug.reset();
                             return d56;
                         }
                 } break;
@@ -8429,31 +7968,38 @@ public class Navigation {
             case 3:
                 switch(dy) {
                     case -3:
-                        if (v57 < 10000) {
+                        if (r57) {
+                            bug.reset();
                             return d57;
                         }
                     case -2:
-                        if (v58 < 10000) {
+                        if (r58) {
+                            bug.reset();
                             return d58;
                         }
                     case -1:
-                        if (v59 < 10000) {
+                        if (r59) {
+                            bug.reset();
                             return d59;
                         }
                     case 0:
-                        if (v60 < 10000) {
+                        if (r60) {
+                            bug.reset();
                             return d60;
                         }
                     case 1:
-                        if (v61 < 10000) {
+                        if (r61) {
+                            bug.reset();
                             return d61;
                         }
                     case 2:
-                        if (v62 < 10000) {
+                        if (r62) {
+                            bug.reset();
                             return d62;
                         }
                     case 3:
-                        if (v63 < 10000) {
+                        if (r63) {
+                            bug.reset();
                             return d63;
                         }
                 } break;
@@ -8461,28 +8007,32 @@ public class Navigation {
             case 4:
                 switch(dy) {
                     case -2:
-                        if (v64 < 10000) {
+                        if (r64) {
+                            bug.reset();
                             return d64;
                         }
                     case -1:
-                        if (v65 < 10000) {
+                        if (r65) {
+                            bug.reset();
                             return d65;
                         }
                     case 0:
-                        if (v66 < 10000) {
+                        if (r66) {
+                            bug.reset();
                             return d66;
                         }
                     case 1:
-                        if (v67 < 10000) {
+                        if (r67) {
+                            bug.reset();
                             return d67;
                         }
                     case 2:
-                        if (v68 < 10000) {
+                        if (r68) {
+                            bug.reset();
                             return d68;
                         }
                 } break;
 
-        }
         }
     
         o30 = r30;
@@ -8810,14 +8360,18 @@ public class Navigation {
             return ans;
         }
 
+        temp10 += 1;
+        if (temp10 > 50) {
+            globalBest = 1000000;
+            temp10 = 0;
+        }
+
         bug.move(targetLocation, lastDirection);
         return null;
     }
 
     private Direction getBestDirection3() throws GameActionException {
         double localBest = 1000000.0;
-        boolean temp1 = false;
-        boolean temp2 = false;
         boolean temp3 = false;
         l34 = currentLocation;
         v34 = 0;
@@ -9115,11 +8669,6 @@ public class Navigation {
                 r33 |= r43;
                 r33 |= r34;
                 r33 &= !b33;
-
-                if (targetLocation.equals(l33) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r33;
-                }
             }
         }
         
@@ -9157,11 +8706,6 @@ public class Navigation {
                 r43 |= r34;
                 r43 |= r33;
                 r43 &= !b43;
-
-                if (targetLocation.equals(l43) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r43;
-                }
             }
         }
         
@@ -9205,11 +8749,6 @@ public class Navigation {
                 r42 |= r34;
                 r42 |= r33;
                 r42 &= !b42;
-
-                if (targetLocation.equals(l42) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r42;
-                }
             }
         }
         
@@ -9248,11 +8787,6 @@ public class Navigation {
                 r44 |= r34;
                 r44 |= r43;
                 r44 &= !b44;
-
-                if (targetLocation.equals(l44) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r44;
-                }
             }
         }
         
@@ -9290,11 +8824,6 @@ public class Navigation {
                 r24 |= r33;
                 r24 |= r34;
                 r24 &= !b24;
-
-                if (targetLocation.equals(l24) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r24;
-                }
             }
         }
         
@@ -9338,11 +8867,6 @@ public class Navigation {
                 r32 |= r33;
                 r32 |= r24;
                 r32 &= !b32;
-
-                if (targetLocation.equals(l32) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r32;
-                }
             }
         }
         
@@ -9388,11 +8912,6 @@ public class Navigation {
                 r52 |= r43;
                 r52 |= r42;
                 r52 &= !b52;
-
-                if (targetLocation.equals(l52) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r52;
-                }
             }
         }
         
@@ -9438,11 +8957,6 @@ public class Navigation {
                 r53 |= r43;
                 r53 |= r52;
                 r53 &= !b53;
-
-                if (targetLocation.equals(l53) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r53;
-                }
             }
         }
         
@@ -9494,11 +9008,6 @@ public class Navigation {
                 r51 |= r42;
                 r51 |= r41;
                 r51 &= !b51;
-
-                if (targetLocation.equals(l51) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r51;
-                }
             }
         }
         
@@ -9551,11 +9060,6 @@ public class Navigation {
                 r41 |= r33;
                 r41 |= r32;
                 r41 &= !b41;
-
-                if (targetLocation.equals(l41) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r41;
-                }
             }
         }
         
@@ -9602,11 +9106,6 @@ public class Navigation {
                 r23 |= r33;
                 r23 |= r24;
                 r23 &= !b23;
-
-                if (targetLocation.equals(l23) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r23;
-                }
             }
         }
         
@@ -9646,11 +9145,6 @@ public class Navigation {
                 r14 |= r23;
                 r14 |= r24;
                 r14 &= !b14;
-
-                if (targetLocation.equals(l14) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r14;
-                }
             }
         }
         
@@ -9695,11 +9189,6 @@ public class Navigation {
                 r50 |= r42;
                 r50 |= r41;
                 r50 &= !b50;
-
-                if (targetLocation.equals(l50) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r50;
-                }
             }
         }
         
@@ -9739,11 +9228,6 @@ public class Navigation {
                 r54 |= r44;
                 r54 |= r53;
                 r54 &= !b54;
-
-                if (targetLocation.equals(l54) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r54;
-                }
             }
         }
         
@@ -9788,11 +9272,6 @@ public class Navigation {
                 r31 |= r32;
                 r31 |= r23;
                 r31 &= !b31;
-
-                if (targetLocation.equals(l31) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r31;
-                }
             }
         }
         
@@ -9838,11 +9317,6 @@ public class Navigation {
                 r60 |= r52;
                 r60 |= r51;
                 r60 &= !b60;
-
-                if (targetLocation.equals(l60) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r60;
-                }
             }
         }
         
@@ -9894,11 +9368,6 @@ public class Navigation {
                 r59 |= r51;
                 r59 |= r50;
                 r59 &= !b59;
-
-                if (targetLocation.equals(l59) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r59;
-                }
             }
         }
         
@@ -9951,11 +9420,6 @@ public class Navigation {
                 r40 |= r32;
                 r40 |= r31;
                 r40 &= !b40;
-
-                if (targetLocation.equals(l40) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r40;
-                }
             }
         }
         
@@ -10008,11 +9472,6 @@ public class Navigation {
                 r22 |= r23;
                 r22 |= r14;
                 r22 &= !b22;
-
-                if (targetLocation.equals(l22) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r22;
-                }
             }
         }
         
@@ -10065,11 +9524,6 @@ public class Navigation {
                 r61 |= r52;
                 r61 |= r60;
                 r61 &= !b61;
-
-                if (targetLocation.equals(l61) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r61;
-                }
             }
         }
         
@@ -10116,11 +9570,6 @@ public class Navigation {
                 r62 |= r53;
                 r62 |= r61;
                 r62 &= !b62;
-
-                if (targetLocation.equals(l62) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r62;
-                }
             }
         }
         
@@ -10172,11 +9621,6 @@ public class Navigation {
                 r58 |= r50;
                 r58 |= r49;
                 r58 &= !b58;
-
-                if (targetLocation.equals(l58) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r58;
-                }
             }
         }
         
@@ -10229,11 +9673,6 @@ public class Navigation {
                 r49 |= r41;
                 r49 |= r40;
                 r49 &= !b49;
-
-                if (targetLocation.equals(l49) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r49;
-                }
             }
         }
         
@@ -10280,11 +9719,6 @@ public class Navigation {
                 r13 |= r23;
                 r13 |= r14;
                 r13 &= !b13;
-
-                if (targetLocation.equals(l13) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r13;
-                }
             }
         }
         
@@ -10324,11 +9758,6 @@ public class Navigation {
                 r63 |= r54;
                 r63 |= r62;
                 r63 &= !b63;
-
-                if (targetLocation.equals(l63) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r63;
-                }
             }
         }
         
@@ -10373,11 +9802,6 @@ public class Navigation {
                 r57 |= r50;
                 r57 |= r49;
                 r57 &= !b57;
-
-                if (targetLocation.equals(l57) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r57;
-                }
             }
         }
         
@@ -10417,11 +9841,6 @@ public class Navigation {
                 r5 |= r13;
                 r5 |= r14;
                 r5 &= !b5;
-
-                if (targetLocation.equals(l5) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r5;
-                }
             }
         }
         
@@ -10466,11 +9885,6 @@ public class Navigation {
                 r66 |= r60;
                 r66 |= r59;
                 r66 &= !b66;
-
-                if (targetLocation.equals(l66) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r66;
-                }
             }
         }
         
@@ -10516,11 +9930,6 @@ public class Navigation {
                 r30 |= r31;
                 r30 |= r22;
                 r30 &= !b30;
-
-                if (targetLocation.equals(l30) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r30;
-                }
             }
         }
         
@@ -10572,11 +9981,6 @@ public class Navigation {
                 r39 |= r31;
                 r39 |= r30;
                 r39 &= !b39;
-
-                if (targetLocation.equals(l39) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r39;
-                }
             }
         }
         
@@ -10629,11 +10033,6 @@ public class Navigation {
                 r67 |= r60;
                 r67 |= r66;
                 r67 &= !b67;
-
-                if (targetLocation.equals(l67) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r67;
-                }
             }
         }
         
@@ -10686,11 +10085,6 @@ public class Navigation {
                 r21 |= r22;
                 r21 |= r13;
                 r21 &= !b21;
-
-                if (targetLocation.equals(l21) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r21;
-                }
             }
         }
         
@@ -10743,11 +10137,6 @@ public class Navigation {
                 r65 |= r59;
                 r65 |= r58;
                 r65 &= !b65;
-
-                if (targetLocation.equals(l65) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r65;
-                }
             }
         }
         
@@ -10800,11 +10189,6 @@ public class Navigation {
                 r68 |= r61;
                 r68 |= r67;
                 r68 &= !b68;
-
-                if (targetLocation.equals(l68) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r68;
-                }
             }
         }
         
@@ -10857,11 +10241,6 @@ public class Navigation {
                 r64 |= r58;
                 r64 |= r57;
                 r64 &= !b64;
-
-                if (targetLocation.equals(l64) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r64;
-                }
             }
         }
         
@@ -10914,11 +10293,6 @@ public class Navigation {
                 r12 |= r13;
                 r12 |= r5;
                 r12 &= !b12;
-
-                if (targetLocation.equals(l12) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r12;
-                }
             }
         }
         
@@ -10971,11 +10345,6 @@ public class Navigation {
                 r48 |= r40;
                 r48 |= r39;
                 r48 &= !b48;
-
-                if (targetLocation.equals(l48) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r48;
-                }
             }
         }
         
@@ -10984,8 +10353,7 @@ public class Navigation {
         o40 |= b48;
         o39 |= b48;
 
-        if (temp1 && temp2) {
-            int dx = targetLocation.x - l34.x;
+        int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
@@ -10996,7 +10364,8 @@ public class Navigation {
             case -3:
                 switch(dy) {
                     case -3:
-                        if (v5 < 10000) {
+                        if (r5) {
+                            bug.reset();
                             return d5;
                         }
                 } break;
@@ -11004,15 +10373,18 @@ public class Navigation {
             case -2:
                 switch(dy) {
                     case -4:
-                        if (v12 < 10000) {
+                        if (r12) {
+                            bug.reset();
                             return d12;
                         }
                     case -3:
-                        if (v13 < 10000) {
+                        if (r13) {
+                            bug.reset();
                             return d13;
                         }
                     case -2:
-                        if (v14 < 10000) {
+                        if (r14) {
+                            bug.reset();
                             return d14;
                         }
                 } break;
@@ -11020,19 +10392,23 @@ public class Navigation {
             case -1:
                 switch(dy) {
                     case -4:
-                        if (v21 < 10000) {
+                        if (r21) {
+                            bug.reset();
                             return d21;
                         }
                     case -3:
-                        if (v22 < 10000) {
+                        if (r22) {
+                            bug.reset();
                             return d22;
                         }
                     case -2:
-                        if (v23 < 10000) {
+                        if (r23) {
+                            bug.reset();
                             return d23;
                         }
                     case -1:
-                        if (v24 < 10000) {
+                        if (r24) {
+                            bug.reset();
                             return d24;
                         }
                 } break;
@@ -11040,19 +10416,23 @@ public class Navigation {
             case 0:
                 switch(dy) {
                     case -4:
-                        if (v30 < 10000) {
+                        if (r30) {
+                            bug.reset();
                             return d30;
                         }
                     case -3:
-                        if (v31 < 10000) {
+                        if (r31) {
+                            bug.reset();
                             return d31;
                         }
                     case -2:
-                        if (v32 < 10000) {
+                        if (r32) {
+                            bug.reset();
                             return d32;
                         }
                     case -1:
-                        if (v33 < 10000) {
+                        if (r33) {
+                            bug.reset();
                             return d33;
                         }
                 } break;
@@ -11060,27 +10440,33 @@ public class Navigation {
             case 1:
                 switch(dy) {
                     case -4:
-                        if (v39 < 10000) {
+                        if (r39) {
+                            bug.reset();
                             return d39;
                         }
                     case -3:
-                        if (v40 < 10000) {
+                        if (r40) {
+                            bug.reset();
                             return d40;
                         }
                     case -2:
-                        if (v41 < 10000) {
+                        if (r41) {
+                            bug.reset();
                             return d41;
                         }
                     case -1:
-                        if (v42 < 10000) {
+                        if (r42) {
+                            bug.reset();
                             return d42;
                         }
                     case 0:
-                        if (v43 < 10000) {
+                        if (r43) {
+                            bug.reset();
                             return d43;
                         }
                     case 1:
-                        if (v44 < 10000) {
+                        if (r44) {
+                            bug.reset();
                             return d44;
                         }
                 } break;
@@ -11088,31 +10474,38 @@ public class Navigation {
             case 2:
                 switch(dy) {
                     case -4:
-                        if (v48 < 10000) {
+                        if (r48) {
+                            bug.reset();
                             return d48;
                         }
                     case -3:
-                        if (v49 < 10000) {
+                        if (r49) {
+                            bug.reset();
                             return d49;
                         }
                     case -2:
-                        if (v50 < 10000) {
+                        if (r50) {
+                            bug.reset();
                             return d50;
                         }
                     case -1:
-                        if (v51 < 10000) {
+                        if (r51) {
+                            bug.reset();
                             return d51;
                         }
                     case 0:
-                        if (v52 < 10000) {
+                        if (r52) {
+                            bug.reset();
                             return d52;
                         }
                     case 1:
-                        if (v53 < 10000) {
+                        if (r53) {
+                            bug.reset();
                             return d53;
                         }
                     case 2:
-                        if (v54 < 10000) {
+                        if (r54) {
+                            bug.reset();
                             return d54;
                         }
                 } break;
@@ -11120,31 +10513,38 @@ public class Navigation {
             case 3:
                 switch(dy) {
                     case -3:
-                        if (v57 < 10000) {
+                        if (r57) {
+                            bug.reset();
                             return d57;
                         }
                     case -2:
-                        if (v58 < 10000) {
+                        if (r58) {
+                            bug.reset();
                             return d58;
                         }
                     case -1:
-                        if (v59 < 10000) {
+                        if (r59) {
+                            bug.reset();
                             return d59;
                         }
                     case 0:
-                        if (v60 < 10000) {
+                        if (r60) {
+                            bug.reset();
                             return d60;
                         }
                     case 1:
-                        if (v61 < 10000) {
+                        if (r61) {
+                            bug.reset();
                             return d61;
                         }
                     case 2:
-                        if (v62 < 10000) {
+                        if (r62) {
+                            bug.reset();
                             return d62;
                         }
                     case 3:
-                        if (v63 < 10000) {
+                        if (r63) {
+                            bug.reset();
                             return d63;
                         }
                 } break;
@@ -11152,28 +10552,32 @@ public class Navigation {
             case 4:
                 switch(dy) {
                     case -2:
-                        if (v64 < 10000) {
+                        if (r64) {
+                            bug.reset();
                             return d64;
                         }
                     case -1:
-                        if (v65 < 10000) {
+                        if (r65) {
+                            bug.reset();
                             return d65;
                         }
                     case 0:
-                        if (v66 < 10000) {
+                        if (r66) {
+                            bug.reset();
                             return d66;
                         }
                     case 1:
-                        if (v67 < 10000) {
+                        if (r67) {
+                            bug.reset();
                             return d67;
                         }
                     case 2:
-                        if (v68 < 10000) {
+                        if (r68) {
+                            bug.reset();
                             return d68;
                         }
                 } break;
 
-        }
         }
     
         o5 = r5;
@@ -11493,14 +10897,18 @@ public class Navigation {
             return ans;
         }
 
+        temp10 += 1;
+        if (temp10 > 50) {
+            globalBest = 1000000;
+            temp10 = 0;
+        }
+
         bug.move(targetLocation, lastDirection);
         return null;
     }
 
     private Direction getBestDirection4() throws GameActionException {
         double localBest = 1000000.0;
-        boolean temp1 = false;
-        boolean temp2 = false;
         boolean temp3 = false;
         l34 = currentLocation;
         v34 = 0;
@@ -11811,11 +11219,6 @@ public class Navigation {
                 r33 |= r34;
                 r33 |= r25;
                 r33 &= !b33;
-
-                if (targetLocation.equals(l33) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r33;
-                }
             }
         }
         
@@ -11854,11 +11257,6 @@ public class Navigation {
                 r25 |= r34;
                 r25 |= r33;
                 r25 &= !b25;
-
-                if (targetLocation.equals(l25) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r25;
-                }
             }
         }
         
@@ -11896,11 +11294,6 @@ public class Navigation {
                 r43 |= r34;
                 r43 |= r33;
                 r43 &= !b43;
-
-                if (targetLocation.equals(l43) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r43;
-                }
             }
         }
         
@@ -11944,11 +11337,6 @@ public class Navigation {
                 r42 |= r34;
                 r42 |= r33;
                 r42 &= !b42;
-
-                if (targetLocation.equals(l42) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r42;
-                }
             }
         }
         
@@ -11993,11 +11381,6 @@ public class Navigation {
                 r24 |= r34;
                 r24 |= r25;
                 r24 &= !b24;
-
-                if (targetLocation.equals(l24) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r24;
-                }
             }
         }
         
@@ -12036,11 +11419,6 @@ public class Navigation {
                 r52 |= r43;
                 r52 |= r42;
                 r52 &= !b52;
-
-                if (targetLocation.equals(l52) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r52;
-                }
             }
         }
         
@@ -12085,11 +11463,6 @@ public class Navigation {
                 r32 |= r33;
                 r32 |= r24;
                 r32 &= !b32;
-
-                if (targetLocation.equals(l32) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r32;
-                }
             }
         }
         
@@ -12129,11 +11502,6 @@ public class Navigation {
                 r16 |= r25;
                 r16 |= r24;
                 r16 &= !b16;
-
-                if (targetLocation.equals(l16) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r16;
-                }
             }
         }
         
@@ -12184,11 +11552,6 @@ public class Navigation {
                 r51 |= r42;
                 r51 |= r41;
                 r51 &= !b51;
-
-                if (targetLocation.equals(l51) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r51;
-                }
             }
         }
         
@@ -12241,11 +11604,6 @@ public class Navigation {
                 r15 |= r16;
                 r15 |= r23;
                 r15 &= !b15;
-
-                if (targetLocation.equals(l15) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r15;
-                }
             }
         }
         
@@ -12298,11 +11656,6 @@ public class Navigation {
                 r23 |= r24;
                 r23 |= r15;
                 r23 &= !b23;
-
-                if (targetLocation.equals(l23) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r23;
-                }
             }
         }
         
@@ -12355,11 +11708,6 @@ public class Navigation {
                 r41 |= r33;
                 r41 |= r32;
                 r41 &= !b41;
-
-                if (targetLocation.equals(l41) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r41;
-                }
             }
         }
         
@@ -12406,11 +11754,6 @@ public class Navigation {
                 r50 |= r42;
                 r50 |= r41;
                 r50 &= !b50;
-
-                if (targetLocation.equals(l50) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r50;
-                }
             }
         }
         
@@ -12456,11 +11799,6 @@ public class Navigation {
                 r14 |= r24;
                 r14 |= r15;
                 r14 &= !b14;
-
-                if (targetLocation.equals(l14) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r14;
-                }
             }
         }
         
@@ -12500,11 +11838,6 @@ public class Navigation {
                 r60 |= r52;
                 r60 |= r51;
                 r60 &= !b60;
-
-                if (targetLocation.equals(l60) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r60;
-                }
             }
         }
         
@@ -12549,11 +11882,6 @@ public class Navigation {
                 r31 |= r32;
                 r31 |= r23;
                 r31 &= !b31;
-
-                if (targetLocation.equals(l31) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r31;
-                }
             }
         }
         
@@ -12593,11 +11921,6 @@ public class Navigation {
                 r8 |= r16;
                 r8 |= r15;
                 r8 &= !b8;
-
-                if (targetLocation.equals(l8) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r8;
-                }
             }
         }
         
@@ -12648,11 +11971,6 @@ public class Navigation {
                 r59 |= r51;
                 r59 |= r50;
                 r59 &= !b59;
-
-                if (targetLocation.equals(l59) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r59;
-                }
             }
         }
         
@@ -12705,11 +12023,6 @@ public class Navigation {
                 r22 |= r23;
                 r22 |= r14;
                 r22 &= !b22;
-
-                if (targetLocation.equals(l22) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r22;
-                }
             }
         }
         
@@ -12762,11 +12075,6 @@ public class Navigation {
                 r7 |= r8;
                 r7 |= r14;
                 r7 &= !b7;
-
-                if (targetLocation.equals(l7) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r7;
-                }
             }
         }
         
@@ -12819,11 +12127,6 @@ public class Navigation {
                 r40 |= r32;
                 r40 |= r31;
                 r40 &= !b40;
-
-                if (targetLocation.equals(l40) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r40;
-                }
             }
         }
         
@@ -12876,11 +12179,6 @@ public class Navigation {
                 r13 |= r14;
                 r13 |= r6;
                 r13 &= !b13;
-
-                if (targetLocation.equals(l13) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r13;
-                }
             }
         }
         
@@ -12933,11 +12231,6 @@ public class Navigation {
                 r58 |= r50;
                 r58 |= r49;
                 r58 &= !b58;
-
-                if (targetLocation.equals(l58) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r58;
-                }
             }
         }
         
@@ -12990,11 +12283,6 @@ public class Navigation {
                 r49 |= r41;
                 r49 |= r40;
                 r49 &= !b49;
-
-                if (targetLocation.equals(l49) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r49;
-                }
             }
         }
         
@@ -13047,11 +12335,6 @@ public class Navigation {
                 r6 |= r7;
                 r6 |= r13;
                 r6 &= !b6;
-
-                if (targetLocation.equals(l6) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r6;
-                }
             }
         }
         
@@ -13098,11 +12381,6 @@ public class Navigation {
                 r5 |= r14;
                 r5 |= r6;
                 r5 &= !b5;
-
-                if (targetLocation.equals(l5) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r5;
-                }
             }
         }
         
@@ -13148,11 +12426,6 @@ public class Navigation {
                 r57 |= r50;
                 r57 |= r49;
                 r57 &= !b57;
-
-                if (targetLocation.equals(l57) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r57;
-                }
             }
         }
         
@@ -13192,11 +12465,6 @@ public class Navigation {
                 r2 |= r8;
                 r2 |= r7;
                 r2 &= !b2;
-
-                if (targetLocation.equals(l2) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r2;
-                }
             }
         }
         
@@ -13235,11 +12503,6 @@ public class Navigation {
                 r66 |= r60;
                 r66 |= r59;
                 r66 &= !b66;
-
-                if (targetLocation.equals(l66) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r66;
-                }
             }
         }
         
@@ -13284,11 +12547,6 @@ public class Navigation {
                 r30 |= r31;
                 r30 |= r22;
                 r30 &= !b30;
-
-                if (targetLocation.equals(l30) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r30;
-                }
             }
         }
         
@@ -13340,11 +12598,6 @@ public class Navigation {
                 r21 |= r22;
                 r21 |= r13;
                 r21 &= !b21;
-
-                if (targetLocation.equals(l21) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r21;
-                }
             }
         }
         
@@ -13397,11 +12650,6 @@ public class Navigation {
                 r1 |= r2;
                 r1 |= r6;
                 r1 &= !b1;
-
-                if (targetLocation.equals(l1) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r1;
-                }
             }
         }
         
@@ -13454,11 +12702,6 @@ public class Navigation {
                 r39 |= r31;
                 r39 |= r30;
                 r39 &= !b39;
-
-                if (targetLocation.equals(l39) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r39;
-                }
             }
         }
         
@@ -13511,11 +12754,6 @@ public class Navigation {
                 r65 |= r59;
                 r65 |= r58;
                 r65 &= !b65;
-
-                if (targetLocation.equals(l65) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r65;
-                }
             }
         }
         
@@ -13568,11 +12806,6 @@ public class Navigation {
                 r64 |= r58;
                 r64 |= r57;
                 r64 &= !b64;
-
-                if (targetLocation.equals(l64) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r64;
-                }
             }
         }
         
@@ -13625,11 +12858,6 @@ public class Navigation {
                 r12 |= r13;
                 r12 |= r5;
                 r12 &= !b12;
-
-                if (targetLocation.equals(l12) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r12;
-                }
             }
         }
         
@@ -13682,11 +12910,6 @@ public class Navigation {
                 r0 |= r1;
                 r0 |= r5;
                 r0 &= !b0;
-
-                if (targetLocation.equals(l0) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r0;
-                }
             }
         }
         
@@ -13739,11 +12962,6 @@ public class Navigation {
                 r48 |= r40;
                 r48 |= r39;
                 r48 &= !b48;
-
-                if (targetLocation.equals(l48) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r48;
-                }
             }
         }
         
@@ -13752,23 +12970,25 @@ public class Navigation {
         o40 |= b48;
         o39 |= b48;
 
-        if (temp1 && temp2) {
-            int dx = targetLocation.x - l34.x;
+        int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
             case -4:
                 switch(dy) {
                     case -2:
-                        if (v0 < 10000) {
+                        if (r0) {
+                            bug.reset();
                             return d0;
                         }
                     case -1:
-                        if (v1 < 10000) {
+                        if (r1) {
+                            bug.reset();
                             return d1;
                         }
                     case 0:
-                        if (v2 < 10000) {
+                        if (r2) {
+                            bug.reset();
                             return d2;
                         }
                 } break;
@@ -13776,19 +12996,23 @@ public class Navigation {
             case -3:
                 switch(dy) {
                     case -3:
-                        if (v5 < 10000) {
+                        if (r5) {
+                            bug.reset();
                             return d5;
                         }
                     case -2:
-                        if (v6 < 10000) {
+                        if (r6) {
+                            bug.reset();
                             return d6;
                         }
                     case -1:
-                        if (v7 < 10000) {
+                        if (r7) {
+                            bug.reset();
                             return d7;
                         }
                     case 0:
-                        if (v8 < 10000) {
+                        if (r8) {
+                            bug.reset();
                             return d8;
                         }
                 } break;
@@ -13796,23 +13020,28 @@ public class Navigation {
             case -2:
                 switch(dy) {
                     case -4:
-                        if (v12 < 10000) {
+                        if (r12) {
+                            bug.reset();
                             return d12;
                         }
                     case -3:
-                        if (v13 < 10000) {
+                        if (r13) {
+                            bug.reset();
                             return d13;
                         }
                     case -2:
-                        if (v14 < 10000) {
+                        if (r14) {
+                            bug.reset();
                             return d14;
                         }
                     case -1:
-                        if (v15 < 10000) {
+                        if (r15) {
+                            bug.reset();
                             return d15;
                         }
                     case 0:
-                        if (v16 < 10000) {
+                        if (r16) {
+                            bug.reset();
                             return d16;
                         }
                 } break;
@@ -13820,23 +13049,28 @@ public class Navigation {
             case -1:
                 switch(dy) {
                     case -4:
-                        if (v21 < 10000) {
+                        if (r21) {
+                            bug.reset();
                             return d21;
                         }
                     case -3:
-                        if (v22 < 10000) {
+                        if (r22) {
+                            bug.reset();
                             return d22;
                         }
                     case -2:
-                        if (v23 < 10000) {
+                        if (r23) {
+                            bug.reset();
                             return d23;
                         }
                     case -1:
-                        if (v24 < 10000) {
+                        if (r24) {
+                            bug.reset();
                             return d24;
                         }
                     case 0:
-                        if (v25 < 10000) {
+                        if (r25) {
+                            bug.reset();
                             return d25;
                         }
                 } break;
@@ -13844,19 +13078,23 @@ public class Navigation {
             case 0:
                 switch(dy) {
                     case -4:
-                        if (v30 < 10000) {
+                        if (r30) {
+                            bug.reset();
                             return d30;
                         }
                     case -3:
-                        if (v31 < 10000) {
+                        if (r31) {
+                            bug.reset();
                             return d31;
                         }
                     case -2:
-                        if (v32 < 10000) {
+                        if (r32) {
+                            bug.reset();
                             return d32;
                         }
                     case -1:
-                        if (v33 < 10000) {
+                        if (r33) {
+                            bug.reset();
                             return d33;
                         }
                 } break;
@@ -13864,23 +13102,28 @@ public class Navigation {
             case 1:
                 switch(dy) {
                     case -4:
-                        if (v39 < 10000) {
+                        if (r39) {
+                            bug.reset();
                             return d39;
                         }
                     case -3:
-                        if (v40 < 10000) {
+                        if (r40) {
+                            bug.reset();
                             return d40;
                         }
                     case -2:
-                        if (v41 < 10000) {
+                        if (r41) {
+                            bug.reset();
                             return d41;
                         }
                     case -1:
-                        if (v42 < 10000) {
+                        if (r42) {
+                            bug.reset();
                             return d42;
                         }
                     case 0:
-                        if (v43 < 10000) {
+                        if (r43) {
+                            bug.reset();
                             return d43;
                         }
                 } break;
@@ -13888,23 +13131,28 @@ public class Navigation {
             case 2:
                 switch(dy) {
                     case -4:
-                        if (v48 < 10000) {
+                        if (r48) {
+                            bug.reset();
                             return d48;
                         }
                     case -3:
-                        if (v49 < 10000) {
+                        if (r49) {
+                            bug.reset();
                             return d49;
                         }
                     case -2:
-                        if (v50 < 10000) {
+                        if (r50) {
+                            bug.reset();
                             return d50;
                         }
                     case -1:
-                        if (v51 < 10000) {
+                        if (r51) {
+                            bug.reset();
                             return d51;
                         }
                     case 0:
-                        if (v52 < 10000) {
+                        if (r52) {
+                            bug.reset();
                             return d52;
                         }
                 } break;
@@ -13912,19 +13160,23 @@ public class Navigation {
             case 3:
                 switch(dy) {
                     case -3:
-                        if (v57 < 10000) {
+                        if (r57) {
+                            bug.reset();
                             return d57;
                         }
                     case -2:
-                        if (v58 < 10000) {
+                        if (r58) {
+                            bug.reset();
                             return d58;
                         }
                     case -1:
-                        if (v59 < 10000) {
+                        if (r59) {
+                            bug.reset();
                             return d59;
                         }
                     case 0:
-                        if (v60 < 10000) {
+                        if (r60) {
+                            bug.reset();
                             return d60;
                         }
                 } break;
@@ -13932,20 +13184,22 @@ public class Navigation {
             case 4:
                 switch(dy) {
                     case -2:
-                        if (v64 < 10000) {
+                        if (r64) {
+                            bug.reset();
                             return d64;
                         }
                     case -1:
-                        if (v65 < 10000) {
+                        if (r65) {
+                            bug.reset();
                             return d65;
                         }
                     case 0:
-                        if (v66 < 10000) {
+                        if (r66) {
+                            bug.reset();
                             return d66;
                         }
                 } break;
 
-        }
         }
     
         o0 = r0;
@@ -14273,14 +13527,18 @@ public class Navigation {
             return ans;
         }
 
+        temp10 += 1;
+        if (temp10 > 50) {
+            globalBest = 1000000;
+            temp10 = 0;
+        }
+
         bug.move(targetLocation, lastDirection);
         return null;
     }
 
     private Direction getBestDirection5() throws GameActionException {
         double localBest = 1000000.0;
-        boolean temp1 = false;
-        boolean temp2 = false;
         boolean temp3 = false;
         l34 = currentLocation;
         v34 = 0;
@@ -14578,11 +13836,6 @@ public class Navigation {
                 r33 |= r34;
                 r33 |= r25;
                 r33 &= !b33;
-
-                if (targetLocation.equals(l33) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r33;
-                }
             }
         }
         
@@ -14620,11 +13873,6 @@ public class Navigation {
                 r25 |= r34;
                 r25 |= r33;
                 r25 &= !b25;
-
-                if (targetLocation.equals(l25) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r25;
-                }
             }
         }
         
@@ -14662,11 +13910,6 @@ public class Navigation {
                 r42 |= r34;
                 r42 |= r33;
                 r42 &= !b42;
-
-                if (targetLocation.equals(l42) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r42;
-                }
             }
         }
         
@@ -14704,11 +13947,6 @@ public class Navigation {
                 r26 |= r25;
                 r26 |= r34;
                 r26 &= !b26;
-
-                if (targetLocation.equals(l26) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r26;
-                }
             }
         }
         
@@ -14752,11 +13990,6 @@ public class Navigation {
                 r24 |= r34;
                 r24 |= r25;
                 r24 &= !b24;
-
-                if (targetLocation.equals(l24) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r24;
-                }
             }
         }
         
@@ -14801,11 +14034,6 @@ public class Navigation {
                 r16 |= r26;
                 r16 |= r24;
                 r16 &= !b16;
-
-                if (targetLocation.equals(l16) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r16;
-                }
             }
         }
         
@@ -14851,11 +14079,6 @@ public class Navigation {
                 r32 |= r33;
                 r32 |= r24;
                 r32 &= !b32;
-
-                if (targetLocation.equals(l32) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r32;
-                }
             }
         }
         
@@ -14907,11 +14130,6 @@ public class Navigation {
                 r15 |= r16;
                 r15 |= r23;
                 r15 &= !b15;
-
-                if (targetLocation.equals(l15) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r15;
-                }
             }
         }
         
@@ -14958,11 +14176,6 @@ public class Navigation {
                 r41 |= r33;
                 r41 |= r32;
                 r41 &= !b41;
-
-                if (targetLocation.equals(l41) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r41;
-                }
             }
         }
         
@@ -15014,11 +14227,6 @@ public class Navigation {
                 r23 |= r24;
                 r23 |= r15;
                 r23 &= !b23;
-
-                if (targetLocation.equals(l23) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r23;
-                }
             }
         }
         
@@ -15065,11 +14273,6 @@ public class Navigation {
                 r17 |= r16;
                 r17 |= r25;
                 r17 &= !b17;
-
-                if (targetLocation.equals(l17) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r17;
-                }
             }
         }
         
@@ -15109,11 +14312,6 @@ public class Navigation {
                 r18 |= r17;
                 r18 |= r26;
                 r18 &= !b18;
-
-                if (targetLocation.equals(l18) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r18;
-                }
             }
         }
         
@@ -15152,11 +14350,6 @@ public class Navigation {
                 r50 |= r42;
                 r50 |= r41;
                 r50 &= !b50;
-
-                if (targetLocation.equals(l50) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r50;
-                }
             }
         }
         
@@ -15201,11 +14394,6 @@ public class Navigation {
                 r14 |= r24;
                 r14 |= r15;
                 r14 &= !b14;
-
-                if (targetLocation.equals(l14) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r14;
-                }
             }
         }
         
@@ -15251,11 +14439,6 @@ public class Navigation {
                 r8 |= r17;
                 r8 |= r15;
                 r8 &= !b8;
-
-                if (targetLocation.equals(l8) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r8;
-                }
             }
         }
         
@@ -15301,11 +14484,6 @@ public class Navigation {
                 r31 |= r32;
                 r31 |= r23;
                 r31 &= !b31;
-
-                if (targetLocation.equals(l31) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r31;
-                }
             }
         }
         
@@ -15357,11 +14535,6 @@ public class Navigation {
                 r7 |= r8;
                 r7 |= r14;
                 r7 &= !b7;
-
-                if (targetLocation.equals(l7) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r7;
-                }
             }
         }
         
@@ -15414,11 +14587,6 @@ public class Navigation {
                 r9 |= r8;
                 r9 |= r16;
                 r9 &= !b9;
-
-                if (targetLocation.equals(l9) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r9;
-                }
             }
         }
         
@@ -15471,11 +14639,6 @@ public class Navigation {
                 r40 |= r32;
                 r40 |= r31;
                 r40 &= !b40;
-
-                if (targetLocation.equals(l40) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r40;
-                }
             }
         }
         
@@ -15528,11 +14691,6 @@ public class Navigation {
                 r22 |= r23;
                 r22 |= r14;
                 r22 &= !b22;
-
-                if (targetLocation.equals(l22) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r22;
-                }
             }
         }
         
@@ -15585,11 +14743,6 @@ public class Navigation {
                 r6 |= r7;
                 r6 |= r13;
                 r6 &= !b6;
-
-                if (targetLocation.equals(l6) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r6;
-                }
             }
         }
         
@@ -15642,11 +14795,6 @@ public class Navigation {
                 r13 |= r14;
                 r13 |= r6;
                 r13 &= !b13;
-
-                if (targetLocation.equals(l13) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r13;
-                }
             }
         }
         
@@ -15693,11 +14841,6 @@ public class Navigation {
                 r49 |= r41;
                 r49 |= r40;
                 r49 &= !b49;
-
-                if (targetLocation.equals(l49) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r49;
-                }
             }
         }
         
@@ -15743,11 +14886,6 @@ public class Navigation {
                 r10 |= r9;
                 r10 |= r17;
                 r10 &= !b10;
-
-                if (targetLocation.equals(l10) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r10;
-                }
             }
         }
         
@@ -15787,11 +14925,6 @@ public class Navigation {
                 r57 |= r50;
                 r57 |= r49;
                 r57 &= !b57;
-
-                if (targetLocation.equals(l57) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r57;
-                }
             }
         }
         
@@ -15836,11 +14969,6 @@ public class Navigation {
                 r5 |= r14;
                 r5 |= r6;
                 r5 &= !b5;
-
-                if (targetLocation.equals(l5) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r5;
-                }
             }
         }
         
@@ -15880,11 +15008,6 @@ public class Navigation {
                 r11 |= r10;
                 r11 |= r18;
                 r11 &= !b11;
-
-                if (targetLocation.equals(l11) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r11;
-                }
             }
         }
         
@@ -15929,11 +15052,6 @@ public class Navigation {
                 r30 |= r31;
                 r30 |= r22;
                 r30 &= !b30;
-
-                if (targetLocation.equals(l30) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r30;
-                }
             }
         }
         
@@ -15979,11 +15097,6 @@ public class Navigation {
                 r2 |= r9;
                 r2 |= r7;
                 r2 &= !b2;
-
-                if (targetLocation.equals(l2) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r2;
-                }
             }
         }
         
@@ -16035,11 +15148,6 @@ public class Navigation {
                 r1 |= r2;
                 r1 |= r6;
                 r1 &= !b1;
-
-                if (targetLocation.equals(l1) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r1;
-                }
             }
         }
         
@@ -16092,11 +15200,6 @@ public class Navigation {
                 r39 |= r31;
                 r39 |= r30;
                 r39 &= !b39;
-
-                if (targetLocation.equals(l39) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r39;
-                }
             }
         }
         
@@ -16149,11 +15252,6 @@ public class Navigation {
                 r21 |= r22;
                 r21 |= r13;
                 r21 &= !b21;
-
-                if (targetLocation.equals(l21) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r21;
-                }
             }
         }
         
@@ -16206,11 +15304,6 @@ public class Navigation {
                 r3 |= r2;
                 r3 |= r8;
                 r3 &= !b3;
-
-                if (targetLocation.equals(l3) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r3;
-                }
             }
         }
         
@@ -16263,11 +15356,6 @@ public class Navigation {
                 r4 |= r3;
                 r4 |= r9;
                 r4 &= !b4;
-
-                if (targetLocation.equals(l4) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r4;
-                }
             }
         }
         
@@ -16320,11 +15408,6 @@ public class Navigation {
                 r48 |= r40;
                 r48 |= r39;
                 r48 &= !b48;
-
-                if (targetLocation.equals(l48) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r48;
-                }
             }
         }
         
@@ -16377,11 +15460,6 @@ public class Navigation {
                 r0 |= r1;
                 r0 |= r5;
                 r0 &= !b0;
-
-                if (targetLocation.equals(l0) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r0;
-                }
             }
         }
         
@@ -16434,11 +15512,6 @@ public class Navigation {
                 r12 |= r13;
                 r12 |= r5;
                 r12 &= !b12;
-
-                if (targetLocation.equals(l12) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r12;
-                }
             }
         }
         
@@ -16447,31 +15520,35 @@ public class Navigation {
         o13 |= b12;
         o5 |= b12;
 
-        if (temp1 && temp2) {
-            int dx = targetLocation.x - l34.x;
+        int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
             case -4:
                 switch(dy) {
                     case -2:
-                        if (v0 < 10000) {
+                        if (r0) {
+                            bug.reset();
                             return d0;
                         }
                     case -1:
-                        if (v1 < 10000) {
+                        if (r1) {
+                            bug.reset();
                             return d1;
                         }
                     case 0:
-                        if (v2 < 10000) {
+                        if (r2) {
+                            bug.reset();
                             return d2;
                         }
                     case 1:
-                        if (v3 < 10000) {
+                        if (r3) {
+                            bug.reset();
                             return d3;
                         }
                     case 2:
-                        if (v4 < 10000) {
+                        if (r4) {
+                            bug.reset();
                             return d4;
                         }
                 } break;
@@ -16479,31 +15556,38 @@ public class Navigation {
             case -3:
                 switch(dy) {
                     case -3:
-                        if (v5 < 10000) {
+                        if (r5) {
+                            bug.reset();
                             return d5;
                         }
                     case -2:
-                        if (v6 < 10000) {
+                        if (r6) {
+                            bug.reset();
                             return d6;
                         }
                     case -1:
-                        if (v7 < 10000) {
+                        if (r7) {
+                            bug.reset();
                             return d7;
                         }
                     case 0:
-                        if (v8 < 10000) {
+                        if (r8) {
+                            bug.reset();
                             return d8;
                         }
                     case 1:
-                        if (v9 < 10000) {
+                        if (r9) {
+                            bug.reset();
                             return d9;
                         }
                     case 2:
-                        if (v10 < 10000) {
+                        if (r10) {
+                            bug.reset();
                             return d10;
                         }
                     case 3:
-                        if (v11 < 10000) {
+                        if (r11) {
+                            bug.reset();
                             return d11;
                         }
                 } break;
@@ -16511,31 +15595,38 @@ public class Navigation {
             case -2:
                 switch(dy) {
                     case -4:
-                        if (v12 < 10000) {
+                        if (r12) {
+                            bug.reset();
                             return d12;
                         }
                     case -3:
-                        if (v13 < 10000) {
+                        if (r13) {
+                            bug.reset();
                             return d13;
                         }
                     case -2:
-                        if (v14 < 10000) {
+                        if (r14) {
+                            bug.reset();
                             return d14;
                         }
                     case -1:
-                        if (v15 < 10000) {
+                        if (r15) {
+                            bug.reset();
                             return d15;
                         }
                     case 0:
-                        if (v16 < 10000) {
+                        if (r16) {
+                            bug.reset();
                             return d16;
                         }
                     case 1:
-                        if (v17 < 10000) {
+                        if (r17) {
+                            bug.reset();
                             return d17;
                         }
                     case 2:
-                        if (v18 < 10000) {
+                        if (r18) {
+                            bug.reset();
                             return d18;
                         }
                 } break;
@@ -16543,27 +15634,33 @@ public class Navigation {
             case -1:
                 switch(dy) {
                     case -4:
-                        if (v21 < 10000) {
+                        if (r21) {
+                            bug.reset();
                             return d21;
                         }
                     case -3:
-                        if (v22 < 10000) {
+                        if (r22) {
+                            bug.reset();
                             return d22;
                         }
                     case -2:
-                        if (v23 < 10000) {
+                        if (r23) {
+                            bug.reset();
                             return d23;
                         }
                     case -1:
-                        if (v24 < 10000) {
+                        if (r24) {
+                            bug.reset();
                             return d24;
                         }
                     case 0:
-                        if (v25 < 10000) {
+                        if (r25) {
+                            bug.reset();
                             return d25;
                         }
                     case 1:
-                        if (v26 < 10000) {
+                        if (r26) {
+                            bug.reset();
                             return d26;
                         }
                 } break;
@@ -16571,19 +15668,23 @@ public class Navigation {
             case 0:
                 switch(dy) {
                     case -4:
-                        if (v30 < 10000) {
+                        if (r30) {
+                            bug.reset();
                             return d30;
                         }
                     case -3:
-                        if (v31 < 10000) {
+                        if (r31) {
+                            bug.reset();
                             return d31;
                         }
                     case -2:
-                        if (v32 < 10000) {
+                        if (r32) {
+                            bug.reset();
                             return d32;
                         }
                     case -1:
-                        if (v33 < 10000) {
+                        if (r33) {
+                            bug.reset();
                             return d33;
                         }
                 } break;
@@ -16591,19 +15692,23 @@ public class Navigation {
             case 1:
                 switch(dy) {
                     case -4:
-                        if (v39 < 10000) {
+                        if (r39) {
+                            bug.reset();
                             return d39;
                         }
                     case -3:
-                        if (v40 < 10000) {
+                        if (r40) {
+                            bug.reset();
                             return d40;
                         }
                     case -2:
-                        if (v41 < 10000) {
+                        if (r41) {
+                            bug.reset();
                             return d41;
                         }
                     case -1:
-                        if (v42 < 10000) {
+                        if (r42) {
+                            bug.reset();
                             return d42;
                         }
                 } break;
@@ -16611,15 +15716,18 @@ public class Navigation {
             case 2:
                 switch(dy) {
                     case -4:
-                        if (v48 < 10000) {
+                        if (r48) {
+                            bug.reset();
                             return d48;
                         }
                     case -3:
-                        if (v49 < 10000) {
+                        if (r49) {
+                            bug.reset();
                             return d49;
                         }
                     case -2:
-                        if (v50 < 10000) {
+                        if (r50) {
+                            bug.reset();
                             return d50;
                         }
                 } break;
@@ -16627,7 +15735,8 @@ public class Navigation {
             case 3:
                 switch(dy) {
                     case -3:
-                        if (v57 < 10000) {
+                        if (r57) {
+                            bug.reset();
                             return d57;
                         }
                 } break;
@@ -16636,7 +15745,6 @@ public class Navigation {
                 switch(dy) {
                 } break;
 
-        }
         }
     
         o0 = r0;
@@ -16956,14 +16064,18 @@ public class Navigation {
             return ans;
         }
 
+        temp10 += 1;
+        if (temp10 > 50) {
+            globalBest = 1000000;
+            temp10 = 0;
+        }
+
         bug.move(targetLocation, lastDirection);
         return null;
     }
 
     private Direction getBestDirection6() throws GameActionException {
         double localBest = 1000000.0;
-        boolean temp1 = false;
-        boolean temp2 = false;
         boolean temp3 = false;
         l34 = currentLocation;
         v34 = 0;
@@ -17268,11 +16380,6 @@ public class Navigation {
                 r33 |= r34;
                 r33 |= r25;
                 r33 &= !b33;
-
-                if (targetLocation.equals(l33) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r33;
-                }
             }
         }
         
@@ -17316,11 +16423,6 @@ public class Navigation {
                 r25 |= r35;
                 r25 |= r33;
                 r25 &= !b25;
-
-                if (targetLocation.equals(l25) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r25;
-                }
             }
         }
         
@@ -17359,11 +16461,6 @@ public class Navigation {
                 r35 |= r25;
                 r35 |= r34;
                 r35 &= !b35;
-
-                if (targetLocation.equals(l35) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r35;
-                }
             }
         }
         
@@ -17407,11 +16504,6 @@ public class Navigation {
                 r24 |= r34;
                 r24 |= r25;
                 r24 &= !b24;
-
-                if (targetLocation.equals(l24) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r24;
-                }
             }
         }
         
@@ -17456,11 +16548,6 @@ public class Navigation {
                 r26 |= r25;
                 r26 |= r34;
                 r26 &= !b26;
-
-                if (targetLocation.equals(l26) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r26;
-                }
             }
         }
         
@@ -17499,11 +16586,6 @@ public class Navigation {
                 r36 |= r26;
                 r36 |= r35;
                 r36 &= !b36;
-
-                if (targetLocation.equals(l36) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r36;
-                }
             }
         }
         
@@ -17548,11 +16630,6 @@ public class Navigation {
                 r16 |= r26;
                 r16 |= r24;
                 r16 &= !b16;
-
-                if (targetLocation.equals(l16) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r16;
-                }
             }
         }
         
@@ -17592,11 +16669,6 @@ public class Navigation {
                 r32 |= r33;
                 r32 |= r24;
                 r32 &= !b32;
-
-                if (targetLocation.equals(l32) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r32;
-                }
             }
         }
         
@@ -17647,11 +16719,6 @@ public class Navigation {
                 r27 |= r26;
                 r27 |= r35;
                 r27 &= !b27;
-
-                if (targetLocation.equals(l27) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r27;
-                }
             }
         }
         
@@ -17704,11 +16771,6 @@ public class Navigation {
                 r15 |= r16;
                 r15 |= r23;
                 r15 &= !b15;
-
-                if (targetLocation.equals(l15) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r15;
-                }
             }
         }
         
@@ -17761,11 +16823,6 @@ public class Navigation {
                 r23 |= r24;
                 r23 |= r15;
                 r23 &= !b23;
-
-                if (targetLocation.equals(l23) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r23;
-                }
             }
         }
         
@@ -17818,11 +16875,6 @@ public class Navigation {
                 r17 |= r16;
                 r17 |= r25;
                 r17 &= !b17;
-
-                if (targetLocation.equals(l17) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r17;
-                }
             }
         }
         
@@ -17869,11 +16921,6 @@ public class Navigation {
                 r14 |= r24;
                 r14 |= r15;
                 r14 &= !b14;
-
-                if (targetLocation.equals(l14) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r14;
-                }
             }
         }
         
@@ -17919,11 +16966,6 @@ public class Navigation {
                 r18 |= r17;
                 r18 |= r26;
                 r18 &= !b18;
-
-                if (targetLocation.equals(l18) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r18;
-                }
             }
         }
         
@@ -17963,11 +17005,6 @@ public class Navigation {
                 r37 |= r27;
                 r37 |= r36;
                 r37 &= !b37;
-
-                if (targetLocation.equals(l37) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r37;
-                }
             }
         }
         
@@ -18012,11 +17049,6 @@ public class Navigation {
                 r8 |= r17;
                 r8 |= r15;
                 r8 &= !b8;
-
-                if (targetLocation.equals(l8) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r8;
-                }
             }
         }
         
@@ -18056,11 +17088,6 @@ public class Navigation {
                 r31 |= r32;
                 r31 |= r23;
                 r31 &= !b31;
-
-                if (targetLocation.equals(l31) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r31;
-                }
             }
         }
         
@@ -18111,11 +17138,6 @@ public class Navigation {
                 r28 |= r27;
                 r28 |= r36;
                 r28 &= !b28;
-
-                if (targetLocation.equals(l28) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r28;
-                }
             }
         }
         
@@ -18168,11 +17190,6 @@ public class Navigation {
                 r9 |= r8;
                 r9 |= r16;
                 r9 &= !b9;
-
-                if (targetLocation.equals(l9) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r9;
-                }
             }
         }
         
@@ -18225,11 +17242,6 @@ public class Navigation {
                 r22 |= r23;
                 r22 |= r14;
                 r22 &= !b22;
-
-                if (targetLocation.equals(l22) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r22;
-                }
             }
         }
         
@@ -18282,11 +17294,6 @@ public class Navigation {
                 r7 |= r8;
                 r7 |= r14;
                 r7 &= !b7;
-
-                if (targetLocation.equals(l7) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r7;
-                }
             }
         }
         
@@ -18339,11 +17346,6 @@ public class Navigation {
                 r13 |= r14;
                 r13 |= r6;
                 r13 &= !b13;
-
-                if (targetLocation.equals(l13) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r13;
-                }
             }
         }
         
@@ -18396,11 +17398,6 @@ public class Navigation {
                 r19 |= r18;
                 r19 |= r27;
                 r19 &= !b19;
-
-                if (targetLocation.equals(l19) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r19;
-                }
             }
         }
         
@@ -18453,11 +17450,6 @@ public class Navigation {
                 r10 |= r9;
                 r10 |= r17;
                 r10 &= !b10;
-
-                if (targetLocation.equals(l10) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r10;
-                }
             }
         }
         
@@ -18510,11 +17502,6 @@ public class Navigation {
                 r6 |= r7;
                 r6 |= r13;
                 r6 &= !b6;
-
-                if (targetLocation.equals(l6) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r6;
-                }
             }
         }
         
@@ -18561,11 +17548,6 @@ public class Navigation {
                 r11 |= r10;
                 r11 |= r18;
                 r11 &= !b11;
-
-                if (targetLocation.equals(l11) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r11;
-                }
             }
         }
         
@@ -18611,11 +17593,6 @@ public class Navigation {
                 r5 |= r14;
                 r5 |= r6;
                 r5 &= !b5;
-
-                if (targetLocation.equals(l5) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r5;
-                }
             }
         }
         
@@ -18655,11 +17632,6 @@ public class Navigation {
                 r30 |= r31;
                 r30 |= r22;
                 r30 &= !b30;
-
-                if (targetLocation.equals(l30) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r30;
-                }
             }
         }
         
@@ -18698,11 +17670,6 @@ public class Navigation {
                 r38 |= r28;
                 r38 |= r37;
                 r38 &= !b38;
-
-                if (targetLocation.equals(l38) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r38;
-                }
             }
         }
         
@@ -18747,11 +17714,6 @@ public class Navigation {
                 r2 |= r9;
                 r2 |= r7;
                 r2 &= !b2;
-
-                if (targetLocation.equals(l2) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r2;
-                }
             }
         }
         
@@ -18803,11 +17765,6 @@ public class Navigation {
                 r21 |= r22;
                 r21 |= r13;
                 r21 &= !b21;
-
-                if (targetLocation.equals(l21) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r21;
-                }
             }
         }
         
@@ -18860,11 +17817,6 @@ public class Navigation {
                 r3 |= r2;
                 r3 |= r8;
                 r3 &= !b3;
-
-                if (targetLocation.equals(l3) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r3;
-                }
             }
         }
         
@@ -18917,11 +17869,6 @@ public class Navigation {
                 r1 |= r2;
                 r1 |= r6;
                 r1 &= !b1;
-
-                if (targetLocation.equals(l1) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r1;
-                }
             }
         }
         
@@ -18974,11 +17921,6 @@ public class Navigation {
                 r29 |= r28;
                 r29 |= r37;
                 r29 &= !b29;
-
-                if (targetLocation.equals(l29) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r29;
-                }
             }
         }
         
@@ -19031,11 +17973,6 @@ public class Navigation {
                 r20 |= r19;
                 r20 |= r28;
                 r20 &= !b20;
-
-                if (targetLocation.equals(l20) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r20;
-                }
             }
         }
         
@@ -19088,11 +18025,6 @@ public class Navigation {
                 r12 |= r13;
                 r12 |= r5;
                 r12 &= !b12;
-
-                if (targetLocation.equals(l12) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r12;
-                }
             }
         }
         
@@ -19145,11 +18077,6 @@ public class Navigation {
                 r4 |= r3;
                 r4 |= r9;
                 r4 &= !b4;
-
-                if (targetLocation.equals(l4) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r4;
-                }
             }
         }
         
@@ -19202,11 +18129,6 @@ public class Navigation {
                 r0 |= r1;
                 r0 |= r5;
                 r0 &= !b0;
-
-                if (targetLocation.equals(l0) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r0;
-                }
             }
         }
         
@@ -19215,31 +18137,35 @@ public class Navigation {
         o1 |= b0;
         o5 |= b0;
 
-        if (temp1 && temp2) {
-            int dx = targetLocation.x - l34.x;
+        int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
             case -4:
                 switch(dy) {
                     case -2:
-                        if (v0 < 10000) {
+                        if (r0) {
+                            bug.reset();
                             return d0;
                         }
                     case -1:
-                        if (v1 < 10000) {
+                        if (r1) {
+                            bug.reset();
                             return d1;
                         }
                     case 0:
-                        if (v2 < 10000) {
+                        if (r2) {
+                            bug.reset();
                             return d2;
                         }
                     case 1:
-                        if (v3 < 10000) {
+                        if (r3) {
+                            bug.reset();
                             return d3;
                         }
                     case 2:
-                        if (v4 < 10000) {
+                        if (r4) {
+                            bug.reset();
                             return d4;
                         }
                 } break;
@@ -19247,31 +18173,38 @@ public class Navigation {
             case -3:
                 switch(dy) {
                     case -3:
-                        if (v5 < 10000) {
+                        if (r5) {
+                            bug.reset();
                             return d5;
                         }
                     case -2:
-                        if (v6 < 10000) {
+                        if (r6) {
+                            bug.reset();
                             return d6;
                         }
                     case -1:
-                        if (v7 < 10000) {
+                        if (r7) {
+                            bug.reset();
                             return d7;
                         }
                     case 0:
-                        if (v8 < 10000) {
+                        if (r8) {
+                            bug.reset();
                             return d8;
                         }
                     case 1:
-                        if (v9 < 10000) {
+                        if (r9) {
+                            bug.reset();
                             return d9;
                         }
                     case 2:
-                        if (v10 < 10000) {
+                        if (r10) {
+                            bug.reset();
                             return d10;
                         }
                     case 3:
-                        if (v11 < 10000) {
+                        if (r11) {
+                            bug.reset();
                             return d11;
                         }
                 } break;
@@ -19279,39 +18212,48 @@ public class Navigation {
             case -2:
                 switch(dy) {
                     case -4:
-                        if (v12 < 10000) {
+                        if (r12) {
+                            bug.reset();
                             return d12;
                         }
                     case -3:
-                        if (v13 < 10000) {
+                        if (r13) {
+                            bug.reset();
                             return d13;
                         }
                     case -2:
-                        if (v14 < 10000) {
+                        if (r14) {
+                            bug.reset();
                             return d14;
                         }
                     case -1:
-                        if (v15 < 10000) {
+                        if (r15) {
+                            bug.reset();
                             return d15;
                         }
                     case 0:
-                        if (v16 < 10000) {
+                        if (r16) {
+                            bug.reset();
                             return d16;
                         }
                     case 1:
-                        if (v17 < 10000) {
+                        if (r17) {
+                            bug.reset();
                             return d17;
                         }
                     case 2:
-                        if (v18 < 10000) {
+                        if (r18) {
+                            bug.reset();
                             return d18;
                         }
                     case 3:
-                        if (v19 < 10000) {
+                        if (r19) {
+                            bug.reset();
                             return d19;
                         }
                     case 4:
-                        if (v20 < 10000) {
+                        if (r20) {
+                            bug.reset();
                             return d20;
                         }
                 } break;
@@ -19319,39 +18261,48 @@ public class Navigation {
             case -1:
                 switch(dy) {
                     case -4:
-                        if (v21 < 10000) {
+                        if (r21) {
+                            bug.reset();
                             return d21;
                         }
                     case -3:
-                        if (v22 < 10000) {
+                        if (r22) {
+                            bug.reset();
                             return d22;
                         }
                     case -2:
-                        if (v23 < 10000) {
+                        if (r23) {
+                            bug.reset();
                             return d23;
                         }
                     case -1:
-                        if (v24 < 10000) {
+                        if (r24) {
+                            bug.reset();
                             return d24;
                         }
                     case 0:
-                        if (v25 < 10000) {
+                        if (r25) {
+                            bug.reset();
                             return d25;
                         }
                     case 1:
-                        if (v26 < 10000) {
+                        if (r26) {
+                            bug.reset();
                             return d26;
                         }
                     case 2:
-                        if (v27 < 10000) {
+                        if (r27) {
+                            bug.reset();
                             return d27;
                         }
                     case 3:
-                        if (v28 < 10000) {
+                        if (r28) {
+                            bug.reset();
                             return d28;
                         }
                     case 4:
-                        if (v29 < 10000) {
+                        if (r29) {
+                            bug.reset();
                             return d29;
                         }
                 } break;
@@ -19359,35 +18310,43 @@ public class Navigation {
             case 0:
                 switch(dy) {
                     case -4:
-                        if (v30 < 10000) {
+                        if (r30) {
+                            bug.reset();
                             return d30;
                         }
                     case -3:
-                        if (v31 < 10000) {
+                        if (r31) {
+                            bug.reset();
                             return d31;
                         }
                     case -2:
-                        if (v32 < 10000) {
+                        if (r32) {
+                            bug.reset();
                             return d32;
                         }
                     case -1:
-                        if (v33 < 10000) {
+                        if (r33) {
+                            bug.reset();
                             return d33;
                         }
                     case 1:
-                        if (v35 < 10000) {
+                        if (r35) {
+                            bug.reset();
                             return d35;
                         }
                     case 2:
-                        if (v36 < 10000) {
+                        if (r36) {
+                            bug.reset();
                             return d36;
                         }
                     case 3:
-                        if (v37 < 10000) {
+                        if (r37) {
+                            bug.reset();
                             return d37;
                         }
                     case 4:
-                        if (v38 < 10000) {
+                        if (r38) {
+                            bug.reset();
                             return d38;
                         }
                 } break;
@@ -19408,7 +18367,6 @@ public class Navigation {
                 switch(dy) {
                 } break;
 
-        }
         }
     
         o0 = r0;
@@ -19736,14 +18694,18 @@ public class Navigation {
             return ans;
         }
 
+        temp10 += 1;
+        if (temp10 > 50) {
+            globalBest = 1000000;
+            temp10 = 0;
+        }
+
         bug.move(targetLocation, lastDirection);
         return null;
     }
 
     private Direction getBestDirection7() throws GameActionException {
         double localBest = 1000000.0;
-        boolean temp1 = false;
-        boolean temp2 = false;
         boolean temp3 = false;
         l34 = currentLocation;
         v34 = 0;
@@ -20041,11 +19003,6 @@ public class Navigation {
                 r25 |= r34;
                 r25 |= r35;
                 r25 &= !b25;
-
-                if (targetLocation.equals(l25) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r25;
-                }
             }
         }
         
@@ -20083,11 +19040,6 @@ public class Navigation {
                 r35 |= r25;
                 r35 |= r34;
                 r35 &= !b35;
-
-                if (targetLocation.equals(l35) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r35;
-                }
             }
         }
         
@@ -20125,11 +19077,6 @@ public class Navigation {
                 r24 |= r34;
                 r24 |= r25;
                 r24 &= !b24;
-
-                if (targetLocation.equals(l24) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r24;
-                }
             }
         }
         
@@ -20167,11 +19114,6 @@ public class Navigation {
                 r44 |= r35;
                 r44 |= r34;
                 r44 &= !b44;
-
-                if (targetLocation.equals(l44) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r44;
-                }
             }
         }
         
@@ -20215,11 +19157,6 @@ public class Navigation {
                 r26 |= r25;
                 r26 |= r34;
                 r26 &= !b26;
-
-                if (targetLocation.equals(l26) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r26;
-                }
             }
         }
         
@@ -20264,11 +19201,6 @@ public class Navigation {
                 r36 |= r35;
                 r36 |= r44;
                 r36 &= !b36;
-
-                if (targetLocation.equals(l36) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r36;
-                }
             }
         }
         
@@ -20314,11 +19246,6 @@ public class Navigation {
                 r16 |= r26;
                 r16 |= r24;
                 r16 &= !b16;
-
-                if (targetLocation.equals(l16) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r16;
-                }
             }
         }
         
@@ -20370,11 +19297,6 @@ public class Navigation {
                 r27 |= r26;
                 r27 |= r35;
                 r27 &= !b27;
-
-                if (targetLocation.equals(l27) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r27;
-                }
             }
         }
         
@@ -20421,11 +19343,6 @@ public class Navigation {
                 r15 |= r25;
                 r15 |= r16;
                 r15 &= !b15;
-
-                if (targetLocation.equals(l15) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r15;
-                }
             }
         }
         
@@ -20477,11 +19394,6 @@ public class Navigation {
                 r17 |= r16;
                 r17 |= r25;
                 r17 &= !b17;
-
-                if (targetLocation.equals(l17) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r17;
-                }
             }
         }
         
@@ -20528,11 +19440,6 @@ public class Navigation {
                 r45 |= r35;
                 r45 |= r44;
                 r45 &= !b45;
-
-                if (targetLocation.equals(l45) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r45;
-                }
             }
         }
         
@@ -20572,11 +19479,6 @@ public class Navigation {
                 r54 |= r45;
                 r54 |= r44;
                 r54 &= !b54;
-
-                if (targetLocation.equals(l54) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r54;
-                }
             }
         }
         
@@ -20615,11 +19517,6 @@ public class Navigation {
                 r14 |= r24;
                 r14 |= r15;
                 r14 &= !b14;
-
-                if (targetLocation.equals(l14) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r14;
-                }
             }
         }
         
@@ -20664,11 +19561,6 @@ public class Navigation {
                 r18 |= r17;
                 r18 |= r26;
                 r18 &= !b18;
-
-                if (targetLocation.equals(l18) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r18;
-                }
             }
         }
         
@@ -20714,11 +19606,6 @@ public class Navigation {
                 r37 |= r36;
                 r37 |= r45;
                 r37 &= !b37;
-
-                if (targetLocation.equals(l37) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r37;
-                }
             }
         }
         
@@ -20764,11 +19651,6 @@ public class Navigation {
                 r8 |= r17;
                 r8 |= r15;
                 r8 &= !b8;
-
-                if (targetLocation.equals(l8) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r8;
-                }
             }
         }
         
@@ -20820,11 +19702,6 @@ public class Navigation {
                 r28 |= r27;
                 r28 |= r36;
                 r28 &= !b28;
-
-                if (targetLocation.equals(l28) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r28;
-                }
             }
         }
         
@@ -20877,11 +19754,6 @@ public class Navigation {
                 r46 |= r45;
                 r46 |= r54;
                 r46 &= !b46;
-
-                if (targetLocation.equals(l46) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r46;
-                }
             }
         }
         
@@ -20934,11 +19806,6 @@ public class Navigation {
                 r7 |= r8;
                 r7 |= r14;
                 r7 &= !b7;
-
-                if (targetLocation.equals(l7) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r7;
-                }
             }
         }
         
@@ -20991,11 +19858,6 @@ public class Navigation {
                 r9 |= r8;
                 r9 |= r16;
                 r9 &= !b9;
-
-                if (targetLocation.equals(l9) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r9;
-                }
             }
         }
         
@@ -21048,11 +19910,6 @@ public class Navigation {
                 r19 |= r18;
                 r19 |= r27;
                 r19 &= !b19;
-
-                if (targetLocation.equals(l19) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r19;
-                }
             }
         }
         
@@ -21105,11 +19962,6 @@ public class Navigation {
                 r10 |= r9;
                 r10 |= r17;
                 r10 &= !b10;
-
-                if (targetLocation.equals(l10) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r10;
-                }
             }
         }
         
@@ -21156,11 +20008,6 @@ public class Navigation {
                 r6 |= r15;
                 r6 |= r7;
                 r6 &= !b6;
-
-                if (targetLocation.equals(l6) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r6;
-                }
             }
         }
         
@@ -21206,11 +20053,6 @@ public class Navigation {
                 r55 |= r45;
                 r55 |= r54;
                 r55 &= !b55;
-
-                if (targetLocation.equals(l55) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r55;
-                }
             }
         }
         
@@ -21250,11 +20092,6 @@ public class Navigation {
                 r5 |= r14;
                 r5 |= r6;
                 r5 &= !b5;
-
-                if (targetLocation.equals(l5) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r5;
-                }
             }
         }
         
@@ -21299,11 +20136,6 @@ public class Navigation {
                 r11 |= r10;
                 r11 |= r18;
                 r11 &= !b11;
-
-                if (targetLocation.equals(l11) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r11;
-                }
             }
         }
         
@@ -21343,11 +20175,6 @@ public class Navigation {
                 r63 |= r55;
                 r63 |= r54;
                 r63 &= !b63;
-
-                if (targetLocation.equals(l63) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r63;
-                }
             }
         }
         
@@ -21392,11 +20219,6 @@ public class Navigation {
                 r2 |= r9;
                 r2 |= r7;
                 r2 &= !b2;
-
-                if (targetLocation.equals(l2) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r2;
-                }
             }
         }
         
@@ -21442,11 +20264,6 @@ public class Navigation {
                 r38 |= r37;
                 r38 |= r46;
                 r38 &= !b38;
-
-                if (targetLocation.equals(l38) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r38;
-                }
             }
         }
         
@@ -21498,11 +20315,6 @@ public class Navigation {
                 r29 |= r28;
                 r29 |= r37;
                 r29 &= !b29;
-
-                if (targetLocation.equals(l29) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r29;
-                }
             }
         }
         
@@ -21555,11 +20367,6 @@ public class Navigation {
                 r1 |= r2;
                 r1 |= r6;
                 r1 &= !b1;
-
-                if (targetLocation.equals(l1) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r1;
-                }
             }
         }
         
@@ -21612,11 +20419,6 @@ public class Navigation {
                 r3 |= r2;
                 r3 |= r8;
                 r3 &= !b3;
-
-                if (targetLocation.equals(l3) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r3;
-                }
             }
         }
         
@@ -21669,11 +20471,6 @@ public class Navigation {
                 r47 |= r46;
                 r47 |= r55;
                 r47 &= !b47;
-
-                if (targetLocation.equals(l47) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r47;
-                }
             }
         }
         
@@ -21726,11 +20523,6 @@ public class Navigation {
                 r56 |= r55;
                 r56 |= r63;
                 r56 &= !b56;
-
-                if (targetLocation.equals(l56) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r56;
-                }
             }
         }
         
@@ -21783,11 +20575,6 @@ public class Navigation {
                 r0 |= r1;
                 r0 |= r5;
                 r0 &= !b0;
-
-                if (targetLocation.equals(l0) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r0;
-                }
             }
         }
         
@@ -21840,11 +20627,6 @@ public class Navigation {
                 r20 |= r19;
                 r20 |= r28;
                 r20 &= !b20;
-
-                if (targetLocation.equals(l20) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r20;
-                }
             }
         }
         
@@ -21897,11 +20679,6 @@ public class Navigation {
                 r4 |= r3;
                 r4 |= r9;
                 r4 &= !b4;
-
-                if (targetLocation.equals(l4) && rc.canSenseLocation(targetLocation)) {
-                    temp1 = true;
-                    temp2 = r4;
-                }
             }
         }
         
@@ -21910,31 +20687,35 @@ public class Navigation {
         o3 |= b4;
         o9 |= b4;
 
-        if (temp1 && temp2) {
-            int dx = targetLocation.x - l34.x;
+        int dx = targetLocation.x - l34.x;
         int dy = targetLocation.y - l34.y;
 
         switch(dx) {
             case -4:
                 switch(dy) {
                     case -2:
-                        if (v0 < 10000) {
+                        if (r0) {
+                            bug.reset();
                             return d0;
                         }
                     case -1:
-                        if (v1 < 10000) {
+                        if (r1) {
+                            bug.reset();
                             return d1;
                         }
                     case 0:
-                        if (v2 < 10000) {
+                        if (r2) {
+                            bug.reset();
                             return d2;
                         }
                     case 1:
-                        if (v3 < 10000) {
+                        if (r3) {
+                            bug.reset();
                             return d3;
                         }
                     case 2:
-                        if (v4 < 10000) {
+                        if (r4) {
+                            bug.reset();
                             return d4;
                         }
                 } break;
@@ -21942,31 +20723,38 @@ public class Navigation {
             case -3:
                 switch(dy) {
                     case -3:
-                        if (v5 < 10000) {
+                        if (r5) {
+                            bug.reset();
                             return d5;
                         }
                     case -2:
-                        if (v6 < 10000) {
+                        if (r6) {
+                            bug.reset();
                             return d6;
                         }
                     case -1:
-                        if (v7 < 10000) {
+                        if (r7) {
+                            bug.reset();
                             return d7;
                         }
                     case 0:
-                        if (v8 < 10000) {
+                        if (r8) {
+                            bug.reset();
                             return d8;
                         }
                     case 1:
-                        if (v9 < 10000) {
+                        if (r9) {
+                            bug.reset();
                             return d9;
                         }
                     case 2:
-                        if (v10 < 10000) {
+                        if (r10) {
+                            bug.reset();
                             return d10;
                         }
                     case 3:
-                        if (v11 < 10000) {
+                        if (r11) {
+                            bug.reset();
                             return d11;
                         }
                 } break;
@@ -21974,31 +20762,38 @@ public class Navigation {
             case -2:
                 switch(dy) {
                     case -2:
-                        if (v14 < 10000) {
+                        if (r14) {
+                            bug.reset();
                             return d14;
                         }
                     case -1:
-                        if (v15 < 10000) {
+                        if (r15) {
+                            bug.reset();
                             return d15;
                         }
                     case 0:
-                        if (v16 < 10000) {
+                        if (r16) {
+                            bug.reset();
                             return d16;
                         }
                     case 1:
-                        if (v17 < 10000) {
+                        if (r17) {
+                            bug.reset();
                             return d17;
                         }
                     case 2:
-                        if (v18 < 10000) {
+                        if (r18) {
+                            bug.reset();
                             return d18;
                         }
                     case 3:
-                        if (v19 < 10000) {
+                        if (r19) {
+                            bug.reset();
                             return d19;
                         }
                     case 4:
-                        if (v20 < 10000) {
+                        if (r20) {
+                            bug.reset();
                             return d20;
                         }
                 } break;
@@ -22006,27 +20801,33 @@ public class Navigation {
             case -1:
                 switch(dy) {
                     case -1:
-                        if (v24 < 10000) {
+                        if (r24) {
+                            bug.reset();
                             return d24;
                         }
                     case 0:
-                        if (v25 < 10000) {
+                        if (r25) {
+                            bug.reset();
                             return d25;
                         }
                     case 1:
-                        if (v26 < 10000) {
+                        if (r26) {
+                            bug.reset();
                             return d26;
                         }
                     case 2:
-                        if (v27 < 10000) {
+                        if (r27) {
+                            bug.reset();
                             return d27;
                         }
                     case 3:
-                        if (v28 < 10000) {
+                        if (r28) {
+                            bug.reset();
                             return d28;
                         }
                     case 4:
-                        if (v29 < 10000) {
+                        if (r29) {
+                            bug.reset();
                             return d29;
                         }
                 } break;
@@ -22034,19 +20835,23 @@ public class Navigation {
             case 0:
                 switch(dy) {
                     case 1:
-                        if (v35 < 10000) {
+                        if (r35) {
+                            bug.reset();
                             return d35;
                         }
                     case 2:
-                        if (v36 < 10000) {
+                        if (r36) {
+                            bug.reset();
                             return d36;
                         }
                     case 3:
-                        if (v37 < 10000) {
+                        if (r37) {
+                            bug.reset();
                             return d37;
                         }
                     case 4:
-                        if (v38 < 10000) {
+                        if (r38) {
+                            bug.reset();
                             return d38;
                         }
                 } break;
@@ -22054,19 +20859,23 @@ public class Navigation {
             case 1:
                 switch(dy) {
                     case 1:
-                        if (v44 < 10000) {
+                        if (r44) {
+                            bug.reset();
                             return d44;
                         }
                     case 2:
-                        if (v45 < 10000) {
+                        if (r45) {
+                            bug.reset();
                             return d45;
                         }
                     case 3:
-                        if (v46 < 10000) {
+                        if (r46) {
+                            bug.reset();
                             return d46;
                         }
                     case 4:
-                        if (v47 < 10000) {
+                        if (r47) {
+                            bug.reset();
                             return d47;
                         }
                 } break;
@@ -22074,15 +20883,18 @@ public class Navigation {
             case 2:
                 switch(dy) {
                     case 2:
-                        if (v54 < 10000) {
+                        if (r54) {
+                            bug.reset();
                             return d54;
                         }
                     case 3:
-                        if (v55 < 10000) {
+                        if (r55) {
+                            bug.reset();
                             return d55;
                         }
                     case 4:
-                        if (v56 < 10000) {
+                        if (r56) {
+                            bug.reset();
                             return d56;
                         }
                 } break;
@@ -22090,7 +20902,8 @@ public class Navigation {
             case 3:
                 switch(dy) {
                     case 3:
-                        if (v63 < 10000) {
+                        if (r63) {
+                            bug.reset();
                             return d63;
                         }
                 } break;
@@ -22099,7 +20912,6 @@ public class Navigation {
                 switch(dy) {
                 } break;
 
-        }
         }
     
         o0 = r0;
@@ -22417,6 +21229,12 @@ public class Navigation {
             globalBest = localBest;
             bug.reset();
             return ans;
+        }
+
+        temp10 += 1;
+        if (temp10 > 50) {
+            globalBest = 1000000;
+            temp10 = 0;
         }
 
         bug.move(targetLocation, lastDirection);
@@ -22437,6 +21255,7 @@ public class Navigation {
         
         if (!targetLocation.equals(this.targetLocation)) {
             globalBest = 1000000;
+            temp10 = 0;
             this.targetLocation = targetLocation;
             lastDirection = Direction.CENTER;
         }

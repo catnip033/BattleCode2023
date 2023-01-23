@@ -162,11 +162,6 @@ for i in range(8):
                 {temp_str4}
                 {temp_str1}
                 r{u.i} &= !b{u.i};
-
-                if (targetLocation.equals(l{u.i}) && rc.canSenseLocation(targetLocation)) {{
-                    temp1 = true;
-                    temp2 = r{u.i};
-                }}
             }}
         }}
         {temp_str2}
@@ -199,7 +194,8 @@ for i in range(8):
                 if c.i != 34:
                     insides[i] += f'''
                     case {y}:
-                        if (v{c.i} < 10000) {{
+                        if (r{c.i}) {{
+                            bug.reset();
                             return d{c.i};
                         }}'''
             
@@ -246,7 +242,7 @@ file_name = 'Navigation'
 
 f = open(f'{file_name}.java', 'w')
 
-f.write(f'''package Pathing;
+f.write(f'''package MeteorV2;
 
 import battlecode.common.*;
 
@@ -264,6 +260,8 @@ public class {file_name} {{
 
     private double globalBest = 1000000;
 
+    private int temp10;
+
     public {file_name} (RobotController rc) {{
         this.rc = rc;
         team = rc.getTeam();
@@ -275,23 +273,25 @@ for i in range(8):
     f.write(f'''
     private Direction getBestDirection{i}() throws GameActionException {{
         double localBest = 1000000.0;
-        boolean temp1 = false;
-        boolean temp2 = false;
         boolean temp3 = false;
         l{C[M][M].i} = currentLocation;
         v{C[M][M].i} = 0;
         d{C[M][M].i} = Direction.CENTER;
         r{C[M][M].i} = true;{assigns[i]}
     {relaxations[i]}
-        if (temp1 && temp2) {{
-        {insides[i]}
-        }}
+    {insides[i]}
     {getEdges[i]}
     {outsides[i]}
         if (localBest < globalBest) {{
             globalBest = localBest;
             bug.reset();
             return ans;
+        }}
+
+        temp10 += 1;
+        if (temp10 > 50) {{
+            globalBest = 1000000;
+            temp10 = 0;
         }}
 
         bug.move(targetLocation, lastDirection);
@@ -314,6 +314,7 @@ f.write(f'''
         
         if (!targetLocation.equals(this.targetLocation)) {{
             globalBest = 1000000;
+            temp10 = 0;
             this.targetLocation = targetLocation;
             lastDirection = Direction.CENTER;
         }}

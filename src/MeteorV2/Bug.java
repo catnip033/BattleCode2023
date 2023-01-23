@@ -1,4 +1,4 @@
-package Pathing;
+package MeteorV2;
 
 import battlecode.common.*;
 
@@ -27,29 +27,27 @@ public class Bug {
             reset();
             this.targetLocation = targetLocation;
         }
-	if (wallLocation != null) {
-	    rc.setIndicatorDot(wallLocation, 0, 0, 0);
-	}
+        if (wallLocation != null) {
+            rc.setIndicatorDot(wallLocation, 0, 0, 0);
+        }
         for (Direction direction : Direction.allDirections()) {
-
             MapLocation newLocation = currentLocation.add(direction);
-	    canMove[direction.ordinal()] = false;
+            canMove[direction.ordinal()] = false;
 
-	    if (newLocation.equals(wallLocation)) {
-		continue;
-	    }
-
-	    if (rc.canMove(direction)) {
-		if (rc.canSenseLocation(newLocation)) {
-		    Direction currentDirection = rc.senseMapInfo(newLocation).getCurrentDirection();
-		    if (currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0)) {
-			canMove[direction.ordinal()] = true;
-		    }
-		}
-		else {
-		    canMove[direction.ordinal()] = true;
-		}
-	    }
+            if (newLocation.equals(wallLocation)) {
+                continue;
+            }
+            if (rc.canMove(direction)) {
+                if (rc.canSenseLocation(newLocation)) {
+                    Direction currentDirection = rc.senseMapInfo(newLocation).getCurrentDirection();
+                    if (currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0)) {
+                        canMove[direction.ordinal()] = true;
+                    }
+                }
+                else {
+                    canMove[direction.ordinal()] = true;
+                }
+            }
         }
 
         Direction direction = currentLocation.directionTo(wallLocation == null ? targetLocation : wallLocation);
@@ -104,11 +102,11 @@ public class Bug {
             if (!canMove[directionR.ordinal()]) { directionR = directionR.rotateRight(); } else { break; }
         }
 
-	int distanceL = currentLocation.add(directionL).distanceSquaredTo(targetLocation);
-	int distanceR = currentLocation.add(directionR).distanceSquaredTo(targetLocation);
+        int distanceL = currentLocation.add(directionL).distanceSquaredTo(targetLocation);
+        int distanceR = currentLocation.add(directionR).distanceSquaredTo(targetLocation);
 
-	double dotL = dot(directionL, lastDirection);
-	double dotR = dot(directionR, lastDirection);
+        double dotL = dot(directionL, lastDirection);
+        double dotR = dot(directionR, lastDirection);
 
         rotateClockwise =  (dotL < dotR) || (dotL == dotR && distanceL > distanceR);
     }

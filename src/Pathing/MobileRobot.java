@@ -7,6 +7,8 @@ public class MobileRobot extends Robot {
 
     protected final Navigation navigation;
 
+    protected boolean hasMoved;
+
     public MobileRobot(RobotController rc) throws GameActionException {
         super(rc);
 
@@ -21,6 +23,7 @@ public class MobileRobot extends Robot {
 
     public void step() throws GameActionException {
         super.step();
+	hasMoved = false;
         evading = false;
     }
 
@@ -29,21 +32,21 @@ public class MobileRobot extends Robot {
             return false;
         }
 
+	if (hasMoved) {
+	    return false;
+	}
+
         Direction direction = navigation.getBestDirection(targetLocation);
 
-        rc.setIndicatorString("" + direction);
-
-        boolean encounteredObstacle = direction == null;
-
-        if (encounteredObstacle) {
-        } else {
+        if (direction != null) {
 	    if (rc.canMove(direction)) {
 		rc.move(direction);
 	    }
 	}
 
         currentLocation = rc.getLocation();
-        return false;
+	hasMoved = true;
+        return true;
     }
 
     protected void draw() throws GameActionException {
