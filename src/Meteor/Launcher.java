@@ -9,8 +9,8 @@ public strictfp class Launcher extends MobileRobot {
     private MapLocation attackTarget;
 
     private MapLocation[] enemyHQLocations;
-
     private boolean[] isExplored;
+    private int symmetry = 0b111;
 
     private final int totalHQCount;
 
@@ -49,6 +49,11 @@ public strictfp class Launcher extends MobileRobot {
 
         if (rc.canWriteSharedArray(0, 0)) {
             map.reportNearbyEnemies(nearbyEnemies);
+            rc.writeSharedArray(Idx.symmetryOffset, rc.readSharedArray(Idx.symmetryOffset) & symmetry);
+        }
+
+        if (rc.getRoundNum() >= 3) {
+            symmetry = rc.readSharedArray(Idx.symmetryOffset);
         }
 
         // Go to closest possible enemy HQ location that is undiscovered
@@ -94,7 +99,7 @@ public strictfp class Launcher extends MobileRobot {
 
         MapLocation enemy = map.getClosestEnemy();
 
-        if (enemy != null && (targetLocation == null || map.getLevel(targetLocation) == 0 || currentLocation.distanceSquaredTo(targetLocation) > 40 && map.getLevel(targetLocation) < map.getLevel(enemy))) {
+        if (enemy != null && (targetLocation == null || map.getLevel(targetLocation) == 0 || currentLocation.distanceSquaredTo(targetLocation) > currentLocation.distanceSquaredTo(enemy))) {
             targetLocation = enemy;
         }
 
@@ -206,8 +211,9 @@ public strictfp class Launcher extends MobileRobot {
         int minDistance = Constants.INF;
 
         for (int i = 0; i < 3; ++i) {
-            MapLocation location = enemyHQLocations[i];
+            if ((symmetry >> i & 1) == 0) continue;
             if (isExplored[i]) continue;
+            MapLocation location = enemyHQLocations[i];
 
             if (rc.canSenseLocation(location)) {
                 if (rc.canSenseRobotAtLocation(location)) {
@@ -215,10 +221,12 @@ public strictfp class Launcher extends MobileRobot {
 
                     if (robot.type != RobotType.HEADQUARTERS || robot.team != team.opponent()) {
                         isExplored[i] = true;
+                        symmetry &= ~(1 << i);
                         continue;
                     }
                 } else {
                     isExplored[i] = true;
+                    symmetry &= ~(1 << i);
                     continue;
                 }
             }

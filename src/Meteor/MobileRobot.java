@@ -28,22 +28,13 @@ public class MobileRobot extends Robot {
 
     // TODO: Change when to use either BugNav or BFS
     protected boolean move() throws GameActionException {
-        if (!rc.isMovementReady() || currentLocation.equals(targetLocation)) { 
+        if (!rc.isMovementReady() || currentLocation.equals(targetLocation)) {
             return false;
         }
 
-        boolean encounteredObstacle = false;
-        for (MapInfo mapInfo : rc.senseNearbyMapInfos(2)) {
-            encounteredObstacle |= !mapInfo.isPassable() || rc.canSenseRobotAtLocation(mapInfo.getMapLocation());
-        }
-
         boolean moved;
-        if (encounteredObstacle) {
-            bugPath.update();
-            moved = bugPath.moveTo(targetLocation);
-        } else {
-            moved = bfs.move(targetLocation);
-        }
+        bugPath.update();
+        moved = bugPath.moveTo(targetLocation);
 
         currentLocation = rc.getLocation();
         return moved;

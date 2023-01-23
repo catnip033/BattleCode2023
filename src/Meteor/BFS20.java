@@ -366,7 +366,10 @@ public class BFS20 extends BFS {
 
     private double weight(MapLocation location) throws GameActionException {
         if (!rc.canSenseLocation(location)) return 100;
-        return (rc.senseMapInfo(location).getCooldownMultiplier(rc.getTeam()) - 1) * 10;
+        MapInfo mapInfo = rc.senseMapInfo(location);
+        double weight = (mapInfo.getCooldownMultiplier(rc.getTeam()) - 1) * 10;
+        if (mapInfo.getCurrentDirection() != Direction.CENTER) weight += 50;
+        return weight;
     }
 
     private Direction getBestDirection0(MapLocation target) throws GameActionException {

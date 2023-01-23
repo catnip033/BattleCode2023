@@ -44,7 +44,7 @@ public strictfp class Carrier extends MobileRobot {
             foundEnemy = true;
             if (rc.getWeight() > 0) returningResource = true;
             updateTarget();
-            if (distanceTo(closestTeamHQLocation) > 5) updateTargetForEvasion(nearbyEnemies);
+            if (!returningResource) updateTargetForEvasion(nearbyEnemies);
             while (move()) ;
 
             transferOrMine();
@@ -65,7 +65,10 @@ public strictfp class Carrier extends MobileRobot {
         }
 
         updateTarget();
-        while (move()) ;
+        while (move()) {
+            nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
+            if (foundEnemy) updateTargetForEvasion(nearbyEnemies);
+        }
 
         transferOrMine();
 
@@ -94,7 +97,7 @@ public strictfp class Carrier extends MobileRobot {
 
         for (int i=0; i<teamHQCount; ++i) {
             MapLocation teamHQLocation = decodeLocation(rc.readSharedArray(i + Idx.teamHQLocationOffset));
-            
+
             int distance = distanceTo(teamHQLocation);
 
             if (distance < minDistance) {
@@ -147,16 +150,16 @@ public strictfp class Carrier extends MobileRobot {
                 if (rc.senseTeamOccupyingIsland(idx) == Team.NEUTRAL) {
                     MapLocation[] islandLocations = rc.senseNearbyIslandLocations(idx);
 
-		    int minDistance = Constants.INF;
+                    int minDistance = Constants.INF;
 
-		    for (MapLocation islandLocation : islandLocations) {
-			int distance = distanceTo(islandLocation);
+                    for (MapLocation islandLocation : islandLocations) {
+                        int distance = distanceTo(islandLocation);
 
-			if (distance < minDistance) {
-			    minDistance = distance;
-			    targetLocation = islandLocation;
-			}
-		    }
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            targetLocation = islandLocation;
+                        }
+                    }
                 }
             }
         }
@@ -190,7 +193,7 @@ public strictfp class Carrier extends MobileRobot {
 
                 int distance = distanceTo(location);
                 if ((distance >= 2 || rc.getWeight() <= 3)
-                        && ((wellInfo.getResourceType() == ResourceType.ADAMANTIUM && carrierCount >= 2)
+                        && ((wellInfo.getResourceType() == ResourceType.ADAMANTIUM && carrierCount >= rc.getRoundNum() / 50 + 2)
                         || (wellInfo.getResourceType() == ResourceType.MANA && carrierCount >= 9))) {
                     if (targetLocation != null && location.distanceSquaredTo(targetLocation) <= 2) {
                         targetLocation = null;

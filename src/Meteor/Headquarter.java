@@ -15,12 +15,18 @@ public strictfp class Headquarter extends Robot {
 
         rc.writeSharedArray(Idx.teamHQCount, idx + 1);
         rc.writeSharedArray(idx + Idx.teamHQLocationOffset, encode(currentLocation, rc.getID()));
+
+        if (idx == 0) {
+            rc.writeSharedArray(Idx.symmetryOffset, 0b111);
+        }
     }
 
     public void step() throws GameActionException {
         super.step();
 
         if (idx == 0) { map.reset(); }
+
+        if (rc.getRoundNum() == 2) { reportSymmetry(); }
 
         RobotInfo[] nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
 
@@ -51,9 +57,9 @@ public strictfp class Headquarter extends Robot {
                 if (mn >= 40 && ad >= 40 && amplifierCount < 2) {
                     amplifierCount++;
                     return buildDroid(RobotType.AMPLIFIER);
-                } else if (mn >= 100) {
+                } else if (mn >= 60) {
                     return buildDroid(RobotType.LAUNCHER);
-                } else if (ad >= 100) {
+                } else if (ad >= 50) {
                     return buildDroid(RobotType.CARRIER);
                 }
             } else {
@@ -147,5 +153,35 @@ public strictfp class Headquarter extends Robot {
         }
 
         return bestWellLocation;
+    }
+
+    private void reportSymmetry() throws GameActionException {
+        int width = rc.getMapWidth() - 1, height = rc.getMapHeight() - 1;
+        int n = rc.readSharedArray(Idx.teamHQCount);
+
+        int symmetry = rc.readSharedArray(Idx.symmetryOffset);
+
+        for (int i = 0; i < n; ++i) {
+            MapLocation teamHQLocation = decodeLocation(rc.readSharedArray(i + Idx.teamHQLocationOffset));
+            int x = teamHQLocation.x, y = teamHQLocation.y;
+
+            MapLocation[] possibleEnemyHQLocation = {
+                    new MapLocation(width - x - 1, height - y - 1),
+                    new MapLocation(width - x - 1, y),
+                    new MapLocation(x, height - y - 1),
+            };
+
+            for (int j = 0; j < 3; ++j) {
+                MapLocation location = possibleEnemyHQLocation[j];
+
+                if (rc.canSenseLocation(location)) {
+                    if (!rc.canSenseRobotAtLocation(location) || rc.senseRobotAtLocation(location).type != RobotType.HEADQUARTERS || rc.senseRobotAtLocation(location).team == team) {
+                        symmetry &= ~(1 << j);
+                    }
+                }
+            }
+        }
+
+        rc.writeSharedArray(Idx.symmetryOffset, symmetry);
     }
 }
