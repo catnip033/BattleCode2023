@@ -3,6 +3,7 @@ package MeteorV2;
 import battlecode.common.*;
 
 public strictfp class Carrier extends MobileRobot {
+    private RobotInfo[] nearbyEnemies;
     private MapLocation closestTeamHQLocation;
     private MapLocation closestWellLocation;
 
@@ -26,26 +27,29 @@ public strictfp class Carrier extends MobileRobot {
             carryingAnchor = true;
         }
 
-        RobotInfo[] nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
+        nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
 
         if (rc.canWriteSharedArray(0, 0)) {
             map.reportNearbyEnemies(nearbyEnemies);
         }
 
-        RobotInfo enemyAttacker = null;
-        for (RobotInfo robot : nearbyEnemies) {
-            if (isDangerous(robot.getType())) {
-                enemyAttacker = robot;
-                break;
-            }
-        }
-
-        if (enemyAttacker != null) {
+        if (countEnemyAttackers() > 0) {
             foundEnemy = true;
             if (rc.getWeight() > 0) returningResource = true;
             updateTarget();
+
+            MapLocation attackTarget = selectAttackTarget();
+            if (attackTarget != null && rc.getWeight() > 0 && currentLocation.distanceSquaredTo(attackTarget) > 9) {
+                Direction direction = bestAttackDirection(currentLocation.directionTo(attackTarget));
+                if (direction != null) {
+                    rc.move(direction);
+                }
+            }
+            if (attackTarget != null && rc.canAttack(attackTarget)) {
+                rc.attack(attackTarget);
+            }
             if (!returningResource) updateTargetForEvasion(nearbyEnemies);
-            while (move()) ;
+            while (move()) transferOrMine();
 
             transferOrMine();
 
@@ -67,7 +71,8 @@ public strictfp class Carrier extends MobileRobot {
         updateTarget();
         while (move()) {
             nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
-            if (foundEnemy) updateTargetForEvasion(nearbyEnemies);
+            if (countEnemyAttackers() > 0) updateTargetForEvasion(nearbyEnemies);
+            transferOrMine();
         }
 
         transferOrMine();
@@ -220,7 +225,7 @@ public strictfp class Carrier extends MobileRobot {
         int minDistance = Constants.INF;
 
         for (MapLocation neighbor: rc.getAllLocationsWithinRadiusSquared(location, 2)) {
-            if ((rc.canSenseRobotAtLocation(neighbor) || !rc.sensePassability(neighbor)) && !currentLocation.equals(neighbor)) { continue; }
+            if ((rc.canSenseRobotAtLocation(neighbor) || !rc.sensePassability(neighbor) || rc.senseMapInfo(neighbor).getCurrentDirection() != Direction.CENTER) && !currentLocation.equals(neighbor)) { continue; }
 
             int distance = closestTeamHQLocation.distanceSquaredTo(neighbor); //distanceTo(neighbor);
             if (distance < minDistance) {
@@ -230,5 +235,75 @@ public strictfp class Carrier extends MobileRobot {
         }
 
         return bestNeighbor;
+    }
+
+    private Direction bestAttackDirection(Direction targetDirection) throws GameActionException {
+        RobotInfo[] enemyAttackers = new RobotInfo[countEnemyAttackers()];
+        int idx = 0;
+
+        for (RobotInfo robot : nearbyEnemies) {
+            if (isDangerous(robot.type)) {
+                enemyAttackers[idx++] = robot;
+            }
+        }
+
+        Direction bestDirection = null;
+        int minCount = Constants.INF;
+
+        for (Direction direction : inorderDirections(targetDirection)) {
+            if (rc.canMove(direction)) {
+                MapLocation location = currentLocation.add(direction);
+                int count = 0;
+                for (RobotInfo robot : enemyAttackers) {
+                    if (robot.location.distanceSquaredTo(location) <= rc.getType().actionRadiusSquared) {
+                        count++;
+                    }
+                }
+                if (count <= minCount || minCount == 0) {
+                    if (count > 0) {
+                        if (count < minCount || minCount == 0) {
+                            minCount = count;
+                            bestDirection = direction;
+                        }
+                    } else if (minCount == Constants.INF) {
+                        minCount = count;
+                        bestDirection = direction;
+                    }
+                }
+            }
+        }
+
+        return bestDirection;
+    }
+
+    private int countEnemyAttackers() {
+        int count = 0;
+
+        for (RobotInfo robot : nearbyEnemies) {
+            if (isDangerous(robot.type)) { count += 1; }
+        }
+
+        return count;
+    }
+
+    private MapLocation selectAttackTarget() throws GameActionException {
+        MapLocation attackTarget = null;
+
+        int minHealth = Constants.INF;
+
+        for (RobotInfo robot : rc.senseNearbyRobots(16, team.opponent())) {
+            RobotType robotType = robot.getType();
+
+            if (!isDangerous(robotType)) continue;
+
+            int health = robot.getHealth();
+
+            if (health < minHealth) {
+                minHealth = health;
+                attackTarget = robot.location;
+            }
+        }
+
+        return attackTarget;
     }
 }
