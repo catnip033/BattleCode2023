@@ -49,8 +49,7 @@ for x in range(-M, M+1):
             declare += f'''
     private static MapLocation l{u.i};
     private static double v{u.i};
-    private static Direction d{u.i};
-    private static boolean r{u.i};
+    private static double s{u.i};
 '''
         else:
             declare += f'''
@@ -58,9 +57,7 @@ for x in range(-M, M+1):
     private static double v{u.i};
     private static Direction d{u.i};
     private static double p{u.i};
-    private static boolean b{u.i};
-    private static boolean r{u.i};
-    private static boolean o{u.i};
+    private static double s{u.i};
 '''
 
 for i in range(8):
@@ -73,42 +70,32 @@ for i in range(8):
         u = pq.get()
         temp_str1 = ''
         temp_str2 = ''
-        temp_str3 = ''
-        temp_str4 = ''
-        temp_str5 = ''
 
         if (u.x, u.y) != (0, 0):
-            relaxations[i] += f'''
-        temp3 = false;'''
-
             if u.dist <= 1:
-                temp_str5 = f'''if (rc.onTheMap(l{u.i}) && rc.canMove(Direction.{Cell(0, 0, 34).getDirectionTo(u)})) {{
-                if (rc.canSenseLocation(l{u.i})) {{
-                    MapInfo mapInfo = rc.senseMapInfo(l{u.i});
-                    Direction currentDirection = mapInfo.getCurrentDirection();
-                    if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l{u.i}), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {{
-                        p{u.i} = mapInfo.getCooldownMultiplier(team);
-                        b{u.i} = false;
-                    }}
+                temp_str1 = f'''if (rc.onTheMap(l{u.i}) && rc.canMove(Direction.{Cell(0, 0, 34).getDirectionTo(u)})) {{
+            if (rc.canSenseLocation(l{u.i})) {{
+                MapInfo mapInfo = rc.senseMapInfo(l{u.i});
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l{u.i}), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {{
+                    p{u.i} = mapInfo.getCooldownMultiplier(team);
                 }}
-                else {{
-                    p{u.i} = 1.5;
-                    b{u.i} = false;
-                }}'''
+            }}
+            else {{
+                p{u.i} = 1.5;
+            }}'''
             else:
-                temp_str5 = f'''if (rc.onTheMap(l{u.i})) {{
-                if (rc.canSenseLocation(l{u.i})) {{
-                    MapInfo mapInfo = rc.senseMapInfo(l{u.i});
-                    Direction currentDirection = mapInfo.getCurrentDirection();
-                    if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l{u.i}), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {{
-                        p{u.i} = mapInfo.getCooldownMultiplier(team);
-                        b{u.i} = false;
-                    }}
+                temp_str1 = f'''if (rc.onTheMap(l{u.i})) {{
+            if (rc.canSenseLocation(l{u.i})) {{
+                MapInfo mapInfo = rc.senseMapInfo(l{u.i});
+                Direction currentDirection = mapInfo.getCurrentDirection();
+                if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l{u.i}), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {{
+                    p{u.i} = mapInfo.getCooldownMultiplier(team);
                 }}
-                else {{
-                    p{u.i} = 1.5;
-                    b{u.i} = false;
-                }}'''
+            }}
+            else {{
+                p{u.i} = 1.5;
+            }}'''
 
         for d in range(8):
             x, y = u.x + dx[d], u.y + dy[d]
@@ -128,51 +115,39 @@ for i in range(8):
             if not visit[x+M][y+M]:
                 pq.put(v)
                 visit[x+M][y+M] = True
+                if x != 0 or y != 0:
+                    assigns[i] += f'''
+        d{v.i} = null;'''
                 assigns[i] += f'''
         l{v.i} = l{u.i}.add(Direction.{u.getDirectionTo(v)});
         v{v.i} = 1000000;
         p{v.i} = 1000000;
-        d{v.i} = null;
-        b{v.i} = true;
-        r{v.i} = false;
-        o{v.i} = false;'''
+        s{v.i} = Math.sqrt(l{v.i}.distanceSquaredTo(targetLocation));'''
 
             elif v < u:
                 if True:
-                    temp_str4 += f'''
-                if (v{u.i} > v{v.i} + p{u.i}) {{
-                    v{u.i} = v{v.i} + p{u.i};
-                    d{u.i} = {'Direction.' + v.getDirectionTo(u) if (x, y) == (0, 0) else 'd' + str(v.i)};
-                }}'''
-
-                    temp_str1 += f'''
-                r{u.i} |= r{v.i};'''
-                    temp_str3 += f'''
-        temp3 |= r{v.i};'''
-                    if v.i != 34:
-                        temp_str2 += f'''
-        o{v.i} |= b{u.i};'''
+                    temp_str2 += f'''
+            dist = v{v.i} + p{u.i} + s{v.i} * 0.000001;
+            if (v{u.i} > dist) {{
+                v{u.i} = dist;
+                d{u.i} = {'Direction.' + v.getDirectionTo(u) if (x, y) == (0, 0) else 'd' + str(v.i)};
+            }}'''
 
         if (u.x, u.y) != (0, 0):
             relaxations[i] += f'''
-            {temp_str3}
 
-        if (temp3) {{
-            {temp_str5}
-                {temp_str4}
-                {temp_str1}
-                r{u.i} &= !b{u.i};
-            }}
-        }}
-        {temp_str2}
-'''
+        {temp_str1}
+            {temp_str2}
+        }}'''
     
-    insides[i] += f'''    int dx = targetLocation.x - l{C[M][M].i}.x;
+    insides[i] += f'''
+        int dx = targetLocation.x - l{C[M][M].i}.x;
         int dy = targetLocation.y - l{C[M][M].i}.y;
 
         switch(dx) {{'''
 
-    outsides[i] += f'''    Direction ans = Direction.CENTER;
+    outsides[i] += f'''
+        Direction ans = Direction.CENTER;
 '''
 
     for x in range(-M, M+1):
@@ -194,18 +169,16 @@ for i in range(8):
                 if c.i != 34:
                     insides[i] += f'''
                     case {y}:
-                        if (r{c.i}) {{
+                        if (v{c.i} < 1000000) {{
                             bug.reset();
                             return d{c.i};
                         }}'''
             
                     outsides[i] += f'''
-        if (r{c.i} && o{c.i}) {{
-            double dist{c.i} = v{c.i} + 1.5 * Math.sqrt(l{c.i}.distanceSquaredTo(targetLocation));
-            if (dist{c.i} < localBest) {{
-                localBest = dist{c.i};
-                ans = d{c.i};
-            }}
+        double dist{c.i} = v{c.i} + 0.7 * s{c.i};
+        if (dist{c.i} < localBest) {{
+            localBest = dist{c.i};
+            ans = d{c.i};
         }}
 '''
 
@@ -215,28 +188,6 @@ for i in range(8):
 
     insides[i] += f'''
         }}'''
-
-def isEdge(x, y):
-    return x ** 2 + y ** 2 <= RADIUS_SQUARED and ((abs(x) + 1) ** 2 + y ** 2 > RADIUS_SQUARED or x ** 2 + (abs(y) + 1) ** 2 > RADIUS_SQUARED)
-
-getEdges = [''] * 8
-
-for i in range(8):
-    for x in range(-M, M+1):
-        for y in range(-M, M+1):
-            if i == 0 and not (y >= 0): continue
-            if i == 1 and not (-x <= y): continue
-            if i == 2 and not (x >= 0): continue
-            if i == 3 and not (x >= y): continue
-            if i == 4 and not (y <= 0): continue
-            if i == 5 and not (-x >= y): continue
-            if i == 6 and not (x <= 0): continue
-            if i == 7 and not (x <= y): continue
-
-            if isEdge(x, y):
-                c = C[x+M][y+M]
-                getEdges[i] += f'''
-        o{c.i} = r{c.i};'''
 
 file_name = 'Navigation'
 
@@ -260,7 +211,7 @@ public class {file_name} {{
 
     private double globalBest = 1000000;
 
-    private int temp10;
+    private int consecutiveBugNavRoundCount;
 
     public {file_name} (RobotController rc) {{
         this.rc = rc;
@@ -273,14 +224,11 @@ for i in range(8):
     f.write(f'''
     private Direction getBestDirection{i}() throws GameActionException {{
         double localBest = 1000000.0;
-        boolean temp3 = false;
+        double dist = 0.0;
         l{C[M][M].i} = currentLocation;
-        v{C[M][M].i} = 0;
-        d{C[M][M].i} = Direction.CENTER;
-        r{C[M][M].i} = true;{assigns[i]}
+        v{C[M][M].i} = 0;{assigns[i]}
     {relaxations[i]}
     {insides[i]}
-    {getEdges[i]}
     {outsides[i]}
         if (localBest < globalBest) {{
             globalBest = localBest;
@@ -288,10 +236,11 @@ for i in range(8):
             return ans;
         }}
 
-        temp10 += 1;
-        if (temp10 > 50) {{
+        consecutiveBugNavRoundCount += 1;
+
+        if (consecutiveBugNavRoundCount > 40) {{
             globalBest = 1000000;
-            temp10 = 0;
+            consecutiveBugNavRoundCount = 0;
         }}
 
         bug.move(targetLocation, lastDirection);
@@ -304,6 +253,7 @@ f.write(f'''
         previousLocation = currentLocation;
         currentLocation = rc.getLocation();
         lastDirection = previousLocation == null ? Direction.CENTER : previousLocation.directionTo(currentLocation);
+        globalBest = Math.min(0.7 * Math.sqrt(currentLocation.distanceSquaredTo(targetLocation)), globalBest);
         bug.move(targetLocation, lastDirection);
     }}
 
@@ -314,7 +264,6 @@ f.write(f'''
         
         if (!targetLocation.equals(this.targetLocation)) {{
             globalBest = 1000000;
-            temp10 = 0;
             this.targetLocation = targetLocation;
             lastDirection = Direction.CENTER;
         }}
