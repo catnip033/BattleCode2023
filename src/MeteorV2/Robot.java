@@ -58,4 +58,14 @@ public class Robot {
     protected int distanceTo(MapLocation location) {
         return Math.max(Math.abs(location.x - currentLocation.x), Math.abs(location.y - currentLocation.y));
     }
+
+    protected Direction[] inorderDirections(Direction direction) {
+        return new Direction[]{
+                direction,
+                direction.rotateRight(),
+                direction.rotateLeft(),
+                direction.rotateRight().rotateRight(),
+                direction.rotateLeft().rotateLeft(),
+        };
+    }
 }
