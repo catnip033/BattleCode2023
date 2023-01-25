@@ -22,6 +22,8 @@ public strictfp class Carrier extends MobileRobot {
 
         updateClosestTeamHQLocation();
 
+        if (targetLocation != null && rc.canSenseLocation(targetLocation) && rc.senseMapInfo(targetLocation).getCurrentDirection() != Direction.CENTER) targetLocation = null;
+
         if (rc.canTakeAnchor(closestTeamHQLocation, Anchor.STANDARD)) {
             rc.takeAnchor(closestTeamHQLocation, Anchor.STANDARD);
             carryingAnchor = true;
