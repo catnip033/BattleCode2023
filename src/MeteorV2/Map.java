@@ -36,23 +36,29 @@ public class Map {
 
     public void reset() throws GameActionException {
         for (int i = 0; i < GRID_MAX_IDX; ++i) {
+            int nextInfo = 0;
+
             for (int j = 0; j < INFOS_PER_INTEGER; ++j) {
 
                 int info = (rc.readSharedArray(i + Idx.mapOffset + parity(false)) >> (j * BITS_PER_INFO)) & MASK;
                 int level = info & 0b11;
-
-                if (level == 0) { continue; }
+                int isWell = info >> 2 & 1;
+                int isFull = info >> 3 & 1;
 
                 int r = (i * INFOS_PER_INTEGER + j) / GRID_COLS, c = (i * INFOS_PER_INTEGER + j) % GRID_COLS;
+
+                nextInfo |= (info & 0b1100) << (j * BITS_PER_INFO);
 
                 MapLocation location = new MapLocation(c * GRID_SIZE + GRID_SIZE / 2, r * GRID_SIZE + GRID_SIZE / 2);
 
                 if (level == 1) { rc.setIndicatorDot(location, 255, 255, 0);  }
                 if (level == 2) { rc.setIndicatorDot(location, 255, 153, 51); }
                 if (level == 3) { rc.setIndicatorDot(location, 255, 80, 80);  }
+                if (isWell == 1) { rc.setIndicatorDot(location, 128, 217, 255); }
+                if (isFull == 1) { rc.setIndicatorDot(location, 150, 0, 150); }
             }
 
-            rc.writeSharedArray(Idx.mapOffset + i + parity(true), 0);
+            rc.writeSharedArray(Idx.mapOffset + i + parity(true), nextInfo);
         }
     }
 
@@ -73,6 +79,21 @@ public class Map {
         for (RobotInfo robot : nearbyRobots) {
             //if (robot.getType() == RobotType.CARRIER) { reportEnemy(robot.location, 1); }
             if (robot.getType() == RobotType.LAUNCHER || robot.getType() == RobotType.DESTABILIZER) { reportEnemy(robot.location, 2); }
+        }
+    }
+
+    public void reportWell(MapLocation location, int fullness) throws GameActionException {
+        int info = getInfo(location);
+
+        if (fullness == 0) info &= ~0b1000;
+        if (fullness == 2) info |= 0b1000;
+
+        setInfo(location, info | 0b0100);
+    }
+
+    public void reportNearbyWells(WellInfo[] nearbyWells) throws GameActionException {
+        for (WellInfo wellInfo : nearbyWells) {
+            reportWell(wellInfo.getMapLocation(), Robot.getWellFullness(rc, wellInfo));
         }
     }
 
@@ -107,8 +128,42 @@ public class Map {
         return closestEnemy;
     }
 
+    MapLocation getClosestWell() throws GameActionException {
+        int minDistance = 0x3F3F3F3F;
+        MapLocation closestWell = null;
+
+        for (int i = 0; i < GRID_MAX_IDX; ++i) {
+            int data = rc.readSharedArray(i + Idx.mapOffset + parity(false));
+            if (data == 0) { continue; }
+            for (int j = 0; j < INFOS_PER_INTEGER; ++j) {
+
+                int info = (data >> (j * BITS_PER_INFO)) & MASK;
+                int isWell = info >> 2 & 1;
+                int isFull = info >> 3 & 1;
+
+                if (isWell == 0 || isFull == 1) { continue; }
+
+                int r = (i * INFOS_PER_INTEGER + j) / GRID_COLS, c = (i * INFOS_PER_INTEGER + j) % GRID_COLS;
+
+                int x = Math.min(c * GRID_SIZE + GRID_SIZE / 2, COLS - 1), y = Math.min(r * GRID_SIZE + GRID_SIZE / 2, ROWS - 1);
+                int distance = distanceTo(x, y);
+
+                if(distance < minDistance) {
+                    minDistance = distance;
+                    closestWell = new MapLocation(x, y);
+                }
+            }
+        }
+
+        return closestWell;
+    }
+
     public int getLevel(MapLocation location) throws GameActionException {
         return getInfo(location) & 0b11;
+    }
+
+    public int getWellFullness(MapLocation location) throws GameActionException {
+        return getInfo(location) >> 3 & 1;
     }
 
     private int getInfo(MapLocation location) throws GameActionException {

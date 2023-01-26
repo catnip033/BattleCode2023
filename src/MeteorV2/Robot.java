@@ -68,4 +68,27 @@ public class Robot {
                 direction.rotateLeft().rotateLeft(),
         };
     }
+
+    static protected int getWellFullness(RobotController rc, WellInfo wellInfo) throws GameActionException {
+        int carrierCount = 0;
+        int passibleTileCount = 1;
+
+        for (RobotInfo robotInfo : rc.senseNearbyRobots(wellInfo.getMapLocation(), 2, rc.getTeam())) {
+            if (robotInfo.getType() == RobotType.CARRIER) carrierCount++;
+        }
+
+        for (Direction direction : directions) {
+            MapLocation location = rc.adjacentLocation(direction);
+            if (rc.canSenseLocation(location) && rc.sensePassability(location)) {
+                passibleTileCount++;
+            }
+        }
+
+        // TODO: Consider elixir wells
+        int k = Math.min(wellInfo.getResourceType() == ResourceType.ADAMANTIUM ? (rc.getRoundNum() / 50 + 2) : 9, passibleTileCount);
+
+        if (carrierCount <= k/3) return 0;
+        if (carrierCount >= k) return 2;
+        return 1;
+    }
 }
