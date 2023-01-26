@@ -48,28 +48,28 @@ public strictfp class Headquarter extends Robot {
 
         if (rc.isActionReady()) {
             if (rc.getRoundNum() <= 150) {
-                if (mn >= 60) {
+                if (mn >= RobotType.LAUNCHER.buildCostMana) {
                     return buildDroid(RobotType.LAUNCHER);
-                } else if (ad >= 50) {
+                } else if (ad >= RobotType.CARRIER.buildCostAdamantium) {
                     return buildDroid(RobotType.CARRIER);
                 }
             } else if (rc.getRoundNum() <= 500) {
-                if (mn >= 40 && ad >= 40 && amplifierCount < 2) {
+                if (mn >= RobotType.AMPLIFIER.buildCostMana && ad >= RobotType.AMPLIFIER.buildCostAdamantium && amplifierCount < 2) {
                     amplifierCount++;
                     return buildDroid(RobotType.AMPLIFIER);
-                } else if (mn >= 60) {
+                } else if (mn >= RobotType.LAUNCHER.buildCostMana) {
                     return buildDroid(RobotType.LAUNCHER);
-                } else if (ad >= 50) {
+                } else if (ad >= RobotType.CARRIER.buildCostAdamantium) {
                     return buildDroid(RobotType.CARRIER);
                 }
             } else {
-                if (ad >= 100 && anchorBuildOrder < 4 || ad >= 200) {
-                    if (mn >= 60) anchorBuildOrder++;
+                if (ad >= 80 && anchorBuildOrder < 4 || ad >= 200) {
+                    if (mn >= RobotType.LAUNCHER.buildCostMana) anchorBuildOrder++;
                     return buildDroid(RobotType.CARRIER);
-                } else if (mn >= 100 && anchorBuildOrder < 8 || mn >= 200) {
-                    if (ad >= 50) anchorBuildOrder++;
+                } else if (mn >= 80 && anchorBuildOrder < 8 || mn >= 200) {
+                    if (ad >= RobotType.CARRIER.buildCostAdamantium) anchorBuildOrder++;
                     return buildDroid(RobotType.LAUNCHER);
-                } else if (ad >= 100 && mn >= 100) {
+                } else if (ad >= 80 && mn >= 80) {
                     rc.buildAnchor(Anchor.STANDARD);
                     anchorBuildOrder = 0;
                     return true;

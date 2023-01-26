@@ -53,7 +53,7 @@ public strictfp class Launcher extends MobileRobot {
         }
 
         if (rc.getRoundNum() >= 3) {
-            symmetry = rc.readSharedArray(Idx.symmetryOffset);
+            symmetry &= rc.readSharedArray(Idx.symmetryOffset);
         }
 
         // Go to closest possible enemy HQ location that is undiscovered
