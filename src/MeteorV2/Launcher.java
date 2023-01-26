@@ -56,6 +56,9 @@ public strictfp class Launcher extends MobileRobot {
             symmetry &= rc.readSharedArray(Idx.symmetryOffset);
         }
 
+        final int enemyAttackerCount = getEnemyAttackerCount();
+        final MapLocation closestEnemyAttacker = getClosestEnemyAttacker();
+
         // Go to closest possible enemy HQ location that is undiscovered
         // Unless go to random location
         updateTarget();
@@ -70,7 +73,7 @@ public strictfp class Launcher extends MobileRobot {
                         || rc.senseRobotAtLocation(targetLocation).getTeam() != team.opponent())) { targetLocation = null; }
 
         // Move to attack target
-        if (attackTarget != null && !isDangerous(rc.senseRobotAtLocation(attackTarget).type)) {
+        if (attackTarget != null && !isDangerous(rc.senseRobotAtLocation(attackTarget).type) && enemyAttackerCount == 0) {
             targetLocation = attackTarget;
             if (currentLocation.isAdjacentTo(attackTarget)) targetLocation = currentLocation;
         }
@@ -92,10 +95,6 @@ public strictfp class Launcher extends MobileRobot {
                 break;
             }
         }
-
-
-        final int enemyAttackerCount = getEnemyAttackerCount();
-        final MapLocation closestEnemyAttacker = getClosestEnemyAttacker();
 
         MapLocation enemy = map.getClosestEnemy();
 
@@ -132,6 +131,14 @@ public strictfp class Launcher extends MobileRobot {
         if (rc.isActionReady()) {
             updateAttackTarget();
             if (attackTarget != null && rc.canAttack(attackTarget)) rc.attack(attackTarget);
+        }
+
+        if (rc.isActionReady()) {
+            MapLocation[] cloudLocations = rc.senseNearbyCloudLocations(16);
+            if (cloudLocations.length > 0) {
+                attackTarget = cloudLocations[0];
+                if (rc.canAttack(attackTarget)) rc.attack(attackTarget);
+            }
         }
 
         draw();
