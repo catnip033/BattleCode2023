@@ -30,39 +30,39 @@ public class Bug {
         if (wallLocation != null) {
             rc.setIndicatorDot(wallLocation, 0, 0, 0);
 
-	    boolean isWallPassible = false;
-	    Direction direction = currentLocation.directionTo(wallLocation);
+            boolean isWallPassible = false;
+            Direction direction = currentLocation.directionTo(wallLocation);
 
-	    if (wallLocation.isAdjacentTo(currentLocation)) {
-		if (rc.canMove(direction)) {
-		    if (rc.canSenseLocation(wallLocation)) {
-			Direction currentDirection = rc.senseMapInfo(wallLocation).getCurrentDirection();
+            if (wallLocation.isAdjacentTo(currentLocation)) {
+                if (rc.canMove(direction)) {
+                    if (rc.canSenseLocation(wallLocation)) {
+                        Direction currentDirection = rc.senseMapInfo(wallLocation).getCurrentDirection();
 
-			if (currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0)) {
-			    isWallPassible = true;
-			}
-		    }
-		    else {
-			isWallPassible = true;
-		    }
-		}
-	    }
-	    else {
-		if (rc.canSenseLocation(wallLocation)) {
-		    Direction currentDirection = rc.senseMapInfo(wallLocation).getCurrentDirection();
+                        if (currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0)) {
+                            isWallPassible = true;
+                        }
+                    }
+                    else {
+                        isWallPassible = true;
+                    }
+                }
+            }
+            else {
+                if (rc.canSenseLocation(wallLocation)) {
+                    Direction currentDirection = rc.senseMapInfo(wallLocation).getCurrentDirection();
 
-		    if (currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0)) {
-			isWallPassible = true;
-		    }
-		}
-		else {
-		    isWallPassible = true;
-		}
-	    }
-	    if (isWallPassible) {
-		rc.setIndicatorDot(wallLocation, 255, 0, 255);
-		wallLocation = null;
-	    }
+                    if (rc.sensePassability(wallLocation) && !rc.canSenseRobotAtLocation(wallLocation) && (currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0))) {
+                        isWallPassible = true;
+                    }
+                }
+                else {
+                    isWallPassible = true;
+                }
+            }
+            if (isWallPassible) {
+                rc.setIndicatorDot(wallLocation, 255, 0, 255);
+                wallLocation = null;
+            }
         }
         for (Direction direction : Direction.allDirections()) {
 

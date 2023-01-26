@@ -774,6 +774,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p52 = mapInfo.getCooldownMultiplier(team);
+                    s52 = Math.sqrt(l52.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -798,6 +799,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p36 = mapInfo.getCooldownMultiplier(team);
+                    s36 = Math.sqrt(l36.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -827,6 +829,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p16 = mapInfo.getCooldownMultiplier(team);
+                    s16 = Math.sqrt(l16.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -851,6 +854,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p53 = mapInfo.getCooldownMultiplier(team);
+                    s53 = Math.sqrt(l53.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -885,6 +889,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p27 = mapInfo.getCooldownMultiplier(team);
+                    s27 = Math.sqrt(l27.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -919,6 +924,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p17 = mapInfo.getCooldownMultiplier(team);
+                    s17 = Math.sqrt(l17.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -953,6 +959,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p45 = mapInfo.getCooldownMultiplier(team);
+                    s45 = Math.sqrt(l45.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -987,6 +994,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p18 = mapInfo.getCooldownMultiplier(team);
+                    s18 = Math.sqrt(l18.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1016,6 +1024,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p54 = mapInfo.getCooldownMultiplier(team);
+                    s54 = Math.sqrt(l54.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1045,6 +1054,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p60 = mapInfo.getCooldownMultiplier(team);
+                    s60 = Math.sqrt(l60.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1069,6 +1079,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p37 = mapInfo.getCooldownMultiplier(team);
+                    s37 = Math.sqrt(l37.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1098,6 +1109,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p8 = mapInfo.getCooldownMultiplier(team);
+                    s8 = Math.sqrt(l8.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1122,6 +1134,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p61 = mapInfo.getCooldownMultiplier(team);
+                    s61 = Math.sqrt(l61.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1156,6 +1169,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p46 = mapInfo.getCooldownMultiplier(team);
+                    s46 = Math.sqrt(l46.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1190,6 +1204,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p9 = mapInfo.getCooldownMultiplier(team);
+                    s9 = Math.sqrt(l9.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1224,6 +1239,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p28 = mapInfo.getCooldownMultiplier(team);
+                    s28 = Math.sqrt(l28.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1258,6 +1274,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p10 = mapInfo.getCooldownMultiplier(team);
+                    s10 = Math.sqrt(l10.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1292,6 +1309,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p62 = mapInfo.getCooldownMultiplier(team);
+                    s62 = Math.sqrt(l62.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1326,6 +1344,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p55 = mapInfo.getCooldownMultiplier(team);
+                    s55 = Math.sqrt(l55.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1360,6 +1379,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p19 = mapInfo.getCooldownMultiplier(team);
+                    s19 = Math.sqrt(l19.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1394,6 +1414,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p63 = mapInfo.getCooldownMultiplier(team);
+                    s63 = Math.sqrt(l63.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1423,6 +1444,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p11 = mapInfo.getCooldownMultiplier(team);
+                    s11 = Math.sqrt(l11.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1452,6 +1474,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p2 = mapInfo.getCooldownMultiplier(team);
+                    s2 = Math.sqrt(l2.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1476,6 +1499,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p66 = mapInfo.getCooldownMultiplier(team);
+                    s66 = Math.sqrt(l66.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1500,6 +1524,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p38 = mapInfo.getCooldownMultiplier(team);
+                    s38 = Math.sqrt(l38.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1529,6 +1554,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p3 = mapInfo.getCooldownMultiplier(team);
+                    s3 = Math.sqrt(l3.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1563,6 +1589,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p47 = mapInfo.getCooldownMultiplier(team);
+                    s47 = Math.sqrt(l47.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1597,6 +1624,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p29 = mapInfo.getCooldownMultiplier(team);
+                    s29 = Math.sqrt(l29.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1631,6 +1659,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p67 = mapInfo.getCooldownMultiplier(team);
+                    s67 = Math.sqrt(l67.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1665,6 +1694,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p68 = mapInfo.getCooldownMultiplier(team);
+                    s68 = Math.sqrt(l68.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1699,6 +1729,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p4 = mapInfo.getCooldownMultiplier(team);
+                    s4 = Math.sqrt(l4.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1733,6 +1764,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p56 = mapInfo.getCooldownMultiplier(team);
+                    s56 = Math.sqrt(l56.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1767,6 +1799,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p20 = mapInfo.getCooldownMultiplier(team);
+                    s20 = Math.sqrt(l20.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -1804,18 +1837,21 @@ public class Navigation {
                     case 0:
                         if (v2 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v2 + " " + d2 + " " + l2);
                             return d2;
-                        }
+                        } break;
                     case 1:
                         if (v3 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v3 + " " + d3 + " " + l3);
                             return d3;
-                        }
+                        } break;
                     case 2:
                         if (v4 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v4 + " " + d4 + " " + l4);
                             return d4;
-                        }
+                        } break;
                 } break;
 
             case -3:
@@ -1823,23 +1859,27 @@ public class Navigation {
                     case 0:
                         if (v8 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v8 + " " + d8 + " " + l8);
                             return d8;
-                        }
+                        } break;
                     case 1:
                         if (v9 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v9 + " " + d9 + " " + l9);
                             return d9;
-                        }
+                        } break;
                     case 2:
                         if (v10 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v10 + " " + d10 + " " + l10);
                             return d10;
-                        }
+                        } break;
                     case 3:
                         if (v11 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v11 + " " + d11 + " " + l11);
                             return d11;
-                        }
+                        } break;
                 } break;
 
             case -2:
@@ -1847,28 +1887,33 @@ public class Navigation {
                     case 0:
                         if (v16 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v16 + " " + d16 + " " + l16);
                             return d16;
-                        }
+                        } break;
                     case 1:
                         if (v17 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v17 + " " + d17 + " " + l17);
                             return d17;
-                        }
+                        } break;
                     case 2:
                         if (v18 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v18 + " " + d18 + " " + l18);
                             return d18;
-                        }
+                        } break;
                     case 3:
                         if (v19 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v19 + " " + d19 + " " + l19);
                             return d19;
-                        }
+                        } break;
                     case 4:
                         if (v20 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v20 + " " + d20 + " " + l20);
                             return d20;
-                        }
+                        } break;
                 } break;
 
             case -1:
@@ -1876,28 +1921,33 @@ public class Navigation {
                     case 0:
                         if (v25 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v25 + " " + d25 + " " + l25);
                             return d25;
-                        }
+                        } break;
                     case 1:
                         if (v26 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v26 + " " + d26 + " " + l26);
                             return d26;
-                        }
+                        } break;
                     case 2:
                         if (v27 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v27 + " " + d27 + " " + l27);
                             return d27;
-                        }
+                        } break;
                     case 3:
                         if (v28 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v28 + " " + d28 + " " + l28);
                             return d28;
-                        }
+                        } break;
                     case 4:
                         if (v29 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v29 + " " + d29 + " " + l29);
                             return d29;
-                        }
+                        } break;
                 } break;
 
             case 0:
@@ -1905,23 +1955,27 @@ public class Navigation {
                     case 1:
                         if (v35 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v35 + " " + d35 + " " + l35);
                             return d35;
-                        }
+                        } break;
                     case 2:
                         if (v36 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v36 + " " + d36 + " " + l36);
                             return d36;
-                        }
+                        } break;
                     case 3:
                         if (v37 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v37 + " " + d37 + " " + l37);
                             return d37;
-                        }
+                        } break;
                     case 4:
                         if (v38 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v38 + " " + d38 + " " + l38);
                             return d38;
-                        }
+                        } break;
                 } break;
 
             case 1:
@@ -1929,28 +1983,33 @@ public class Navigation {
                     case 0:
                         if (v43 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v43 + " " + d43 + " " + l43);
                             return d43;
-                        }
+                        } break;
                     case 1:
                         if (v44 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v44 + " " + d44 + " " + l44);
                             return d44;
-                        }
+                        } break;
                     case 2:
                         if (v45 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v45 + " " + d45 + " " + l45);
                             return d45;
-                        }
+                        } break;
                     case 3:
                         if (v46 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v46 + " " + d46 + " " + l46);
                             return d46;
-                        }
+                        } break;
                     case 4:
                         if (v47 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v47 + " " + d47 + " " + l47);
                             return d47;
-                        }
+                        } break;
                 } break;
 
             case 2:
@@ -1958,28 +2017,33 @@ public class Navigation {
                     case 0:
                         if (v52 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v52 + " " + d52 + " " + l52);
                             return d52;
-                        }
+                        } break;
                     case 1:
                         if (v53 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v53 + " " + d53 + " " + l53);
                             return d53;
-                        }
+                        } break;
                     case 2:
                         if (v54 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v54 + " " + d54 + " " + l54);
                             return d54;
-                        }
+                        } break;
                     case 3:
                         if (v55 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v55 + " " + d55 + " " + l55);
                             return d55;
-                        }
+                        } break;
                     case 4:
                         if (v56 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v56 + " " + d56 + " " + l56);
                             return d56;
-                        }
+                        } break;
                 } break;
 
             case 3:
@@ -1987,23 +2051,27 @@ public class Navigation {
                     case 0:
                         if (v60 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v60 + " " + d60 + " " + l60);
                             return d60;
-                        }
+                        } break;
                     case 1:
                         if (v61 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v61 + " " + d61 + " " + l61);
                             return d61;
-                        }
+                        } break;
                     case 2:
                         if (v62 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v62 + " " + d62 + " " + l62);
                             return d62;
-                        }
+                        } break;
                     case 3:
                         if (v63 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v63 + " " + d63 + " " + l63);
                             return d63;
-                        }
+                        } break;
                 } break;
 
             case 4:
@@ -2011,247 +2079,250 @@ public class Navigation {
                     case 0:
                         if (v66 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v66 + " " + d66 + " " + l66);
                             return d66;
-                        }
+                        } break;
                     case 1:
                         if (v67 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v67 + " " + d67 + " " + l67);
                             return d67;
-                        }
+                        } break;
                     case 2:
                         if (v68 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v68 + " " + d68 + " " + l68);
                             return d68;
-                        }
+                        } break;
                 } break;
 
         }
     
         Direction ans = Direction.CENTER;
 
-        double dist2 = v2 + 0.7 * s2;
+        double dist2 = v2 + s2;
         if (dist2 < localBest) {
             localBest = dist2;
             ans = d2;
         }
 
-        double dist3 = v3 + 0.7 * s3;
+        double dist3 = v3 + s3;
         if (dist3 < localBest) {
             localBest = dist3;
             ans = d3;
         }
 
-        double dist4 = v4 + 0.7 * s4;
+        double dist4 = v4 + s4;
         if (dist4 < localBest) {
             localBest = dist4;
             ans = d4;
         }
 
-        double dist8 = v8 + 0.7 * s8;
+        double dist8 = v8 + s8;
         if (dist8 < localBest) {
             localBest = dist8;
             ans = d8;
         }
 
-        double dist9 = v9 + 0.7 * s9;
+        double dist9 = v9 + s9;
         if (dist9 < localBest) {
             localBest = dist9;
             ans = d9;
         }
 
-        double dist10 = v10 + 0.7 * s10;
+        double dist10 = v10 + s10;
         if (dist10 < localBest) {
             localBest = dist10;
             ans = d10;
         }
 
-        double dist11 = v11 + 0.7 * s11;
+        double dist11 = v11 + s11;
         if (dist11 < localBest) {
             localBest = dist11;
             ans = d11;
         }
 
-        double dist16 = v16 + 0.7 * s16;
+        double dist16 = v16 + s16;
         if (dist16 < localBest) {
             localBest = dist16;
             ans = d16;
         }
 
-        double dist17 = v17 + 0.7 * s17;
+        double dist17 = v17 + s17;
         if (dist17 < localBest) {
             localBest = dist17;
             ans = d17;
         }
 
-        double dist18 = v18 + 0.7 * s18;
+        double dist18 = v18 + s18;
         if (dist18 < localBest) {
             localBest = dist18;
             ans = d18;
         }
 
-        double dist19 = v19 + 0.7 * s19;
+        double dist19 = v19 + s19;
         if (dist19 < localBest) {
             localBest = dist19;
             ans = d19;
         }
 
-        double dist20 = v20 + 0.7 * s20;
+        double dist20 = v20 + s20;
         if (dist20 < localBest) {
             localBest = dist20;
             ans = d20;
         }
 
-        double dist25 = v25 + 0.7 * s25;
+        double dist25 = v25 + s25;
         if (dist25 < localBest) {
             localBest = dist25;
             ans = d25;
         }
 
-        double dist26 = v26 + 0.7 * s26;
+        double dist26 = v26 + s26;
         if (dist26 < localBest) {
             localBest = dist26;
             ans = d26;
         }
 
-        double dist27 = v27 + 0.7 * s27;
+        double dist27 = v27 + s27;
         if (dist27 < localBest) {
             localBest = dist27;
             ans = d27;
         }
 
-        double dist28 = v28 + 0.7 * s28;
+        double dist28 = v28 + s28;
         if (dist28 < localBest) {
             localBest = dist28;
             ans = d28;
         }
 
-        double dist29 = v29 + 0.7 * s29;
+        double dist29 = v29 + s29;
         if (dist29 < localBest) {
             localBest = dist29;
             ans = d29;
         }
 
-        double dist35 = v35 + 0.7 * s35;
+        double dist35 = v35 + s35;
         if (dist35 < localBest) {
             localBest = dist35;
             ans = d35;
         }
 
-        double dist36 = v36 + 0.7 * s36;
+        double dist36 = v36 + s36;
         if (dist36 < localBest) {
             localBest = dist36;
             ans = d36;
         }
 
-        double dist37 = v37 + 0.7 * s37;
+        double dist37 = v37 + s37;
         if (dist37 < localBest) {
             localBest = dist37;
             ans = d37;
         }
 
-        double dist38 = v38 + 0.7 * s38;
+        double dist38 = v38 + s38;
         if (dist38 < localBest) {
             localBest = dist38;
             ans = d38;
         }
 
-        double dist43 = v43 + 0.7 * s43;
+        double dist43 = v43 + s43;
         if (dist43 < localBest) {
             localBest = dist43;
             ans = d43;
         }
 
-        double dist44 = v44 + 0.7 * s44;
+        double dist44 = v44 + s44;
         if (dist44 < localBest) {
             localBest = dist44;
             ans = d44;
         }
 
-        double dist45 = v45 + 0.7 * s45;
+        double dist45 = v45 + s45;
         if (dist45 < localBest) {
             localBest = dist45;
             ans = d45;
         }
 
-        double dist46 = v46 + 0.7 * s46;
+        double dist46 = v46 + s46;
         if (dist46 < localBest) {
             localBest = dist46;
             ans = d46;
         }
 
-        double dist47 = v47 + 0.7 * s47;
+        double dist47 = v47 + s47;
         if (dist47 < localBest) {
             localBest = dist47;
             ans = d47;
         }
 
-        double dist52 = v52 + 0.7 * s52;
+        double dist52 = v52 + s52;
         if (dist52 < localBest) {
             localBest = dist52;
             ans = d52;
         }
 
-        double dist53 = v53 + 0.7 * s53;
+        double dist53 = v53 + s53;
         if (dist53 < localBest) {
             localBest = dist53;
             ans = d53;
         }
 
-        double dist54 = v54 + 0.7 * s54;
+        double dist54 = v54 + s54;
         if (dist54 < localBest) {
             localBest = dist54;
             ans = d54;
         }
 
-        double dist55 = v55 + 0.7 * s55;
+        double dist55 = v55 + s55;
         if (dist55 < localBest) {
             localBest = dist55;
             ans = d55;
         }
 
-        double dist56 = v56 + 0.7 * s56;
+        double dist56 = v56 + s56;
         if (dist56 < localBest) {
             localBest = dist56;
             ans = d56;
         }
 
-        double dist60 = v60 + 0.7 * s60;
+        double dist60 = v60 + s60;
         if (dist60 < localBest) {
             localBest = dist60;
             ans = d60;
         }
 
-        double dist61 = v61 + 0.7 * s61;
+        double dist61 = v61 + s61;
         if (dist61 < localBest) {
             localBest = dist61;
             ans = d61;
         }
 
-        double dist62 = v62 + 0.7 * s62;
+        double dist62 = v62 + s62;
         if (dist62 < localBest) {
             localBest = dist62;
             ans = d62;
         }
 
-        double dist63 = v63 + 0.7 * s63;
+        double dist63 = v63 + s63;
         if (dist63 < localBest) {
             localBest = dist63;
             ans = d63;
         }
 
-        double dist66 = v66 + 0.7 * s66;
+        double dist66 = v66 + s66;
         if (dist66 < localBest) {
             localBest = dist66;
             ans = d66;
         }
 
-        double dist67 = v67 + 0.7 * s67;
+        double dist67 = v67 + s67;
         if (dist67 < localBest) {
             localBest = dist67;
             ans = d67;
         }
 
-        double dist68 = v68 + 0.7 * s68;
+        double dist68 = v68 + s68;
         if (dist68 < localBest) {
             localBest = dist68;
             ans = d68;
@@ -2597,6 +2668,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p36 = mapInfo.getCooldownMultiplier(team);
+                    s36 = Math.sqrt(l36.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2626,6 +2698,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p52 = mapInfo.getCooldownMultiplier(team);
+                    s52 = Math.sqrt(l52.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2655,6 +2728,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p53 = mapInfo.getCooldownMultiplier(team);
+                    s53 = Math.sqrt(l53.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2689,6 +2763,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p51 = mapInfo.getCooldownMultiplier(team);
+                    s51 = Math.sqrt(l51.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2718,6 +2793,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p27 = mapInfo.getCooldownMultiplier(team);
+                    s27 = Math.sqrt(l27.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2747,6 +2823,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p45 = mapInfo.getCooldownMultiplier(team);
+                    s45 = Math.sqrt(l45.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2781,6 +2858,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p18 = mapInfo.getCooldownMultiplier(team);
+                    s18 = Math.sqrt(l18.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2805,6 +2883,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p50 = mapInfo.getCooldownMultiplier(team);
+                    s50 = Math.sqrt(l50.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2829,6 +2908,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p54 = mapInfo.getCooldownMultiplier(team);
+                    s54 = Math.sqrt(l54.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2858,6 +2938,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p37 = mapInfo.getCooldownMultiplier(team);
+                    s37 = Math.sqrt(l37.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2887,6 +2968,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p60 = mapInfo.getCooldownMultiplier(team);
+                    s60 = Math.sqrt(l60.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2916,6 +2998,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p59 = mapInfo.getCooldownMultiplier(team);
+                    s59 = Math.sqrt(l59.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2950,6 +3033,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p28 = mapInfo.getCooldownMultiplier(team);
+                    s28 = Math.sqrt(l28.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -2984,6 +3068,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p46 = mapInfo.getCooldownMultiplier(team);
+                    s46 = Math.sqrt(l46.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3018,6 +3103,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p61 = mapInfo.getCooldownMultiplier(team);
+                    s61 = Math.sqrt(l61.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3052,6 +3138,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p62 = mapInfo.getCooldownMultiplier(team);
+                    s62 = Math.sqrt(l62.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3086,6 +3173,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p58 = mapInfo.getCooldownMultiplier(team);
+                    s58 = Math.sqrt(l58.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3115,6 +3203,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p19 = mapInfo.getCooldownMultiplier(team);
+                    s19 = Math.sqrt(l19.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3144,6 +3233,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p55 = mapInfo.getCooldownMultiplier(team);
+                    s55 = Math.sqrt(l55.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3178,6 +3268,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p63 = mapInfo.getCooldownMultiplier(team);
+                    s63 = Math.sqrt(l63.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3207,6 +3298,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p57 = mapInfo.getCooldownMultiplier(team);
+                    s57 = Math.sqrt(l57.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3231,6 +3323,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p11 = mapInfo.getCooldownMultiplier(team);
+                    s11 = Math.sqrt(l11.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3255,6 +3348,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p66 = mapInfo.getCooldownMultiplier(team);
+                    s66 = Math.sqrt(l66.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3284,6 +3378,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p38 = mapInfo.getCooldownMultiplier(team);
+                    s38 = Math.sqrt(l38.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3313,6 +3408,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p29 = mapInfo.getCooldownMultiplier(team);
+                    s29 = Math.sqrt(l29.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3347,6 +3443,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p67 = mapInfo.getCooldownMultiplier(team);
+                    s67 = Math.sqrt(l67.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3381,6 +3478,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p47 = mapInfo.getCooldownMultiplier(team);
+                    s47 = Math.sqrt(l47.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3415,6 +3513,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p65 = mapInfo.getCooldownMultiplier(team);
+                    s65 = Math.sqrt(l65.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3449,6 +3548,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p68 = mapInfo.getCooldownMultiplier(team);
+                    s68 = Math.sqrt(l68.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3483,6 +3583,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p64 = mapInfo.getCooldownMultiplier(team);
+                    s64 = Math.sqrt(l64.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3517,6 +3618,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p56 = mapInfo.getCooldownMultiplier(team);
+                    s56 = Math.sqrt(l56.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3551,6 +3653,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p20 = mapInfo.getCooldownMultiplier(team);
+                    s20 = Math.sqrt(l20.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -3592,8 +3695,9 @@ public class Navigation {
                     case 3:
                         if (v11 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v11 + " " + d11 + " " + l11);
                             return d11;
-                        }
+                        } break;
                 } break;
 
             case -2:
@@ -3601,18 +3705,21 @@ public class Navigation {
                     case 2:
                         if (v18 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v18 + " " + d18 + " " + l18);
                             return d18;
-                        }
+                        } break;
                     case 3:
                         if (v19 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v19 + " " + d19 + " " + l19);
                             return d19;
-                        }
+                        } break;
                     case 4:
                         if (v20 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v20 + " " + d20 + " " + l20);
                             return d20;
-                        }
+                        } break;
                 } break;
 
             case -1:
@@ -3620,23 +3727,27 @@ public class Navigation {
                     case 1:
                         if (v26 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v26 + " " + d26 + " " + l26);
                             return d26;
-                        }
+                        } break;
                     case 2:
                         if (v27 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v27 + " " + d27 + " " + l27);
                             return d27;
-                        }
+                        } break;
                     case 3:
                         if (v28 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v28 + " " + d28 + " " + l28);
                             return d28;
-                        }
+                        } break;
                     case 4:
                         if (v29 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v29 + " " + d29 + " " + l29);
                             return d29;
-                        }
+                        } break;
                 } break;
 
             case 0:
@@ -3644,23 +3755,27 @@ public class Navigation {
                     case 1:
                         if (v35 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v35 + " " + d35 + " " + l35);
                             return d35;
-                        }
+                        } break;
                     case 2:
                         if (v36 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v36 + " " + d36 + " " + l36);
                             return d36;
-                        }
+                        } break;
                     case 3:
                         if (v37 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v37 + " " + d37 + " " + l37);
                             return d37;
-                        }
+                        } break;
                     case 4:
                         if (v38 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v38 + " " + d38 + " " + l38);
                             return d38;
-                        }
+                        } break;
                 } break;
 
             case 1:
@@ -3668,33 +3783,39 @@ public class Navigation {
                     case -1:
                         if (v42 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v42 + " " + d42 + " " + l42);
                             return d42;
-                        }
+                        } break;
                     case 0:
                         if (v43 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v43 + " " + d43 + " " + l43);
                             return d43;
-                        }
+                        } break;
                     case 1:
                         if (v44 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v44 + " " + d44 + " " + l44);
                             return d44;
-                        }
+                        } break;
                     case 2:
                         if (v45 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v45 + " " + d45 + " " + l45);
                             return d45;
-                        }
+                        } break;
                     case 3:
                         if (v46 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v46 + " " + d46 + " " + l46);
                             return d46;
-                        }
+                        } break;
                     case 4:
                         if (v47 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v47 + " " + d47 + " " + l47);
                             return d47;
-                        }
+                        } break;
                 } break;
 
             case 2:
@@ -3702,38 +3823,45 @@ public class Navigation {
                     case -2:
                         if (v50 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v50 + " " + d50 + " " + l50);
                             return d50;
-                        }
+                        } break;
                     case -1:
                         if (v51 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v51 + " " + d51 + " " + l51);
                             return d51;
-                        }
+                        } break;
                     case 0:
                         if (v52 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v52 + " " + d52 + " " + l52);
                             return d52;
-                        }
+                        } break;
                     case 1:
                         if (v53 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v53 + " " + d53 + " " + l53);
                             return d53;
-                        }
+                        } break;
                     case 2:
                         if (v54 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v54 + " " + d54 + " " + l54);
                             return d54;
-                        }
+                        } break;
                     case 3:
                         if (v55 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v55 + " " + d55 + " " + l55);
                             return d55;
-                        }
+                        } break;
                     case 4:
                         if (v56 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v56 + " " + d56 + " " + l56);
                             return d56;
-                        }
+                        } break;
                 } break;
 
             case 3:
@@ -3741,38 +3869,45 @@ public class Navigation {
                     case -3:
                         if (v57 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v57 + " " + d57 + " " + l57);
                             return d57;
-                        }
+                        } break;
                     case -2:
                         if (v58 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v58 + " " + d58 + " " + l58);
                             return d58;
-                        }
+                        } break;
                     case -1:
                         if (v59 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v59 + " " + d59 + " " + l59);
                             return d59;
-                        }
+                        } break;
                     case 0:
                         if (v60 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v60 + " " + d60 + " " + l60);
                             return d60;
-                        }
+                        } break;
                     case 1:
                         if (v61 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v61 + " " + d61 + " " + l61);
                             return d61;
-                        }
+                        } break;
                     case 2:
                         if (v62 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v62 + " " + d62 + " " + l62);
                             return d62;
-                        }
+                        } break;
                     case 3:
                         if (v63 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v63 + " " + d63 + " " + l63);
                             return d63;
-                        }
+                        } break;
                 } break;
 
             case 4:
@@ -3780,251 +3915,256 @@ public class Navigation {
                     case -2:
                         if (v64 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v64 + " " + d64 + " " + l64);
                             return d64;
-                        }
+                        } break;
                     case -1:
                         if (v65 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v65 + " " + d65 + " " + l65);
                             return d65;
-                        }
+                        } break;
                     case 0:
                         if (v66 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v66 + " " + d66 + " " + l66);
                             return d66;
-                        }
+                        } break;
                     case 1:
                         if (v67 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v67 + " " + d67 + " " + l67);
                             return d67;
-                        }
+                        } break;
                     case 2:
                         if (v68 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v68 + " " + d68 + " " + l68);
                             return d68;
-                        }
+                        } break;
                 } break;
 
         }
     
         Direction ans = Direction.CENTER;
 
-        double dist11 = v11 + 0.7 * s11;
+        double dist11 = v11 + s11;
         if (dist11 < localBest) {
             localBest = dist11;
             ans = d11;
         }
 
-        double dist18 = v18 + 0.7 * s18;
+        double dist18 = v18 + s18;
         if (dist18 < localBest) {
             localBest = dist18;
             ans = d18;
         }
 
-        double dist19 = v19 + 0.7 * s19;
+        double dist19 = v19 + s19;
         if (dist19 < localBest) {
             localBest = dist19;
             ans = d19;
         }
 
-        double dist20 = v20 + 0.7 * s20;
+        double dist20 = v20 + s20;
         if (dist20 < localBest) {
             localBest = dist20;
             ans = d20;
         }
 
-        double dist26 = v26 + 0.7 * s26;
+        double dist26 = v26 + s26;
         if (dist26 < localBest) {
             localBest = dist26;
             ans = d26;
         }
 
-        double dist27 = v27 + 0.7 * s27;
+        double dist27 = v27 + s27;
         if (dist27 < localBest) {
             localBest = dist27;
             ans = d27;
         }
 
-        double dist28 = v28 + 0.7 * s28;
+        double dist28 = v28 + s28;
         if (dist28 < localBest) {
             localBest = dist28;
             ans = d28;
         }
 
-        double dist29 = v29 + 0.7 * s29;
+        double dist29 = v29 + s29;
         if (dist29 < localBest) {
             localBest = dist29;
             ans = d29;
         }
 
-        double dist35 = v35 + 0.7 * s35;
+        double dist35 = v35 + s35;
         if (dist35 < localBest) {
             localBest = dist35;
             ans = d35;
         }
 
-        double dist36 = v36 + 0.7 * s36;
+        double dist36 = v36 + s36;
         if (dist36 < localBest) {
             localBest = dist36;
             ans = d36;
         }
 
-        double dist37 = v37 + 0.7 * s37;
+        double dist37 = v37 + s37;
         if (dist37 < localBest) {
             localBest = dist37;
             ans = d37;
         }
 
-        double dist38 = v38 + 0.7 * s38;
+        double dist38 = v38 + s38;
         if (dist38 < localBest) {
             localBest = dist38;
             ans = d38;
         }
 
-        double dist42 = v42 + 0.7 * s42;
+        double dist42 = v42 + s42;
         if (dist42 < localBest) {
             localBest = dist42;
             ans = d42;
         }
 
-        double dist43 = v43 + 0.7 * s43;
+        double dist43 = v43 + s43;
         if (dist43 < localBest) {
             localBest = dist43;
             ans = d43;
         }
 
-        double dist44 = v44 + 0.7 * s44;
+        double dist44 = v44 + s44;
         if (dist44 < localBest) {
             localBest = dist44;
             ans = d44;
         }
 
-        double dist45 = v45 + 0.7 * s45;
+        double dist45 = v45 + s45;
         if (dist45 < localBest) {
             localBest = dist45;
             ans = d45;
         }
 
-        double dist46 = v46 + 0.7 * s46;
+        double dist46 = v46 + s46;
         if (dist46 < localBest) {
             localBest = dist46;
             ans = d46;
         }
 
-        double dist47 = v47 + 0.7 * s47;
+        double dist47 = v47 + s47;
         if (dist47 < localBest) {
             localBest = dist47;
             ans = d47;
         }
 
-        double dist50 = v50 + 0.7 * s50;
+        double dist50 = v50 + s50;
         if (dist50 < localBest) {
             localBest = dist50;
             ans = d50;
         }
 
-        double dist51 = v51 + 0.7 * s51;
+        double dist51 = v51 + s51;
         if (dist51 < localBest) {
             localBest = dist51;
             ans = d51;
         }
 
-        double dist52 = v52 + 0.7 * s52;
+        double dist52 = v52 + s52;
         if (dist52 < localBest) {
             localBest = dist52;
             ans = d52;
         }
 
-        double dist53 = v53 + 0.7 * s53;
+        double dist53 = v53 + s53;
         if (dist53 < localBest) {
             localBest = dist53;
             ans = d53;
         }
 
-        double dist54 = v54 + 0.7 * s54;
+        double dist54 = v54 + s54;
         if (dist54 < localBest) {
             localBest = dist54;
             ans = d54;
         }
 
-        double dist55 = v55 + 0.7 * s55;
+        double dist55 = v55 + s55;
         if (dist55 < localBest) {
             localBest = dist55;
             ans = d55;
         }
 
-        double dist56 = v56 + 0.7 * s56;
+        double dist56 = v56 + s56;
         if (dist56 < localBest) {
             localBest = dist56;
             ans = d56;
         }
 
-        double dist57 = v57 + 0.7 * s57;
+        double dist57 = v57 + s57;
         if (dist57 < localBest) {
             localBest = dist57;
             ans = d57;
         }
 
-        double dist58 = v58 + 0.7 * s58;
+        double dist58 = v58 + s58;
         if (dist58 < localBest) {
             localBest = dist58;
             ans = d58;
         }
 
-        double dist59 = v59 + 0.7 * s59;
+        double dist59 = v59 + s59;
         if (dist59 < localBest) {
             localBest = dist59;
             ans = d59;
         }
 
-        double dist60 = v60 + 0.7 * s60;
+        double dist60 = v60 + s60;
         if (dist60 < localBest) {
             localBest = dist60;
             ans = d60;
         }
 
-        double dist61 = v61 + 0.7 * s61;
+        double dist61 = v61 + s61;
         if (dist61 < localBest) {
             localBest = dist61;
             ans = d61;
         }
 
-        double dist62 = v62 + 0.7 * s62;
+        double dist62 = v62 + s62;
         if (dist62 < localBest) {
             localBest = dist62;
             ans = d62;
         }
 
-        double dist63 = v63 + 0.7 * s63;
+        double dist63 = v63 + s63;
         if (dist63 < localBest) {
             localBest = dist63;
             ans = d63;
         }
 
-        double dist64 = v64 + 0.7 * s64;
+        double dist64 = v64 + s64;
         if (dist64 < localBest) {
             localBest = dist64;
             ans = d64;
         }
 
-        double dist65 = v65 + 0.7 * s65;
+        double dist65 = v65 + s65;
         if (dist65 < localBest) {
             localBest = dist65;
             ans = d65;
         }
 
-        double dist66 = v66 + 0.7 * s66;
+        double dist66 = v66 + s66;
         if (dist66 < localBest) {
             localBest = dist66;
             ans = d66;
         }
 
-        double dist67 = v67 + 0.7 * s67;
+        double dist67 = v67 + s67;
         if (dist67 < localBest) {
             localBest = dist67;
             ans = d67;
         }
 
-        double dist68 = v68 + 0.7 * s68;
+        double dist68 = v68 + s68;
         if (dist68 < localBest) {
             localBest = dist68;
             ans = d68;
@@ -4385,6 +4525,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p32 = mapInfo.getCooldownMultiplier(team);
+                    s32 = Math.sqrt(l32.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4409,6 +4550,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p52 = mapInfo.getCooldownMultiplier(team);
+                    s52 = Math.sqrt(l52.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4438,6 +4580,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p36 = mapInfo.getCooldownMultiplier(team);
+                    s36 = Math.sqrt(l36.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4462,6 +4605,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p51 = mapInfo.getCooldownMultiplier(team);
+                    s51 = Math.sqrt(l51.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4496,6 +4640,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p45 = mapInfo.getCooldownMultiplier(team);
+                    s45 = Math.sqrt(l45.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4530,6 +4675,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p53 = mapInfo.getCooldownMultiplier(team);
+                    s53 = Math.sqrt(l53.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4564,6 +4710,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p41 = mapInfo.getCooldownMultiplier(team);
+                    s41 = Math.sqrt(l41.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4598,6 +4745,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p50 = mapInfo.getCooldownMultiplier(team);
+                    s50 = Math.sqrt(l50.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4627,6 +4775,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p54 = mapInfo.getCooldownMultiplier(team);
+                    s54 = Math.sqrt(l54.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4656,6 +4805,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p31 = mapInfo.getCooldownMultiplier(team);
+                    s31 = Math.sqrt(l31.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4680,6 +4830,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p60 = mapInfo.getCooldownMultiplier(team);
+                    s60 = Math.sqrt(l60.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4709,6 +4860,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p37 = mapInfo.getCooldownMultiplier(team);
+                    s37 = Math.sqrt(l37.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4733,6 +4885,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p40 = mapInfo.getCooldownMultiplier(team);
+                    s40 = Math.sqrt(l40.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4767,6 +4920,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p46 = mapInfo.getCooldownMultiplier(team);
+                    s46 = Math.sqrt(l46.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4801,6 +4955,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p61 = mapInfo.getCooldownMultiplier(team);
+                    s61 = Math.sqrt(l61.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4835,6 +4990,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p59 = mapInfo.getCooldownMultiplier(team);
+                    s59 = Math.sqrt(l59.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4869,6 +5025,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p62 = mapInfo.getCooldownMultiplier(team);
+                    s62 = Math.sqrt(l62.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4903,6 +5060,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p58 = mapInfo.getCooldownMultiplier(team);
+                    s58 = Math.sqrt(l58.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4937,6 +5095,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p49 = mapInfo.getCooldownMultiplier(team);
+                    s49 = Math.sqrt(l49.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -4971,6 +5130,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p55 = mapInfo.getCooldownMultiplier(team);
+                    s55 = Math.sqrt(l55.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5005,6 +5165,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p63 = mapInfo.getCooldownMultiplier(team);
+                    s63 = Math.sqrt(l63.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5034,6 +5195,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p57 = mapInfo.getCooldownMultiplier(team);
+                    s57 = Math.sqrt(l57.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5063,6 +5225,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p38 = mapInfo.getCooldownMultiplier(team);
+                    s38 = Math.sqrt(l38.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5087,6 +5250,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p30 = mapInfo.getCooldownMultiplier(team);
+                    s30 = Math.sqrt(l30.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5111,6 +5275,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p66 = mapInfo.getCooldownMultiplier(team);
+                    s66 = Math.sqrt(l66.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5140,6 +5305,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p39 = mapInfo.getCooldownMultiplier(team);
+                    s39 = Math.sqrt(l39.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5174,6 +5340,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p47 = mapInfo.getCooldownMultiplier(team);
+                    s47 = Math.sqrt(l47.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5208,6 +5375,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p65 = mapInfo.getCooldownMultiplier(team);
+                    s65 = Math.sqrt(l65.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5242,6 +5410,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p67 = mapInfo.getCooldownMultiplier(team);
+                    s67 = Math.sqrt(l67.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5276,6 +5445,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p64 = mapInfo.getCooldownMultiplier(team);
+                    s64 = Math.sqrt(l64.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5310,6 +5480,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p48 = mapInfo.getCooldownMultiplier(team);
+                    s48 = Math.sqrt(l48.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5344,6 +5515,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p68 = mapInfo.getCooldownMultiplier(team);
+                    s68 = Math.sqrt(l68.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5378,6 +5550,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p56 = mapInfo.getCooldownMultiplier(team);
+                    s56 = Math.sqrt(l56.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -5431,43 +5604,51 @@ public class Navigation {
                     case -4:
                         if (v30 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v30 + " " + d30 + " " + l30);
                             return d30;
-                        }
+                        } break;
                     case -3:
                         if (v31 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v31 + " " + d31 + " " + l31);
                             return d31;
-                        }
+                        } break;
                     case -2:
                         if (v32 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v32 + " " + d32 + " " + l32);
                             return d32;
-                        }
+                        } break;
                     case -1:
                         if (v33 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v33 + " " + d33 + " " + l33);
                             return d33;
-                        }
+                        } break;
                     case 1:
                         if (v35 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v35 + " " + d35 + " " + l35);
                             return d35;
-                        }
+                        } break;
                     case 2:
                         if (v36 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v36 + " " + d36 + " " + l36);
                             return d36;
-                        }
+                        } break;
                     case 3:
                         if (v37 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v37 + " " + d37 + " " + l37);
                             return d37;
-                        }
+                        } break;
                     case 4:
                         if (v38 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v38 + " " + d38 + " " + l38);
                             return d38;
-                        }
+                        } break;
                 } break;
 
             case 1:
@@ -5475,48 +5656,57 @@ public class Navigation {
                     case -4:
                         if (v39 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v39 + " " + d39 + " " + l39);
                             return d39;
-                        }
+                        } break;
                     case -3:
                         if (v40 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v40 + " " + d40 + " " + l40);
                             return d40;
-                        }
+                        } break;
                     case -2:
                         if (v41 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v41 + " " + d41 + " " + l41);
                             return d41;
-                        }
+                        } break;
                     case -1:
                         if (v42 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v42 + " " + d42 + " " + l42);
                             return d42;
-                        }
+                        } break;
                     case 0:
                         if (v43 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v43 + " " + d43 + " " + l43);
                             return d43;
-                        }
+                        } break;
                     case 1:
                         if (v44 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v44 + " " + d44 + " " + l44);
                             return d44;
-                        }
+                        } break;
                     case 2:
                         if (v45 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v45 + " " + d45 + " " + l45);
                             return d45;
-                        }
+                        } break;
                     case 3:
                         if (v46 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v46 + " " + d46 + " " + l46);
                             return d46;
-                        }
+                        } break;
                     case 4:
                         if (v47 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v47 + " " + d47 + " " + l47);
                             return d47;
-                        }
+                        } break;
                 } break;
 
             case 2:
@@ -5524,48 +5714,57 @@ public class Navigation {
                     case -4:
                         if (v48 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v48 + " " + d48 + " " + l48);
                             return d48;
-                        }
+                        } break;
                     case -3:
                         if (v49 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v49 + " " + d49 + " " + l49);
                             return d49;
-                        }
+                        } break;
                     case -2:
                         if (v50 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v50 + " " + d50 + " " + l50);
                             return d50;
-                        }
+                        } break;
                     case -1:
                         if (v51 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v51 + " " + d51 + " " + l51);
                             return d51;
-                        }
+                        } break;
                     case 0:
                         if (v52 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v52 + " " + d52 + " " + l52);
                             return d52;
-                        }
+                        } break;
                     case 1:
                         if (v53 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v53 + " " + d53 + " " + l53);
                             return d53;
-                        }
+                        } break;
                     case 2:
                         if (v54 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v54 + " " + d54 + " " + l54);
                             return d54;
-                        }
+                        } break;
                     case 3:
                         if (v55 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v55 + " " + d55 + " " + l55);
                             return d55;
-                        }
+                        } break;
                     case 4:
                         if (v56 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v56 + " " + d56 + " " + l56);
                             return d56;
-                        }
+                        } break;
                 } break;
 
             case 3:
@@ -5573,38 +5772,45 @@ public class Navigation {
                     case -3:
                         if (v57 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v57 + " " + d57 + " " + l57);
                             return d57;
-                        }
+                        } break;
                     case -2:
                         if (v58 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v58 + " " + d58 + " " + l58);
                             return d58;
-                        }
+                        } break;
                     case -1:
                         if (v59 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v59 + " " + d59 + " " + l59);
                             return d59;
-                        }
+                        } break;
                     case 0:
                         if (v60 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v60 + " " + d60 + " " + l60);
                             return d60;
-                        }
+                        } break;
                     case 1:
                         if (v61 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v61 + " " + d61 + " " + l61);
                             return d61;
-                        }
+                        } break;
                     case 2:
                         if (v62 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v62 + " " + d62 + " " + l62);
                             return d62;
-                        }
+                        } break;
                     case 3:
                         if (v63 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v63 + " " + d63 + " " + l63);
                             return d63;
-                        }
+                        } break;
                 } break;
 
             case 4:
@@ -5612,257 +5818,262 @@ public class Navigation {
                     case -2:
                         if (v64 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v64 + " " + d64 + " " + l64);
                             return d64;
-                        }
+                        } break;
                     case -1:
                         if (v65 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v65 + " " + d65 + " " + l65);
                             return d65;
-                        }
+                        } break;
                     case 0:
                         if (v66 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v66 + " " + d66 + " " + l66);
                             return d66;
-                        }
+                        } break;
                     case 1:
                         if (v67 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v67 + " " + d67 + " " + l67);
                             return d67;
-                        }
+                        } break;
                     case 2:
                         if (v68 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v68 + " " + d68 + " " + l68);
                             return d68;
-                        }
+                        } break;
                 } break;
 
         }
     
         Direction ans = Direction.CENTER;
 
-        double dist30 = v30 + 0.7 * s30;
+        double dist30 = v30 + s30;
         if (dist30 < localBest) {
             localBest = dist30;
             ans = d30;
         }
 
-        double dist31 = v31 + 0.7 * s31;
+        double dist31 = v31 + s31;
         if (dist31 < localBest) {
             localBest = dist31;
             ans = d31;
         }
 
-        double dist32 = v32 + 0.7 * s32;
+        double dist32 = v32 + s32;
         if (dist32 < localBest) {
             localBest = dist32;
             ans = d32;
         }
 
-        double dist33 = v33 + 0.7 * s33;
+        double dist33 = v33 + s33;
         if (dist33 < localBest) {
             localBest = dist33;
             ans = d33;
         }
 
-        double dist35 = v35 + 0.7 * s35;
+        double dist35 = v35 + s35;
         if (dist35 < localBest) {
             localBest = dist35;
             ans = d35;
         }
 
-        double dist36 = v36 + 0.7 * s36;
+        double dist36 = v36 + s36;
         if (dist36 < localBest) {
             localBest = dist36;
             ans = d36;
         }
 
-        double dist37 = v37 + 0.7 * s37;
+        double dist37 = v37 + s37;
         if (dist37 < localBest) {
             localBest = dist37;
             ans = d37;
         }
 
-        double dist38 = v38 + 0.7 * s38;
+        double dist38 = v38 + s38;
         if (dist38 < localBest) {
             localBest = dist38;
             ans = d38;
         }
 
-        double dist39 = v39 + 0.7 * s39;
+        double dist39 = v39 + s39;
         if (dist39 < localBest) {
             localBest = dist39;
             ans = d39;
         }
 
-        double dist40 = v40 + 0.7 * s40;
+        double dist40 = v40 + s40;
         if (dist40 < localBest) {
             localBest = dist40;
             ans = d40;
         }
 
-        double dist41 = v41 + 0.7 * s41;
+        double dist41 = v41 + s41;
         if (dist41 < localBest) {
             localBest = dist41;
             ans = d41;
         }
 
-        double dist42 = v42 + 0.7 * s42;
+        double dist42 = v42 + s42;
         if (dist42 < localBest) {
             localBest = dist42;
             ans = d42;
         }
 
-        double dist43 = v43 + 0.7 * s43;
+        double dist43 = v43 + s43;
         if (dist43 < localBest) {
             localBest = dist43;
             ans = d43;
         }
 
-        double dist44 = v44 + 0.7 * s44;
+        double dist44 = v44 + s44;
         if (dist44 < localBest) {
             localBest = dist44;
             ans = d44;
         }
 
-        double dist45 = v45 + 0.7 * s45;
+        double dist45 = v45 + s45;
         if (dist45 < localBest) {
             localBest = dist45;
             ans = d45;
         }
 
-        double dist46 = v46 + 0.7 * s46;
+        double dist46 = v46 + s46;
         if (dist46 < localBest) {
             localBest = dist46;
             ans = d46;
         }
 
-        double dist47 = v47 + 0.7 * s47;
+        double dist47 = v47 + s47;
         if (dist47 < localBest) {
             localBest = dist47;
             ans = d47;
         }
 
-        double dist48 = v48 + 0.7 * s48;
+        double dist48 = v48 + s48;
         if (dist48 < localBest) {
             localBest = dist48;
             ans = d48;
         }
 
-        double dist49 = v49 + 0.7 * s49;
+        double dist49 = v49 + s49;
         if (dist49 < localBest) {
             localBest = dist49;
             ans = d49;
         }
 
-        double dist50 = v50 + 0.7 * s50;
+        double dist50 = v50 + s50;
         if (dist50 < localBest) {
             localBest = dist50;
             ans = d50;
         }
 
-        double dist51 = v51 + 0.7 * s51;
+        double dist51 = v51 + s51;
         if (dist51 < localBest) {
             localBest = dist51;
             ans = d51;
         }
 
-        double dist52 = v52 + 0.7 * s52;
+        double dist52 = v52 + s52;
         if (dist52 < localBest) {
             localBest = dist52;
             ans = d52;
         }
 
-        double dist53 = v53 + 0.7 * s53;
+        double dist53 = v53 + s53;
         if (dist53 < localBest) {
             localBest = dist53;
             ans = d53;
         }
 
-        double dist54 = v54 + 0.7 * s54;
+        double dist54 = v54 + s54;
         if (dist54 < localBest) {
             localBest = dist54;
             ans = d54;
         }
 
-        double dist55 = v55 + 0.7 * s55;
+        double dist55 = v55 + s55;
         if (dist55 < localBest) {
             localBest = dist55;
             ans = d55;
         }
 
-        double dist56 = v56 + 0.7 * s56;
+        double dist56 = v56 + s56;
         if (dist56 < localBest) {
             localBest = dist56;
             ans = d56;
         }
 
-        double dist57 = v57 + 0.7 * s57;
+        double dist57 = v57 + s57;
         if (dist57 < localBest) {
             localBest = dist57;
             ans = d57;
         }
 
-        double dist58 = v58 + 0.7 * s58;
+        double dist58 = v58 + s58;
         if (dist58 < localBest) {
             localBest = dist58;
             ans = d58;
         }
 
-        double dist59 = v59 + 0.7 * s59;
+        double dist59 = v59 + s59;
         if (dist59 < localBest) {
             localBest = dist59;
             ans = d59;
         }
 
-        double dist60 = v60 + 0.7 * s60;
+        double dist60 = v60 + s60;
         if (dist60 < localBest) {
             localBest = dist60;
             ans = d60;
         }
 
-        double dist61 = v61 + 0.7 * s61;
+        double dist61 = v61 + s61;
         if (dist61 < localBest) {
             localBest = dist61;
             ans = d61;
         }
 
-        double dist62 = v62 + 0.7 * s62;
+        double dist62 = v62 + s62;
         if (dist62 < localBest) {
             localBest = dist62;
             ans = d62;
         }
 
-        double dist63 = v63 + 0.7 * s63;
+        double dist63 = v63 + s63;
         if (dist63 < localBest) {
             localBest = dist63;
             ans = d63;
         }
 
-        double dist64 = v64 + 0.7 * s64;
+        double dist64 = v64 + s64;
         if (dist64 < localBest) {
             localBest = dist64;
             ans = d64;
         }
 
-        double dist65 = v65 + 0.7 * s65;
+        double dist65 = v65 + s65;
         if (dist65 < localBest) {
             localBest = dist65;
             ans = d65;
         }
 
-        double dist66 = v66 + 0.7 * s66;
+        double dist66 = v66 + s66;
         if (dist66 < localBest) {
             localBest = dist66;
             ans = d66;
         }
 
-        double dist67 = v67 + 0.7 * s67;
+        double dist67 = v67 + s67;
         if (dist67 < localBest) {
             localBest = dist67;
             ans = d67;
         }
 
-        double dist68 = v68 + 0.7 * s68;
+        double dist68 = v68 + s68;
         if (dist68 < localBest) {
             localBest = dist68;
             ans = d68;
@@ -6208,6 +6419,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p32 = mapInfo.getCooldownMultiplier(team);
+                    s32 = Math.sqrt(l32.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6237,6 +6449,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p52 = mapInfo.getCooldownMultiplier(team);
+                    s52 = Math.sqrt(l52.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6266,6 +6479,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p53 = mapInfo.getCooldownMultiplier(team);
+                    s53 = Math.sqrt(l53.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6295,6 +6509,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p51 = mapInfo.getCooldownMultiplier(team);
+                    s51 = Math.sqrt(l51.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6329,6 +6544,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p41 = mapInfo.getCooldownMultiplier(team);
+                    s41 = Math.sqrt(l41.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6363,6 +6579,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p23 = mapInfo.getCooldownMultiplier(team);
+                    s23 = Math.sqrt(l23.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6392,6 +6609,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p14 = mapInfo.getCooldownMultiplier(team);
+                    s14 = Math.sqrt(l14.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6416,6 +6634,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p50 = mapInfo.getCooldownMultiplier(team);
+                    s50 = Math.sqrt(l50.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6445,6 +6664,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p54 = mapInfo.getCooldownMultiplier(team);
+                    s54 = Math.sqrt(l54.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6469,6 +6689,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p31 = mapInfo.getCooldownMultiplier(team);
+                    s31 = Math.sqrt(l31.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6498,6 +6719,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p60 = mapInfo.getCooldownMultiplier(team);
+                    s60 = Math.sqrt(l60.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6527,6 +6749,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p59 = mapInfo.getCooldownMultiplier(team);
+                    s59 = Math.sqrt(l59.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6561,6 +6784,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p40 = mapInfo.getCooldownMultiplier(team);
+                    s40 = Math.sqrt(l40.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6595,6 +6819,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p22 = mapInfo.getCooldownMultiplier(team);
+                    s22 = Math.sqrt(l22.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6629,6 +6854,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p61 = mapInfo.getCooldownMultiplier(team);
+                    s61 = Math.sqrt(l61.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6663,6 +6889,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p62 = mapInfo.getCooldownMultiplier(team);
+                    s62 = Math.sqrt(l62.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6692,6 +6919,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p58 = mapInfo.getCooldownMultiplier(team);
+                    s58 = Math.sqrt(l58.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6726,6 +6954,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p49 = mapInfo.getCooldownMultiplier(team);
+                    s49 = Math.sqrt(l49.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6760,6 +6989,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p13 = mapInfo.getCooldownMultiplier(team);
+                    s13 = Math.sqrt(l13.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6789,6 +7019,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p63 = mapInfo.getCooldownMultiplier(team);
+                    s63 = Math.sqrt(l63.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6813,6 +7044,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p57 = mapInfo.getCooldownMultiplier(team);
+                    s57 = Math.sqrt(l57.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6842,6 +7074,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p5 = mapInfo.getCooldownMultiplier(team);
+                    s5 = Math.sqrt(l5.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6866,6 +7099,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p66 = mapInfo.getCooldownMultiplier(team);
+                    s66 = Math.sqrt(l66.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6895,6 +7129,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p30 = mapInfo.getCooldownMultiplier(team);
+                    s30 = Math.sqrt(l30.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6924,6 +7159,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p39 = mapInfo.getCooldownMultiplier(team);
+                    s39 = Math.sqrt(l39.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6958,6 +7194,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p67 = mapInfo.getCooldownMultiplier(team);
+                    s67 = Math.sqrt(l67.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -6992,6 +7229,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p21 = mapInfo.getCooldownMultiplier(team);
+                    s21 = Math.sqrt(l21.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -7026,6 +7264,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p65 = mapInfo.getCooldownMultiplier(team);
+                    s65 = Math.sqrt(l65.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -7060,6 +7299,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p68 = mapInfo.getCooldownMultiplier(team);
+                    s68 = Math.sqrt(l68.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -7094,6 +7334,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p64 = mapInfo.getCooldownMultiplier(team);
+                    s64 = Math.sqrt(l64.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -7128,6 +7369,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p12 = mapInfo.getCooldownMultiplier(team);
+                    s12 = Math.sqrt(l12.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -7162,6 +7404,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p48 = mapInfo.getCooldownMultiplier(team);
+                    s48 = Math.sqrt(l48.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -7203,8 +7446,9 @@ public class Navigation {
                     case -3:
                         if (v5 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v5 + " " + d5 + " " + l5);
                             return d5;
-                        }
+                        } break;
                 } break;
 
             case -2:
@@ -7212,18 +7456,21 @@ public class Navigation {
                     case -4:
                         if (v12 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v12 + " " + d12 + " " + l12);
                             return d12;
-                        }
+                        } break;
                     case -3:
                         if (v13 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v13 + " " + d13 + " " + l13);
                             return d13;
-                        }
+                        } break;
                     case -2:
                         if (v14 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v14 + " " + d14 + " " + l14);
                             return d14;
-                        }
+                        } break;
                 } break;
 
             case -1:
@@ -7231,23 +7478,27 @@ public class Navigation {
                     case -4:
                         if (v21 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v21 + " " + d21 + " " + l21);
                             return d21;
-                        }
+                        } break;
                     case -3:
                         if (v22 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v22 + " " + d22 + " " + l22);
                             return d22;
-                        }
+                        } break;
                     case -2:
                         if (v23 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v23 + " " + d23 + " " + l23);
                             return d23;
-                        }
+                        } break;
                     case -1:
                         if (v24 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v24 + " " + d24 + " " + l24);
                             return d24;
-                        }
+                        } break;
                 } break;
 
             case 0:
@@ -7255,23 +7506,27 @@ public class Navigation {
                     case -4:
                         if (v30 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v30 + " " + d30 + " " + l30);
                             return d30;
-                        }
+                        } break;
                     case -3:
                         if (v31 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v31 + " " + d31 + " " + l31);
                             return d31;
-                        }
+                        } break;
                     case -2:
                         if (v32 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v32 + " " + d32 + " " + l32);
                             return d32;
-                        }
+                        } break;
                     case -1:
                         if (v33 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v33 + " " + d33 + " " + l33);
                             return d33;
-                        }
+                        } break;
                 } break;
 
             case 1:
@@ -7279,33 +7534,39 @@ public class Navigation {
                     case -4:
                         if (v39 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v39 + " " + d39 + " " + l39);
                             return d39;
-                        }
+                        } break;
                     case -3:
                         if (v40 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v40 + " " + d40 + " " + l40);
                             return d40;
-                        }
+                        } break;
                     case -2:
                         if (v41 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v41 + " " + d41 + " " + l41);
                             return d41;
-                        }
+                        } break;
                     case -1:
                         if (v42 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v42 + " " + d42 + " " + l42);
                             return d42;
-                        }
+                        } break;
                     case 0:
                         if (v43 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v43 + " " + d43 + " " + l43);
                             return d43;
-                        }
+                        } break;
                     case 1:
                         if (v44 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v44 + " " + d44 + " " + l44);
                             return d44;
-                        }
+                        } break;
                 } break;
 
             case 2:
@@ -7313,38 +7574,45 @@ public class Navigation {
                     case -4:
                         if (v48 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v48 + " " + d48 + " " + l48);
                             return d48;
-                        }
+                        } break;
                     case -3:
                         if (v49 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v49 + " " + d49 + " " + l49);
                             return d49;
-                        }
+                        } break;
                     case -2:
                         if (v50 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v50 + " " + d50 + " " + l50);
                             return d50;
-                        }
+                        } break;
                     case -1:
                         if (v51 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v51 + " " + d51 + " " + l51);
                             return d51;
-                        }
+                        } break;
                     case 0:
                         if (v52 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v52 + " " + d52 + " " + l52);
                             return d52;
-                        }
+                        } break;
                     case 1:
                         if (v53 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v53 + " " + d53 + " " + l53);
                             return d53;
-                        }
+                        } break;
                     case 2:
                         if (v54 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v54 + " " + d54 + " " + l54);
                             return d54;
-                        }
+                        } break;
                 } break;
 
             case 3:
@@ -7352,38 +7620,45 @@ public class Navigation {
                     case -3:
                         if (v57 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v57 + " " + d57 + " " + l57);
                             return d57;
-                        }
+                        } break;
                     case -2:
                         if (v58 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v58 + " " + d58 + " " + l58);
                             return d58;
-                        }
+                        } break;
                     case -1:
                         if (v59 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v59 + " " + d59 + " " + l59);
                             return d59;
-                        }
+                        } break;
                     case 0:
                         if (v60 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v60 + " " + d60 + " " + l60);
                             return d60;
-                        }
+                        } break;
                     case 1:
                         if (v61 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v61 + " " + d61 + " " + l61);
                             return d61;
-                        }
+                        } break;
                     case 2:
                         if (v62 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v62 + " " + d62 + " " + l62);
                             return d62;
-                        }
+                        } break;
                     case 3:
                         if (v63 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v63 + " " + d63 + " " + l63);
                             return d63;
-                        }
+                        } break;
                 } break;
 
             case 4:
@@ -7391,251 +7666,256 @@ public class Navigation {
                     case -2:
                         if (v64 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v64 + " " + d64 + " " + l64);
                             return d64;
-                        }
+                        } break;
                     case -1:
                         if (v65 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v65 + " " + d65 + " " + l65);
                             return d65;
-                        }
+                        } break;
                     case 0:
                         if (v66 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v66 + " " + d66 + " " + l66);
                             return d66;
-                        }
+                        } break;
                     case 1:
                         if (v67 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v67 + " " + d67 + " " + l67);
                             return d67;
-                        }
+                        } break;
                     case 2:
                         if (v68 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v68 + " " + d68 + " " + l68);
                             return d68;
-                        }
+                        } break;
                 } break;
 
         }
     
         Direction ans = Direction.CENTER;
 
-        double dist5 = v5 + 0.7 * s5;
+        double dist5 = v5 + s5;
         if (dist5 < localBest) {
             localBest = dist5;
             ans = d5;
         }
 
-        double dist12 = v12 + 0.7 * s12;
+        double dist12 = v12 + s12;
         if (dist12 < localBest) {
             localBest = dist12;
             ans = d12;
         }
 
-        double dist13 = v13 + 0.7 * s13;
+        double dist13 = v13 + s13;
         if (dist13 < localBest) {
             localBest = dist13;
             ans = d13;
         }
 
-        double dist14 = v14 + 0.7 * s14;
+        double dist14 = v14 + s14;
         if (dist14 < localBest) {
             localBest = dist14;
             ans = d14;
         }
 
-        double dist21 = v21 + 0.7 * s21;
+        double dist21 = v21 + s21;
         if (dist21 < localBest) {
             localBest = dist21;
             ans = d21;
         }
 
-        double dist22 = v22 + 0.7 * s22;
+        double dist22 = v22 + s22;
         if (dist22 < localBest) {
             localBest = dist22;
             ans = d22;
         }
 
-        double dist23 = v23 + 0.7 * s23;
+        double dist23 = v23 + s23;
         if (dist23 < localBest) {
             localBest = dist23;
             ans = d23;
         }
 
-        double dist24 = v24 + 0.7 * s24;
+        double dist24 = v24 + s24;
         if (dist24 < localBest) {
             localBest = dist24;
             ans = d24;
         }
 
-        double dist30 = v30 + 0.7 * s30;
+        double dist30 = v30 + s30;
         if (dist30 < localBest) {
             localBest = dist30;
             ans = d30;
         }
 
-        double dist31 = v31 + 0.7 * s31;
+        double dist31 = v31 + s31;
         if (dist31 < localBest) {
             localBest = dist31;
             ans = d31;
         }
 
-        double dist32 = v32 + 0.7 * s32;
+        double dist32 = v32 + s32;
         if (dist32 < localBest) {
             localBest = dist32;
             ans = d32;
         }
 
-        double dist33 = v33 + 0.7 * s33;
+        double dist33 = v33 + s33;
         if (dist33 < localBest) {
             localBest = dist33;
             ans = d33;
         }
 
-        double dist39 = v39 + 0.7 * s39;
+        double dist39 = v39 + s39;
         if (dist39 < localBest) {
             localBest = dist39;
             ans = d39;
         }
 
-        double dist40 = v40 + 0.7 * s40;
+        double dist40 = v40 + s40;
         if (dist40 < localBest) {
             localBest = dist40;
             ans = d40;
         }
 
-        double dist41 = v41 + 0.7 * s41;
+        double dist41 = v41 + s41;
         if (dist41 < localBest) {
             localBest = dist41;
             ans = d41;
         }
 
-        double dist42 = v42 + 0.7 * s42;
+        double dist42 = v42 + s42;
         if (dist42 < localBest) {
             localBest = dist42;
             ans = d42;
         }
 
-        double dist43 = v43 + 0.7 * s43;
+        double dist43 = v43 + s43;
         if (dist43 < localBest) {
             localBest = dist43;
             ans = d43;
         }
 
-        double dist44 = v44 + 0.7 * s44;
+        double dist44 = v44 + s44;
         if (dist44 < localBest) {
             localBest = dist44;
             ans = d44;
         }
 
-        double dist48 = v48 + 0.7 * s48;
+        double dist48 = v48 + s48;
         if (dist48 < localBest) {
             localBest = dist48;
             ans = d48;
         }
 
-        double dist49 = v49 + 0.7 * s49;
+        double dist49 = v49 + s49;
         if (dist49 < localBest) {
             localBest = dist49;
             ans = d49;
         }
 
-        double dist50 = v50 + 0.7 * s50;
+        double dist50 = v50 + s50;
         if (dist50 < localBest) {
             localBest = dist50;
             ans = d50;
         }
 
-        double dist51 = v51 + 0.7 * s51;
+        double dist51 = v51 + s51;
         if (dist51 < localBest) {
             localBest = dist51;
             ans = d51;
         }
 
-        double dist52 = v52 + 0.7 * s52;
+        double dist52 = v52 + s52;
         if (dist52 < localBest) {
             localBest = dist52;
             ans = d52;
         }
 
-        double dist53 = v53 + 0.7 * s53;
+        double dist53 = v53 + s53;
         if (dist53 < localBest) {
             localBest = dist53;
             ans = d53;
         }
 
-        double dist54 = v54 + 0.7 * s54;
+        double dist54 = v54 + s54;
         if (dist54 < localBest) {
             localBest = dist54;
             ans = d54;
         }
 
-        double dist57 = v57 + 0.7 * s57;
+        double dist57 = v57 + s57;
         if (dist57 < localBest) {
             localBest = dist57;
             ans = d57;
         }
 
-        double dist58 = v58 + 0.7 * s58;
+        double dist58 = v58 + s58;
         if (dist58 < localBest) {
             localBest = dist58;
             ans = d58;
         }
 
-        double dist59 = v59 + 0.7 * s59;
+        double dist59 = v59 + s59;
         if (dist59 < localBest) {
             localBest = dist59;
             ans = d59;
         }
 
-        double dist60 = v60 + 0.7 * s60;
+        double dist60 = v60 + s60;
         if (dist60 < localBest) {
             localBest = dist60;
             ans = d60;
         }
 
-        double dist61 = v61 + 0.7 * s61;
+        double dist61 = v61 + s61;
         if (dist61 < localBest) {
             localBest = dist61;
             ans = d61;
         }
 
-        double dist62 = v62 + 0.7 * s62;
+        double dist62 = v62 + s62;
         if (dist62 < localBest) {
             localBest = dist62;
             ans = d62;
         }
 
-        double dist63 = v63 + 0.7 * s63;
+        double dist63 = v63 + s63;
         if (dist63 < localBest) {
             localBest = dist63;
             ans = d63;
         }
 
-        double dist64 = v64 + 0.7 * s64;
+        double dist64 = v64 + s64;
         if (dist64 < localBest) {
             localBest = dist64;
             ans = d64;
         }
 
-        double dist65 = v65 + 0.7 * s65;
+        double dist65 = v65 + s65;
         if (dist65 < localBest) {
             localBest = dist65;
             ans = d65;
         }
 
-        double dist66 = v66 + 0.7 * s66;
+        double dist66 = v66 + s66;
         if (dist66 < localBest) {
             localBest = dist66;
             ans = d66;
         }
 
-        double dist67 = v67 + 0.7 * s67;
+        double dist67 = v67 + s67;
         if (dist67 < localBest) {
             localBest = dist67;
             ans = d67;
         }
 
-        double dist68 = v68 + 0.7 * s68;
+        double dist68 = v68 + s68;
         if (dist68 < localBest) {
             localBest = dist68;
             ans = d68;
@@ -7996,6 +8276,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p52 = mapInfo.getCooldownMultiplier(team);
+                    s52 = Math.sqrt(l52.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8020,6 +8301,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p32 = mapInfo.getCooldownMultiplier(team);
+                    s32 = Math.sqrt(l32.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8049,6 +8331,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p16 = mapInfo.getCooldownMultiplier(team);
+                    s16 = Math.sqrt(l16.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8073,6 +8356,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p51 = mapInfo.getCooldownMultiplier(team);
+                    s51 = Math.sqrt(l51.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8107,6 +8391,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p15 = mapInfo.getCooldownMultiplier(team);
+                    s15 = Math.sqrt(l15.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8141,6 +8426,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p23 = mapInfo.getCooldownMultiplier(team);
+                    s23 = Math.sqrt(l23.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8175,6 +8461,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p41 = mapInfo.getCooldownMultiplier(team);
+                    s41 = Math.sqrt(l41.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8209,6 +8496,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p50 = mapInfo.getCooldownMultiplier(team);
+                    s50 = Math.sqrt(l50.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8238,6 +8526,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p14 = mapInfo.getCooldownMultiplier(team);
+                    s14 = Math.sqrt(l14.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8267,6 +8556,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p60 = mapInfo.getCooldownMultiplier(team);
+                    s60 = Math.sqrt(l60.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8291,6 +8581,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p31 = mapInfo.getCooldownMultiplier(team);
+                    s31 = Math.sqrt(l31.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8320,6 +8611,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p8 = mapInfo.getCooldownMultiplier(team);
+                    s8 = Math.sqrt(l8.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8344,6 +8636,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p59 = mapInfo.getCooldownMultiplier(team);
+                    s59 = Math.sqrt(l59.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8378,6 +8671,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p22 = mapInfo.getCooldownMultiplier(team);
+                    s22 = Math.sqrt(l22.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8412,6 +8706,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p7 = mapInfo.getCooldownMultiplier(team);
+                    s7 = Math.sqrt(l7.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8446,6 +8741,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p40 = mapInfo.getCooldownMultiplier(team);
+                    s40 = Math.sqrt(l40.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8480,6 +8776,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p13 = mapInfo.getCooldownMultiplier(team);
+                    s13 = Math.sqrt(l13.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8514,6 +8811,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p58 = mapInfo.getCooldownMultiplier(team);
+                    s58 = Math.sqrt(l58.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8548,6 +8846,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p49 = mapInfo.getCooldownMultiplier(team);
+                    s49 = Math.sqrt(l49.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8582,6 +8881,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p6 = mapInfo.getCooldownMultiplier(team);
+                    s6 = Math.sqrt(l6.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8616,6 +8916,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p5 = mapInfo.getCooldownMultiplier(team);
+                    s5 = Math.sqrt(l5.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8645,6 +8946,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p57 = mapInfo.getCooldownMultiplier(team);
+                    s57 = Math.sqrt(l57.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8674,6 +8976,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p2 = mapInfo.getCooldownMultiplier(team);
+                    s2 = Math.sqrt(l2.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8698,6 +9001,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p66 = mapInfo.getCooldownMultiplier(team);
+                    s66 = Math.sqrt(l66.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8722,6 +9026,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p30 = mapInfo.getCooldownMultiplier(team);
+                    s30 = Math.sqrt(l30.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8751,6 +9056,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p21 = mapInfo.getCooldownMultiplier(team);
+                    s21 = Math.sqrt(l21.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8785,6 +9091,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p1 = mapInfo.getCooldownMultiplier(team);
+                    s1 = Math.sqrt(l1.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8819,6 +9126,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p39 = mapInfo.getCooldownMultiplier(team);
+                    s39 = Math.sqrt(l39.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8853,6 +9161,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p65 = mapInfo.getCooldownMultiplier(team);
+                    s65 = Math.sqrt(l65.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8887,6 +9196,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p64 = mapInfo.getCooldownMultiplier(team);
+                    s64 = Math.sqrt(l64.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8921,6 +9231,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p12 = mapInfo.getCooldownMultiplier(team);
+                    s12 = Math.sqrt(l12.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8955,6 +9266,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p0 = mapInfo.getCooldownMultiplier(team);
+                    s0 = Math.sqrt(l0.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -8989,6 +9301,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p48 = mapInfo.getCooldownMultiplier(team);
+                    s48 = Math.sqrt(l48.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -9026,18 +9339,21 @@ public class Navigation {
                     case -2:
                         if (v0 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v0 + " " + d0 + " " + l0);
                             return d0;
-                        }
+                        } break;
                     case -1:
                         if (v1 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v1 + " " + d1 + " " + l1);
                             return d1;
-                        }
+                        } break;
                     case 0:
                         if (v2 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v2 + " " + d2 + " " + l2);
                             return d2;
-                        }
+                        } break;
                 } break;
 
             case -3:
@@ -9045,23 +9361,27 @@ public class Navigation {
                     case -3:
                         if (v5 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v5 + " " + d5 + " " + l5);
                             return d5;
-                        }
+                        } break;
                     case -2:
                         if (v6 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v6 + " " + d6 + " " + l6);
                             return d6;
-                        }
+                        } break;
                     case -1:
                         if (v7 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v7 + " " + d7 + " " + l7);
                             return d7;
-                        }
+                        } break;
                     case 0:
                         if (v8 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v8 + " " + d8 + " " + l8);
                             return d8;
-                        }
+                        } break;
                 } break;
 
             case -2:
@@ -9069,28 +9389,33 @@ public class Navigation {
                     case -4:
                         if (v12 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v12 + " " + d12 + " " + l12);
                             return d12;
-                        }
+                        } break;
                     case -3:
                         if (v13 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v13 + " " + d13 + " " + l13);
                             return d13;
-                        }
+                        } break;
                     case -2:
                         if (v14 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v14 + " " + d14 + " " + l14);
                             return d14;
-                        }
+                        } break;
                     case -1:
                         if (v15 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v15 + " " + d15 + " " + l15);
                             return d15;
-                        }
+                        } break;
                     case 0:
                         if (v16 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v16 + " " + d16 + " " + l16);
                             return d16;
-                        }
+                        } break;
                 } break;
 
             case -1:
@@ -9098,28 +9423,33 @@ public class Navigation {
                     case -4:
                         if (v21 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v21 + " " + d21 + " " + l21);
                             return d21;
-                        }
+                        } break;
                     case -3:
                         if (v22 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v22 + " " + d22 + " " + l22);
                             return d22;
-                        }
+                        } break;
                     case -2:
                         if (v23 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v23 + " " + d23 + " " + l23);
                             return d23;
-                        }
+                        } break;
                     case -1:
                         if (v24 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v24 + " " + d24 + " " + l24);
                             return d24;
-                        }
+                        } break;
                     case 0:
                         if (v25 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v25 + " " + d25 + " " + l25);
                             return d25;
-                        }
+                        } break;
                 } break;
 
             case 0:
@@ -9127,23 +9457,27 @@ public class Navigation {
                     case -4:
                         if (v30 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v30 + " " + d30 + " " + l30);
                             return d30;
-                        }
+                        } break;
                     case -3:
                         if (v31 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v31 + " " + d31 + " " + l31);
                             return d31;
-                        }
+                        } break;
                     case -2:
                         if (v32 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v32 + " " + d32 + " " + l32);
                             return d32;
-                        }
+                        } break;
                     case -1:
                         if (v33 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v33 + " " + d33 + " " + l33);
                             return d33;
-                        }
+                        } break;
                 } break;
 
             case 1:
@@ -9151,28 +9485,33 @@ public class Navigation {
                     case -4:
                         if (v39 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v39 + " " + d39 + " " + l39);
                             return d39;
-                        }
+                        } break;
                     case -3:
                         if (v40 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v40 + " " + d40 + " " + l40);
                             return d40;
-                        }
+                        } break;
                     case -2:
                         if (v41 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v41 + " " + d41 + " " + l41);
                             return d41;
-                        }
+                        } break;
                     case -1:
                         if (v42 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v42 + " " + d42 + " " + l42);
                             return d42;
-                        }
+                        } break;
                     case 0:
                         if (v43 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v43 + " " + d43 + " " + l43);
                             return d43;
-                        }
+                        } break;
                 } break;
 
             case 2:
@@ -9180,28 +9519,33 @@ public class Navigation {
                     case -4:
                         if (v48 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v48 + " " + d48 + " " + l48);
                             return d48;
-                        }
+                        } break;
                     case -3:
                         if (v49 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v49 + " " + d49 + " " + l49);
                             return d49;
-                        }
+                        } break;
                     case -2:
                         if (v50 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v50 + " " + d50 + " " + l50);
                             return d50;
-                        }
+                        } break;
                     case -1:
                         if (v51 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v51 + " " + d51 + " " + l51);
                             return d51;
-                        }
+                        } break;
                     case 0:
                         if (v52 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v52 + " " + d52 + " " + l52);
                             return d52;
-                        }
+                        } break;
                 } break;
 
             case 3:
@@ -9209,23 +9553,27 @@ public class Navigation {
                     case -3:
                         if (v57 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v57 + " " + d57 + " " + l57);
                             return d57;
-                        }
+                        } break;
                     case -2:
                         if (v58 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v58 + " " + d58 + " " + l58);
                             return d58;
-                        }
+                        } break;
                     case -1:
                         if (v59 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v59 + " " + d59 + " " + l59);
                             return d59;
-                        }
+                        } break;
                     case 0:
                         if (v60 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v60 + " " + d60 + " " + l60);
                             return d60;
-                        }
+                        } break;
                 } break;
 
             case 4:
@@ -9233,247 +9581,250 @@ public class Navigation {
                     case -2:
                         if (v64 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v64 + " " + d64 + " " + l64);
                             return d64;
-                        }
+                        } break;
                     case -1:
                         if (v65 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v65 + " " + d65 + " " + l65);
                             return d65;
-                        }
+                        } break;
                     case 0:
                         if (v66 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v66 + " " + d66 + " " + l66);
                             return d66;
-                        }
+                        } break;
                 } break;
 
         }
     
         Direction ans = Direction.CENTER;
 
-        double dist0 = v0 + 0.7 * s0;
+        double dist0 = v0 + s0;
         if (dist0 < localBest) {
             localBest = dist0;
             ans = d0;
         }
 
-        double dist1 = v1 + 0.7 * s1;
+        double dist1 = v1 + s1;
         if (dist1 < localBest) {
             localBest = dist1;
             ans = d1;
         }
 
-        double dist2 = v2 + 0.7 * s2;
+        double dist2 = v2 + s2;
         if (dist2 < localBest) {
             localBest = dist2;
             ans = d2;
         }
 
-        double dist5 = v5 + 0.7 * s5;
+        double dist5 = v5 + s5;
         if (dist5 < localBest) {
             localBest = dist5;
             ans = d5;
         }
 
-        double dist6 = v6 + 0.7 * s6;
+        double dist6 = v6 + s6;
         if (dist6 < localBest) {
             localBest = dist6;
             ans = d6;
         }
 
-        double dist7 = v7 + 0.7 * s7;
+        double dist7 = v7 + s7;
         if (dist7 < localBest) {
             localBest = dist7;
             ans = d7;
         }
 
-        double dist8 = v8 + 0.7 * s8;
+        double dist8 = v8 + s8;
         if (dist8 < localBest) {
             localBest = dist8;
             ans = d8;
         }
 
-        double dist12 = v12 + 0.7 * s12;
+        double dist12 = v12 + s12;
         if (dist12 < localBest) {
             localBest = dist12;
             ans = d12;
         }
 
-        double dist13 = v13 + 0.7 * s13;
+        double dist13 = v13 + s13;
         if (dist13 < localBest) {
             localBest = dist13;
             ans = d13;
         }
 
-        double dist14 = v14 + 0.7 * s14;
+        double dist14 = v14 + s14;
         if (dist14 < localBest) {
             localBest = dist14;
             ans = d14;
         }
 
-        double dist15 = v15 + 0.7 * s15;
+        double dist15 = v15 + s15;
         if (dist15 < localBest) {
             localBest = dist15;
             ans = d15;
         }
 
-        double dist16 = v16 + 0.7 * s16;
+        double dist16 = v16 + s16;
         if (dist16 < localBest) {
             localBest = dist16;
             ans = d16;
         }
 
-        double dist21 = v21 + 0.7 * s21;
+        double dist21 = v21 + s21;
         if (dist21 < localBest) {
             localBest = dist21;
             ans = d21;
         }
 
-        double dist22 = v22 + 0.7 * s22;
+        double dist22 = v22 + s22;
         if (dist22 < localBest) {
             localBest = dist22;
             ans = d22;
         }
 
-        double dist23 = v23 + 0.7 * s23;
+        double dist23 = v23 + s23;
         if (dist23 < localBest) {
             localBest = dist23;
             ans = d23;
         }
 
-        double dist24 = v24 + 0.7 * s24;
+        double dist24 = v24 + s24;
         if (dist24 < localBest) {
             localBest = dist24;
             ans = d24;
         }
 
-        double dist25 = v25 + 0.7 * s25;
+        double dist25 = v25 + s25;
         if (dist25 < localBest) {
             localBest = dist25;
             ans = d25;
         }
 
-        double dist30 = v30 + 0.7 * s30;
+        double dist30 = v30 + s30;
         if (dist30 < localBest) {
             localBest = dist30;
             ans = d30;
         }
 
-        double dist31 = v31 + 0.7 * s31;
+        double dist31 = v31 + s31;
         if (dist31 < localBest) {
             localBest = dist31;
             ans = d31;
         }
 
-        double dist32 = v32 + 0.7 * s32;
+        double dist32 = v32 + s32;
         if (dist32 < localBest) {
             localBest = dist32;
             ans = d32;
         }
 
-        double dist33 = v33 + 0.7 * s33;
+        double dist33 = v33 + s33;
         if (dist33 < localBest) {
             localBest = dist33;
             ans = d33;
         }
 
-        double dist39 = v39 + 0.7 * s39;
+        double dist39 = v39 + s39;
         if (dist39 < localBest) {
             localBest = dist39;
             ans = d39;
         }
 
-        double dist40 = v40 + 0.7 * s40;
+        double dist40 = v40 + s40;
         if (dist40 < localBest) {
             localBest = dist40;
             ans = d40;
         }
 
-        double dist41 = v41 + 0.7 * s41;
+        double dist41 = v41 + s41;
         if (dist41 < localBest) {
             localBest = dist41;
             ans = d41;
         }
 
-        double dist42 = v42 + 0.7 * s42;
+        double dist42 = v42 + s42;
         if (dist42 < localBest) {
             localBest = dist42;
             ans = d42;
         }
 
-        double dist43 = v43 + 0.7 * s43;
+        double dist43 = v43 + s43;
         if (dist43 < localBest) {
             localBest = dist43;
             ans = d43;
         }
 
-        double dist48 = v48 + 0.7 * s48;
+        double dist48 = v48 + s48;
         if (dist48 < localBest) {
             localBest = dist48;
             ans = d48;
         }
 
-        double dist49 = v49 + 0.7 * s49;
+        double dist49 = v49 + s49;
         if (dist49 < localBest) {
             localBest = dist49;
             ans = d49;
         }
 
-        double dist50 = v50 + 0.7 * s50;
+        double dist50 = v50 + s50;
         if (dist50 < localBest) {
             localBest = dist50;
             ans = d50;
         }
 
-        double dist51 = v51 + 0.7 * s51;
+        double dist51 = v51 + s51;
         if (dist51 < localBest) {
             localBest = dist51;
             ans = d51;
         }
 
-        double dist52 = v52 + 0.7 * s52;
+        double dist52 = v52 + s52;
         if (dist52 < localBest) {
             localBest = dist52;
             ans = d52;
         }
 
-        double dist57 = v57 + 0.7 * s57;
+        double dist57 = v57 + s57;
         if (dist57 < localBest) {
             localBest = dist57;
             ans = d57;
         }
 
-        double dist58 = v58 + 0.7 * s58;
+        double dist58 = v58 + s58;
         if (dist58 < localBest) {
             localBest = dist58;
             ans = d58;
         }
 
-        double dist59 = v59 + 0.7 * s59;
+        double dist59 = v59 + s59;
         if (dist59 < localBest) {
             localBest = dist59;
             ans = d59;
         }
 
-        double dist60 = v60 + 0.7 * s60;
+        double dist60 = v60 + s60;
         if (dist60 < localBest) {
             localBest = dist60;
             ans = d60;
         }
 
-        double dist64 = v64 + 0.7 * s64;
+        double dist64 = v64 + s64;
         if (dist64 < localBest) {
             localBest = dist64;
             ans = d64;
         }
 
-        double dist65 = v65 + 0.7 * s65;
+        double dist65 = v65 + s65;
         if (dist65 < localBest) {
             localBest = dist65;
             ans = d65;
         }
 
-        double dist66 = v66 + 0.7 * s66;
+        double dist66 = v66 + s66;
         if (dist66 < localBest) {
             localBest = dist66;
             ans = d66;
@@ -9819,6 +10170,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p16 = mapInfo.getCooldownMultiplier(team);
+                    s16 = Math.sqrt(l16.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -9848,6 +10200,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p32 = mapInfo.getCooldownMultiplier(team);
+                    s32 = Math.sqrt(l32.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -9877,6 +10230,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p15 = mapInfo.getCooldownMultiplier(team);
+                    s15 = Math.sqrt(l15.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -9911,6 +10265,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p41 = mapInfo.getCooldownMultiplier(team);
+                    s41 = Math.sqrt(l41.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -9940,6 +10295,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p23 = mapInfo.getCooldownMultiplier(team);
+                    s23 = Math.sqrt(l23.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -9974,6 +10330,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p17 = mapInfo.getCooldownMultiplier(team);
+                    s17 = Math.sqrt(l17.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10003,6 +10360,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p18 = mapInfo.getCooldownMultiplier(team);
+                    s18 = Math.sqrt(l18.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10027,6 +10385,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p50 = mapInfo.getCooldownMultiplier(team);
+                    s50 = Math.sqrt(l50.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10051,6 +10410,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p14 = mapInfo.getCooldownMultiplier(team);
+                    s14 = Math.sqrt(l14.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10080,6 +10440,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p8 = mapInfo.getCooldownMultiplier(team);
+                    s8 = Math.sqrt(l8.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10109,6 +10470,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p31 = mapInfo.getCooldownMultiplier(team);
+                    s31 = Math.sqrt(l31.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10138,6 +10500,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p7 = mapInfo.getCooldownMultiplier(team);
+                    s7 = Math.sqrt(l7.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10172,6 +10535,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p9 = mapInfo.getCooldownMultiplier(team);
+                    s9 = Math.sqrt(l9.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10206,6 +10570,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p40 = mapInfo.getCooldownMultiplier(team);
+                    s40 = Math.sqrt(l40.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10240,6 +10605,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p22 = mapInfo.getCooldownMultiplier(team);
+                    s22 = Math.sqrt(l22.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10274,6 +10640,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p6 = mapInfo.getCooldownMultiplier(team);
+                    s6 = Math.sqrt(l6.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10308,6 +10675,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p13 = mapInfo.getCooldownMultiplier(team);
+                    s13 = Math.sqrt(l13.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10342,6 +10710,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p49 = mapInfo.getCooldownMultiplier(team);
+                    s49 = Math.sqrt(l49.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10371,6 +10740,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p10 = mapInfo.getCooldownMultiplier(team);
+                    s10 = Math.sqrt(l10.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10400,6 +10770,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p57 = mapInfo.getCooldownMultiplier(team);
+                    s57 = Math.sqrt(l57.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10424,6 +10795,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p5 = mapInfo.getCooldownMultiplier(team);
+                    s5 = Math.sqrt(l5.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10453,6 +10825,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p11 = mapInfo.getCooldownMultiplier(team);
+                    s11 = Math.sqrt(l11.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10477,6 +10850,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p30 = mapInfo.getCooldownMultiplier(team);
+                    s30 = Math.sqrt(l30.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10506,6 +10880,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p2 = mapInfo.getCooldownMultiplier(team);
+                    s2 = Math.sqrt(l2.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10535,6 +10910,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p1 = mapInfo.getCooldownMultiplier(team);
+                    s1 = Math.sqrt(l1.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10569,6 +10945,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p39 = mapInfo.getCooldownMultiplier(team);
+                    s39 = Math.sqrt(l39.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10603,6 +10980,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p21 = mapInfo.getCooldownMultiplier(team);
+                    s21 = Math.sqrt(l21.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10637,6 +11015,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p3 = mapInfo.getCooldownMultiplier(team);
+                    s3 = Math.sqrt(l3.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10671,6 +11050,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p4 = mapInfo.getCooldownMultiplier(team);
+                    s4 = Math.sqrt(l4.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10705,6 +11085,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p48 = mapInfo.getCooldownMultiplier(team);
+                    s48 = Math.sqrt(l48.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10739,6 +11120,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p0 = mapInfo.getCooldownMultiplier(team);
+                    s0 = Math.sqrt(l0.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10773,6 +11155,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p12 = mapInfo.getCooldownMultiplier(team);
+                    s12 = Math.sqrt(l12.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -10810,28 +11193,33 @@ public class Navigation {
                     case -2:
                         if (v0 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v0 + " " + d0 + " " + l0);
                             return d0;
-                        }
+                        } break;
                     case -1:
                         if (v1 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v1 + " " + d1 + " " + l1);
                             return d1;
-                        }
+                        } break;
                     case 0:
                         if (v2 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v2 + " " + d2 + " " + l2);
                             return d2;
-                        }
+                        } break;
                     case 1:
                         if (v3 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v3 + " " + d3 + " " + l3);
                             return d3;
-                        }
+                        } break;
                     case 2:
                         if (v4 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v4 + " " + d4 + " " + l4);
                             return d4;
-                        }
+                        } break;
                 } break;
 
             case -3:
@@ -10839,38 +11227,45 @@ public class Navigation {
                     case -3:
                         if (v5 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v5 + " " + d5 + " " + l5);
                             return d5;
-                        }
+                        } break;
                     case -2:
                         if (v6 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v6 + " " + d6 + " " + l6);
                             return d6;
-                        }
+                        } break;
                     case -1:
                         if (v7 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v7 + " " + d7 + " " + l7);
                             return d7;
-                        }
+                        } break;
                     case 0:
                         if (v8 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v8 + " " + d8 + " " + l8);
                             return d8;
-                        }
+                        } break;
                     case 1:
                         if (v9 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v9 + " " + d9 + " " + l9);
                             return d9;
-                        }
+                        } break;
                     case 2:
                         if (v10 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v10 + " " + d10 + " " + l10);
                             return d10;
-                        }
+                        } break;
                     case 3:
                         if (v11 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v11 + " " + d11 + " " + l11);
                             return d11;
-                        }
+                        } break;
                 } break;
 
             case -2:
@@ -10878,38 +11273,45 @@ public class Navigation {
                     case -4:
                         if (v12 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v12 + " " + d12 + " " + l12);
                             return d12;
-                        }
+                        } break;
                     case -3:
                         if (v13 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v13 + " " + d13 + " " + l13);
                             return d13;
-                        }
+                        } break;
                     case -2:
                         if (v14 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v14 + " " + d14 + " " + l14);
                             return d14;
-                        }
+                        } break;
                     case -1:
                         if (v15 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v15 + " " + d15 + " " + l15);
                             return d15;
-                        }
+                        } break;
                     case 0:
                         if (v16 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v16 + " " + d16 + " " + l16);
                             return d16;
-                        }
+                        } break;
                     case 1:
                         if (v17 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v17 + " " + d17 + " " + l17);
                             return d17;
-                        }
+                        } break;
                     case 2:
                         if (v18 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v18 + " " + d18 + " " + l18);
                             return d18;
-                        }
+                        } break;
                 } break;
 
             case -1:
@@ -10917,33 +11319,39 @@ public class Navigation {
                     case -4:
                         if (v21 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v21 + " " + d21 + " " + l21);
                             return d21;
-                        }
+                        } break;
                     case -3:
                         if (v22 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v22 + " " + d22 + " " + l22);
                             return d22;
-                        }
+                        } break;
                     case -2:
                         if (v23 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v23 + " " + d23 + " " + l23);
                             return d23;
-                        }
+                        } break;
                     case -1:
                         if (v24 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v24 + " " + d24 + " " + l24);
                             return d24;
-                        }
+                        } break;
                     case 0:
                         if (v25 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v25 + " " + d25 + " " + l25);
                             return d25;
-                        }
+                        } break;
                     case 1:
                         if (v26 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v26 + " " + d26 + " " + l26);
                             return d26;
-                        }
+                        } break;
                 } break;
 
             case 0:
@@ -10951,23 +11359,27 @@ public class Navigation {
                     case -4:
                         if (v30 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v30 + " " + d30 + " " + l30);
                             return d30;
-                        }
+                        } break;
                     case -3:
                         if (v31 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v31 + " " + d31 + " " + l31);
                             return d31;
-                        }
+                        } break;
                     case -2:
                         if (v32 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v32 + " " + d32 + " " + l32);
                             return d32;
-                        }
+                        } break;
                     case -1:
                         if (v33 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v33 + " " + d33 + " " + l33);
                             return d33;
-                        }
+                        } break;
                 } break;
 
             case 1:
@@ -10975,23 +11387,27 @@ public class Navigation {
                     case -4:
                         if (v39 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v39 + " " + d39 + " " + l39);
                             return d39;
-                        }
+                        } break;
                     case -3:
                         if (v40 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v40 + " " + d40 + " " + l40);
                             return d40;
-                        }
+                        } break;
                     case -2:
                         if (v41 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v41 + " " + d41 + " " + l41);
                             return d41;
-                        }
+                        } break;
                     case -1:
                         if (v42 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v42 + " " + d42 + " " + l42);
                             return d42;
-                        }
+                        } break;
                 } break;
 
             case 2:
@@ -10999,18 +11415,21 @@ public class Navigation {
                     case -4:
                         if (v48 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v48 + " " + d48 + " " + l48);
                             return d48;
-                        }
+                        } break;
                     case -3:
                         if (v49 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v49 + " " + d49 + " " + l49);
                             return d49;
-                        }
+                        } break;
                     case -2:
                         if (v50 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v50 + " " + d50 + " " + l50);
                             return d50;
-                        }
+                        } break;
                 } break;
 
             case 3:
@@ -11018,8 +11437,9 @@ public class Navigation {
                     case -3:
                         if (v57 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v57 + " " + d57 + " " + l57);
                             return d57;
-                        }
+                        } break;
                 } break;
 
             case 4:
@@ -11030,223 +11450,223 @@ public class Navigation {
     
         Direction ans = Direction.CENTER;
 
-        double dist0 = v0 + 0.7 * s0;
+        double dist0 = v0 + s0;
         if (dist0 < localBest) {
             localBest = dist0;
             ans = d0;
         }
 
-        double dist1 = v1 + 0.7 * s1;
+        double dist1 = v1 + s1;
         if (dist1 < localBest) {
             localBest = dist1;
             ans = d1;
         }
 
-        double dist2 = v2 + 0.7 * s2;
+        double dist2 = v2 + s2;
         if (dist2 < localBest) {
             localBest = dist2;
             ans = d2;
         }
 
-        double dist3 = v3 + 0.7 * s3;
+        double dist3 = v3 + s3;
         if (dist3 < localBest) {
             localBest = dist3;
             ans = d3;
         }
 
-        double dist4 = v4 + 0.7 * s4;
+        double dist4 = v4 + s4;
         if (dist4 < localBest) {
             localBest = dist4;
             ans = d4;
         }
 
-        double dist5 = v5 + 0.7 * s5;
+        double dist5 = v5 + s5;
         if (dist5 < localBest) {
             localBest = dist5;
             ans = d5;
         }
 
-        double dist6 = v6 + 0.7 * s6;
+        double dist6 = v6 + s6;
         if (dist6 < localBest) {
             localBest = dist6;
             ans = d6;
         }
 
-        double dist7 = v7 + 0.7 * s7;
+        double dist7 = v7 + s7;
         if (dist7 < localBest) {
             localBest = dist7;
             ans = d7;
         }
 
-        double dist8 = v8 + 0.7 * s8;
+        double dist8 = v8 + s8;
         if (dist8 < localBest) {
             localBest = dist8;
             ans = d8;
         }
 
-        double dist9 = v9 + 0.7 * s9;
+        double dist9 = v9 + s9;
         if (dist9 < localBest) {
             localBest = dist9;
             ans = d9;
         }
 
-        double dist10 = v10 + 0.7 * s10;
+        double dist10 = v10 + s10;
         if (dist10 < localBest) {
             localBest = dist10;
             ans = d10;
         }
 
-        double dist11 = v11 + 0.7 * s11;
+        double dist11 = v11 + s11;
         if (dist11 < localBest) {
             localBest = dist11;
             ans = d11;
         }
 
-        double dist12 = v12 + 0.7 * s12;
+        double dist12 = v12 + s12;
         if (dist12 < localBest) {
             localBest = dist12;
             ans = d12;
         }
 
-        double dist13 = v13 + 0.7 * s13;
+        double dist13 = v13 + s13;
         if (dist13 < localBest) {
             localBest = dist13;
             ans = d13;
         }
 
-        double dist14 = v14 + 0.7 * s14;
+        double dist14 = v14 + s14;
         if (dist14 < localBest) {
             localBest = dist14;
             ans = d14;
         }
 
-        double dist15 = v15 + 0.7 * s15;
+        double dist15 = v15 + s15;
         if (dist15 < localBest) {
             localBest = dist15;
             ans = d15;
         }
 
-        double dist16 = v16 + 0.7 * s16;
+        double dist16 = v16 + s16;
         if (dist16 < localBest) {
             localBest = dist16;
             ans = d16;
         }
 
-        double dist17 = v17 + 0.7 * s17;
+        double dist17 = v17 + s17;
         if (dist17 < localBest) {
             localBest = dist17;
             ans = d17;
         }
 
-        double dist18 = v18 + 0.7 * s18;
+        double dist18 = v18 + s18;
         if (dist18 < localBest) {
             localBest = dist18;
             ans = d18;
         }
 
-        double dist21 = v21 + 0.7 * s21;
+        double dist21 = v21 + s21;
         if (dist21 < localBest) {
             localBest = dist21;
             ans = d21;
         }
 
-        double dist22 = v22 + 0.7 * s22;
+        double dist22 = v22 + s22;
         if (dist22 < localBest) {
             localBest = dist22;
             ans = d22;
         }
 
-        double dist23 = v23 + 0.7 * s23;
+        double dist23 = v23 + s23;
         if (dist23 < localBest) {
             localBest = dist23;
             ans = d23;
         }
 
-        double dist24 = v24 + 0.7 * s24;
+        double dist24 = v24 + s24;
         if (dist24 < localBest) {
             localBest = dist24;
             ans = d24;
         }
 
-        double dist25 = v25 + 0.7 * s25;
+        double dist25 = v25 + s25;
         if (dist25 < localBest) {
             localBest = dist25;
             ans = d25;
         }
 
-        double dist26 = v26 + 0.7 * s26;
+        double dist26 = v26 + s26;
         if (dist26 < localBest) {
             localBest = dist26;
             ans = d26;
         }
 
-        double dist30 = v30 + 0.7 * s30;
+        double dist30 = v30 + s30;
         if (dist30 < localBest) {
             localBest = dist30;
             ans = d30;
         }
 
-        double dist31 = v31 + 0.7 * s31;
+        double dist31 = v31 + s31;
         if (dist31 < localBest) {
             localBest = dist31;
             ans = d31;
         }
 
-        double dist32 = v32 + 0.7 * s32;
+        double dist32 = v32 + s32;
         if (dist32 < localBest) {
             localBest = dist32;
             ans = d32;
         }
 
-        double dist33 = v33 + 0.7 * s33;
+        double dist33 = v33 + s33;
         if (dist33 < localBest) {
             localBest = dist33;
             ans = d33;
         }
 
-        double dist39 = v39 + 0.7 * s39;
+        double dist39 = v39 + s39;
         if (dist39 < localBest) {
             localBest = dist39;
             ans = d39;
         }
 
-        double dist40 = v40 + 0.7 * s40;
+        double dist40 = v40 + s40;
         if (dist40 < localBest) {
             localBest = dist40;
             ans = d40;
         }
 
-        double dist41 = v41 + 0.7 * s41;
+        double dist41 = v41 + s41;
         if (dist41 < localBest) {
             localBest = dist41;
             ans = d41;
         }
 
-        double dist42 = v42 + 0.7 * s42;
+        double dist42 = v42 + s42;
         if (dist42 < localBest) {
             localBest = dist42;
             ans = d42;
         }
 
-        double dist48 = v48 + 0.7 * s48;
+        double dist48 = v48 + s48;
         if (dist48 < localBest) {
             localBest = dist48;
             ans = d48;
         }
 
-        double dist49 = v49 + 0.7 * s49;
+        double dist49 = v49 + s49;
         if (dist49 < localBest) {
             localBest = dist49;
             ans = d49;
         }
 
-        double dist50 = v50 + 0.7 * s50;
+        double dist50 = v50 + s50;
         if (dist50 < localBest) {
             localBest = dist50;
             ans = d50;
         }
 
-        double dist57 = v57 + 0.7 * s57;
+        double dist57 = v57 + s57;
         if (dist57 < localBest) {
             localBest = dist57;
             ans = d57;
@@ -11607,6 +12027,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p36 = mapInfo.getCooldownMultiplier(team);
+                    s36 = Math.sqrt(l36.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11631,6 +12052,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p16 = mapInfo.getCooldownMultiplier(team);
+                    s16 = Math.sqrt(l16.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11660,6 +12082,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p32 = mapInfo.getCooldownMultiplier(team);
+                    s32 = Math.sqrt(l32.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11684,6 +12107,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p27 = mapInfo.getCooldownMultiplier(team);
+                    s27 = Math.sqrt(l27.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11718,6 +12142,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p15 = mapInfo.getCooldownMultiplier(team);
+                    s15 = Math.sqrt(l15.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11752,6 +12177,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p23 = mapInfo.getCooldownMultiplier(team);
+                    s23 = Math.sqrt(l23.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11786,6 +12212,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p17 = mapInfo.getCooldownMultiplier(team);
+                    s17 = Math.sqrt(l17.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11820,6 +12247,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p14 = mapInfo.getCooldownMultiplier(team);
+                    s14 = Math.sqrt(l14.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11849,6 +12277,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p18 = mapInfo.getCooldownMultiplier(team);
+                    s18 = Math.sqrt(l18.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11878,6 +12307,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p37 = mapInfo.getCooldownMultiplier(team);
+                    s37 = Math.sqrt(l37.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11902,6 +12332,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p8 = mapInfo.getCooldownMultiplier(team);
+                    s8 = Math.sqrt(l8.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11931,6 +12362,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p31 = mapInfo.getCooldownMultiplier(team);
+                    s31 = Math.sqrt(l31.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11955,6 +12387,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p28 = mapInfo.getCooldownMultiplier(team);
+                    s28 = Math.sqrt(l28.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -11989,6 +12422,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p9 = mapInfo.getCooldownMultiplier(team);
+                    s9 = Math.sqrt(l9.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12023,6 +12457,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p22 = mapInfo.getCooldownMultiplier(team);
+                    s22 = Math.sqrt(l22.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12057,6 +12492,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p7 = mapInfo.getCooldownMultiplier(team);
+                    s7 = Math.sqrt(l7.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12091,6 +12527,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p13 = mapInfo.getCooldownMultiplier(team);
+                    s13 = Math.sqrt(l13.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12125,6 +12562,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p19 = mapInfo.getCooldownMultiplier(team);
+                    s19 = Math.sqrt(l19.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12159,6 +12597,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p10 = mapInfo.getCooldownMultiplier(team);
+                    s10 = Math.sqrt(l10.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12193,6 +12632,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p6 = mapInfo.getCooldownMultiplier(team);
+                    s6 = Math.sqrt(l6.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12227,6 +12667,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p11 = mapInfo.getCooldownMultiplier(team);
+                    s11 = Math.sqrt(l11.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12256,6 +12697,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p5 = mapInfo.getCooldownMultiplier(team);
+                    s5 = Math.sqrt(l5.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12285,6 +12727,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p30 = mapInfo.getCooldownMultiplier(team);
+                    s30 = Math.sqrt(l30.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12309,6 +12752,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p38 = mapInfo.getCooldownMultiplier(team);
+                    s38 = Math.sqrt(l38.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12333,6 +12777,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p2 = mapInfo.getCooldownMultiplier(team);
+                    s2 = Math.sqrt(l2.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12362,6 +12807,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p21 = mapInfo.getCooldownMultiplier(team);
+                    s21 = Math.sqrt(l21.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12396,6 +12842,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p3 = mapInfo.getCooldownMultiplier(team);
+                    s3 = Math.sqrt(l3.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12430,6 +12877,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p1 = mapInfo.getCooldownMultiplier(team);
+                    s1 = Math.sqrt(l1.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12464,6 +12912,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p29 = mapInfo.getCooldownMultiplier(team);
+                    s29 = Math.sqrt(l29.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12498,6 +12947,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p20 = mapInfo.getCooldownMultiplier(team);
+                    s20 = Math.sqrt(l20.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12532,6 +12982,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p12 = mapInfo.getCooldownMultiplier(team);
+                    s12 = Math.sqrt(l12.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12566,6 +13017,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p4 = mapInfo.getCooldownMultiplier(team);
+                    s4 = Math.sqrt(l4.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12600,6 +13052,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p0 = mapInfo.getCooldownMultiplier(team);
+                    s0 = Math.sqrt(l0.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -12637,28 +13090,33 @@ public class Navigation {
                     case -2:
                         if (v0 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v0 + " " + d0 + " " + l0);
                             return d0;
-                        }
+                        } break;
                     case -1:
                         if (v1 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v1 + " " + d1 + " " + l1);
                             return d1;
-                        }
+                        } break;
                     case 0:
                         if (v2 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v2 + " " + d2 + " " + l2);
                             return d2;
-                        }
+                        } break;
                     case 1:
                         if (v3 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v3 + " " + d3 + " " + l3);
                             return d3;
-                        }
+                        } break;
                     case 2:
                         if (v4 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v4 + " " + d4 + " " + l4);
                             return d4;
-                        }
+                        } break;
                 } break;
 
             case -3:
@@ -12666,38 +13124,45 @@ public class Navigation {
                     case -3:
                         if (v5 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v5 + " " + d5 + " " + l5);
                             return d5;
-                        }
+                        } break;
                     case -2:
                         if (v6 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v6 + " " + d6 + " " + l6);
                             return d6;
-                        }
+                        } break;
                     case -1:
                         if (v7 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v7 + " " + d7 + " " + l7);
                             return d7;
-                        }
+                        } break;
                     case 0:
                         if (v8 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v8 + " " + d8 + " " + l8);
                             return d8;
-                        }
+                        } break;
                     case 1:
                         if (v9 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v9 + " " + d9 + " " + l9);
                             return d9;
-                        }
+                        } break;
                     case 2:
                         if (v10 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v10 + " " + d10 + " " + l10);
                             return d10;
-                        }
+                        } break;
                     case 3:
                         if (v11 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v11 + " " + d11 + " " + l11);
                             return d11;
-                        }
+                        } break;
                 } break;
 
             case -2:
@@ -12705,48 +13170,57 @@ public class Navigation {
                     case -4:
                         if (v12 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v12 + " " + d12 + " " + l12);
                             return d12;
-                        }
+                        } break;
                     case -3:
                         if (v13 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v13 + " " + d13 + " " + l13);
                             return d13;
-                        }
+                        } break;
                     case -2:
                         if (v14 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v14 + " " + d14 + " " + l14);
                             return d14;
-                        }
+                        } break;
                     case -1:
                         if (v15 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v15 + " " + d15 + " " + l15);
                             return d15;
-                        }
+                        } break;
                     case 0:
                         if (v16 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v16 + " " + d16 + " " + l16);
                             return d16;
-                        }
+                        } break;
                     case 1:
                         if (v17 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v17 + " " + d17 + " " + l17);
                             return d17;
-                        }
+                        } break;
                     case 2:
                         if (v18 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v18 + " " + d18 + " " + l18);
                             return d18;
-                        }
+                        } break;
                     case 3:
                         if (v19 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v19 + " " + d19 + " " + l19);
                             return d19;
-                        }
+                        } break;
                     case 4:
                         if (v20 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v20 + " " + d20 + " " + l20);
                             return d20;
-                        }
+                        } break;
                 } break;
 
             case -1:
@@ -12754,48 +13228,57 @@ public class Navigation {
                     case -4:
                         if (v21 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v21 + " " + d21 + " " + l21);
                             return d21;
-                        }
+                        } break;
                     case -3:
                         if (v22 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v22 + " " + d22 + " " + l22);
                             return d22;
-                        }
+                        } break;
                     case -2:
                         if (v23 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v23 + " " + d23 + " " + l23);
                             return d23;
-                        }
+                        } break;
                     case -1:
                         if (v24 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v24 + " " + d24 + " " + l24);
                             return d24;
-                        }
+                        } break;
                     case 0:
                         if (v25 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v25 + " " + d25 + " " + l25);
                             return d25;
-                        }
+                        } break;
                     case 1:
                         if (v26 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v26 + " " + d26 + " " + l26);
                             return d26;
-                        }
+                        } break;
                     case 2:
                         if (v27 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v27 + " " + d27 + " " + l27);
                             return d27;
-                        }
+                        } break;
                     case 3:
                         if (v28 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v28 + " " + d28 + " " + l28);
                             return d28;
-                        }
+                        } break;
                     case 4:
                         if (v29 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v29 + " " + d29 + " " + l29);
                             return d29;
-                        }
+                        } break;
                 } break;
 
             case 0:
@@ -12803,43 +13286,51 @@ public class Navigation {
                     case -4:
                         if (v30 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v30 + " " + d30 + " " + l30);
                             return d30;
-                        }
+                        } break;
                     case -3:
                         if (v31 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v31 + " " + d31 + " " + l31);
                             return d31;
-                        }
+                        } break;
                     case -2:
                         if (v32 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v32 + " " + d32 + " " + l32);
                             return d32;
-                        }
+                        } break;
                     case -1:
                         if (v33 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v33 + " " + d33 + " " + l33);
                             return d33;
-                        }
+                        } break;
                     case 1:
                         if (v35 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v35 + " " + d35 + " " + l35);
                             return d35;
-                        }
+                        } break;
                     case 2:
                         if (v36 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v36 + " " + d36 + " " + l36);
                             return d36;
-                        }
+                        } break;
                     case 3:
                         if (v37 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v37 + " " + d37 + " " + l37);
                             return d37;
-                        }
+                        } break;
                     case 4:
                         if (v38 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v38 + " " + d38 + " " + l38);
                             return d38;
-                        }
+                        } break;
                 } break;
 
             case 1:
@@ -12862,229 +13353,229 @@ public class Navigation {
     
         Direction ans = Direction.CENTER;
 
-        double dist0 = v0 + 0.7 * s0;
+        double dist0 = v0 + s0;
         if (dist0 < localBest) {
             localBest = dist0;
             ans = d0;
         }
 
-        double dist1 = v1 + 0.7 * s1;
+        double dist1 = v1 + s1;
         if (dist1 < localBest) {
             localBest = dist1;
             ans = d1;
         }
 
-        double dist2 = v2 + 0.7 * s2;
+        double dist2 = v2 + s2;
         if (dist2 < localBest) {
             localBest = dist2;
             ans = d2;
         }
 
-        double dist3 = v3 + 0.7 * s3;
+        double dist3 = v3 + s3;
         if (dist3 < localBest) {
             localBest = dist3;
             ans = d3;
         }
 
-        double dist4 = v4 + 0.7 * s4;
+        double dist4 = v4 + s4;
         if (dist4 < localBest) {
             localBest = dist4;
             ans = d4;
         }
 
-        double dist5 = v5 + 0.7 * s5;
+        double dist5 = v5 + s5;
         if (dist5 < localBest) {
             localBest = dist5;
             ans = d5;
         }
 
-        double dist6 = v6 + 0.7 * s6;
+        double dist6 = v6 + s6;
         if (dist6 < localBest) {
             localBest = dist6;
             ans = d6;
         }
 
-        double dist7 = v7 + 0.7 * s7;
+        double dist7 = v7 + s7;
         if (dist7 < localBest) {
             localBest = dist7;
             ans = d7;
         }
 
-        double dist8 = v8 + 0.7 * s8;
+        double dist8 = v8 + s8;
         if (dist8 < localBest) {
             localBest = dist8;
             ans = d8;
         }
 
-        double dist9 = v9 + 0.7 * s9;
+        double dist9 = v9 + s9;
         if (dist9 < localBest) {
             localBest = dist9;
             ans = d9;
         }
 
-        double dist10 = v10 + 0.7 * s10;
+        double dist10 = v10 + s10;
         if (dist10 < localBest) {
             localBest = dist10;
             ans = d10;
         }
 
-        double dist11 = v11 + 0.7 * s11;
+        double dist11 = v11 + s11;
         if (dist11 < localBest) {
             localBest = dist11;
             ans = d11;
         }
 
-        double dist12 = v12 + 0.7 * s12;
+        double dist12 = v12 + s12;
         if (dist12 < localBest) {
             localBest = dist12;
             ans = d12;
         }
 
-        double dist13 = v13 + 0.7 * s13;
+        double dist13 = v13 + s13;
         if (dist13 < localBest) {
             localBest = dist13;
             ans = d13;
         }
 
-        double dist14 = v14 + 0.7 * s14;
+        double dist14 = v14 + s14;
         if (dist14 < localBest) {
             localBest = dist14;
             ans = d14;
         }
 
-        double dist15 = v15 + 0.7 * s15;
+        double dist15 = v15 + s15;
         if (dist15 < localBest) {
             localBest = dist15;
             ans = d15;
         }
 
-        double dist16 = v16 + 0.7 * s16;
+        double dist16 = v16 + s16;
         if (dist16 < localBest) {
             localBest = dist16;
             ans = d16;
         }
 
-        double dist17 = v17 + 0.7 * s17;
+        double dist17 = v17 + s17;
         if (dist17 < localBest) {
             localBest = dist17;
             ans = d17;
         }
 
-        double dist18 = v18 + 0.7 * s18;
+        double dist18 = v18 + s18;
         if (dist18 < localBest) {
             localBest = dist18;
             ans = d18;
         }
 
-        double dist19 = v19 + 0.7 * s19;
+        double dist19 = v19 + s19;
         if (dist19 < localBest) {
             localBest = dist19;
             ans = d19;
         }
 
-        double dist20 = v20 + 0.7 * s20;
+        double dist20 = v20 + s20;
         if (dist20 < localBest) {
             localBest = dist20;
             ans = d20;
         }
 
-        double dist21 = v21 + 0.7 * s21;
+        double dist21 = v21 + s21;
         if (dist21 < localBest) {
             localBest = dist21;
             ans = d21;
         }
 
-        double dist22 = v22 + 0.7 * s22;
+        double dist22 = v22 + s22;
         if (dist22 < localBest) {
             localBest = dist22;
             ans = d22;
         }
 
-        double dist23 = v23 + 0.7 * s23;
+        double dist23 = v23 + s23;
         if (dist23 < localBest) {
             localBest = dist23;
             ans = d23;
         }
 
-        double dist24 = v24 + 0.7 * s24;
+        double dist24 = v24 + s24;
         if (dist24 < localBest) {
             localBest = dist24;
             ans = d24;
         }
 
-        double dist25 = v25 + 0.7 * s25;
+        double dist25 = v25 + s25;
         if (dist25 < localBest) {
             localBest = dist25;
             ans = d25;
         }
 
-        double dist26 = v26 + 0.7 * s26;
+        double dist26 = v26 + s26;
         if (dist26 < localBest) {
             localBest = dist26;
             ans = d26;
         }
 
-        double dist27 = v27 + 0.7 * s27;
+        double dist27 = v27 + s27;
         if (dist27 < localBest) {
             localBest = dist27;
             ans = d27;
         }
 
-        double dist28 = v28 + 0.7 * s28;
+        double dist28 = v28 + s28;
         if (dist28 < localBest) {
             localBest = dist28;
             ans = d28;
         }
 
-        double dist29 = v29 + 0.7 * s29;
+        double dist29 = v29 + s29;
         if (dist29 < localBest) {
             localBest = dist29;
             ans = d29;
         }
 
-        double dist30 = v30 + 0.7 * s30;
+        double dist30 = v30 + s30;
         if (dist30 < localBest) {
             localBest = dist30;
             ans = d30;
         }
 
-        double dist31 = v31 + 0.7 * s31;
+        double dist31 = v31 + s31;
         if (dist31 < localBest) {
             localBest = dist31;
             ans = d31;
         }
 
-        double dist32 = v32 + 0.7 * s32;
+        double dist32 = v32 + s32;
         if (dist32 < localBest) {
             localBest = dist32;
             ans = d32;
         }
 
-        double dist33 = v33 + 0.7 * s33;
+        double dist33 = v33 + s33;
         if (dist33 < localBest) {
             localBest = dist33;
             ans = d33;
         }
 
-        double dist35 = v35 + 0.7 * s35;
+        double dist35 = v35 + s35;
         if (dist35 < localBest) {
             localBest = dist35;
             ans = d35;
         }
 
-        double dist36 = v36 + 0.7 * s36;
+        double dist36 = v36 + s36;
         if (dist36 < localBest) {
             localBest = dist36;
             ans = d36;
         }
 
-        double dist37 = v37 + 0.7 * s37;
+        double dist37 = v37 + s37;
         if (dist37 < localBest) {
             localBest = dist37;
             ans = d37;
         }
 
-        double dist38 = v38 + 0.7 * s38;
+        double dist38 = v38 + s38;
         if (dist38 < localBest) {
             localBest = dist38;
             ans = d38;
@@ -13430,6 +13921,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p36 = mapInfo.getCooldownMultiplier(team);
+                    s36 = Math.sqrt(l36.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13459,6 +13951,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p16 = mapInfo.getCooldownMultiplier(team);
+                    s16 = Math.sqrt(l16.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13488,6 +13981,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p27 = mapInfo.getCooldownMultiplier(team);
+                    s27 = Math.sqrt(l27.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13522,6 +14016,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p15 = mapInfo.getCooldownMultiplier(team);
+                    s15 = Math.sqrt(l15.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13551,6 +14046,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p17 = mapInfo.getCooldownMultiplier(team);
+                    s17 = Math.sqrt(l17.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13585,6 +14081,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p45 = mapInfo.getCooldownMultiplier(team);
+                    s45 = Math.sqrt(l45.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13614,6 +14111,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p54 = mapInfo.getCooldownMultiplier(team);
+                    s54 = Math.sqrt(l54.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13638,6 +14136,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p14 = mapInfo.getCooldownMultiplier(team);
+                    s14 = Math.sqrt(l14.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13662,6 +14161,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p18 = mapInfo.getCooldownMultiplier(team);
+                    s18 = Math.sqrt(l18.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13691,6 +14191,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p37 = mapInfo.getCooldownMultiplier(team);
+                    s37 = Math.sqrt(l37.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13720,6 +14221,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p8 = mapInfo.getCooldownMultiplier(team);
+                    s8 = Math.sqrt(l8.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13749,6 +14251,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p28 = mapInfo.getCooldownMultiplier(team);
+                    s28 = Math.sqrt(l28.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13783,6 +14286,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p46 = mapInfo.getCooldownMultiplier(team);
+                    s46 = Math.sqrt(l46.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13817,6 +14321,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p7 = mapInfo.getCooldownMultiplier(team);
+                    s7 = Math.sqrt(l7.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13851,6 +14356,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p9 = mapInfo.getCooldownMultiplier(team);
+                    s9 = Math.sqrt(l9.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13885,6 +14391,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p19 = mapInfo.getCooldownMultiplier(team);
+                    s19 = Math.sqrt(l19.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13919,6 +14426,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p10 = mapInfo.getCooldownMultiplier(team);
+                    s10 = Math.sqrt(l10.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13953,6 +14461,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p6 = mapInfo.getCooldownMultiplier(team);
+                    s6 = Math.sqrt(l6.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -13982,6 +14491,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p55 = mapInfo.getCooldownMultiplier(team);
+                    s55 = Math.sqrt(l55.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14011,6 +14521,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p5 = mapInfo.getCooldownMultiplier(team);
+                    s5 = Math.sqrt(l5.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14035,6 +14546,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p11 = mapInfo.getCooldownMultiplier(team);
+                    s11 = Math.sqrt(l11.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14064,6 +14576,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p63 = mapInfo.getCooldownMultiplier(team);
+                    s63 = Math.sqrt(l63.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14088,6 +14601,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p2 = mapInfo.getCooldownMultiplier(team);
+                    s2 = Math.sqrt(l2.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14117,6 +14631,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p38 = mapInfo.getCooldownMultiplier(team);
+                    s38 = Math.sqrt(l38.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14146,6 +14661,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p29 = mapInfo.getCooldownMultiplier(team);
+                    s29 = Math.sqrt(l29.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14180,6 +14696,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p1 = mapInfo.getCooldownMultiplier(team);
+                    s1 = Math.sqrt(l1.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14214,6 +14731,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p3 = mapInfo.getCooldownMultiplier(team);
+                    s3 = Math.sqrt(l3.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14248,6 +14766,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p47 = mapInfo.getCooldownMultiplier(team);
+                    s47 = Math.sqrt(l47.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14282,6 +14801,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p56 = mapInfo.getCooldownMultiplier(team);
+                    s56 = Math.sqrt(l56.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14316,6 +14836,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p0 = mapInfo.getCooldownMultiplier(team);
+                    s0 = Math.sqrt(l0.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14350,6 +14871,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p20 = mapInfo.getCooldownMultiplier(team);
+                    s20 = Math.sqrt(l20.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14384,6 +14906,7 @@ public class Navigation {
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p4 = mapInfo.getCooldownMultiplier(team);
+                    s4 = Math.sqrt(l4.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
             }
             else {
@@ -14421,28 +14944,33 @@ public class Navigation {
                     case -2:
                         if (v0 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v0 + " " + d0 + " " + l0);
                             return d0;
-                        }
+                        } break;
                     case -1:
                         if (v1 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v1 + " " + d1 + " " + l1);
                             return d1;
-                        }
+                        } break;
                     case 0:
                         if (v2 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v2 + " " + d2 + " " + l2);
                             return d2;
-                        }
+                        } break;
                     case 1:
                         if (v3 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v3 + " " + d3 + " " + l3);
                             return d3;
-                        }
+                        } break;
                     case 2:
                         if (v4 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v4 + " " + d4 + " " + l4);
                             return d4;
-                        }
+                        } break;
                 } break;
 
             case -3:
@@ -14450,38 +14978,45 @@ public class Navigation {
                     case -3:
                         if (v5 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v5 + " " + d5 + " " + l5);
                             return d5;
-                        }
+                        } break;
                     case -2:
                         if (v6 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v6 + " " + d6 + " " + l6);
                             return d6;
-                        }
+                        } break;
                     case -1:
                         if (v7 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v7 + " " + d7 + " " + l7);
                             return d7;
-                        }
+                        } break;
                     case 0:
                         if (v8 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v8 + " " + d8 + " " + l8);
                             return d8;
-                        }
+                        } break;
                     case 1:
                         if (v9 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v9 + " " + d9 + " " + l9);
                             return d9;
-                        }
+                        } break;
                     case 2:
                         if (v10 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v10 + " " + d10 + " " + l10);
                             return d10;
-                        }
+                        } break;
                     case 3:
                         if (v11 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v11 + " " + d11 + " " + l11);
                             return d11;
-                        }
+                        } break;
                 } break;
 
             case -2:
@@ -14489,38 +15024,45 @@ public class Navigation {
                     case -2:
                         if (v14 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v14 + " " + d14 + " " + l14);
                             return d14;
-                        }
+                        } break;
                     case -1:
                         if (v15 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v15 + " " + d15 + " " + l15);
                             return d15;
-                        }
+                        } break;
                     case 0:
                         if (v16 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v16 + " " + d16 + " " + l16);
                             return d16;
-                        }
+                        } break;
                     case 1:
                         if (v17 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v17 + " " + d17 + " " + l17);
                             return d17;
-                        }
+                        } break;
                     case 2:
                         if (v18 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v18 + " " + d18 + " " + l18);
                             return d18;
-                        }
+                        } break;
                     case 3:
                         if (v19 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v19 + " " + d19 + " " + l19);
                             return d19;
-                        }
+                        } break;
                     case 4:
                         if (v20 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v20 + " " + d20 + " " + l20);
                             return d20;
-                        }
+                        } break;
                 } break;
 
             case -1:
@@ -14528,33 +15070,39 @@ public class Navigation {
                     case -1:
                         if (v24 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v24 + " " + d24 + " " + l24);
                             return d24;
-                        }
+                        } break;
                     case 0:
                         if (v25 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v25 + " " + d25 + " " + l25);
                             return d25;
-                        }
+                        } break;
                     case 1:
                         if (v26 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v26 + " " + d26 + " " + l26);
                             return d26;
-                        }
+                        } break;
                     case 2:
                         if (v27 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v27 + " " + d27 + " " + l27);
                             return d27;
-                        }
+                        } break;
                     case 3:
                         if (v28 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v28 + " " + d28 + " " + l28);
                             return d28;
-                        }
+                        } break;
                     case 4:
                         if (v29 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v29 + " " + d29 + " " + l29);
                             return d29;
-                        }
+                        } break;
                 } break;
 
             case 0:
@@ -14562,23 +15110,27 @@ public class Navigation {
                     case 1:
                         if (v35 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v35 + " " + d35 + " " + l35);
                             return d35;
-                        }
+                        } break;
                     case 2:
                         if (v36 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v36 + " " + d36 + " " + l36);
                             return d36;
-                        }
+                        } break;
                     case 3:
                         if (v37 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v37 + " " + d37 + " " + l37);
                             return d37;
-                        }
+                        } break;
                     case 4:
                         if (v38 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v38 + " " + d38 + " " + l38);
                             return d38;
-                        }
+                        } break;
                 } break;
 
             case 1:
@@ -14586,23 +15138,27 @@ public class Navigation {
                     case 1:
                         if (v44 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v44 + " " + d44 + " " + l44);
                             return d44;
-                        }
+                        } break;
                     case 2:
                         if (v45 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v45 + " " + d45 + " " + l45);
                             return d45;
-                        }
+                        } break;
                     case 3:
                         if (v46 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v46 + " " + d46 + " " + l46);
                             return d46;
-                        }
+                        } break;
                     case 4:
                         if (v47 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v47 + " " + d47 + " " + l47);
                             return d47;
-                        }
+                        } break;
                 } break;
 
             case 2:
@@ -14610,18 +15166,21 @@ public class Navigation {
                     case 2:
                         if (v54 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v54 + " " + d54 + " " + l54);
                             return d54;
-                        }
+                        } break;
                     case 3:
                         if (v55 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v55 + " " + d55 + " " + l55);
                             return d55;
-                        }
+                        } break;
                     case 4:
                         if (v56 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v56 + " " + d56 + " " + l56);
                             return d56;
-                        }
+                        } break;
                 } break;
 
             case 3:
@@ -14629,8 +15188,9 @@ public class Navigation {
                     case 3:
                         if (v63 < 1000000) {
                             bug.reset();
+                            rc.setIndicatorString("" + v63 + " " + d63 + " " + l63);
                             return d63;
-                        }
+                        } break;
                 } break;
 
             case 4:
@@ -14641,223 +15201,223 @@ public class Navigation {
     
         Direction ans = Direction.CENTER;
 
-        double dist0 = v0 + 0.7 * s0;
+        double dist0 = v0 + s0;
         if (dist0 < localBest) {
             localBest = dist0;
             ans = d0;
         }
 
-        double dist1 = v1 + 0.7 * s1;
+        double dist1 = v1 + s1;
         if (dist1 < localBest) {
             localBest = dist1;
             ans = d1;
         }
 
-        double dist2 = v2 + 0.7 * s2;
+        double dist2 = v2 + s2;
         if (dist2 < localBest) {
             localBest = dist2;
             ans = d2;
         }
 
-        double dist3 = v3 + 0.7 * s3;
+        double dist3 = v3 + s3;
         if (dist3 < localBest) {
             localBest = dist3;
             ans = d3;
         }
 
-        double dist4 = v4 + 0.7 * s4;
+        double dist4 = v4 + s4;
         if (dist4 < localBest) {
             localBest = dist4;
             ans = d4;
         }
 
-        double dist5 = v5 + 0.7 * s5;
+        double dist5 = v5 + s5;
         if (dist5 < localBest) {
             localBest = dist5;
             ans = d5;
         }
 
-        double dist6 = v6 + 0.7 * s6;
+        double dist6 = v6 + s6;
         if (dist6 < localBest) {
             localBest = dist6;
             ans = d6;
         }
 
-        double dist7 = v7 + 0.7 * s7;
+        double dist7 = v7 + s7;
         if (dist7 < localBest) {
             localBest = dist7;
             ans = d7;
         }
 
-        double dist8 = v8 + 0.7 * s8;
+        double dist8 = v8 + s8;
         if (dist8 < localBest) {
             localBest = dist8;
             ans = d8;
         }
 
-        double dist9 = v9 + 0.7 * s9;
+        double dist9 = v9 + s9;
         if (dist9 < localBest) {
             localBest = dist9;
             ans = d9;
         }
 
-        double dist10 = v10 + 0.7 * s10;
+        double dist10 = v10 + s10;
         if (dist10 < localBest) {
             localBest = dist10;
             ans = d10;
         }
 
-        double dist11 = v11 + 0.7 * s11;
+        double dist11 = v11 + s11;
         if (dist11 < localBest) {
             localBest = dist11;
             ans = d11;
         }
 
-        double dist14 = v14 + 0.7 * s14;
+        double dist14 = v14 + s14;
         if (dist14 < localBest) {
             localBest = dist14;
             ans = d14;
         }
 
-        double dist15 = v15 + 0.7 * s15;
+        double dist15 = v15 + s15;
         if (dist15 < localBest) {
             localBest = dist15;
             ans = d15;
         }
 
-        double dist16 = v16 + 0.7 * s16;
+        double dist16 = v16 + s16;
         if (dist16 < localBest) {
             localBest = dist16;
             ans = d16;
         }
 
-        double dist17 = v17 + 0.7 * s17;
+        double dist17 = v17 + s17;
         if (dist17 < localBest) {
             localBest = dist17;
             ans = d17;
         }
 
-        double dist18 = v18 + 0.7 * s18;
+        double dist18 = v18 + s18;
         if (dist18 < localBest) {
             localBest = dist18;
             ans = d18;
         }
 
-        double dist19 = v19 + 0.7 * s19;
+        double dist19 = v19 + s19;
         if (dist19 < localBest) {
             localBest = dist19;
             ans = d19;
         }
 
-        double dist20 = v20 + 0.7 * s20;
+        double dist20 = v20 + s20;
         if (dist20 < localBest) {
             localBest = dist20;
             ans = d20;
         }
 
-        double dist24 = v24 + 0.7 * s24;
+        double dist24 = v24 + s24;
         if (dist24 < localBest) {
             localBest = dist24;
             ans = d24;
         }
 
-        double dist25 = v25 + 0.7 * s25;
+        double dist25 = v25 + s25;
         if (dist25 < localBest) {
             localBest = dist25;
             ans = d25;
         }
 
-        double dist26 = v26 + 0.7 * s26;
+        double dist26 = v26 + s26;
         if (dist26 < localBest) {
             localBest = dist26;
             ans = d26;
         }
 
-        double dist27 = v27 + 0.7 * s27;
+        double dist27 = v27 + s27;
         if (dist27 < localBest) {
             localBest = dist27;
             ans = d27;
         }
 
-        double dist28 = v28 + 0.7 * s28;
+        double dist28 = v28 + s28;
         if (dist28 < localBest) {
             localBest = dist28;
             ans = d28;
         }
 
-        double dist29 = v29 + 0.7 * s29;
+        double dist29 = v29 + s29;
         if (dist29 < localBest) {
             localBest = dist29;
             ans = d29;
         }
 
-        double dist35 = v35 + 0.7 * s35;
+        double dist35 = v35 + s35;
         if (dist35 < localBest) {
             localBest = dist35;
             ans = d35;
         }
 
-        double dist36 = v36 + 0.7 * s36;
+        double dist36 = v36 + s36;
         if (dist36 < localBest) {
             localBest = dist36;
             ans = d36;
         }
 
-        double dist37 = v37 + 0.7 * s37;
+        double dist37 = v37 + s37;
         if (dist37 < localBest) {
             localBest = dist37;
             ans = d37;
         }
 
-        double dist38 = v38 + 0.7 * s38;
+        double dist38 = v38 + s38;
         if (dist38 < localBest) {
             localBest = dist38;
             ans = d38;
         }
 
-        double dist44 = v44 + 0.7 * s44;
+        double dist44 = v44 + s44;
         if (dist44 < localBest) {
             localBest = dist44;
             ans = d44;
         }
 
-        double dist45 = v45 + 0.7 * s45;
+        double dist45 = v45 + s45;
         if (dist45 < localBest) {
             localBest = dist45;
             ans = d45;
         }
 
-        double dist46 = v46 + 0.7 * s46;
+        double dist46 = v46 + s46;
         if (dist46 < localBest) {
             localBest = dist46;
             ans = d46;
         }
 
-        double dist47 = v47 + 0.7 * s47;
+        double dist47 = v47 + s47;
         if (dist47 < localBest) {
             localBest = dist47;
             ans = d47;
         }
 
-        double dist54 = v54 + 0.7 * s54;
+        double dist54 = v54 + s54;
         if (dist54 < localBest) {
             localBest = dist54;
             ans = d54;
         }
 
-        double dist55 = v55 + 0.7 * s55;
+        double dist55 = v55 + s55;
         if (dist55 < localBest) {
             localBest = dist55;
             ans = d55;
         }
 
-        double dist56 = v56 + 0.7 * s56;
+        double dist56 = v56 + s56;
         if (dist56 < localBest) {
             localBest = dist56;
             ans = d56;
         }
 
-        double dist63 = v63 + 0.7 * s63;
+        double dist63 = v63 + s63;
         if (dist63 < localBest) {
             localBest = dist63;
             ans = d63;
@@ -14884,7 +15444,7 @@ public class Navigation {
         previousLocation = currentLocation;
         currentLocation = rc.getLocation();
         lastDirection = previousLocation == null ? Direction.CENTER : previousLocation.directionTo(currentLocation);
-        globalBest = Math.min(0.7 * Math.sqrt(currentLocation.distanceSquaredTo(targetLocation)), globalBest);
+        globalBest = Math.min(Math.sqrt(currentLocation.distanceSquaredTo(targetLocation)), globalBest);
         bug.move(targetLocation, lastDirection);
     }
 
@@ -14896,6 +15456,7 @@ public class Navigation {
         if (!targetLocation.equals(this.targetLocation)) {
             globalBest = 1000000;
             this.targetLocation = targetLocation;
+            consecutiveBugNavRoundCount = 0;
             lastDirection = Direction.CENTER;
         }
 

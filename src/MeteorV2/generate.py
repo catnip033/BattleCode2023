@@ -8,6 +8,8 @@ dy = [0, 1, 1, 1, 0,-1,-1,-1]
 directions = ['EAST', 'NORTHEAST', 'NORTH', 'NORTHWEST', 'WEST', 'SOUTHWEST', 'SOUTH', 'SOUTHEAST']
 adjacent = {33, 35, 25, 43, 24, 26, 42, 44}
 
+alpha = 1.0
+
 class Cell:
     def __init__(self, x, y, i):
         self.x = x
@@ -91,6 +93,7 @@ for i in range(8):
                 Direction currentDirection = mapInfo.getCurrentDirection();
                 if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l{u.i}), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {{
                     p{u.i} = mapInfo.getCooldownMultiplier(team);
+                    s{u.i} = Math.sqrt(l{u.i}.add(currentDirection).distanceSquaredTo(targetLocation));
                 }}
             }}
             else {{
@@ -171,11 +174,12 @@ for i in range(8):
                     case {y}:
                         if (v{c.i} < 1000000) {{
                             bug.reset();
+                            rc.setIndicatorString("" + v{c.i} + " " + d{c.i} + " " + l{c.i});
                             return d{c.i};
-                        }}'''
+                        }} break;'''
             
                     outsides[i] += f'''
-        double dist{c.i} = v{c.i} + 0.7 * s{c.i};
+        double dist{c.i} = v{c.i} + {str(alpha) + ' * ' if alpha != 1.0 else ''}s{c.i};
         if (dist{c.i} < localBest) {{
             localBest = dist{c.i};
             ans = d{c.i};
@@ -253,7 +257,7 @@ f.write(f'''
         previousLocation = currentLocation;
         currentLocation = rc.getLocation();
         lastDirection = previousLocation == null ? Direction.CENTER : previousLocation.directionTo(currentLocation);
-        globalBest = Math.min(0.7 * Math.sqrt(currentLocation.distanceSquaredTo(targetLocation)), globalBest);
+        globalBest = Math.min({str(alpha) + ' * ' if alpha != 1.0 else ''}Math.sqrt(currentLocation.distanceSquaredTo(targetLocation)), globalBest);
         bug.move(targetLocation, lastDirection);
     }}
 
@@ -265,6 +269,7 @@ f.write(f'''
         if (!targetLocation.equals(this.targetLocation)) {{
             globalBest = 1000000;
             this.targetLocation = targetLocation;
+            consecutiveBugNavRoundCount = 0;
             lastDirection = Direction.CENTER;
         }}
 
