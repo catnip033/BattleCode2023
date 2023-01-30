@@ -5,14 +5,11 @@ import battlecode.common.*;
 public strictfp class Carrier extends MobileRobot {
     private RobotInfo[] nearbyEnemies;
     private MapLocation closestTeamHQLocation;
-    private WellInfo closestWellInfo;
-
-    private WellInfo[] nearbyWells;
+    private MapLocation closestWellLocation;
 
     private boolean carryingAnchor = false;
     private boolean foundEnemy = false;
     private boolean returningResource = false;
-    private int closestWellFullness = -1;
 
     public Carrier(RobotController rc) throws GameActionException {
         super(rc);
@@ -33,26 +30,14 @@ public strictfp class Carrier extends MobileRobot {
             targetLocation = null;
         }
 
-        nearbyWells = rc.senseNearbyWells();
-        if (closestWellInfo != null && rc.canSenseLocation(closestWellInfo.getMapLocation())) {
-            closestWellFullness = Math.max(closestWellFullness, getWellFullness(rc, closestWellInfo));
-        }
-
         nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
 
         if (rc.canWriteSharedArray(0, 0)) {
             map.reportNearbyEnemies(nearbyEnemies);
-            map.reportNearbyWells(nearbyWells);
-            if (closestWellInfo != null && closestWellFullness >= 0) {
-                map.reportWell(closestWellInfo.getMapLocation(), closestWellFullness);
-                closestWellFullness = -1;
-            }
         }
 
         if (countEnemyAttackers() > 0) {
             foundEnemy = true;
-            closestWellInfo = null;
-            closestWellFullness = -1;
             if (rc.getWeight() > 0) returningResource = true;
             updateTarget();
 
@@ -136,18 +121,14 @@ public strictfp class Carrier extends MobileRobot {
 
     private void mine() throws GameActionException {
         for (WellInfo wellInfo : rc.senseNearbyWells(2, ResourceType.MANA)) {
-            if (rc.canCollectResource(wellInfo.getMapLocation(), -1)) {
-                rc.collectResource(wellInfo.getMapLocation(), -1);
-                closestWellInfo = wellInfo;
-                return;
-            }
+            rc.collectResource(wellInfo.getMapLocation(), -1);
+            closestWellLocation = wellInfo.getMapLocation();
+            return;
         }
         for (WellInfo wellInfo : rc.senseNearbyWells(2, ResourceType.ADAMANTIUM)) {
-            if (rc.canCollectResource(wellInfo.getMapLocation(), -1)) {
-                rc.collectResource(wellInfo.getMapLocation(), -1);
-                closestWellInfo = wellInfo;
-                return;
-            }
+            rc.collectResource(wellInfo.getMapLocation(), -1);
+            closestWellLocation = wellInfo.getMapLocation();
+            return;
         }
     }
 
@@ -205,15 +186,23 @@ public strictfp class Carrier extends MobileRobot {
 
         else {
             if (targetLocation != null && targetLocation.equals(closestTeamHQLocation)) targetLocation = null;
-            if (closestWellInfo != null && targetLocation == null) targetLocation = closestWellInfo.getMapLocation();
+            if (closestWellLocation != null && targetLocation == null) targetLocation = closestWellLocation;
 
             int minDistance = Constants.INF;
 
-            for (WellInfo wellInfo : nearbyWells) {
+            for (WellInfo wellInfo : rc.senseNearbyWells()) {
                 MapLocation location = wellInfo.getMapLocation();
 
+                int carrierCount = 0;
+
+                for (RobotInfo robotInfo : rc.senseNearbyRobots(location, 5, team)) {
+                    if (robotInfo.getType() == RobotType.CARRIER) carrierCount++;
+                }
+
                 int distance = distanceTo(location);
-                if ((distance >= 2 || rc.getWeight() <= 3) && (getWellFullness(rc, wellInfo) == 2 || map.getWellFullness(wellInfo.getMapLocation()) == 1)) {
+                if ((distance >= 2 || rc.getWeight() <= 3)
+                        && ((wellInfo.getResourceType() == ResourceType.ADAMANTIUM && carrierCount >= rc.getRoundNum() / 50 + 2)
+                        || (wellInfo.getResourceType() == ResourceType.MANA && carrierCount >= 9))) {
                     if (targetLocation != null && location.distanceSquaredTo(targetLocation) <= 2) {
                         targetLocation = null;
                     }
@@ -229,10 +218,6 @@ public strictfp class Carrier extends MobileRobot {
             if (targetLocation != null && minDistance != Constants.INF && currentLocation.distanceSquaredTo(targetLocation) <= 9) {
                 targetLocation = bestLocationNextTo(targetLocation);
             }
-        }
-
-        if (!carryingAnchor && targetLocation == null) {
-            targetLocation = map.getClosestWell();
         }
 
         if (targetLocation == null) { selectRandomTarget(); }
@@ -258,13 +243,16 @@ public strictfp class Carrier extends MobileRobot {
     private Direction bestAttackDirection(Direction targetDirection) throws GameActionException {
         RobotInfo[] enemyAttackers = new RobotInfo[countEnemyAttackers()];
         int idx = 0;
+
         for (RobotInfo robot : nearbyEnemies) {
             if (isDangerous(robot.type)) {
                 enemyAttackers[idx++] = robot;
             }
         }
+
         Direction bestDirection = null;
         int minCount = Constants.INF;
+
         for (Direction direction : inorderDirections(targetDirection)) {
             if (rc.canMove(direction)) {
                 MapLocation location = currentLocation.add(direction);
@@ -287,27 +275,38 @@ public strictfp class Carrier extends MobileRobot {
                 }
             }
         }
+
         return bestDirection;
     }
+
     private int countEnemyAttackers() {
         int count = 0;
+
         for (RobotInfo robot : nearbyEnemies) {
             if (isDangerous(robot.type)) { count += 1; }
         }
+
         return count;
     }
+
     private MapLocation selectAttackTarget() throws GameActionException {
         MapLocation attackTarget = null;
+
         int minHealth = Constants.INF;
+
         for (RobotInfo robot : rc.senseNearbyRobots(16, team.opponent())) {
             RobotType robotType = robot.getType();
+
             if (!isDangerous(robotType)) continue;
+
             int health = robot.getHealth();
+
             if (health < minHealth) {
                 minHealth = health;
                 attackTarget = robot.location;
             }
         }
+
         return attackTarget;
     }
 }
