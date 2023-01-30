@@ -49,6 +49,7 @@ public strictfp class Carrier extends MobileRobot {
                 }
             }
             if (attackTarget != null && rc.canAttack(attackTarget)) {
+                carryingAnchor = false;
                 rc.attack(attackTarget);
             }
             if (!returningResource) updateTargetForEvasion(nearbyEnemies);
@@ -231,6 +232,7 @@ public strictfp class Carrier extends MobileRobot {
             if ((rc.canSenseRobotAtLocation(neighbor) || !rc.sensePassability(neighbor) || rc.senseMapInfo(neighbor).getCurrentDirection() != Direction.CENTER) && !currentLocation.equals(neighbor)) { continue; }
 
             int distance = closestTeamHQLocation.distanceSquaredTo(neighbor); //distanceTo(neighbor);
+            if (neighbor.equals(location)) distance = 0;
             if (distance < minDistance) {
                 minDistance = distance;
                 bestNeighbor = neighbor;
