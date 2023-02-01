@@ -12,7 +12,7 @@ public class Map {
     private final int GRID_ROWS, GRID_COLS, GRID_MAX_IDX;
 
     private final int GRID_SIZE         = 6;
-    private final int BITS_PER_INFO     = 4;
+    private final int BITS_PER_INFO     = 2;
     private final int INFOS_PER_INTEGER = 16 / BITS_PER_INFO;
 
     private final int MASK = (1 << BITS_PER_INFO) - 1;

@@ -122,14 +122,18 @@ public strictfp class Carrier extends MobileRobot {
 
     private void mine() throws GameActionException {
         for (WellInfo wellInfo : rc.senseNearbyWells(2, ResourceType.MANA)) {
-            rc.collectResource(wellInfo.getMapLocation(), -1);
-            closestWellLocation = wellInfo.getMapLocation();
-            return;
+            if (rc.canCollectResource(wellInfo.getMapLocation(), -1)) {
+                rc.collectResource(wellInfo.getMapLocation(), -1);
+                closestWellLocation = wellInfo.getMapLocation();
+                return;
+            }
         }
         for (WellInfo wellInfo : rc.senseNearbyWells(2, ResourceType.ADAMANTIUM)) {
-            rc.collectResource(wellInfo.getMapLocation(), -1);
-            closestWellLocation = wellInfo.getMapLocation();
-            return;
+            if (rc.canCollectResource(wellInfo.getMapLocation(), -1)) {
+                rc.collectResource(wellInfo.getMapLocation(), -1);
+                closestWellLocation = wellInfo.getMapLocation();
+                return;
+            }
         }
     }
 
