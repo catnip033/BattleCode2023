@@ -89,7 +89,7 @@ public class Robot {
 
         if (wellCount < 8) {
             rc.writeSharedArray(wellCount + wellLocationOffset, encode(wellLocation, passibleTileCount));
-            rc.writeSharedArray(wellCount + wellCountOffset, wellCount + 1);
+            rc.writeSharedArray(wellCountOffset, wellCount + 1);
         }
     }
 

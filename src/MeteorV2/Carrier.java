@@ -248,7 +248,7 @@ public strictfp class Carrier extends MobileRobot {
                 MapLocation wellLocation = closestWellLocation;
                 if (attachedWellInfo != null) wellLocation = attachedWellInfo.getMapLocation();
                 if (targetLocation == null || targetLocation.distanceSquaredTo(wellLocation) > 2) targetLocation = wellLocation;
-                if (currentLocation.distanceSquaredTo(targetLocation) <= 9) {
+                if (wellLocation.equals(targetLocation) && currentLocation.distanceSquaredTo(targetLocation) <= 9) {
                     targetLocation = bestLocationNextTo(targetLocation);
                 }
             }
@@ -264,7 +264,7 @@ public strictfp class Carrier extends MobileRobot {
         for (MapLocation neighbor: rc.getAllLocationsWithinRadiusSquared(location, 2)) {
             if ((rc.canSenseRobotAtLocation(neighbor) || !rc.sensePassability(neighbor) || rc.senseMapInfo(neighbor).getCurrentDirection() != Direction.CENTER) && !currentLocation.equals(neighbor)) { continue; }
 
-            int distance = closestTeamHQLocation.distanceSquaredTo(neighbor); //distanceTo(neighbor);
+            int distance = -closestTeamHQLocation.distanceSquaredTo(neighbor); //distanceTo(neighbor);
             if (neighbor.x != location.x && neighbor.y != location.y) distance -= 200000;
             if (neighbor.equals(location)) distance -= 100000;
             if (distance < minDistance) {
