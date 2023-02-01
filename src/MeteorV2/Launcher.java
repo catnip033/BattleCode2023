@@ -66,6 +66,8 @@ public strictfp class Launcher extends MobileRobot {
         // Always attack enemy when possible
         updateAttackTarget();
 
+        selectRandomTarget();
+
         // Reset target if adjacent to it
         if (targetLocation != null && currentLocation.distanceSquaredTo(targetLocation) <= 2 &&
                 (!rc.canSenseRobotAtLocation(targetLocation)
