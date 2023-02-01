@@ -79,6 +79,14 @@ public class Robot {
 
         int wellCount = rc.readSharedArray(wellCountOffset);
 
+        for (int i=0; i<wellCount; ++i) {
+            int code = rc.readSharedArray(i + wellLocationOffset);
+
+            if (decodeLocation(code).equals(wellLocation)) {
+                return;
+            }
+        }
+
         if (wellCount < 8) {
             rc.writeSharedArray(wellCount + wellLocationOffset, encode(wellLocation, passibleTileCount));
             rc.writeSharedArray(wellCount + wellCountOffset, wellCount + 1);
