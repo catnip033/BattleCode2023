@@ -19,9 +19,9 @@ public strictfp class Launcher extends MobileRobot {
 
         totalHQCount = rc.readSharedArray(Idx.teamHQCount);
 
-        enemyHQLocations = new MapLocation[3];
+        enemyHQLocations = new MapLocation[totalHQCount * 3];
 
-        isExplored = new boolean[3];
+        isExplored = new boolean[totalHQCount * 3];
 
         final int width = rc.getMapWidth(), height = rc.getMapHeight();
 
@@ -30,16 +30,18 @@ public strictfp class Launcher extends MobileRobot {
         for (int i=0; i<totalHQCount; ++i) {
             MapLocation location = decodeLocation(rc.readSharedArray(i + Idx.teamHQLocationOffset));
 
+            int x = location.x, y = location.y;
+
+            enemyHQLocations[i * 3 + 0] = new MapLocation(width - x - 1, height - y - 1);
+            enemyHQLocations[i * 3 + 1] = new MapLocation(width - x - 1, y);
+            enemyHQLocations[i * 3 + 2] = new MapLocation(x, height - y - 1);
+
             int distance = distanceTo(location);
             if (distance < minDistance) {
                 teamHQLocation = location;
                 minDistance = distance;
             }
         }
-
-        enemyHQLocations[0] = new MapLocation(width - teamHQLocation.x - 1, height - teamHQLocation.y - 1);
-        enemyHQLocations[1] = new MapLocation(width - teamHQLocation.x - 1, teamHQLocation.y);
-        enemyHQLocations[2] = new MapLocation(teamHQLocation.x, height - teamHQLocation.y - 1);
     }
 
     public void step() throws GameActionException {
@@ -219,31 +221,49 @@ public strictfp class Launcher extends MobileRobot {
     protected void selectRandomTarget() throws GameActionException {
         int minDistance = Constants.INF;
 
-        for (int i = 0; i < 3; ++i) {
-            if ((symmetry >> i & 1) == 0) continue;
-            if (isExplored[i]) continue;
-            MapLocation location = enemyHQLocations[i];
+        for (int j = 0; j < 3; ++j) {
+            if ((symmetry >> j & 1) == 0) continue;
+            for (int i = 0; i < totalHQCount; ++i) {
+                int k = i * 3 + j;
+                if (isExplored[k]) continue;
+                MapLocation location = enemyHQLocations[k];
 
-            if (rc.canSenseLocation(location)) {
-                if (rc.canSenseRobotAtLocation(location)) {
-                    RobotInfo robot = rc.senseRobotAtLocation(location);
+                if (rc.canSenseLocation(location)) {
+                    if (rc.canSenseRobotAtLocation(location)) {
+                        RobotInfo robot = rc.senseRobotAtLocation(location);
 
-                    if (robot.type != RobotType.HEADQUARTERS || robot.team != team.opponent()) {
-                        isExplored[i] = true;
-                        symmetry &= ~(1 << i);
-                        continue;
+                        if (robot.type != RobotType.HEADQUARTERS || robot.team != team.opponent()) {
+                            isExplored[k] = true;
+                            symmetry &= ~(1 << j);
+                            break;
+                        } else {
+                            isExplored[k] = true;
+                            symmetry = 1 << j;
+                        }
+                    } else {
+                        isExplored[k] = true;
+                        symmetry &= ~(1 << j);
+                        break;
                     }
-                } else {
-                    isExplored[i] = true;
-                    symmetry &= ~(1 << i);
-                    continue;
                 }
             }
+        }
 
-            int distance = 0; //distanceTo(location);
-            if (distance < minDistance) {
-                minDistance = distance;
-                targetLocation = location;
+        for (int j = 0; j < 3; ++j) {
+            if ((symmetry >> j & 1) == 0) continue;
+            for (int i = 0; i < totalHQCount; ++i) {
+                int k = i * 3 + j;
+                if (isExplored[k]) continue;
+                MapLocation location = enemyHQLocations[k];
+
+                rc.setIndicatorDot(location, 255, 255, 0);
+
+                int distance = currentLocation.distanceSquaredTo(location);
+                if (j == 0) distance -= 100000;
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    targetLocation = location;
+                }
             }
         }
 

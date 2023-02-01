@@ -202,7 +202,7 @@ public strictfp class Carrier extends MobileRobot {
 
                 int distance = distanceTo(location);
                 if ((distance >= 2 || rc.getWeight() <= 3)
-                        && ((wellInfo.getResourceType() == ResourceType.ADAMANTIUM && carrierCount >= rc.getRoundNum() / 50 + 2)
+                        && ((wellInfo.getResourceType() == ResourceType.ADAMANTIUM && carrierCount >= rc.getRoundNum() / 50)
                         || (wellInfo.getResourceType() == ResourceType.MANA && carrierCount >= 9))) {
                     if (targetLocation != null && location.distanceSquaredTo(targetLocation) <= 2) {
                         targetLocation = null;
