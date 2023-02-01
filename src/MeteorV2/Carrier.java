@@ -21,6 +21,8 @@ public strictfp class Carrier extends MobileRobot {
     public Carrier(RobotController rc) throws GameActionException {
         super(rc);
 
+        RNG.setSeed(rc.getID());
+
         updateClosestTeamHQLocation();
     }
 
@@ -223,6 +225,7 @@ public strictfp class Carrier extends MobileRobot {
                 if (rc.senseCloud(currentLocation)) approachingDistance = 0;
                 for (WellInfo wellInfo : rc.senseNearbyWells()) {
                     MapLocation location = wellInfo.getMapLocation();
+                    if (!isWellAvailable(wellInfo.getResourceType(), location)) continue;
                     if (wellInfo.getResourceType() == ResourceType.MANA && manaWellLocation == null) {
                         if (currentLocation.distanceSquaredTo(location) <= approachingDistance) {
                             manaWellLocation = location;

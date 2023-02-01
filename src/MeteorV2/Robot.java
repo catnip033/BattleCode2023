@@ -140,6 +140,6 @@ public class Robot {
             }
         }
 
-        return false;
+        return true;
     }
 }
