@@ -5,11 +5,18 @@ import battlecode.common.*;
 public strictfp class Carrier extends MobileRobot {
     private RobotInfo[] nearbyEnemies;
     private MapLocation closestTeamHQLocation;
-    private MapLocation closestWellLocation;
+    private WellInfo attachedWellInfo;
+    private MapLocation adamantiumWellLocation;
+    private MapLocation manaWellLocation;
+    private int adamantiumWellPassibleTileCount;
+    private int manaWellPassibleTileCount;
 
     private boolean carryingAnchor = false;
     private boolean foundEnemy = false;
     private boolean returningResource = false;
+    private boolean reportedAttached = false;
+
+    private final ResourceType targetResource = ResourceType.MANA;
 
     public Carrier(RobotController rc) throws GameActionException {
         super(rc);
@@ -34,6 +41,18 @@ public strictfp class Carrier extends MobileRobot {
 
         if (rc.canWriteSharedArray(0, 0)) {
             map.reportNearbyEnemies(nearbyEnemies);
+            if (adamantiumWellLocation != null) {
+                reportWell(ResourceType.ADAMANTIUM, adamantiumWellLocation, adamantiumWellPassibleTileCount);
+                adamantiumWellLocation = null;
+            }
+            if (manaWellLocation != null) {
+                reportWell(ResourceType.MANA, manaWellLocation, manaWellPassibleTileCount);
+                manaWellLocation = null;
+            }
+            if (!reportedAttached && attachedWellInfo != null) {
+                attachCarrierToWell(attachedWellInfo.getResourceType(), attachedWellInfo.getMapLocation());
+                reportedAttached = true;
+            }
         }
 
         if (countEnemyAttackers() > 0) {
@@ -82,6 +101,9 @@ public strictfp class Carrier extends MobileRobot {
         transferOrMine();
 
         draw();
+
+        if (attachedWellInfo != null)
+        rc.setIndicatorString("attached: " + attachedWellInfo.getMapLocation() + " reported: " + reportedAttached);
     }
 
     private void transferOrMine() throws GameActionException {
@@ -117,21 +139,25 @@ public strictfp class Carrier extends MobileRobot {
     }
 
     private boolean isReturning() throws GameActionException {
-        return returningResource || foundEnemy;
+        return returningResource || foundEnemy || (getClosestWellLocation(targetResource) == null && foundTargetResourceWell());
     }
 
     private void mine() throws GameActionException {
         for (WellInfo wellInfo : rc.senseNearbyWells(2, ResourceType.MANA)) {
             if (rc.canCollectResource(wellInfo.getMapLocation(), -1)) {
                 rc.collectResource(wellInfo.getMapLocation(), -1);
-                closestWellLocation = wellInfo.getMapLocation();
+                if (rc.getWeight() == GameConstants.CARRIER_CAPACITY) {
+                    attachedWellInfo = wellInfo;
+                }
                 return;
             }
         }
         for (WellInfo wellInfo : rc.senseNearbyWells(2, ResourceType.ADAMANTIUM)) {
             if (rc.canCollectResource(wellInfo.getMapLocation(), -1)) {
                 rc.collectResource(wellInfo.getMapLocation(), -1);
-                closestWellLocation = wellInfo.getMapLocation();
+                if (rc.getWeight() == GameConstants.CARRIER_CAPACITY) {
+                    attachedWellInfo = wellInfo;
+                }
                 return;
             }
         }
@@ -191,37 +217,37 @@ public strictfp class Carrier extends MobileRobot {
 
         else {
             if (targetLocation != null && targetLocation.equals(closestTeamHQLocation)) targetLocation = null;
-            if (closestWellLocation != null && targetLocation == null) targetLocation = closestWellLocation;
-
-            int minDistance = Constants.INF;
-
-            for (WellInfo wellInfo : rc.senseNearbyWells()) {
-                MapLocation location = wellInfo.getMapLocation();
-
-                int carrierCount = 0;
-
-                for (RobotInfo robotInfo : rc.senseNearbyRobots(location, 5, team)) {
-                    if (robotInfo.getType() == RobotType.CARRIER) carrierCount++;
-                }
-
-                int distance = distanceTo(location);
-                if ((distance >= 2 || rc.getWeight() <= 3)
-                        && ((wellInfo.getResourceType() == ResourceType.ADAMANTIUM && carrierCount >= rc.getRoundNum() / 50)
-                        || (wellInfo.getResourceType() == ResourceType.MANA && carrierCount >= 9))) {
-                    if (targetLocation != null && location.distanceSquaredTo(targetLocation) <= 2) {
-                        targetLocation = null;
+            MapLocation closestWellLocation = getClosestWellLocation(targetResource);
+            if (closestWellLocation == null && attachedWellInfo == null) {
+                int approachingDistance = 8;
+                if (rc.senseCloud(currentLocation)) approachingDistance = 0;
+                for (WellInfo wellInfo : rc.senseNearbyWells()) {
+                    MapLocation location = wellInfo.getMapLocation();
+                    if (wellInfo.getResourceType() == ResourceType.MANA && manaWellLocation == null) {
+                        if (currentLocation.distanceSquaredTo(location) <= approachingDistance) {
+                            manaWellLocation = location;
+                            manaWellPassibleTileCount = countPassibleTiles(location);
+                            targetLocation = null;
+                        } else {
+                            targetLocation = location;
+                        }
+                    } else if (wellInfo.getResourceType() == ResourceType.ADAMANTIUM && adamantiumWellLocation == null) {
+                        if (currentLocation.distanceSquaredTo(location) <= approachingDistance) {
+                            adamantiumWellLocation = location;
+                            adamantiumWellPassibleTileCount = countPassibleTiles(location);
+                            targetLocation = null;
+                        } else {
+                            targetLocation = location;
+                        }
                     }
-                    continue;
                 }
-
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    targetLocation = location;
+            } else {
+                MapLocation wellLocation = closestWellLocation;
+                if (attachedWellInfo != null) wellLocation = attachedWellInfo.getMapLocation();
+                if (targetLocation == null || targetLocation.distanceSquaredTo(wellLocation) > 2) targetLocation = wellLocation;
+                if (currentLocation.distanceSquaredTo(targetLocation) <= 9) {
+                    targetLocation = bestLocationNextTo(targetLocation);
                 }
-            }
-
-            if (targetLocation != null && minDistance != Constants.INF && currentLocation.distanceSquaredTo(targetLocation) <= 9) {
-                targetLocation = bestLocationNextTo(targetLocation);
             }
         }
 
@@ -236,7 +262,8 @@ public strictfp class Carrier extends MobileRobot {
             if ((rc.canSenseRobotAtLocation(neighbor) || !rc.sensePassability(neighbor) || rc.senseMapInfo(neighbor).getCurrentDirection() != Direction.CENTER) && !currentLocation.equals(neighbor)) { continue; }
 
             int distance = closestTeamHQLocation.distanceSquaredTo(neighbor); //distanceTo(neighbor);
-            if (neighbor.equals(location)) distance = 0;
+            if (neighbor.x != location.x && neighbor.y != location.y) distance -= 200000;
+            if (neighbor.equals(location)) distance -= 100000;
             if (distance < minDistance) {
                 minDistance = distance;
                 bestNeighbor = neighbor;
@@ -283,6 +310,21 @@ public strictfp class Carrier extends MobileRobot {
         }
 
         return bestDirection;
+    }
+
+    private boolean foundTargetResourceWell() {
+        if (targetResource == ResourceType.ADAMANTIUM) return adamantiumWellLocation != null;
+        return manaWellLocation != null;
+    }
+
+    private int countPassibleTiles(MapLocation location) throws GameActionException {
+        int count = 0;
+
+        for(MapInfo mapInfo : rc.senseNearbyMapInfos(location, 2)) {
+            if (mapInfo.isPassable() && mapInfo.getCurrentDirection() == Direction.CENTER) count++;
+        }
+
+        return count;
     }
 
     private int countEnemyAttackers() {

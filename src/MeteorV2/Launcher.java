@@ -70,6 +70,8 @@ public strictfp class Launcher extends MobileRobot {
 
         selectRandomTarget();
 
+        evadeInvisibleEnemyHQ();
+
         // Reset target if adjacent to it
         if (targetLocation != null && currentLocation.distanceSquaredTo(targetLocation) <= 2 &&
                 (!rc.canSenseRobotAtLocation(targetLocation)
@@ -198,6 +200,22 @@ public strictfp class Launcher extends MobileRobot {
         }
 
         return closestEnemyAttacker;
+    }
+
+    private void evadeInvisibleEnemyHQ() throws GameActionException {
+        if (symmetry == 1 || symmetry == 2 || symmetry == 4) {
+            for (int j = 0; j < 3; ++j) {
+                if ((symmetry >> j & 1) == 0) continue;
+                for (int i = 0; i < totalHQCount; ++i) {
+                    int k = i * 3 + j;
+                    MapLocation location = enemyHQLocations[k];
+
+                    if (currentLocation.distanceSquaredTo(location) <= 20) {
+                        updateTargetForEvasion(nearbyEnemies, location);
+                    }
+                }
+            }
+        }
     }
 
     protected void updateTarget() throws GameActionException {

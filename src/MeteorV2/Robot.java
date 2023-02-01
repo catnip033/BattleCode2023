@@ -81,6 +81,7 @@ public class Robot {
 
         if (wellCount < 8) {
             rc.writeSharedArray(wellCount + wellLocationOffset, encode(wellLocation, passibleTileCount));
+            rc.writeSharedArray(wellCount + wellCountOffset, wellCount + 1);
         }
     }
 
@@ -119,9 +120,26 @@ public class Robot {
         for (int i=0; i<wellCount; ++i) {
             int code = rc.readSharedArray(i + wellLocationOffset);
 
-            if (decodeLocation(code) == wellLocation) {
+            if (decodeID(code) > 0 && decodeLocation(code).equals(wellLocation)) {
                 rc.writeSharedArray(i + wellLocationOffset, encode(wellLocation, decodeID(code) - 1));
             }
         }
+    }
+
+    protected boolean isWellAvailable(ResourceType resourceType, MapLocation wellLocation) throws GameActionException {
+        int wellCountOffset    = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellCountOffset : Idx.manaWellCountOffset;
+        int wellLocationOffset = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellLocationOffset : Idx.manaWellLocationOffset;
+
+        int wellCount = rc.readSharedArray(wellCountOffset);
+
+        for (int i=0; i<wellCount; ++i) {
+            int code = rc.readSharedArray(i + wellLocationOffset);
+
+            if (decodeLocation(code).equals(wellLocation)) {
+                return decodeID(code) > 0;
+            }
+        }
+
+        return false;
     }
 }

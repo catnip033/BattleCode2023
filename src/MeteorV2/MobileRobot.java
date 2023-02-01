@@ -54,7 +54,7 @@ public class MobileRobot extends Robot {
         }
     }
 
-    protected void updateTargetForEvasion(RobotInfo[] nearbyEnemies) throws GameActionException {
+    protected void updateTargetForEvasion(RobotInfo[] nearbyEnemies, MapLocation enemyHQLocation) throws GameActionException {
         if (evading) { return; }
 
         int maxDistance = 0;
@@ -76,23 +76,20 @@ public class MobileRobot extends Robot {
             if (!rc.canSenseLocation(location) || !rc.onTheMap(location) || rc.canSenseRobotAtLocation(location) || !rc.sensePassability(location)) { continue; }
 
             int distance = 0;
-            MapLocation enemyHQLocation = null;
             for (RobotInfo robot : nearbyEnemies) {
                 if (isDangerous(robot.type)) {
                     distance += location.distanceSquaredTo(robot.location);
                 }
-                if (robot.getType() == RobotType.HEADQUARTERS) {
-                    enemyHQLocation = robot.location;
-                    if (currentLocation.distanceSquaredTo(enemyHQLocation) <= 9) {
-                        distance += location.distanceSquaredTo(enemyHQLocation);
-                    }
-                    int nextDistance = currentLocation.add(direction).distanceSquaredTo(enemyHQLocation);
-                    if (nextDistance <= 9) {
-                        distance -= 50 / (nextDistance + 1);
-                    }
-                }
             }
             if (enemyHQLocation != null) {
+                if (currentLocation.distanceSquaredTo(enemyHQLocation) <= 9) {
+                    distance += location.distanceSquaredTo(enemyHQLocation);
+                }
+                int nextDistance = currentLocation.add(direction).distanceSquaredTo(enemyHQLocation);
+                if (nextDistance <= 9) {
+                    distance -= 50 / (nextDistance + 1);
+                }
+
                 Direction tangentDirection = currentLocation.directionTo(enemyHQLocation).rotateLeft();
                 for (int i=3; i>=1; --i) {
                     if (direction.equals(tangentDirection)) {
@@ -109,6 +106,21 @@ public class MobileRobot extends Robot {
         }
 
         evading = true;
+    }
+
+    protected void updateTargetForEvasion(RobotInfo[] nearbyEnemies) throws GameActionException {
+        if (evading) { return; }
+
+        MapLocation enemyHQLocation = null;
+
+        for (RobotInfo robot : nearbyEnemies) {
+            if (robot.getType() == RobotType.HEADQUARTERS) {
+                enemyHQLocation = robot.location;
+                break;
+            }
+        }
+
+        updateTargetForEvasion(nearbyEnemies, enemyHQLocation);
     }
 
     // TODO NOT A GOOD WAY OF SELECTING TARGETS
