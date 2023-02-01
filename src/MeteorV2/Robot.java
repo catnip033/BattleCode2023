@@ -68,4 +68,16 @@ public class Robot {
                 direction.rotateLeft().rotateLeft(),
         };
     }
+
+    protected void reportWell(ResourceType resourceType, MapLocation wellLocation, int passibleTileCount) {
+        // TODO
+    }
+
+    protected MapLocation getClosestWellLocation(ResourceType resourceType) {
+        // TODO
+    }
+
+    protected void attachCarrierToWell(ResourceType resourceType, MapLocation wellLocation) {
+        // TODO
+    }
 }
