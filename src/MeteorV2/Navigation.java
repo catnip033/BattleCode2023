@@ -1837,19 +1837,16 @@ public class Navigation {
                     case 0:
                         if (v2 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v2 + " " + d2 + " " + l2);
                             return d2;
                         } break;
                     case 1:
                         if (v3 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v3 + " " + d3 + " " + l3);
                             return d3;
                         } break;
                     case 2:
                         if (v4 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v4 + " " + d4 + " " + l4);
                             return d4;
                         } break;
                 } break;
@@ -1859,25 +1856,21 @@ public class Navigation {
                     case 0:
                         if (v8 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v8 + " " + d8 + " " + l8);
                             return d8;
                         } break;
                     case 1:
                         if (v9 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v9 + " " + d9 + " " + l9);
                             return d9;
                         } break;
                     case 2:
                         if (v10 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v10 + " " + d10 + " " + l10);
                             return d10;
                         } break;
                     case 3:
                         if (v11 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v11 + " " + d11 + " " + l11);
                             return d11;
                         } break;
                 } break;
@@ -1887,31 +1880,26 @@ public class Navigation {
                     case 0:
                         if (v16 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v16 + " " + d16 + " " + l16);
                             return d16;
                         } break;
                     case 1:
                         if (v17 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v17 + " " + d17 + " " + l17);
                             return d17;
                         } break;
                     case 2:
                         if (v18 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v18 + " " + d18 + " " + l18);
                             return d18;
                         } break;
                     case 3:
                         if (v19 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v19 + " " + d19 + " " + l19);
                             return d19;
                         } break;
                     case 4:
                         if (v20 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v20 + " " + d20 + " " + l20);
                             return d20;
                         } break;
                 } break;
@@ -1921,31 +1909,26 @@ public class Navigation {
                     case 0:
                         if (v25 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v25 + " " + d25 + " " + l25);
                             return d25;
                         } break;
                     case 1:
                         if (v26 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v26 + " " + d26 + " " + l26);
                             return d26;
                         } break;
                     case 2:
                         if (v27 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v27 + " " + d27 + " " + l27);
                             return d27;
                         } break;
                     case 3:
                         if (v28 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v28 + " " + d28 + " " + l28);
                             return d28;
                         } break;
                     case 4:
                         if (v29 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v29 + " " + d29 + " " + l29);
                             return d29;
                         } break;
                 } break;
@@ -1955,25 +1938,21 @@ public class Navigation {
                     case 1:
                         if (v35 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v35 + " " + d35 + " " + l35);
                             return d35;
                         } break;
                     case 2:
                         if (v36 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v36 + " " + d36 + " " + l36);
                             return d36;
                         } break;
                     case 3:
                         if (v37 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v37 + " " + d37 + " " + l37);
                             return d37;
                         } break;
                     case 4:
                         if (v38 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v38 + " " + d38 + " " + l38);
                             return d38;
                         } break;
                 } break;
@@ -1983,31 +1962,26 @@ public class Navigation {
                     case 0:
                         if (v43 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v43 + " " + d43 + " " + l43);
                             return d43;
                         } break;
                     case 1:
                         if (v44 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v44 + " " + d44 + " " + l44);
                             return d44;
                         } break;
                     case 2:
                         if (v45 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v45 + " " + d45 + " " + l45);
                             return d45;
                         } break;
                     case 3:
                         if (v46 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v46 + " " + d46 + " " + l46);
                             return d46;
                         } break;
                     case 4:
                         if (v47 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v47 + " " + d47 + " " + l47);
                             return d47;
                         } break;
                 } break;
@@ -2017,31 +1991,26 @@ public class Navigation {
                     case 0:
                         if (v52 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v52 + " " + d52 + " " + l52);
                             return d52;
                         } break;
                     case 1:
                         if (v53 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v53 + " " + d53 + " " + l53);
                             return d53;
                         } break;
                     case 2:
                         if (v54 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v54 + " " + d54 + " " + l54);
                             return d54;
                         } break;
                     case 3:
                         if (v55 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v55 + " " + d55 + " " + l55);
                             return d55;
                         } break;
                     case 4:
                         if (v56 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v56 + " " + d56 + " " + l56);
                             return d56;
                         } break;
                 } break;
@@ -2051,25 +2020,21 @@ public class Navigation {
                     case 0:
                         if (v60 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v60 + " " + d60 + " " + l60);
                             return d60;
                         } break;
                     case 1:
                         if (v61 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v61 + " " + d61 + " " + l61);
                             return d61;
                         } break;
                     case 2:
                         if (v62 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v62 + " " + d62 + " " + l62);
                             return d62;
                         } break;
                     case 3:
                         if (v63 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v63 + " " + d63 + " " + l63);
                             return d63;
                         } break;
                 } break;
@@ -2079,19 +2044,16 @@ public class Navigation {
                     case 0:
                         if (v66 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v66 + " " + d66 + " " + l66);
                             return d66;
                         } break;
                     case 1:
                         if (v67 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v67 + " " + d67 + " " + l67);
                             return d67;
                         } break;
                     case 2:
                         if (v68 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v68 + " " + d68 + " " + l68);
                             return d68;
                         } break;
                 } break;
@@ -3695,7 +3657,6 @@ public class Navigation {
                     case 3:
                         if (v11 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v11 + " " + d11 + " " + l11);
                             return d11;
                         } break;
                 } break;
@@ -3705,19 +3666,16 @@ public class Navigation {
                     case 2:
                         if (v18 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v18 + " " + d18 + " " + l18);
                             return d18;
                         } break;
                     case 3:
                         if (v19 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v19 + " " + d19 + " " + l19);
                             return d19;
                         } break;
                     case 4:
                         if (v20 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v20 + " " + d20 + " " + l20);
                             return d20;
                         } break;
                 } break;
@@ -3727,25 +3685,21 @@ public class Navigation {
                     case 1:
                         if (v26 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v26 + " " + d26 + " " + l26);
                             return d26;
                         } break;
                     case 2:
                         if (v27 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v27 + " " + d27 + " " + l27);
                             return d27;
                         } break;
                     case 3:
                         if (v28 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v28 + " " + d28 + " " + l28);
                             return d28;
                         } break;
                     case 4:
                         if (v29 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v29 + " " + d29 + " " + l29);
                             return d29;
                         } break;
                 } break;
@@ -3755,25 +3709,21 @@ public class Navigation {
                     case 1:
                         if (v35 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v35 + " " + d35 + " " + l35);
                             return d35;
                         } break;
                     case 2:
                         if (v36 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v36 + " " + d36 + " " + l36);
                             return d36;
                         } break;
                     case 3:
                         if (v37 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v37 + " " + d37 + " " + l37);
                             return d37;
                         } break;
                     case 4:
                         if (v38 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v38 + " " + d38 + " " + l38);
                             return d38;
                         } break;
                 } break;
@@ -3783,37 +3733,31 @@ public class Navigation {
                     case -1:
                         if (v42 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v42 + " " + d42 + " " + l42);
                             return d42;
                         } break;
                     case 0:
                         if (v43 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v43 + " " + d43 + " " + l43);
                             return d43;
                         } break;
                     case 1:
                         if (v44 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v44 + " " + d44 + " " + l44);
                             return d44;
                         } break;
                     case 2:
                         if (v45 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v45 + " " + d45 + " " + l45);
                             return d45;
                         } break;
                     case 3:
                         if (v46 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v46 + " " + d46 + " " + l46);
                             return d46;
                         } break;
                     case 4:
                         if (v47 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v47 + " " + d47 + " " + l47);
                             return d47;
                         } break;
                 } break;
@@ -3823,43 +3767,36 @@ public class Navigation {
                     case -2:
                         if (v50 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v50 + " " + d50 + " " + l50);
                             return d50;
                         } break;
                     case -1:
                         if (v51 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v51 + " " + d51 + " " + l51);
                             return d51;
                         } break;
                     case 0:
                         if (v52 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v52 + " " + d52 + " " + l52);
                             return d52;
                         } break;
                     case 1:
                         if (v53 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v53 + " " + d53 + " " + l53);
                             return d53;
                         } break;
                     case 2:
                         if (v54 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v54 + " " + d54 + " " + l54);
                             return d54;
                         } break;
                     case 3:
                         if (v55 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v55 + " " + d55 + " " + l55);
                             return d55;
                         } break;
                     case 4:
                         if (v56 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v56 + " " + d56 + " " + l56);
                             return d56;
                         } break;
                 } break;
@@ -3869,43 +3806,36 @@ public class Navigation {
                     case -3:
                         if (v57 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v57 + " " + d57 + " " + l57);
                             return d57;
                         } break;
                     case -2:
                         if (v58 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v58 + " " + d58 + " " + l58);
                             return d58;
                         } break;
                     case -1:
                         if (v59 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v59 + " " + d59 + " " + l59);
                             return d59;
                         } break;
                     case 0:
                         if (v60 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v60 + " " + d60 + " " + l60);
                             return d60;
                         } break;
                     case 1:
                         if (v61 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v61 + " " + d61 + " " + l61);
                             return d61;
                         } break;
                     case 2:
                         if (v62 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v62 + " " + d62 + " " + l62);
                             return d62;
                         } break;
                     case 3:
                         if (v63 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v63 + " " + d63 + " " + l63);
                             return d63;
                         } break;
                 } break;
@@ -3915,31 +3845,26 @@ public class Navigation {
                     case -2:
                         if (v64 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v64 + " " + d64 + " " + l64);
                             return d64;
                         } break;
                     case -1:
                         if (v65 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v65 + " " + d65 + " " + l65);
                             return d65;
                         } break;
                     case 0:
                         if (v66 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v66 + " " + d66 + " " + l66);
                             return d66;
                         } break;
                     case 1:
                         if (v67 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v67 + " " + d67 + " " + l67);
                             return d67;
                         } break;
                     case 2:
                         if (v68 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v68 + " " + d68 + " " + l68);
                             return d68;
                         } break;
                 } break;
@@ -5604,49 +5529,41 @@ public class Navigation {
                     case -4:
                         if (v30 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v30 + " " + d30 + " " + l30);
                             return d30;
                         } break;
                     case -3:
                         if (v31 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v31 + " " + d31 + " " + l31);
                             return d31;
                         } break;
                     case -2:
                         if (v32 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v32 + " " + d32 + " " + l32);
                             return d32;
                         } break;
                     case -1:
                         if (v33 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v33 + " " + d33 + " " + l33);
                             return d33;
                         } break;
                     case 1:
                         if (v35 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v35 + " " + d35 + " " + l35);
                             return d35;
                         } break;
                     case 2:
                         if (v36 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v36 + " " + d36 + " " + l36);
                             return d36;
                         } break;
                     case 3:
                         if (v37 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v37 + " " + d37 + " " + l37);
                             return d37;
                         } break;
                     case 4:
                         if (v38 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v38 + " " + d38 + " " + l38);
                             return d38;
                         } break;
                 } break;
@@ -5656,55 +5573,46 @@ public class Navigation {
                     case -4:
                         if (v39 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v39 + " " + d39 + " " + l39);
                             return d39;
                         } break;
                     case -3:
                         if (v40 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v40 + " " + d40 + " " + l40);
                             return d40;
                         } break;
                     case -2:
                         if (v41 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v41 + " " + d41 + " " + l41);
                             return d41;
                         } break;
                     case -1:
                         if (v42 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v42 + " " + d42 + " " + l42);
                             return d42;
                         } break;
                     case 0:
                         if (v43 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v43 + " " + d43 + " " + l43);
                             return d43;
                         } break;
                     case 1:
                         if (v44 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v44 + " " + d44 + " " + l44);
                             return d44;
                         } break;
                     case 2:
                         if (v45 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v45 + " " + d45 + " " + l45);
                             return d45;
                         } break;
                     case 3:
                         if (v46 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v46 + " " + d46 + " " + l46);
                             return d46;
                         } break;
                     case 4:
                         if (v47 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v47 + " " + d47 + " " + l47);
                             return d47;
                         } break;
                 } break;
@@ -5714,55 +5622,46 @@ public class Navigation {
                     case -4:
                         if (v48 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v48 + " " + d48 + " " + l48);
                             return d48;
                         } break;
                     case -3:
                         if (v49 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v49 + " " + d49 + " " + l49);
                             return d49;
                         } break;
                     case -2:
                         if (v50 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v50 + " " + d50 + " " + l50);
                             return d50;
                         } break;
                     case -1:
                         if (v51 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v51 + " " + d51 + " " + l51);
                             return d51;
                         } break;
                     case 0:
                         if (v52 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v52 + " " + d52 + " " + l52);
                             return d52;
                         } break;
                     case 1:
                         if (v53 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v53 + " " + d53 + " " + l53);
                             return d53;
                         } break;
                     case 2:
                         if (v54 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v54 + " " + d54 + " " + l54);
                             return d54;
                         } break;
                     case 3:
                         if (v55 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v55 + " " + d55 + " " + l55);
                             return d55;
                         } break;
                     case 4:
                         if (v56 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v56 + " " + d56 + " " + l56);
                             return d56;
                         } break;
                 } break;
@@ -5772,43 +5671,36 @@ public class Navigation {
                     case -3:
                         if (v57 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v57 + " " + d57 + " " + l57);
                             return d57;
                         } break;
                     case -2:
                         if (v58 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v58 + " " + d58 + " " + l58);
                             return d58;
                         } break;
                     case -1:
                         if (v59 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v59 + " " + d59 + " " + l59);
                             return d59;
                         } break;
                     case 0:
                         if (v60 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v60 + " " + d60 + " " + l60);
                             return d60;
                         } break;
                     case 1:
                         if (v61 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v61 + " " + d61 + " " + l61);
                             return d61;
                         } break;
                     case 2:
                         if (v62 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v62 + " " + d62 + " " + l62);
                             return d62;
                         } break;
                     case 3:
                         if (v63 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v63 + " " + d63 + " " + l63);
                             return d63;
                         } break;
                 } break;
@@ -5818,31 +5710,26 @@ public class Navigation {
                     case -2:
                         if (v64 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v64 + " " + d64 + " " + l64);
                             return d64;
                         } break;
                     case -1:
                         if (v65 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v65 + " " + d65 + " " + l65);
                             return d65;
                         } break;
                     case 0:
                         if (v66 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v66 + " " + d66 + " " + l66);
                             return d66;
                         } break;
                     case 1:
                         if (v67 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v67 + " " + d67 + " " + l67);
                             return d67;
                         } break;
                     case 2:
                         if (v68 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v68 + " " + d68 + " " + l68);
                             return d68;
                         } break;
                 } break;
@@ -7446,7 +7333,6 @@ public class Navigation {
                     case -3:
                         if (v5 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v5 + " " + d5 + " " + l5);
                             return d5;
                         } break;
                 } break;
@@ -7456,19 +7342,16 @@ public class Navigation {
                     case -4:
                         if (v12 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v12 + " " + d12 + " " + l12);
                             return d12;
                         } break;
                     case -3:
                         if (v13 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v13 + " " + d13 + " " + l13);
                             return d13;
                         } break;
                     case -2:
                         if (v14 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v14 + " " + d14 + " " + l14);
                             return d14;
                         } break;
                 } break;
@@ -7478,25 +7361,21 @@ public class Navigation {
                     case -4:
                         if (v21 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v21 + " " + d21 + " " + l21);
                             return d21;
                         } break;
                     case -3:
                         if (v22 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v22 + " " + d22 + " " + l22);
                             return d22;
                         } break;
                     case -2:
                         if (v23 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v23 + " " + d23 + " " + l23);
                             return d23;
                         } break;
                     case -1:
                         if (v24 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v24 + " " + d24 + " " + l24);
                             return d24;
                         } break;
                 } break;
@@ -7506,25 +7385,21 @@ public class Navigation {
                     case -4:
                         if (v30 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v30 + " " + d30 + " " + l30);
                             return d30;
                         } break;
                     case -3:
                         if (v31 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v31 + " " + d31 + " " + l31);
                             return d31;
                         } break;
                     case -2:
                         if (v32 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v32 + " " + d32 + " " + l32);
                             return d32;
                         } break;
                     case -1:
                         if (v33 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v33 + " " + d33 + " " + l33);
                             return d33;
                         } break;
                 } break;
@@ -7534,37 +7409,31 @@ public class Navigation {
                     case -4:
                         if (v39 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v39 + " " + d39 + " " + l39);
                             return d39;
                         } break;
                     case -3:
                         if (v40 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v40 + " " + d40 + " " + l40);
                             return d40;
                         } break;
                     case -2:
                         if (v41 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v41 + " " + d41 + " " + l41);
                             return d41;
                         } break;
                     case -1:
                         if (v42 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v42 + " " + d42 + " " + l42);
                             return d42;
                         } break;
                     case 0:
                         if (v43 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v43 + " " + d43 + " " + l43);
                             return d43;
                         } break;
                     case 1:
                         if (v44 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v44 + " " + d44 + " " + l44);
                             return d44;
                         } break;
                 } break;
@@ -7574,43 +7443,36 @@ public class Navigation {
                     case -4:
                         if (v48 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v48 + " " + d48 + " " + l48);
                             return d48;
                         } break;
                     case -3:
                         if (v49 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v49 + " " + d49 + " " + l49);
                             return d49;
                         } break;
                     case -2:
                         if (v50 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v50 + " " + d50 + " " + l50);
                             return d50;
                         } break;
                     case -1:
                         if (v51 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v51 + " " + d51 + " " + l51);
                             return d51;
                         } break;
                     case 0:
                         if (v52 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v52 + " " + d52 + " " + l52);
                             return d52;
                         } break;
                     case 1:
                         if (v53 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v53 + " " + d53 + " " + l53);
                             return d53;
                         } break;
                     case 2:
                         if (v54 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v54 + " " + d54 + " " + l54);
                             return d54;
                         } break;
                 } break;
@@ -7620,43 +7482,36 @@ public class Navigation {
                     case -3:
                         if (v57 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v57 + " " + d57 + " " + l57);
                             return d57;
                         } break;
                     case -2:
                         if (v58 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v58 + " " + d58 + " " + l58);
                             return d58;
                         } break;
                     case -1:
                         if (v59 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v59 + " " + d59 + " " + l59);
                             return d59;
                         } break;
                     case 0:
                         if (v60 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v60 + " " + d60 + " " + l60);
                             return d60;
                         } break;
                     case 1:
                         if (v61 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v61 + " " + d61 + " " + l61);
                             return d61;
                         } break;
                     case 2:
                         if (v62 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v62 + " " + d62 + " " + l62);
                             return d62;
                         } break;
                     case 3:
                         if (v63 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v63 + " " + d63 + " " + l63);
                             return d63;
                         } break;
                 } break;
@@ -7666,31 +7521,26 @@ public class Navigation {
                     case -2:
                         if (v64 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v64 + " " + d64 + " " + l64);
                             return d64;
                         } break;
                     case -1:
                         if (v65 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v65 + " " + d65 + " " + l65);
                             return d65;
                         } break;
                     case 0:
                         if (v66 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v66 + " " + d66 + " " + l66);
                             return d66;
                         } break;
                     case 1:
                         if (v67 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v67 + " " + d67 + " " + l67);
                             return d67;
                         } break;
                     case 2:
                         if (v68 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v68 + " " + d68 + " " + l68);
                             return d68;
                         } break;
                 } break;
@@ -9339,19 +9189,16 @@ public class Navigation {
                     case -2:
                         if (v0 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v0 + " " + d0 + " " + l0);
                             return d0;
                         } break;
                     case -1:
                         if (v1 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v1 + " " + d1 + " " + l1);
                             return d1;
                         } break;
                     case 0:
                         if (v2 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v2 + " " + d2 + " " + l2);
                             return d2;
                         } break;
                 } break;
@@ -9361,25 +9208,21 @@ public class Navigation {
                     case -3:
                         if (v5 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v5 + " " + d5 + " " + l5);
                             return d5;
                         } break;
                     case -2:
                         if (v6 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v6 + " " + d6 + " " + l6);
                             return d6;
                         } break;
                     case -1:
                         if (v7 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v7 + " " + d7 + " " + l7);
                             return d7;
                         } break;
                     case 0:
                         if (v8 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v8 + " " + d8 + " " + l8);
                             return d8;
                         } break;
                 } break;
@@ -9389,31 +9232,26 @@ public class Navigation {
                     case -4:
                         if (v12 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v12 + " " + d12 + " " + l12);
                             return d12;
                         } break;
                     case -3:
                         if (v13 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v13 + " " + d13 + " " + l13);
                             return d13;
                         } break;
                     case -2:
                         if (v14 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v14 + " " + d14 + " " + l14);
                             return d14;
                         } break;
                     case -1:
                         if (v15 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v15 + " " + d15 + " " + l15);
                             return d15;
                         } break;
                     case 0:
                         if (v16 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v16 + " " + d16 + " " + l16);
                             return d16;
                         } break;
                 } break;
@@ -9423,31 +9261,26 @@ public class Navigation {
                     case -4:
                         if (v21 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v21 + " " + d21 + " " + l21);
                             return d21;
                         } break;
                     case -3:
                         if (v22 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v22 + " " + d22 + " " + l22);
                             return d22;
                         } break;
                     case -2:
                         if (v23 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v23 + " " + d23 + " " + l23);
                             return d23;
                         } break;
                     case -1:
                         if (v24 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v24 + " " + d24 + " " + l24);
                             return d24;
                         } break;
                     case 0:
                         if (v25 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v25 + " " + d25 + " " + l25);
                             return d25;
                         } break;
                 } break;
@@ -9457,25 +9290,21 @@ public class Navigation {
                     case -4:
                         if (v30 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v30 + " " + d30 + " " + l30);
                             return d30;
                         } break;
                     case -3:
                         if (v31 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v31 + " " + d31 + " " + l31);
                             return d31;
                         } break;
                     case -2:
                         if (v32 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v32 + " " + d32 + " " + l32);
                             return d32;
                         } break;
                     case -1:
                         if (v33 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v33 + " " + d33 + " " + l33);
                             return d33;
                         } break;
                 } break;
@@ -9485,31 +9314,26 @@ public class Navigation {
                     case -4:
                         if (v39 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v39 + " " + d39 + " " + l39);
                             return d39;
                         } break;
                     case -3:
                         if (v40 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v40 + " " + d40 + " " + l40);
                             return d40;
                         } break;
                     case -2:
                         if (v41 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v41 + " " + d41 + " " + l41);
                             return d41;
                         } break;
                     case -1:
                         if (v42 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v42 + " " + d42 + " " + l42);
                             return d42;
                         } break;
                     case 0:
                         if (v43 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v43 + " " + d43 + " " + l43);
                             return d43;
                         } break;
                 } break;
@@ -9519,31 +9343,26 @@ public class Navigation {
                     case -4:
                         if (v48 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v48 + " " + d48 + " " + l48);
                             return d48;
                         } break;
                     case -3:
                         if (v49 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v49 + " " + d49 + " " + l49);
                             return d49;
                         } break;
                     case -2:
                         if (v50 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v50 + " " + d50 + " " + l50);
                             return d50;
                         } break;
                     case -1:
                         if (v51 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v51 + " " + d51 + " " + l51);
                             return d51;
                         } break;
                     case 0:
                         if (v52 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v52 + " " + d52 + " " + l52);
                             return d52;
                         } break;
                 } break;
@@ -9553,25 +9372,21 @@ public class Navigation {
                     case -3:
                         if (v57 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v57 + " " + d57 + " " + l57);
                             return d57;
                         } break;
                     case -2:
                         if (v58 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v58 + " " + d58 + " " + l58);
                             return d58;
                         } break;
                     case -1:
                         if (v59 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v59 + " " + d59 + " " + l59);
                             return d59;
                         } break;
                     case 0:
                         if (v60 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v60 + " " + d60 + " " + l60);
                             return d60;
                         } break;
                 } break;
@@ -9581,19 +9396,16 @@ public class Navigation {
                     case -2:
                         if (v64 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v64 + " " + d64 + " " + l64);
                             return d64;
                         } break;
                     case -1:
                         if (v65 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v65 + " " + d65 + " " + l65);
                             return d65;
                         } break;
                     case 0:
                         if (v66 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v66 + " " + d66 + " " + l66);
                             return d66;
                         } break;
                 } break;
@@ -11193,31 +11005,26 @@ public class Navigation {
                     case -2:
                         if (v0 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v0 + " " + d0 + " " + l0);
                             return d0;
                         } break;
                     case -1:
                         if (v1 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v1 + " " + d1 + " " + l1);
                             return d1;
                         } break;
                     case 0:
                         if (v2 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v2 + " " + d2 + " " + l2);
                             return d2;
                         } break;
                     case 1:
                         if (v3 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v3 + " " + d3 + " " + l3);
                             return d3;
                         } break;
                     case 2:
                         if (v4 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v4 + " " + d4 + " " + l4);
                             return d4;
                         } break;
                 } break;
@@ -11227,43 +11034,36 @@ public class Navigation {
                     case -3:
                         if (v5 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v5 + " " + d5 + " " + l5);
                             return d5;
                         } break;
                     case -2:
                         if (v6 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v6 + " " + d6 + " " + l6);
                             return d6;
                         } break;
                     case -1:
                         if (v7 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v7 + " " + d7 + " " + l7);
                             return d7;
                         } break;
                     case 0:
                         if (v8 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v8 + " " + d8 + " " + l8);
                             return d8;
                         } break;
                     case 1:
                         if (v9 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v9 + " " + d9 + " " + l9);
                             return d9;
                         } break;
                     case 2:
                         if (v10 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v10 + " " + d10 + " " + l10);
                             return d10;
                         } break;
                     case 3:
                         if (v11 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v11 + " " + d11 + " " + l11);
                             return d11;
                         } break;
                 } break;
@@ -11273,43 +11073,36 @@ public class Navigation {
                     case -4:
                         if (v12 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v12 + " " + d12 + " " + l12);
                             return d12;
                         } break;
                     case -3:
                         if (v13 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v13 + " " + d13 + " " + l13);
                             return d13;
                         } break;
                     case -2:
                         if (v14 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v14 + " " + d14 + " " + l14);
                             return d14;
                         } break;
                     case -1:
                         if (v15 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v15 + " " + d15 + " " + l15);
                             return d15;
                         } break;
                     case 0:
                         if (v16 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v16 + " " + d16 + " " + l16);
                             return d16;
                         } break;
                     case 1:
                         if (v17 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v17 + " " + d17 + " " + l17);
                             return d17;
                         } break;
                     case 2:
                         if (v18 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v18 + " " + d18 + " " + l18);
                             return d18;
                         } break;
                 } break;
@@ -11319,37 +11112,31 @@ public class Navigation {
                     case -4:
                         if (v21 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v21 + " " + d21 + " " + l21);
                             return d21;
                         } break;
                     case -3:
                         if (v22 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v22 + " " + d22 + " " + l22);
                             return d22;
                         } break;
                     case -2:
                         if (v23 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v23 + " " + d23 + " " + l23);
                             return d23;
                         } break;
                     case -1:
                         if (v24 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v24 + " " + d24 + " " + l24);
                             return d24;
                         } break;
                     case 0:
                         if (v25 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v25 + " " + d25 + " " + l25);
                             return d25;
                         } break;
                     case 1:
                         if (v26 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v26 + " " + d26 + " " + l26);
                             return d26;
                         } break;
                 } break;
@@ -11359,25 +11146,21 @@ public class Navigation {
                     case -4:
                         if (v30 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v30 + " " + d30 + " " + l30);
                             return d30;
                         } break;
                     case -3:
                         if (v31 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v31 + " " + d31 + " " + l31);
                             return d31;
                         } break;
                     case -2:
                         if (v32 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v32 + " " + d32 + " " + l32);
                             return d32;
                         } break;
                     case -1:
                         if (v33 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v33 + " " + d33 + " " + l33);
                             return d33;
                         } break;
                 } break;
@@ -11387,25 +11170,21 @@ public class Navigation {
                     case -4:
                         if (v39 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v39 + " " + d39 + " " + l39);
                             return d39;
                         } break;
                     case -3:
                         if (v40 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v40 + " " + d40 + " " + l40);
                             return d40;
                         } break;
                     case -2:
                         if (v41 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v41 + " " + d41 + " " + l41);
                             return d41;
                         } break;
                     case -1:
                         if (v42 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v42 + " " + d42 + " " + l42);
                             return d42;
                         } break;
                 } break;
@@ -11415,19 +11194,16 @@ public class Navigation {
                     case -4:
                         if (v48 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v48 + " " + d48 + " " + l48);
                             return d48;
                         } break;
                     case -3:
                         if (v49 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v49 + " " + d49 + " " + l49);
                             return d49;
                         } break;
                     case -2:
                         if (v50 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v50 + " " + d50 + " " + l50);
                             return d50;
                         } break;
                 } break;
@@ -11437,7 +11213,6 @@ public class Navigation {
                     case -3:
                         if (v57 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v57 + " " + d57 + " " + l57);
                             return d57;
                         } break;
                 } break;
@@ -13090,31 +12865,26 @@ public class Navigation {
                     case -2:
                         if (v0 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v0 + " " + d0 + " " + l0);
                             return d0;
                         } break;
                     case -1:
                         if (v1 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v1 + " " + d1 + " " + l1);
                             return d1;
                         } break;
                     case 0:
                         if (v2 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v2 + " " + d2 + " " + l2);
                             return d2;
                         } break;
                     case 1:
                         if (v3 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v3 + " " + d3 + " " + l3);
                             return d3;
                         } break;
                     case 2:
                         if (v4 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v4 + " " + d4 + " " + l4);
                             return d4;
                         } break;
                 } break;
@@ -13124,43 +12894,36 @@ public class Navigation {
                     case -3:
                         if (v5 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v5 + " " + d5 + " " + l5);
                             return d5;
                         } break;
                     case -2:
                         if (v6 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v6 + " " + d6 + " " + l6);
                             return d6;
                         } break;
                     case -1:
                         if (v7 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v7 + " " + d7 + " " + l7);
                             return d7;
                         } break;
                     case 0:
                         if (v8 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v8 + " " + d8 + " " + l8);
                             return d8;
                         } break;
                     case 1:
                         if (v9 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v9 + " " + d9 + " " + l9);
                             return d9;
                         } break;
                     case 2:
                         if (v10 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v10 + " " + d10 + " " + l10);
                             return d10;
                         } break;
                     case 3:
                         if (v11 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v11 + " " + d11 + " " + l11);
                             return d11;
                         } break;
                 } break;
@@ -13170,55 +12933,46 @@ public class Navigation {
                     case -4:
                         if (v12 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v12 + " " + d12 + " " + l12);
                             return d12;
                         } break;
                     case -3:
                         if (v13 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v13 + " " + d13 + " " + l13);
                             return d13;
                         } break;
                     case -2:
                         if (v14 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v14 + " " + d14 + " " + l14);
                             return d14;
                         } break;
                     case -1:
                         if (v15 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v15 + " " + d15 + " " + l15);
                             return d15;
                         } break;
                     case 0:
                         if (v16 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v16 + " " + d16 + " " + l16);
                             return d16;
                         } break;
                     case 1:
                         if (v17 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v17 + " " + d17 + " " + l17);
                             return d17;
                         } break;
                     case 2:
                         if (v18 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v18 + " " + d18 + " " + l18);
                             return d18;
                         } break;
                     case 3:
                         if (v19 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v19 + " " + d19 + " " + l19);
                             return d19;
                         } break;
                     case 4:
                         if (v20 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v20 + " " + d20 + " " + l20);
                             return d20;
                         } break;
                 } break;
@@ -13228,55 +12982,46 @@ public class Navigation {
                     case -4:
                         if (v21 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v21 + " " + d21 + " " + l21);
                             return d21;
                         } break;
                     case -3:
                         if (v22 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v22 + " " + d22 + " " + l22);
                             return d22;
                         } break;
                     case -2:
                         if (v23 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v23 + " " + d23 + " " + l23);
                             return d23;
                         } break;
                     case -1:
                         if (v24 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v24 + " " + d24 + " " + l24);
                             return d24;
                         } break;
                     case 0:
                         if (v25 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v25 + " " + d25 + " " + l25);
                             return d25;
                         } break;
                     case 1:
                         if (v26 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v26 + " " + d26 + " " + l26);
                             return d26;
                         } break;
                     case 2:
                         if (v27 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v27 + " " + d27 + " " + l27);
                             return d27;
                         } break;
                     case 3:
                         if (v28 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v28 + " " + d28 + " " + l28);
                             return d28;
                         } break;
                     case 4:
                         if (v29 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v29 + " " + d29 + " " + l29);
                             return d29;
                         } break;
                 } break;
@@ -13286,49 +13031,41 @@ public class Navigation {
                     case -4:
                         if (v30 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v30 + " " + d30 + " " + l30);
                             return d30;
                         } break;
                     case -3:
                         if (v31 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v31 + " " + d31 + " " + l31);
                             return d31;
                         } break;
                     case -2:
                         if (v32 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v32 + " " + d32 + " " + l32);
                             return d32;
                         } break;
                     case -1:
                         if (v33 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v33 + " " + d33 + " " + l33);
                             return d33;
                         } break;
                     case 1:
                         if (v35 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v35 + " " + d35 + " " + l35);
                             return d35;
                         } break;
                     case 2:
                         if (v36 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v36 + " " + d36 + " " + l36);
                             return d36;
                         } break;
                     case 3:
                         if (v37 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v37 + " " + d37 + " " + l37);
                             return d37;
                         } break;
                     case 4:
                         if (v38 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v38 + " " + d38 + " " + l38);
                             return d38;
                         } break;
                 } break;
@@ -14944,31 +14681,26 @@ public class Navigation {
                     case -2:
                         if (v0 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v0 + " " + d0 + " " + l0);
                             return d0;
                         } break;
                     case -1:
                         if (v1 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v1 + " " + d1 + " " + l1);
                             return d1;
                         } break;
                     case 0:
                         if (v2 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v2 + " " + d2 + " " + l2);
                             return d2;
                         } break;
                     case 1:
                         if (v3 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v3 + " " + d3 + " " + l3);
                             return d3;
                         } break;
                     case 2:
                         if (v4 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v4 + " " + d4 + " " + l4);
                             return d4;
                         } break;
                 } break;
@@ -14978,43 +14710,36 @@ public class Navigation {
                     case -3:
                         if (v5 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v5 + " " + d5 + " " + l5);
                             return d5;
                         } break;
                     case -2:
                         if (v6 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v6 + " " + d6 + " " + l6);
                             return d6;
                         } break;
                     case -1:
                         if (v7 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v7 + " " + d7 + " " + l7);
                             return d7;
                         } break;
                     case 0:
                         if (v8 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v8 + " " + d8 + " " + l8);
                             return d8;
                         } break;
                     case 1:
                         if (v9 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v9 + " " + d9 + " " + l9);
                             return d9;
                         } break;
                     case 2:
                         if (v10 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v10 + " " + d10 + " " + l10);
                             return d10;
                         } break;
                     case 3:
                         if (v11 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v11 + " " + d11 + " " + l11);
                             return d11;
                         } break;
                 } break;
@@ -15024,43 +14749,36 @@ public class Navigation {
                     case -2:
                         if (v14 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v14 + " " + d14 + " " + l14);
                             return d14;
                         } break;
                     case -1:
                         if (v15 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v15 + " " + d15 + " " + l15);
                             return d15;
                         } break;
                     case 0:
                         if (v16 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v16 + " " + d16 + " " + l16);
                             return d16;
                         } break;
                     case 1:
                         if (v17 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v17 + " " + d17 + " " + l17);
                             return d17;
                         } break;
                     case 2:
                         if (v18 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v18 + " " + d18 + " " + l18);
                             return d18;
                         } break;
                     case 3:
                         if (v19 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v19 + " " + d19 + " " + l19);
                             return d19;
                         } break;
                     case 4:
                         if (v20 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v20 + " " + d20 + " " + l20);
                             return d20;
                         } break;
                 } break;
@@ -15070,37 +14788,31 @@ public class Navigation {
                     case -1:
                         if (v24 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v24 + " " + d24 + " " + l24);
                             return d24;
                         } break;
                     case 0:
                         if (v25 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v25 + " " + d25 + " " + l25);
                             return d25;
                         } break;
                     case 1:
                         if (v26 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v26 + " " + d26 + " " + l26);
                             return d26;
                         } break;
                     case 2:
                         if (v27 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v27 + " " + d27 + " " + l27);
                             return d27;
                         } break;
                     case 3:
                         if (v28 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v28 + " " + d28 + " " + l28);
                             return d28;
                         } break;
                     case 4:
                         if (v29 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v29 + " " + d29 + " " + l29);
                             return d29;
                         } break;
                 } break;
@@ -15110,25 +14822,21 @@ public class Navigation {
                     case 1:
                         if (v35 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v35 + " " + d35 + " " + l35);
                             return d35;
                         } break;
                     case 2:
                         if (v36 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v36 + " " + d36 + " " + l36);
                             return d36;
                         } break;
                     case 3:
                         if (v37 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v37 + " " + d37 + " " + l37);
                             return d37;
                         } break;
                     case 4:
                         if (v38 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v38 + " " + d38 + " " + l38);
                             return d38;
                         } break;
                 } break;
@@ -15138,25 +14846,21 @@ public class Navigation {
                     case 1:
                         if (v44 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v44 + " " + d44 + " " + l44);
                             return d44;
                         } break;
                     case 2:
                         if (v45 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v45 + " " + d45 + " " + l45);
                             return d45;
                         } break;
                     case 3:
                         if (v46 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v46 + " " + d46 + " " + l46);
                             return d46;
                         } break;
                     case 4:
                         if (v47 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v47 + " " + d47 + " " + l47);
                             return d47;
                         } break;
                 } break;
@@ -15166,19 +14870,16 @@ public class Navigation {
                     case 2:
                         if (v54 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v54 + " " + d54 + " " + l54);
                             return d54;
                         } break;
                     case 3:
                         if (v55 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v55 + " " + d55 + " " + l55);
                             return d55;
                         } break;
                     case 4:
                         if (v56 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v56 + " " + d56 + " " + l56);
                             return d56;
                         } break;
                 } break;
@@ -15188,7 +14889,6 @@ public class Navigation {
                     case 3:
                         if (v63 < 1000000) {
                             bug.reset();
-                            rc.setIndicatorString("" + v63 + " " + d63 + " " + l63);
                             return d63;
                         } break;
                 } break;

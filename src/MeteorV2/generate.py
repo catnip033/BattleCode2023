@@ -174,7 +174,6 @@ for i in range(8):
                     case {y}:
                         if (v{c.i} < 1000000) {{
                             bug.reset();
-                            rc.setIndicatorString("" + v{c.i} + " " + d{c.i} + " " + l{c.i});
                             return d{c.i};
                         }} break;'''
             

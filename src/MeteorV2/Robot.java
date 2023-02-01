@@ -69,15 +69,59 @@ public class Robot {
         };
     }
 
-    protected void reportWell(ResourceType resourceType, MapLocation wellLocation, int passibleTileCount) {
-        // TODO
+    protected void reportWell(ResourceType resourceType, MapLocation wellLocation, int passibleTileCount) throws GameActionException {
+        if (!rc.canWriteSharedArray(0, 0)) {
+            return;
+        }
+
+        int wellCountOffset    = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellCountOffset : Idx.manaWellCountOffset;
+        int wellLocationOffset = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellLocationOffset : Idx.manaWellLocationOffset;
+
+        int wellCount = rc.readSharedArray(wellCountOffset);
+
+        if (wellCount < 8) {
+            rc.writeSharedArray(wellCount + wellLocationOffset, encode(wellLocation, passibleTileCount));
+        }
     }
 
-    protected MapLocation getClosestWellLocation(ResourceType resourceType) {
-        // TODO
+    protected MapLocation getClosestWellLocation(ResourceType resourceType) throws GameActionException {
+        int wellCountOffset    = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellCountOffset : Idx.manaWellCountOffset;
+        int wellLocationOffset = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellLocationOffset : Idx.manaWellLocationOffset;
+
+        int wellCount = rc.readSharedArray(wellCountOffset);
+
+        MapLocation closestWellLocation = null;
+        int minDistance = Constants.INF;
+
+        for (int i=0; i<wellCount; ++i) {
+            int code = rc.readSharedArray(i + wellLocationOffset);
+
+            if (decodeID(code) > 0) {
+                MapLocation location = decodeLocation(code);
+                int distance = currentLocation.distanceSquaredTo(location);
+
+                if (distance < minDistance) {
+                    closestWellLocation = location;
+                    minDistance = distance;
+                }
+            }
+        }
+
+        return closestWellLocation;
     }
 
-    protected void attachCarrierToWell(ResourceType resourceType, MapLocation wellLocation) {
-        // TODO
+    protected void attachCarrierToWell(ResourceType resourceType, MapLocation wellLocation) throws GameActionException {
+        int wellCountOffset    = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellCountOffset : Idx.manaWellCountOffset;
+        int wellLocationOffset = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellLocationOffset : Idx.manaWellLocationOffset;
+
+        int wellCount = rc.readSharedArray(wellCountOffset);
+
+        for (int i=0; i<wellCount; ++i) {
+            int code = rc.readSharedArray(i + wellLocationOffset);
+
+            if (decodeLocation(code) == wellLocation) {
+                rc.writeSharedArray(i + wellLocationOffset, encode(wellLocation, decodeID(code) - 1));
+            }
+        }
     }
 }
