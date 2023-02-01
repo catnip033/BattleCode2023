@@ -16,12 +16,14 @@ public strictfp class Carrier extends MobileRobot {
     private boolean returningResource = false;
     private boolean reportedAttached = false;
 
-    private final ResourceType targetResource = ResourceType.MANA;
+    private final ResourceType targetResource;
 
     public Carrier(RobotController rc) throws GameActionException {
         super(rc);
 
         RNG.setSeed(rc.getID());
+
+        targetResource = RNG.nextInt(10) < Math.max(rc.getRoundNum() / 50, 4) ? ResourceType.ADAMANTIUM : ResourceType.MANA;
 
         updateClosestTeamHQLocation();
     }
@@ -248,8 +250,8 @@ public strictfp class Carrier extends MobileRobot {
                 MapLocation wellLocation = closestWellLocation;
                 if (attachedWellInfo != null) wellLocation = attachedWellInfo.getMapLocation();
                 if (targetLocation == null || targetLocation.distanceSquaredTo(wellLocation) > 2) targetLocation = wellLocation;
-                if (wellLocation.equals(targetLocation) && currentLocation.distanceSquaredTo(targetLocation) <= 9) {
-                    targetLocation = bestLocationNextTo(targetLocation);
+                if (currentLocation.distanceSquaredTo(wellLocation) <= 9) {
+                    targetLocation = bestLocationNextTo(wellLocation);
                 }
             }
         }
