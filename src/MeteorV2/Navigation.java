@@ -439,6 +439,7 @@ public class Navigation {
     private Direction getBestDirection0() throws GameActionException {
         double localBest = 1000000.0;
         double dist = 0.0;
+	    boolean gothroughCurrent = rc.getType() == RobotType.CARRIER && rc.getWeight() < 3;
         l34 = currentLocation;
         v34 = 0;
         d43 = null;
@@ -637,7 +638,7 @@ public class Navigation {
             if (rc.canSenseLocation(l25)) {
                 MapInfo mapInfo = rc.senseMapInfo(l25);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l25), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l25), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p25 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -661,7 +662,7 @@ public class Navigation {
             if (rc.canSenseLocation(l35)) {
                 MapInfo mapInfo = rc.senseMapInfo(l35);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l35), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l35), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p35 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -690,7 +691,7 @@ public class Navigation {
             if (rc.canSenseLocation(l43)) {
                 MapInfo mapInfo = rc.senseMapInfo(l43);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l43), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l43), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p43 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -714,7 +715,7 @@ public class Navigation {
             if (rc.canSenseLocation(l26)) {
                 MapInfo mapInfo = rc.senseMapInfo(l26);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l26), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l26), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p26 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -743,7 +744,7 @@ public class Navigation {
             if (rc.canSenseLocation(l44)) {
                 MapInfo mapInfo = rc.senseMapInfo(l44);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l44), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l44), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p44 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -772,7 +773,7 @@ public class Navigation {
             if (rc.canSenseLocation(l52)) {
                 MapInfo mapInfo = rc.senseMapInfo(l52);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p52 = mapInfo.getCooldownMultiplier(team);
                     s52 = Math.sqrt(l52.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -797,7 +798,7 @@ public class Navigation {
             if (rc.canSenseLocation(l36)) {
                 MapInfo mapInfo = rc.senseMapInfo(l36);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p36 = mapInfo.getCooldownMultiplier(team);
                     s36 = Math.sqrt(l36.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -827,7 +828,7 @@ public class Navigation {
             if (rc.canSenseLocation(l16)) {
                 MapInfo mapInfo = rc.senseMapInfo(l16);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p16 = mapInfo.getCooldownMultiplier(team);
                     s16 = Math.sqrt(l16.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -852,7 +853,7 @@ public class Navigation {
             if (rc.canSenseLocation(l53)) {
                 MapInfo mapInfo = rc.senseMapInfo(l53);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p53 = mapInfo.getCooldownMultiplier(team);
                     s53 = Math.sqrt(l53.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -887,7 +888,7 @@ public class Navigation {
             if (rc.canSenseLocation(l27)) {
                 MapInfo mapInfo = rc.senseMapInfo(l27);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p27 = mapInfo.getCooldownMultiplier(team);
                     s27 = Math.sqrt(l27.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -922,7 +923,7 @@ public class Navigation {
             if (rc.canSenseLocation(l17)) {
                 MapInfo mapInfo = rc.senseMapInfo(l17);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p17 = mapInfo.getCooldownMultiplier(team);
                     s17 = Math.sqrt(l17.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -957,7 +958,7 @@ public class Navigation {
             if (rc.canSenseLocation(l45)) {
                 MapInfo mapInfo = rc.senseMapInfo(l45);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p45 = mapInfo.getCooldownMultiplier(team);
                     s45 = Math.sqrt(l45.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -992,7 +993,7 @@ public class Navigation {
             if (rc.canSenseLocation(l18)) {
                 MapInfo mapInfo = rc.senseMapInfo(l18);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p18 = mapInfo.getCooldownMultiplier(team);
                     s18 = Math.sqrt(l18.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1022,7 +1023,7 @@ public class Navigation {
             if (rc.canSenseLocation(l54)) {
                 MapInfo mapInfo = rc.senseMapInfo(l54);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p54 = mapInfo.getCooldownMultiplier(team);
                     s54 = Math.sqrt(l54.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1052,7 +1053,7 @@ public class Navigation {
             if (rc.canSenseLocation(l60)) {
                 MapInfo mapInfo = rc.senseMapInfo(l60);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p60 = mapInfo.getCooldownMultiplier(team);
                     s60 = Math.sqrt(l60.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1077,7 +1078,7 @@ public class Navigation {
             if (rc.canSenseLocation(l37)) {
                 MapInfo mapInfo = rc.senseMapInfo(l37);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p37 = mapInfo.getCooldownMultiplier(team);
                     s37 = Math.sqrt(l37.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1107,7 +1108,7 @@ public class Navigation {
             if (rc.canSenseLocation(l8)) {
                 MapInfo mapInfo = rc.senseMapInfo(l8);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p8 = mapInfo.getCooldownMultiplier(team);
                     s8 = Math.sqrt(l8.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1132,7 +1133,7 @@ public class Navigation {
             if (rc.canSenseLocation(l61)) {
                 MapInfo mapInfo = rc.senseMapInfo(l61);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p61 = mapInfo.getCooldownMultiplier(team);
                     s61 = Math.sqrt(l61.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1167,7 +1168,7 @@ public class Navigation {
             if (rc.canSenseLocation(l46)) {
                 MapInfo mapInfo = rc.senseMapInfo(l46);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p46 = mapInfo.getCooldownMultiplier(team);
                     s46 = Math.sqrt(l46.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1202,7 +1203,7 @@ public class Navigation {
             if (rc.canSenseLocation(l9)) {
                 MapInfo mapInfo = rc.senseMapInfo(l9);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p9 = mapInfo.getCooldownMultiplier(team);
                     s9 = Math.sqrt(l9.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1237,7 +1238,7 @@ public class Navigation {
             if (rc.canSenseLocation(l28)) {
                 MapInfo mapInfo = rc.senseMapInfo(l28);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p28 = mapInfo.getCooldownMultiplier(team);
                     s28 = Math.sqrt(l28.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1272,7 +1273,7 @@ public class Navigation {
             if (rc.canSenseLocation(l10)) {
                 MapInfo mapInfo = rc.senseMapInfo(l10);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p10 = mapInfo.getCooldownMultiplier(team);
                     s10 = Math.sqrt(l10.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1307,7 +1308,7 @@ public class Navigation {
             if (rc.canSenseLocation(l62)) {
                 MapInfo mapInfo = rc.senseMapInfo(l62);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p62 = mapInfo.getCooldownMultiplier(team);
                     s62 = Math.sqrt(l62.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1342,7 +1343,7 @@ public class Navigation {
             if (rc.canSenseLocation(l55)) {
                 MapInfo mapInfo = rc.senseMapInfo(l55);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p55 = mapInfo.getCooldownMultiplier(team);
                     s55 = Math.sqrt(l55.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1377,7 +1378,7 @@ public class Navigation {
             if (rc.canSenseLocation(l19)) {
                 MapInfo mapInfo = rc.senseMapInfo(l19);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p19 = mapInfo.getCooldownMultiplier(team);
                     s19 = Math.sqrt(l19.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1412,7 +1413,7 @@ public class Navigation {
             if (rc.canSenseLocation(l63)) {
                 MapInfo mapInfo = rc.senseMapInfo(l63);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p63 = mapInfo.getCooldownMultiplier(team);
                     s63 = Math.sqrt(l63.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1442,7 +1443,7 @@ public class Navigation {
             if (rc.canSenseLocation(l11)) {
                 MapInfo mapInfo = rc.senseMapInfo(l11);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p11 = mapInfo.getCooldownMultiplier(team);
                     s11 = Math.sqrt(l11.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1472,7 +1473,7 @@ public class Navigation {
             if (rc.canSenseLocation(l2)) {
                 MapInfo mapInfo = rc.senseMapInfo(l2);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p2 = mapInfo.getCooldownMultiplier(team);
                     s2 = Math.sqrt(l2.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1497,7 +1498,7 @@ public class Navigation {
             if (rc.canSenseLocation(l66)) {
                 MapInfo mapInfo = rc.senseMapInfo(l66);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p66 = mapInfo.getCooldownMultiplier(team);
                     s66 = Math.sqrt(l66.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1522,7 +1523,7 @@ public class Navigation {
             if (rc.canSenseLocation(l38)) {
                 MapInfo mapInfo = rc.senseMapInfo(l38);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p38 = mapInfo.getCooldownMultiplier(team);
                     s38 = Math.sqrt(l38.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1552,7 +1553,7 @@ public class Navigation {
             if (rc.canSenseLocation(l3)) {
                 MapInfo mapInfo = rc.senseMapInfo(l3);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p3 = mapInfo.getCooldownMultiplier(team);
                     s3 = Math.sqrt(l3.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1587,7 +1588,7 @@ public class Navigation {
             if (rc.canSenseLocation(l47)) {
                 MapInfo mapInfo = rc.senseMapInfo(l47);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p47 = mapInfo.getCooldownMultiplier(team);
                     s47 = Math.sqrt(l47.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1622,7 +1623,7 @@ public class Navigation {
             if (rc.canSenseLocation(l29)) {
                 MapInfo mapInfo = rc.senseMapInfo(l29);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p29 = mapInfo.getCooldownMultiplier(team);
                     s29 = Math.sqrt(l29.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1657,7 +1658,7 @@ public class Navigation {
             if (rc.canSenseLocation(l67)) {
                 MapInfo mapInfo = rc.senseMapInfo(l67);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p67 = mapInfo.getCooldownMultiplier(team);
                     s67 = Math.sqrt(l67.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1692,7 +1693,7 @@ public class Navigation {
             if (rc.canSenseLocation(l68)) {
                 MapInfo mapInfo = rc.senseMapInfo(l68);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p68 = mapInfo.getCooldownMultiplier(team);
                     s68 = Math.sqrt(l68.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1727,7 +1728,7 @@ public class Navigation {
             if (rc.canSenseLocation(l4)) {
                 MapInfo mapInfo = rc.senseMapInfo(l4);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p4 = mapInfo.getCooldownMultiplier(team);
                     s4 = Math.sqrt(l4.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1762,7 +1763,7 @@ public class Navigation {
             if (rc.canSenseLocation(l56)) {
                 MapInfo mapInfo = rc.senseMapInfo(l56);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p56 = mapInfo.getCooldownMultiplier(team);
                     s56 = Math.sqrt(l56.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1797,7 +1798,7 @@ public class Navigation {
             if (rc.canSenseLocation(l20)) {
                 MapInfo mapInfo = rc.senseMapInfo(l20);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p20 = mapInfo.getCooldownMultiplier(team);
                     s20 = Math.sqrt(l20.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -1827,237 +1828,239 @@ public class Navigation {
                 d20 = d28;
             }
         }
-    
-        int dx = targetLocation.x - l34.x;
-        int dy = targetLocation.y - l34.y;
+        if (!rc.senseCloud(currentLocation) || currentLocation.distanceSquaredTo(targetLocation) <= 4) {
+        
+            int dx = targetLocation.x - l34.x;
+            int dy = targetLocation.y - l34.y;
 
-        switch(dx) {
-            case -4:
-                switch(dy) {
-                    case 0:
-                        if (v2 < 1000000) {
-                            bug.reset();
-                            return d2;
-                        } break;
-                    case 1:
-                        if (v3 < 1000000) {
-                            bug.reset();
-                            return d3;
-                        } break;
-                    case 2:
-                        if (v4 < 1000000) {
-                            bug.reset();
-                            return d4;
-                        } break;
-                } break;
+            switch(dx) {
+                case -4:
+                    switch(dy) {
+                        case 0:
+                            if (v2 < 1000000) {
+                                bug.reset();
+                                return d2;
+                            } break;
+                        case 1:
+                            if (v3 < 1000000) {
+                                bug.reset();
+                                return d3;
+                            } break;
+                        case 2:
+                            if (v4 < 1000000) {
+                                bug.reset();
+                                return d4;
+                            } break;
+                    } break;
 
-            case -3:
-                switch(dy) {
-                    case 0:
-                        if (v8 < 1000000) {
-                            bug.reset();
-                            return d8;
-                        } break;
-                    case 1:
-                        if (v9 < 1000000) {
-                            bug.reset();
-                            return d9;
-                        } break;
-                    case 2:
-                        if (v10 < 1000000) {
-                            bug.reset();
-                            return d10;
-                        } break;
-                    case 3:
-                        if (v11 < 1000000) {
-                            bug.reset();
-                            return d11;
-                        } break;
-                } break;
+                case -3:
+                    switch(dy) {
+                        case 0:
+                            if (v8 < 1000000) {
+                                bug.reset();
+                                return d8;
+                            } break;
+                        case 1:
+                            if (v9 < 1000000) {
+                                bug.reset();
+                                return d9;
+                            } break;
+                        case 2:
+                            if (v10 < 1000000) {
+                                bug.reset();
+                                return d10;
+                            } break;
+                        case 3:
+                            if (v11 < 1000000) {
+                                bug.reset();
+                                return d11;
+                            } break;
+                    } break;
 
-            case -2:
-                switch(dy) {
-                    case 0:
-                        if (v16 < 1000000) {
-                            bug.reset();
-                            return d16;
-                        } break;
-                    case 1:
-                        if (v17 < 1000000) {
-                            bug.reset();
-                            return d17;
-                        } break;
-                    case 2:
-                        if (v18 < 1000000) {
-                            bug.reset();
-                            return d18;
-                        } break;
-                    case 3:
-                        if (v19 < 1000000) {
-                            bug.reset();
-                            return d19;
-                        } break;
-                    case 4:
-                        if (v20 < 1000000) {
-                            bug.reset();
-                            return d20;
-                        } break;
-                } break;
+                case -2:
+                    switch(dy) {
+                        case 0:
+                            if (v16 < 1000000) {
+                                bug.reset();
+                                return d16;
+                            } break;
+                        case 1:
+                            if (v17 < 1000000) {
+                                bug.reset();
+                                return d17;
+                            } break;
+                        case 2:
+                            if (v18 < 1000000) {
+                                bug.reset();
+                                return d18;
+                            } break;
+                        case 3:
+                            if (v19 < 1000000) {
+                                bug.reset();
+                                return d19;
+                            } break;
+                        case 4:
+                            if (v20 < 1000000) {
+                                bug.reset();
+                                return d20;
+                            } break;
+                    } break;
 
-            case -1:
-                switch(dy) {
-                    case 0:
-                        if (v25 < 1000000) {
-                            bug.reset();
-                            return d25;
-                        } break;
-                    case 1:
-                        if (v26 < 1000000) {
-                            bug.reset();
-                            return d26;
-                        } break;
-                    case 2:
-                        if (v27 < 1000000) {
-                            bug.reset();
-                            return d27;
-                        } break;
-                    case 3:
-                        if (v28 < 1000000) {
-                            bug.reset();
-                            return d28;
-                        } break;
-                    case 4:
-                        if (v29 < 1000000) {
-                            bug.reset();
-                            return d29;
-                        } break;
-                } break;
+                case -1:
+                    switch(dy) {
+                        case 0:
+                            if (v25 < 1000000) {
+                                bug.reset();
+                                return d25;
+                            } break;
+                        case 1:
+                            if (v26 < 1000000) {
+                                bug.reset();
+                                return d26;
+                            } break;
+                        case 2:
+                            if (v27 < 1000000) {
+                                bug.reset();
+                                return d27;
+                            } break;
+                        case 3:
+                            if (v28 < 1000000) {
+                                bug.reset();
+                                return d28;
+                            } break;
+                        case 4:
+                            if (v29 < 1000000) {
+                                bug.reset();
+                                return d29;
+                            } break;
+                    } break;
 
-            case 0:
-                switch(dy) {
-                    case 1:
-                        if (v35 < 1000000) {
-                            bug.reset();
-                            return d35;
-                        } break;
-                    case 2:
-                        if (v36 < 1000000) {
-                            bug.reset();
-                            return d36;
-                        } break;
-                    case 3:
-                        if (v37 < 1000000) {
-                            bug.reset();
-                            return d37;
-                        } break;
-                    case 4:
-                        if (v38 < 1000000) {
-                            bug.reset();
-                            return d38;
-                        } break;
-                } break;
+                case 0:
+                    switch(dy) {
+                        case 1:
+                            if (v35 < 1000000) {
+                                bug.reset();
+                                return d35;
+                            } break;
+                        case 2:
+                            if (v36 < 1000000) {
+                                bug.reset();
+                                return d36;
+                            } break;
+                        case 3:
+                            if (v37 < 1000000) {
+                                bug.reset();
+                                return d37;
+                            } break;
+                        case 4:
+                            if (v38 < 1000000) {
+                                bug.reset();
+                                return d38;
+                            } break;
+                    } break;
 
-            case 1:
-                switch(dy) {
-                    case 0:
-                        if (v43 < 1000000) {
-                            bug.reset();
-                            return d43;
-                        } break;
-                    case 1:
-                        if (v44 < 1000000) {
-                            bug.reset();
-                            return d44;
-                        } break;
-                    case 2:
-                        if (v45 < 1000000) {
-                            bug.reset();
-                            return d45;
-                        } break;
-                    case 3:
-                        if (v46 < 1000000) {
-                            bug.reset();
-                            return d46;
-                        } break;
-                    case 4:
-                        if (v47 < 1000000) {
-                            bug.reset();
-                            return d47;
-                        } break;
-                } break;
+                case 1:
+                    switch(dy) {
+                        case 0:
+                            if (v43 < 1000000) {
+                                bug.reset();
+                                return d43;
+                            } break;
+                        case 1:
+                            if (v44 < 1000000) {
+                                bug.reset();
+                                return d44;
+                            } break;
+                        case 2:
+                            if (v45 < 1000000) {
+                                bug.reset();
+                                return d45;
+                            } break;
+                        case 3:
+                            if (v46 < 1000000) {
+                                bug.reset();
+                                return d46;
+                            } break;
+                        case 4:
+                            if (v47 < 1000000) {
+                                bug.reset();
+                                return d47;
+                            } break;
+                    } break;
 
-            case 2:
-                switch(dy) {
-                    case 0:
-                        if (v52 < 1000000) {
-                            bug.reset();
-                            return d52;
-                        } break;
-                    case 1:
-                        if (v53 < 1000000) {
-                            bug.reset();
-                            return d53;
-                        } break;
-                    case 2:
-                        if (v54 < 1000000) {
-                            bug.reset();
-                            return d54;
-                        } break;
-                    case 3:
-                        if (v55 < 1000000) {
-                            bug.reset();
-                            return d55;
-                        } break;
-                    case 4:
-                        if (v56 < 1000000) {
-                            bug.reset();
-                            return d56;
-                        } break;
-                } break;
+                case 2:
+                    switch(dy) {
+                        case 0:
+                            if (v52 < 1000000) {
+                                bug.reset();
+                                return d52;
+                            } break;
+                        case 1:
+                            if (v53 < 1000000) {
+                                bug.reset();
+                                return d53;
+                            } break;
+                        case 2:
+                            if (v54 < 1000000) {
+                                bug.reset();
+                                return d54;
+                            } break;
+                        case 3:
+                            if (v55 < 1000000) {
+                                bug.reset();
+                                return d55;
+                            } break;
+                        case 4:
+                            if (v56 < 1000000) {
+                                bug.reset();
+                                return d56;
+                            } break;
+                    } break;
 
-            case 3:
-                switch(dy) {
-                    case 0:
-                        if (v60 < 1000000) {
-                            bug.reset();
-                            return d60;
-                        } break;
-                    case 1:
-                        if (v61 < 1000000) {
-                            bug.reset();
-                            return d61;
-                        } break;
-                    case 2:
-                        if (v62 < 1000000) {
-                            bug.reset();
-                            return d62;
-                        } break;
-                    case 3:
-                        if (v63 < 1000000) {
-                            bug.reset();
-                            return d63;
-                        } break;
-                } break;
+                case 3:
+                    switch(dy) {
+                        case 0:
+                            if (v60 < 1000000) {
+                                bug.reset();
+                                return d60;
+                            } break;
+                        case 1:
+                            if (v61 < 1000000) {
+                                bug.reset();
+                                return d61;
+                            } break;
+                        case 2:
+                            if (v62 < 1000000) {
+                                bug.reset();
+                                return d62;
+                            } break;
+                        case 3:
+                            if (v63 < 1000000) {
+                                bug.reset();
+                                return d63;
+                            } break;
+                    } break;
 
-            case 4:
-                switch(dy) {
-                    case 0:
-                        if (v66 < 1000000) {
-                            bug.reset();
-                            return d66;
-                        } break;
-                    case 1:
-                        if (v67 < 1000000) {
-                            bug.reset();
-                            return d67;
-                        } break;
-                    case 2:
-                        if (v68 < 1000000) {
-                            bug.reset();
-                            return d68;
-                        } break;
-                } break;
+                case 4:
+                    switch(dy) {
+                        case 0:
+                            if (v66 < 1000000) {
+                                bug.reset();
+                                return d66;
+                            } break;
+                        case 1:
+                            if (v67 < 1000000) {
+                                bug.reset();
+                                return d67;
+                            } break;
+                        case 2:
+                            if (v68 < 1000000) {
+                                bug.reset();
+                                return d68;
+                            } break;
+                    } break;
 
+            }
         }
     
         Direction ans = Direction.CENTER;
@@ -2310,6 +2313,7 @@ public class Navigation {
     private Direction getBestDirection1() throws GameActionException {
         double localBest = 1000000.0;
         double dist = 0.0;
+	    boolean gothroughCurrent = rc.getType() == RobotType.CARRIER && rc.getWeight() < 3;
         l34 = currentLocation;
         v34 = 0;
         d43 = null;
@@ -2503,7 +2507,7 @@ public class Navigation {
             if (rc.canSenseLocation(l35)) {
                 MapInfo mapInfo = rc.senseMapInfo(l35);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l35), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l35), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p35 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -2527,7 +2531,7 @@ public class Navigation {
             if (rc.canSenseLocation(l43)) {
                 MapInfo mapInfo = rc.senseMapInfo(l43);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l43), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l43), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p43 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -2551,7 +2555,7 @@ public class Navigation {
             if (rc.canSenseLocation(l42)) {
                 MapInfo mapInfo = rc.senseMapInfo(l42);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l42), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l42), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p42 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -2575,7 +2579,7 @@ public class Navigation {
             if (rc.canSenseLocation(l44)) {
                 MapInfo mapInfo = rc.senseMapInfo(l44);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l44), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l44), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p44 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -2604,7 +2608,7 @@ public class Navigation {
             if (rc.canSenseLocation(l26)) {
                 MapInfo mapInfo = rc.senseMapInfo(l26);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l26), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l26), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p26 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -2628,7 +2632,7 @@ public class Navigation {
             if (rc.canSenseLocation(l36)) {
                 MapInfo mapInfo = rc.senseMapInfo(l36);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p36 = mapInfo.getCooldownMultiplier(team);
                     s36 = Math.sqrt(l36.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2658,7 +2662,7 @@ public class Navigation {
             if (rc.canSenseLocation(l52)) {
                 MapInfo mapInfo = rc.senseMapInfo(l52);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p52 = mapInfo.getCooldownMultiplier(team);
                     s52 = Math.sqrt(l52.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2688,7 +2692,7 @@ public class Navigation {
             if (rc.canSenseLocation(l53)) {
                 MapInfo mapInfo = rc.senseMapInfo(l53);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p53 = mapInfo.getCooldownMultiplier(team);
                     s53 = Math.sqrt(l53.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2723,7 +2727,7 @@ public class Navigation {
             if (rc.canSenseLocation(l51)) {
                 MapInfo mapInfo = rc.senseMapInfo(l51);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p51 = mapInfo.getCooldownMultiplier(team);
                     s51 = Math.sqrt(l51.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2753,7 +2757,7 @@ public class Navigation {
             if (rc.canSenseLocation(l27)) {
                 MapInfo mapInfo = rc.senseMapInfo(l27);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p27 = mapInfo.getCooldownMultiplier(team);
                     s27 = Math.sqrt(l27.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2783,7 +2787,7 @@ public class Navigation {
             if (rc.canSenseLocation(l45)) {
                 MapInfo mapInfo = rc.senseMapInfo(l45);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p45 = mapInfo.getCooldownMultiplier(team);
                     s45 = Math.sqrt(l45.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2818,7 +2822,7 @@ public class Navigation {
             if (rc.canSenseLocation(l18)) {
                 MapInfo mapInfo = rc.senseMapInfo(l18);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p18 = mapInfo.getCooldownMultiplier(team);
                     s18 = Math.sqrt(l18.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2843,7 +2847,7 @@ public class Navigation {
             if (rc.canSenseLocation(l50)) {
                 MapInfo mapInfo = rc.senseMapInfo(l50);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p50 = mapInfo.getCooldownMultiplier(team);
                     s50 = Math.sqrt(l50.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2868,7 +2872,7 @@ public class Navigation {
             if (rc.canSenseLocation(l54)) {
                 MapInfo mapInfo = rc.senseMapInfo(l54);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p54 = mapInfo.getCooldownMultiplier(team);
                     s54 = Math.sqrt(l54.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2898,7 +2902,7 @@ public class Navigation {
             if (rc.canSenseLocation(l37)) {
                 MapInfo mapInfo = rc.senseMapInfo(l37);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p37 = mapInfo.getCooldownMultiplier(team);
                     s37 = Math.sqrt(l37.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2928,7 +2932,7 @@ public class Navigation {
             if (rc.canSenseLocation(l60)) {
                 MapInfo mapInfo = rc.senseMapInfo(l60);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p60 = mapInfo.getCooldownMultiplier(team);
                     s60 = Math.sqrt(l60.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2958,7 +2962,7 @@ public class Navigation {
             if (rc.canSenseLocation(l59)) {
                 MapInfo mapInfo = rc.senseMapInfo(l59);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p59 = mapInfo.getCooldownMultiplier(team);
                     s59 = Math.sqrt(l59.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -2993,7 +2997,7 @@ public class Navigation {
             if (rc.canSenseLocation(l28)) {
                 MapInfo mapInfo = rc.senseMapInfo(l28);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p28 = mapInfo.getCooldownMultiplier(team);
                     s28 = Math.sqrt(l28.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3028,7 +3032,7 @@ public class Navigation {
             if (rc.canSenseLocation(l46)) {
                 MapInfo mapInfo = rc.senseMapInfo(l46);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p46 = mapInfo.getCooldownMultiplier(team);
                     s46 = Math.sqrt(l46.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3063,7 +3067,7 @@ public class Navigation {
             if (rc.canSenseLocation(l61)) {
                 MapInfo mapInfo = rc.senseMapInfo(l61);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p61 = mapInfo.getCooldownMultiplier(team);
                     s61 = Math.sqrt(l61.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3098,7 +3102,7 @@ public class Navigation {
             if (rc.canSenseLocation(l62)) {
                 MapInfo mapInfo = rc.senseMapInfo(l62);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p62 = mapInfo.getCooldownMultiplier(team);
                     s62 = Math.sqrt(l62.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3133,7 +3137,7 @@ public class Navigation {
             if (rc.canSenseLocation(l58)) {
                 MapInfo mapInfo = rc.senseMapInfo(l58);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p58 = mapInfo.getCooldownMultiplier(team);
                     s58 = Math.sqrt(l58.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3163,7 +3167,7 @@ public class Navigation {
             if (rc.canSenseLocation(l19)) {
                 MapInfo mapInfo = rc.senseMapInfo(l19);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p19 = mapInfo.getCooldownMultiplier(team);
                     s19 = Math.sqrt(l19.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3193,7 +3197,7 @@ public class Navigation {
             if (rc.canSenseLocation(l55)) {
                 MapInfo mapInfo = rc.senseMapInfo(l55);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p55 = mapInfo.getCooldownMultiplier(team);
                     s55 = Math.sqrt(l55.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3228,7 +3232,7 @@ public class Navigation {
             if (rc.canSenseLocation(l63)) {
                 MapInfo mapInfo = rc.senseMapInfo(l63);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p63 = mapInfo.getCooldownMultiplier(team);
                     s63 = Math.sqrt(l63.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3258,7 +3262,7 @@ public class Navigation {
             if (rc.canSenseLocation(l57)) {
                 MapInfo mapInfo = rc.senseMapInfo(l57);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p57 = mapInfo.getCooldownMultiplier(team);
                     s57 = Math.sqrt(l57.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3283,7 +3287,7 @@ public class Navigation {
             if (rc.canSenseLocation(l11)) {
                 MapInfo mapInfo = rc.senseMapInfo(l11);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p11 = mapInfo.getCooldownMultiplier(team);
                     s11 = Math.sqrt(l11.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3308,7 +3312,7 @@ public class Navigation {
             if (rc.canSenseLocation(l66)) {
                 MapInfo mapInfo = rc.senseMapInfo(l66);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p66 = mapInfo.getCooldownMultiplier(team);
                     s66 = Math.sqrt(l66.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3338,7 +3342,7 @@ public class Navigation {
             if (rc.canSenseLocation(l38)) {
                 MapInfo mapInfo = rc.senseMapInfo(l38);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p38 = mapInfo.getCooldownMultiplier(team);
                     s38 = Math.sqrt(l38.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3368,7 +3372,7 @@ public class Navigation {
             if (rc.canSenseLocation(l29)) {
                 MapInfo mapInfo = rc.senseMapInfo(l29);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p29 = mapInfo.getCooldownMultiplier(team);
                     s29 = Math.sqrt(l29.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3403,7 +3407,7 @@ public class Navigation {
             if (rc.canSenseLocation(l67)) {
                 MapInfo mapInfo = rc.senseMapInfo(l67);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p67 = mapInfo.getCooldownMultiplier(team);
                     s67 = Math.sqrt(l67.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3438,7 +3442,7 @@ public class Navigation {
             if (rc.canSenseLocation(l47)) {
                 MapInfo mapInfo = rc.senseMapInfo(l47);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p47 = mapInfo.getCooldownMultiplier(team);
                     s47 = Math.sqrt(l47.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3473,7 +3477,7 @@ public class Navigation {
             if (rc.canSenseLocation(l65)) {
                 MapInfo mapInfo = rc.senseMapInfo(l65);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p65 = mapInfo.getCooldownMultiplier(team);
                     s65 = Math.sqrt(l65.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3508,7 +3512,7 @@ public class Navigation {
             if (rc.canSenseLocation(l68)) {
                 MapInfo mapInfo = rc.senseMapInfo(l68);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p68 = mapInfo.getCooldownMultiplier(team);
                     s68 = Math.sqrt(l68.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3543,7 +3547,7 @@ public class Navigation {
             if (rc.canSenseLocation(l64)) {
                 MapInfo mapInfo = rc.senseMapInfo(l64);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p64 = mapInfo.getCooldownMultiplier(team);
                     s64 = Math.sqrt(l64.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3578,7 +3582,7 @@ public class Navigation {
             if (rc.canSenseLocation(l56)) {
                 MapInfo mapInfo = rc.senseMapInfo(l56);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p56 = mapInfo.getCooldownMultiplier(team);
                     s56 = Math.sqrt(l56.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3613,7 +3617,7 @@ public class Navigation {
             if (rc.canSenseLocation(l20)) {
                 MapInfo mapInfo = rc.senseMapInfo(l20);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p20 = mapInfo.getCooldownMultiplier(team);
                     s20 = Math.sqrt(l20.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -3643,232 +3647,234 @@ public class Navigation {
                 d20 = d28;
             }
         }
-    
-        int dx = targetLocation.x - l34.x;
-        int dy = targetLocation.y - l34.y;
+        if (!rc.senseCloud(currentLocation) || currentLocation.distanceSquaredTo(targetLocation) <= 4) {
+        
+            int dx = targetLocation.x - l34.x;
+            int dy = targetLocation.y - l34.y;
 
-        switch(dx) {
-            case -4:
-                switch(dy) {
-                } break;
+            switch(dx) {
+                case -4:
+                    switch(dy) {
+                    } break;
 
-            case -3:
-                switch(dy) {
-                    case 3:
-                        if (v11 < 1000000) {
-                            bug.reset();
-                            return d11;
-                        } break;
-                } break;
+                case -3:
+                    switch(dy) {
+                        case 3:
+                            if (v11 < 1000000) {
+                                bug.reset();
+                                return d11;
+                            } break;
+                    } break;
 
-            case -2:
-                switch(dy) {
-                    case 2:
-                        if (v18 < 1000000) {
-                            bug.reset();
-                            return d18;
-                        } break;
-                    case 3:
-                        if (v19 < 1000000) {
-                            bug.reset();
-                            return d19;
-                        } break;
-                    case 4:
-                        if (v20 < 1000000) {
-                            bug.reset();
-                            return d20;
-                        } break;
-                } break;
+                case -2:
+                    switch(dy) {
+                        case 2:
+                            if (v18 < 1000000) {
+                                bug.reset();
+                                return d18;
+                            } break;
+                        case 3:
+                            if (v19 < 1000000) {
+                                bug.reset();
+                                return d19;
+                            } break;
+                        case 4:
+                            if (v20 < 1000000) {
+                                bug.reset();
+                                return d20;
+                            } break;
+                    } break;
 
-            case -1:
-                switch(dy) {
-                    case 1:
-                        if (v26 < 1000000) {
-                            bug.reset();
-                            return d26;
-                        } break;
-                    case 2:
-                        if (v27 < 1000000) {
-                            bug.reset();
-                            return d27;
-                        } break;
-                    case 3:
-                        if (v28 < 1000000) {
-                            bug.reset();
-                            return d28;
-                        } break;
-                    case 4:
-                        if (v29 < 1000000) {
-                            bug.reset();
-                            return d29;
-                        } break;
-                } break;
+                case -1:
+                    switch(dy) {
+                        case 1:
+                            if (v26 < 1000000) {
+                                bug.reset();
+                                return d26;
+                            } break;
+                        case 2:
+                            if (v27 < 1000000) {
+                                bug.reset();
+                                return d27;
+                            } break;
+                        case 3:
+                            if (v28 < 1000000) {
+                                bug.reset();
+                                return d28;
+                            } break;
+                        case 4:
+                            if (v29 < 1000000) {
+                                bug.reset();
+                                return d29;
+                            } break;
+                    } break;
 
-            case 0:
-                switch(dy) {
-                    case 1:
-                        if (v35 < 1000000) {
-                            bug.reset();
-                            return d35;
-                        } break;
-                    case 2:
-                        if (v36 < 1000000) {
-                            bug.reset();
-                            return d36;
-                        } break;
-                    case 3:
-                        if (v37 < 1000000) {
-                            bug.reset();
-                            return d37;
-                        } break;
-                    case 4:
-                        if (v38 < 1000000) {
-                            bug.reset();
-                            return d38;
-                        } break;
-                } break;
+                case 0:
+                    switch(dy) {
+                        case 1:
+                            if (v35 < 1000000) {
+                                bug.reset();
+                                return d35;
+                            } break;
+                        case 2:
+                            if (v36 < 1000000) {
+                                bug.reset();
+                                return d36;
+                            } break;
+                        case 3:
+                            if (v37 < 1000000) {
+                                bug.reset();
+                                return d37;
+                            } break;
+                        case 4:
+                            if (v38 < 1000000) {
+                                bug.reset();
+                                return d38;
+                            } break;
+                    } break;
 
-            case 1:
-                switch(dy) {
-                    case -1:
-                        if (v42 < 1000000) {
-                            bug.reset();
-                            return d42;
-                        } break;
-                    case 0:
-                        if (v43 < 1000000) {
-                            bug.reset();
-                            return d43;
-                        } break;
-                    case 1:
-                        if (v44 < 1000000) {
-                            bug.reset();
-                            return d44;
-                        } break;
-                    case 2:
-                        if (v45 < 1000000) {
-                            bug.reset();
-                            return d45;
-                        } break;
-                    case 3:
-                        if (v46 < 1000000) {
-                            bug.reset();
-                            return d46;
-                        } break;
-                    case 4:
-                        if (v47 < 1000000) {
-                            bug.reset();
-                            return d47;
-                        } break;
-                } break;
+                case 1:
+                    switch(dy) {
+                        case -1:
+                            if (v42 < 1000000) {
+                                bug.reset();
+                                return d42;
+                            } break;
+                        case 0:
+                            if (v43 < 1000000) {
+                                bug.reset();
+                                return d43;
+                            } break;
+                        case 1:
+                            if (v44 < 1000000) {
+                                bug.reset();
+                                return d44;
+                            } break;
+                        case 2:
+                            if (v45 < 1000000) {
+                                bug.reset();
+                                return d45;
+                            } break;
+                        case 3:
+                            if (v46 < 1000000) {
+                                bug.reset();
+                                return d46;
+                            } break;
+                        case 4:
+                            if (v47 < 1000000) {
+                                bug.reset();
+                                return d47;
+                            } break;
+                    } break;
 
-            case 2:
-                switch(dy) {
-                    case -2:
-                        if (v50 < 1000000) {
-                            bug.reset();
-                            return d50;
-                        } break;
-                    case -1:
-                        if (v51 < 1000000) {
-                            bug.reset();
-                            return d51;
-                        } break;
-                    case 0:
-                        if (v52 < 1000000) {
-                            bug.reset();
-                            return d52;
-                        } break;
-                    case 1:
-                        if (v53 < 1000000) {
-                            bug.reset();
-                            return d53;
-                        } break;
-                    case 2:
-                        if (v54 < 1000000) {
-                            bug.reset();
-                            return d54;
-                        } break;
-                    case 3:
-                        if (v55 < 1000000) {
-                            bug.reset();
-                            return d55;
-                        } break;
-                    case 4:
-                        if (v56 < 1000000) {
-                            bug.reset();
-                            return d56;
-                        } break;
-                } break;
+                case 2:
+                    switch(dy) {
+                        case -2:
+                            if (v50 < 1000000) {
+                                bug.reset();
+                                return d50;
+                            } break;
+                        case -1:
+                            if (v51 < 1000000) {
+                                bug.reset();
+                                return d51;
+                            } break;
+                        case 0:
+                            if (v52 < 1000000) {
+                                bug.reset();
+                                return d52;
+                            } break;
+                        case 1:
+                            if (v53 < 1000000) {
+                                bug.reset();
+                                return d53;
+                            } break;
+                        case 2:
+                            if (v54 < 1000000) {
+                                bug.reset();
+                                return d54;
+                            } break;
+                        case 3:
+                            if (v55 < 1000000) {
+                                bug.reset();
+                                return d55;
+                            } break;
+                        case 4:
+                            if (v56 < 1000000) {
+                                bug.reset();
+                                return d56;
+                            } break;
+                    } break;
 
-            case 3:
-                switch(dy) {
-                    case -3:
-                        if (v57 < 1000000) {
-                            bug.reset();
-                            return d57;
-                        } break;
-                    case -2:
-                        if (v58 < 1000000) {
-                            bug.reset();
-                            return d58;
-                        } break;
-                    case -1:
-                        if (v59 < 1000000) {
-                            bug.reset();
-                            return d59;
-                        } break;
-                    case 0:
-                        if (v60 < 1000000) {
-                            bug.reset();
-                            return d60;
-                        } break;
-                    case 1:
-                        if (v61 < 1000000) {
-                            bug.reset();
-                            return d61;
-                        } break;
-                    case 2:
-                        if (v62 < 1000000) {
-                            bug.reset();
-                            return d62;
-                        } break;
-                    case 3:
-                        if (v63 < 1000000) {
-                            bug.reset();
-                            return d63;
-                        } break;
-                } break;
+                case 3:
+                    switch(dy) {
+                        case -3:
+                            if (v57 < 1000000) {
+                                bug.reset();
+                                return d57;
+                            } break;
+                        case -2:
+                            if (v58 < 1000000) {
+                                bug.reset();
+                                return d58;
+                            } break;
+                        case -1:
+                            if (v59 < 1000000) {
+                                bug.reset();
+                                return d59;
+                            } break;
+                        case 0:
+                            if (v60 < 1000000) {
+                                bug.reset();
+                                return d60;
+                            } break;
+                        case 1:
+                            if (v61 < 1000000) {
+                                bug.reset();
+                                return d61;
+                            } break;
+                        case 2:
+                            if (v62 < 1000000) {
+                                bug.reset();
+                                return d62;
+                            } break;
+                        case 3:
+                            if (v63 < 1000000) {
+                                bug.reset();
+                                return d63;
+                            } break;
+                    } break;
 
-            case 4:
-                switch(dy) {
-                    case -2:
-                        if (v64 < 1000000) {
-                            bug.reset();
-                            return d64;
-                        } break;
-                    case -1:
-                        if (v65 < 1000000) {
-                            bug.reset();
-                            return d65;
-                        } break;
-                    case 0:
-                        if (v66 < 1000000) {
-                            bug.reset();
-                            return d66;
-                        } break;
-                    case 1:
-                        if (v67 < 1000000) {
-                            bug.reset();
-                            return d67;
-                        } break;
-                    case 2:
-                        if (v68 < 1000000) {
-                            bug.reset();
-                            return d68;
-                        } break;
-                } break;
+                case 4:
+                    switch(dy) {
+                        case -2:
+                            if (v64 < 1000000) {
+                                bug.reset();
+                                return d64;
+                            } break;
+                        case -1:
+                            if (v65 < 1000000) {
+                                bug.reset();
+                                return d65;
+                            } break;
+                        case 0:
+                            if (v66 < 1000000) {
+                                bug.reset();
+                                return d66;
+                            } break;
+                        case 1:
+                            if (v67 < 1000000) {
+                                bug.reset();
+                                return d67;
+                            } break;
+                        case 2:
+                            if (v68 < 1000000) {
+                                bug.reset();
+                                return d68;
+                            } break;
+                    } break;
 
+            }
         }
     
         Direction ans = Direction.CENTER;
@@ -4115,6 +4121,7 @@ public class Navigation {
     private Direction getBestDirection2() throws GameActionException {
         double localBest = 1000000.0;
         double dist = 0.0;
+	    boolean gothroughCurrent = rc.getType() == RobotType.CARRIER && rc.getWeight() < 3;
         l34 = currentLocation;
         v34 = 0;
         d43 = null;
@@ -4313,7 +4320,7 @@ public class Navigation {
             if (rc.canSenseLocation(l33)) {
                 MapInfo mapInfo = rc.senseMapInfo(l33);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l33), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l33), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p33 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -4337,7 +4344,7 @@ public class Navigation {
             if (rc.canSenseLocation(l35)) {
                 MapInfo mapInfo = rc.senseMapInfo(l35);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l35), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l35), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p35 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -4361,7 +4368,7 @@ public class Navigation {
             if (rc.canSenseLocation(l43)) {
                 MapInfo mapInfo = rc.senseMapInfo(l43);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l43), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l43), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p43 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -4390,7 +4397,7 @@ public class Navigation {
             if (rc.canSenseLocation(l42)) {
                 MapInfo mapInfo = rc.senseMapInfo(l42);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l42), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l42), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p42 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -4419,7 +4426,7 @@ public class Navigation {
             if (rc.canSenseLocation(l44)) {
                 MapInfo mapInfo = rc.senseMapInfo(l44);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l44), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l44), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p44 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -4448,7 +4455,7 @@ public class Navigation {
             if (rc.canSenseLocation(l32)) {
                 MapInfo mapInfo = rc.senseMapInfo(l32);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p32 = mapInfo.getCooldownMultiplier(team);
                     s32 = Math.sqrt(l32.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4473,7 +4480,7 @@ public class Navigation {
             if (rc.canSenseLocation(l52)) {
                 MapInfo mapInfo = rc.senseMapInfo(l52);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p52 = mapInfo.getCooldownMultiplier(team);
                     s52 = Math.sqrt(l52.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4503,7 +4510,7 @@ public class Navigation {
             if (rc.canSenseLocation(l36)) {
                 MapInfo mapInfo = rc.senseMapInfo(l36);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p36 = mapInfo.getCooldownMultiplier(team);
                     s36 = Math.sqrt(l36.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4528,7 +4535,7 @@ public class Navigation {
             if (rc.canSenseLocation(l51)) {
                 MapInfo mapInfo = rc.senseMapInfo(l51);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p51 = mapInfo.getCooldownMultiplier(team);
                     s51 = Math.sqrt(l51.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4563,7 +4570,7 @@ public class Navigation {
             if (rc.canSenseLocation(l45)) {
                 MapInfo mapInfo = rc.senseMapInfo(l45);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p45 = mapInfo.getCooldownMultiplier(team);
                     s45 = Math.sqrt(l45.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4598,7 +4605,7 @@ public class Navigation {
             if (rc.canSenseLocation(l53)) {
                 MapInfo mapInfo = rc.senseMapInfo(l53);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p53 = mapInfo.getCooldownMultiplier(team);
                     s53 = Math.sqrt(l53.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4633,7 +4640,7 @@ public class Navigation {
             if (rc.canSenseLocation(l41)) {
                 MapInfo mapInfo = rc.senseMapInfo(l41);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p41 = mapInfo.getCooldownMultiplier(team);
                     s41 = Math.sqrt(l41.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4668,7 +4675,7 @@ public class Navigation {
             if (rc.canSenseLocation(l50)) {
                 MapInfo mapInfo = rc.senseMapInfo(l50);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p50 = mapInfo.getCooldownMultiplier(team);
                     s50 = Math.sqrt(l50.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4698,7 +4705,7 @@ public class Navigation {
             if (rc.canSenseLocation(l54)) {
                 MapInfo mapInfo = rc.senseMapInfo(l54);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p54 = mapInfo.getCooldownMultiplier(team);
                     s54 = Math.sqrt(l54.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4728,7 +4735,7 @@ public class Navigation {
             if (rc.canSenseLocation(l31)) {
                 MapInfo mapInfo = rc.senseMapInfo(l31);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p31 = mapInfo.getCooldownMultiplier(team);
                     s31 = Math.sqrt(l31.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4753,7 +4760,7 @@ public class Navigation {
             if (rc.canSenseLocation(l60)) {
                 MapInfo mapInfo = rc.senseMapInfo(l60);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p60 = mapInfo.getCooldownMultiplier(team);
                     s60 = Math.sqrt(l60.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4783,7 +4790,7 @@ public class Navigation {
             if (rc.canSenseLocation(l37)) {
                 MapInfo mapInfo = rc.senseMapInfo(l37);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p37 = mapInfo.getCooldownMultiplier(team);
                     s37 = Math.sqrt(l37.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4808,7 +4815,7 @@ public class Navigation {
             if (rc.canSenseLocation(l40)) {
                 MapInfo mapInfo = rc.senseMapInfo(l40);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p40 = mapInfo.getCooldownMultiplier(team);
                     s40 = Math.sqrt(l40.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4843,7 +4850,7 @@ public class Navigation {
             if (rc.canSenseLocation(l46)) {
                 MapInfo mapInfo = rc.senseMapInfo(l46);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p46 = mapInfo.getCooldownMultiplier(team);
                     s46 = Math.sqrt(l46.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4878,7 +4885,7 @@ public class Navigation {
             if (rc.canSenseLocation(l61)) {
                 MapInfo mapInfo = rc.senseMapInfo(l61);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p61 = mapInfo.getCooldownMultiplier(team);
                     s61 = Math.sqrt(l61.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4913,7 +4920,7 @@ public class Navigation {
             if (rc.canSenseLocation(l59)) {
                 MapInfo mapInfo = rc.senseMapInfo(l59);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p59 = mapInfo.getCooldownMultiplier(team);
                     s59 = Math.sqrt(l59.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4948,7 +4955,7 @@ public class Navigation {
             if (rc.canSenseLocation(l62)) {
                 MapInfo mapInfo = rc.senseMapInfo(l62);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p62 = mapInfo.getCooldownMultiplier(team);
                     s62 = Math.sqrt(l62.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -4983,7 +4990,7 @@ public class Navigation {
             if (rc.canSenseLocation(l58)) {
                 MapInfo mapInfo = rc.senseMapInfo(l58);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p58 = mapInfo.getCooldownMultiplier(team);
                     s58 = Math.sqrt(l58.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5018,7 +5025,7 @@ public class Navigation {
             if (rc.canSenseLocation(l49)) {
                 MapInfo mapInfo = rc.senseMapInfo(l49);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p49 = mapInfo.getCooldownMultiplier(team);
                     s49 = Math.sqrt(l49.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5053,7 +5060,7 @@ public class Navigation {
             if (rc.canSenseLocation(l55)) {
                 MapInfo mapInfo = rc.senseMapInfo(l55);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p55 = mapInfo.getCooldownMultiplier(team);
                     s55 = Math.sqrt(l55.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5088,7 +5095,7 @@ public class Navigation {
             if (rc.canSenseLocation(l63)) {
                 MapInfo mapInfo = rc.senseMapInfo(l63);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p63 = mapInfo.getCooldownMultiplier(team);
                     s63 = Math.sqrt(l63.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5118,7 +5125,7 @@ public class Navigation {
             if (rc.canSenseLocation(l57)) {
                 MapInfo mapInfo = rc.senseMapInfo(l57);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p57 = mapInfo.getCooldownMultiplier(team);
                     s57 = Math.sqrt(l57.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5148,7 +5155,7 @@ public class Navigation {
             if (rc.canSenseLocation(l38)) {
                 MapInfo mapInfo = rc.senseMapInfo(l38);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p38 = mapInfo.getCooldownMultiplier(team);
                     s38 = Math.sqrt(l38.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5173,7 +5180,7 @@ public class Navigation {
             if (rc.canSenseLocation(l30)) {
                 MapInfo mapInfo = rc.senseMapInfo(l30);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p30 = mapInfo.getCooldownMultiplier(team);
                     s30 = Math.sqrt(l30.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5198,7 +5205,7 @@ public class Navigation {
             if (rc.canSenseLocation(l66)) {
                 MapInfo mapInfo = rc.senseMapInfo(l66);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p66 = mapInfo.getCooldownMultiplier(team);
                     s66 = Math.sqrt(l66.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5228,7 +5235,7 @@ public class Navigation {
             if (rc.canSenseLocation(l39)) {
                 MapInfo mapInfo = rc.senseMapInfo(l39);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p39 = mapInfo.getCooldownMultiplier(team);
                     s39 = Math.sqrt(l39.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5263,7 +5270,7 @@ public class Navigation {
             if (rc.canSenseLocation(l47)) {
                 MapInfo mapInfo = rc.senseMapInfo(l47);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p47 = mapInfo.getCooldownMultiplier(team);
                     s47 = Math.sqrt(l47.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5298,7 +5305,7 @@ public class Navigation {
             if (rc.canSenseLocation(l65)) {
                 MapInfo mapInfo = rc.senseMapInfo(l65);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p65 = mapInfo.getCooldownMultiplier(team);
                     s65 = Math.sqrt(l65.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5333,7 +5340,7 @@ public class Navigation {
             if (rc.canSenseLocation(l67)) {
                 MapInfo mapInfo = rc.senseMapInfo(l67);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p67 = mapInfo.getCooldownMultiplier(team);
                     s67 = Math.sqrt(l67.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5368,7 +5375,7 @@ public class Navigation {
             if (rc.canSenseLocation(l64)) {
                 MapInfo mapInfo = rc.senseMapInfo(l64);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p64 = mapInfo.getCooldownMultiplier(team);
                     s64 = Math.sqrt(l64.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5403,7 +5410,7 @@ public class Navigation {
             if (rc.canSenseLocation(l48)) {
                 MapInfo mapInfo = rc.senseMapInfo(l48);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p48 = mapInfo.getCooldownMultiplier(team);
                     s48 = Math.sqrt(l48.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5438,7 +5445,7 @@ public class Navigation {
             if (rc.canSenseLocation(l68)) {
                 MapInfo mapInfo = rc.senseMapInfo(l68);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p68 = mapInfo.getCooldownMultiplier(team);
                     s68 = Math.sqrt(l68.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5473,7 +5480,7 @@ public class Navigation {
             if (rc.canSenseLocation(l56)) {
                 MapInfo mapInfo = rc.senseMapInfo(l56);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p56 = mapInfo.getCooldownMultiplier(team);
                     s56 = Math.sqrt(l56.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -5503,237 +5510,239 @@ public class Navigation {
                 d56 = d63;
             }
         }
-    
-        int dx = targetLocation.x - l34.x;
-        int dy = targetLocation.y - l34.y;
+        if (!rc.senseCloud(currentLocation) || currentLocation.distanceSquaredTo(targetLocation) <= 4) {
+        
+            int dx = targetLocation.x - l34.x;
+            int dy = targetLocation.y - l34.y;
 
-        switch(dx) {
-            case -4:
-                switch(dy) {
-                } break;
+            switch(dx) {
+                case -4:
+                    switch(dy) {
+                    } break;
 
-            case -3:
-                switch(dy) {
-                } break;
+                case -3:
+                    switch(dy) {
+                    } break;
 
-            case -2:
-                switch(dy) {
-                } break;
+                case -2:
+                    switch(dy) {
+                    } break;
 
-            case -1:
-                switch(dy) {
-                } break;
+                case -1:
+                    switch(dy) {
+                    } break;
 
-            case 0:
-                switch(dy) {
-                    case -4:
-                        if (v30 < 1000000) {
-                            bug.reset();
-                            return d30;
-                        } break;
-                    case -3:
-                        if (v31 < 1000000) {
-                            bug.reset();
-                            return d31;
-                        } break;
-                    case -2:
-                        if (v32 < 1000000) {
-                            bug.reset();
-                            return d32;
-                        } break;
-                    case -1:
-                        if (v33 < 1000000) {
-                            bug.reset();
-                            return d33;
-                        } break;
-                    case 1:
-                        if (v35 < 1000000) {
-                            bug.reset();
-                            return d35;
-                        } break;
-                    case 2:
-                        if (v36 < 1000000) {
-                            bug.reset();
-                            return d36;
-                        } break;
-                    case 3:
-                        if (v37 < 1000000) {
-                            bug.reset();
-                            return d37;
-                        } break;
-                    case 4:
-                        if (v38 < 1000000) {
-                            bug.reset();
-                            return d38;
-                        } break;
-                } break;
+                case 0:
+                    switch(dy) {
+                        case -4:
+                            if (v30 < 1000000) {
+                                bug.reset();
+                                return d30;
+                            } break;
+                        case -3:
+                            if (v31 < 1000000) {
+                                bug.reset();
+                                return d31;
+                            } break;
+                        case -2:
+                            if (v32 < 1000000) {
+                                bug.reset();
+                                return d32;
+                            } break;
+                        case -1:
+                            if (v33 < 1000000) {
+                                bug.reset();
+                                return d33;
+                            } break;
+                        case 1:
+                            if (v35 < 1000000) {
+                                bug.reset();
+                                return d35;
+                            } break;
+                        case 2:
+                            if (v36 < 1000000) {
+                                bug.reset();
+                                return d36;
+                            } break;
+                        case 3:
+                            if (v37 < 1000000) {
+                                bug.reset();
+                                return d37;
+                            } break;
+                        case 4:
+                            if (v38 < 1000000) {
+                                bug.reset();
+                                return d38;
+                            } break;
+                    } break;
 
-            case 1:
-                switch(dy) {
-                    case -4:
-                        if (v39 < 1000000) {
-                            bug.reset();
-                            return d39;
-                        } break;
-                    case -3:
-                        if (v40 < 1000000) {
-                            bug.reset();
-                            return d40;
-                        } break;
-                    case -2:
-                        if (v41 < 1000000) {
-                            bug.reset();
-                            return d41;
-                        } break;
-                    case -1:
-                        if (v42 < 1000000) {
-                            bug.reset();
-                            return d42;
-                        } break;
-                    case 0:
-                        if (v43 < 1000000) {
-                            bug.reset();
-                            return d43;
-                        } break;
-                    case 1:
-                        if (v44 < 1000000) {
-                            bug.reset();
-                            return d44;
-                        } break;
-                    case 2:
-                        if (v45 < 1000000) {
-                            bug.reset();
-                            return d45;
-                        } break;
-                    case 3:
-                        if (v46 < 1000000) {
-                            bug.reset();
-                            return d46;
-                        } break;
-                    case 4:
-                        if (v47 < 1000000) {
-                            bug.reset();
-                            return d47;
-                        } break;
-                } break;
+                case 1:
+                    switch(dy) {
+                        case -4:
+                            if (v39 < 1000000) {
+                                bug.reset();
+                                return d39;
+                            } break;
+                        case -3:
+                            if (v40 < 1000000) {
+                                bug.reset();
+                                return d40;
+                            } break;
+                        case -2:
+                            if (v41 < 1000000) {
+                                bug.reset();
+                                return d41;
+                            } break;
+                        case -1:
+                            if (v42 < 1000000) {
+                                bug.reset();
+                                return d42;
+                            } break;
+                        case 0:
+                            if (v43 < 1000000) {
+                                bug.reset();
+                                return d43;
+                            } break;
+                        case 1:
+                            if (v44 < 1000000) {
+                                bug.reset();
+                                return d44;
+                            } break;
+                        case 2:
+                            if (v45 < 1000000) {
+                                bug.reset();
+                                return d45;
+                            } break;
+                        case 3:
+                            if (v46 < 1000000) {
+                                bug.reset();
+                                return d46;
+                            } break;
+                        case 4:
+                            if (v47 < 1000000) {
+                                bug.reset();
+                                return d47;
+                            } break;
+                    } break;
 
-            case 2:
-                switch(dy) {
-                    case -4:
-                        if (v48 < 1000000) {
-                            bug.reset();
-                            return d48;
-                        } break;
-                    case -3:
-                        if (v49 < 1000000) {
-                            bug.reset();
-                            return d49;
-                        } break;
-                    case -2:
-                        if (v50 < 1000000) {
-                            bug.reset();
-                            return d50;
-                        } break;
-                    case -1:
-                        if (v51 < 1000000) {
-                            bug.reset();
-                            return d51;
-                        } break;
-                    case 0:
-                        if (v52 < 1000000) {
-                            bug.reset();
-                            return d52;
-                        } break;
-                    case 1:
-                        if (v53 < 1000000) {
-                            bug.reset();
-                            return d53;
-                        } break;
-                    case 2:
-                        if (v54 < 1000000) {
-                            bug.reset();
-                            return d54;
-                        } break;
-                    case 3:
-                        if (v55 < 1000000) {
-                            bug.reset();
-                            return d55;
-                        } break;
-                    case 4:
-                        if (v56 < 1000000) {
-                            bug.reset();
-                            return d56;
-                        } break;
-                } break;
+                case 2:
+                    switch(dy) {
+                        case -4:
+                            if (v48 < 1000000) {
+                                bug.reset();
+                                return d48;
+                            } break;
+                        case -3:
+                            if (v49 < 1000000) {
+                                bug.reset();
+                                return d49;
+                            } break;
+                        case -2:
+                            if (v50 < 1000000) {
+                                bug.reset();
+                                return d50;
+                            } break;
+                        case -1:
+                            if (v51 < 1000000) {
+                                bug.reset();
+                                return d51;
+                            } break;
+                        case 0:
+                            if (v52 < 1000000) {
+                                bug.reset();
+                                return d52;
+                            } break;
+                        case 1:
+                            if (v53 < 1000000) {
+                                bug.reset();
+                                return d53;
+                            } break;
+                        case 2:
+                            if (v54 < 1000000) {
+                                bug.reset();
+                                return d54;
+                            } break;
+                        case 3:
+                            if (v55 < 1000000) {
+                                bug.reset();
+                                return d55;
+                            } break;
+                        case 4:
+                            if (v56 < 1000000) {
+                                bug.reset();
+                                return d56;
+                            } break;
+                    } break;
 
-            case 3:
-                switch(dy) {
-                    case -3:
-                        if (v57 < 1000000) {
-                            bug.reset();
-                            return d57;
-                        } break;
-                    case -2:
-                        if (v58 < 1000000) {
-                            bug.reset();
-                            return d58;
-                        } break;
-                    case -1:
-                        if (v59 < 1000000) {
-                            bug.reset();
-                            return d59;
-                        } break;
-                    case 0:
-                        if (v60 < 1000000) {
-                            bug.reset();
-                            return d60;
-                        } break;
-                    case 1:
-                        if (v61 < 1000000) {
-                            bug.reset();
-                            return d61;
-                        } break;
-                    case 2:
-                        if (v62 < 1000000) {
-                            bug.reset();
-                            return d62;
-                        } break;
-                    case 3:
-                        if (v63 < 1000000) {
-                            bug.reset();
-                            return d63;
-                        } break;
-                } break;
+                case 3:
+                    switch(dy) {
+                        case -3:
+                            if (v57 < 1000000) {
+                                bug.reset();
+                                return d57;
+                            } break;
+                        case -2:
+                            if (v58 < 1000000) {
+                                bug.reset();
+                                return d58;
+                            } break;
+                        case -1:
+                            if (v59 < 1000000) {
+                                bug.reset();
+                                return d59;
+                            } break;
+                        case 0:
+                            if (v60 < 1000000) {
+                                bug.reset();
+                                return d60;
+                            } break;
+                        case 1:
+                            if (v61 < 1000000) {
+                                bug.reset();
+                                return d61;
+                            } break;
+                        case 2:
+                            if (v62 < 1000000) {
+                                bug.reset();
+                                return d62;
+                            } break;
+                        case 3:
+                            if (v63 < 1000000) {
+                                bug.reset();
+                                return d63;
+                            } break;
+                    } break;
 
-            case 4:
-                switch(dy) {
-                    case -2:
-                        if (v64 < 1000000) {
-                            bug.reset();
-                            return d64;
-                        } break;
-                    case -1:
-                        if (v65 < 1000000) {
-                            bug.reset();
-                            return d65;
-                        } break;
-                    case 0:
-                        if (v66 < 1000000) {
-                            bug.reset();
-                            return d66;
-                        } break;
-                    case 1:
-                        if (v67 < 1000000) {
-                            bug.reset();
-                            return d67;
-                        } break;
-                    case 2:
-                        if (v68 < 1000000) {
-                            bug.reset();
-                            return d68;
-                        } break;
-                } break;
+                case 4:
+                    switch(dy) {
+                        case -2:
+                            if (v64 < 1000000) {
+                                bug.reset();
+                                return d64;
+                            } break;
+                        case -1:
+                            if (v65 < 1000000) {
+                                bug.reset();
+                                return d65;
+                            } break;
+                        case 0:
+                            if (v66 < 1000000) {
+                                bug.reset();
+                                return d66;
+                            } break;
+                        case 1:
+                            if (v67 < 1000000) {
+                                bug.reset();
+                                return d67;
+                            } break;
+                        case 2:
+                            if (v68 < 1000000) {
+                                bug.reset();
+                                return d68;
+                            } break;
+                    } break;
 
+            }
         }
     
         Direction ans = Direction.CENTER;
@@ -5986,6 +5995,7 @@ public class Navigation {
     private Direction getBestDirection3() throws GameActionException {
         double localBest = 1000000.0;
         double dist = 0.0;
+	    boolean gothroughCurrent = rc.getType() == RobotType.CARRIER && rc.getWeight() < 3;
         l34 = currentLocation;
         v34 = 0;
         d43 = null;
@@ -6179,7 +6189,7 @@ public class Navigation {
             if (rc.canSenseLocation(l33)) {
                 MapInfo mapInfo = rc.senseMapInfo(l33);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l33), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l33), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p33 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -6203,7 +6213,7 @@ public class Navigation {
             if (rc.canSenseLocation(l43)) {
                 MapInfo mapInfo = rc.senseMapInfo(l43);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l43), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l43), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p43 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -6227,7 +6237,7 @@ public class Navigation {
             if (rc.canSenseLocation(l42)) {
                 MapInfo mapInfo = rc.senseMapInfo(l42);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l42), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l42), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p42 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -6256,7 +6266,7 @@ public class Navigation {
             if (rc.canSenseLocation(l44)) {
                 MapInfo mapInfo = rc.senseMapInfo(l44);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l44), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l44), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p44 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -6280,7 +6290,7 @@ public class Navigation {
             if (rc.canSenseLocation(l24)) {
                 MapInfo mapInfo = rc.senseMapInfo(l24);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l24), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l24), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p24 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -6304,7 +6314,7 @@ public class Navigation {
             if (rc.canSenseLocation(l32)) {
                 MapInfo mapInfo = rc.senseMapInfo(l32);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p32 = mapInfo.getCooldownMultiplier(team);
                     s32 = Math.sqrt(l32.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6334,7 +6344,7 @@ public class Navigation {
             if (rc.canSenseLocation(l52)) {
                 MapInfo mapInfo = rc.senseMapInfo(l52);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p52 = mapInfo.getCooldownMultiplier(team);
                     s52 = Math.sqrt(l52.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6364,7 +6374,7 @@ public class Navigation {
             if (rc.canSenseLocation(l53)) {
                 MapInfo mapInfo = rc.senseMapInfo(l53);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l53) || (rc.sensePassability(l53) && !rc.canSenseRobotAtLocation(l53) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l53), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p53 = mapInfo.getCooldownMultiplier(team);
                     s53 = Math.sqrt(l53.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6394,7 +6404,7 @@ public class Navigation {
             if (rc.canSenseLocation(l51)) {
                 MapInfo mapInfo = rc.senseMapInfo(l51);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p51 = mapInfo.getCooldownMultiplier(team);
                     s51 = Math.sqrt(l51.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6429,7 +6439,7 @@ public class Navigation {
             if (rc.canSenseLocation(l41)) {
                 MapInfo mapInfo = rc.senseMapInfo(l41);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p41 = mapInfo.getCooldownMultiplier(team);
                     s41 = Math.sqrt(l41.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6464,7 +6474,7 @@ public class Navigation {
             if (rc.canSenseLocation(l23)) {
                 MapInfo mapInfo = rc.senseMapInfo(l23);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p23 = mapInfo.getCooldownMultiplier(team);
                     s23 = Math.sqrt(l23.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6494,7 +6504,7 @@ public class Navigation {
             if (rc.canSenseLocation(l14)) {
                 MapInfo mapInfo = rc.senseMapInfo(l14);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p14 = mapInfo.getCooldownMultiplier(team);
                     s14 = Math.sqrt(l14.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6519,7 +6529,7 @@ public class Navigation {
             if (rc.canSenseLocation(l50)) {
                 MapInfo mapInfo = rc.senseMapInfo(l50);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p50 = mapInfo.getCooldownMultiplier(team);
                     s50 = Math.sqrt(l50.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6549,7 +6559,7 @@ public class Navigation {
             if (rc.canSenseLocation(l54)) {
                 MapInfo mapInfo = rc.senseMapInfo(l54);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p54 = mapInfo.getCooldownMultiplier(team);
                     s54 = Math.sqrt(l54.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6574,7 +6584,7 @@ public class Navigation {
             if (rc.canSenseLocation(l31)) {
                 MapInfo mapInfo = rc.senseMapInfo(l31);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p31 = mapInfo.getCooldownMultiplier(team);
                     s31 = Math.sqrt(l31.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6604,7 +6614,7 @@ public class Navigation {
             if (rc.canSenseLocation(l60)) {
                 MapInfo mapInfo = rc.senseMapInfo(l60);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p60 = mapInfo.getCooldownMultiplier(team);
                     s60 = Math.sqrt(l60.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6634,7 +6644,7 @@ public class Navigation {
             if (rc.canSenseLocation(l59)) {
                 MapInfo mapInfo = rc.senseMapInfo(l59);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p59 = mapInfo.getCooldownMultiplier(team);
                     s59 = Math.sqrt(l59.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6669,7 +6679,7 @@ public class Navigation {
             if (rc.canSenseLocation(l40)) {
                 MapInfo mapInfo = rc.senseMapInfo(l40);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p40 = mapInfo.getCooldownMultiplier(team);
                     s40 = Math.sqrt(l40.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6704,7 +6714,7 @@ public class Navigation {
             if (rc.canSenseLocation(l22)) {
                 MapInfo mapInfo = rc.senseMapInfo(l22);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p22 = mapInfo.getCooldownMultiplier(team);
                     s22 = Math.sqrt(l22.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6739,7 +6749,7 @@ public class Navigation {
             if (rc.canSenseLocation(l61)) {
                 MapInfo mapInfo = rc.senseMapInfo(l61);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l61) || (rc.sensePassability(l61) && !rc.canSenseRobotAtLocation(l61) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l61), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p61 = mapInfo.getCooldownMultiplier(team);
                     s61 = Math.sqrt(l61.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6774,7 +6784,7 @@ public class Navigation {
             if (rc.canSenseLocation(l62)) {
                 MapInfo mapInfo = rc.senseMapInfo(l62);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l62) || (rc.sensePassability(l62) && !rc.canSenseRobotAtLocation(l62) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l62), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p62 = mapInfo.getCooldownMultiplier(team);
                     s62 = Math.sqrt(l62.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6804,7 +6814,7 @@ public class Navigation {
             if (rc.canSenseLocation(l58)) {
                 MapInfo mapInfo = rc.senseMapInfo(l58);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p58 = mapInfo.getCooldownMultiplier(team);
                     s58 = Math.sqrt(l58.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6839,7 +6849,7 @@ public class Navigation {
             if (rc.canSenseLocation(l49)) {
                 MapInfo mapInfo = rc.senseMapInfo(l49);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p49 = mapInfo.getCooldownMultiplier(team);
                     s49 = Math.sqrt(l49.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6874,7 +6884,7 @@ public class Navigation {
             if (rc.canSenseLocation(l13)) {
                 MapInfo mapInfo = rc.senseMapInfo(l13);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p13 = mapInfo.getCooldownMultiplier(team);
                     s13 = Math.sqrt(l13.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6904,7 +6914,7 @@ public class Navigation {
             if (rc.canSenseLocation(l63)) {
                 MapInfo mapInfo = rc.senseMapInfo(l63);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p63 = mapInfo.getCooldownMultiplier(team);
                     s63 = Math.sqrt(l63.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6929,7 +6939,7 @@ public class Navigation {
             if (rc.canSenseLocation(l57)) {
                 MapInfo mapInfo = rc.senseMapInfo(l57);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p57 = mapInfo.getCooldownMultiplier(team);
                     s57 = Math.sqrt(l57.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6959,7 +6969,7 @@ public class Navigation {
             if (rc.canSenseLocation(l5)) {
                 MapInfo mapInfo = rc.senseMapInfo(l5);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p5 = mapInfo.getCooldownMultiplier(team);
                     s5 = Math.sqrt(l5.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -6984,7 +6994,7 @@ public class Navigation {
             if (rc.canSenseLocation(l66)) {
                 MapInfo mapInfo = rc.senseMapInfo(l66);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p66 = mapInfo.getCooldownMultiplier(team);
                     s66 = Math.sqrt(l66.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -7014,7 +7024,7 @@ public class Navigation {
             if (rc.canSenseLocation(l30)) {
                 MapInfo mapInfo = rc.senseMapInfo(l30);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p30 = mapInfo.getCooldownMultiplier(team);
                     s30 = Math.sqrt(l30.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -7044,7 +7054,7 @@ public class Navigation {
             if (rc.canSenseLocation(l39)) {
                 MapInfo mapInfo = rc.senseMapInfo(l39);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p39 = mapInfo.getCooldownMultiplier(team);
                     s39 = Math.sqrt(l39.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -7079,7 +7089,7 @@ public class Navigation {
             if (rc.canSenseLocation(l67)) {
                 MapInfo mapInfo = rc.senseMapInfo(l67);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l67) || (rc.sensePassability(l67) && !rc.canSenseRobotAtLocation(l67) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l67), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p67 = mapInfo.getCooldownMultiplier(team);
                     s67 = Math.sqrt(l67.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -7114,7 +7124,7 @@ public class Navigation {
             if (rc.canSenseLocation(l21)) {
                 MapInfo mapInfo = rc.senseMapInfo(l21);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p21 = mapInfo.getCooldownMultiplier(team);
                     s21 = Math.sqrt(l21.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -7149,7 +7159,7 @@ public class Navigation {
             if (rc.canSenseLocation(l65)) {
                 MapInfo mapInfo = rc.senseMapInfo(l65);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p65 = mapInfo.getCooldownMultiplier(team);
                     s65 = Math.sqrt(l65.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -7184,7 +7194,7 @@ public class Navigation {
             if (rc.canSenseLocation(l68)) {
                 MapInfo mapInfo = rc.senseMapInfo(l68);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l68) || (rc.sensePassability(l68) && !rc.canSenseRobotAtLocation(l68) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l68), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p68 = mapInfo.getCooldownMultiplier(team);
                     s68 = Math.sqrt(l68.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -7219,7 +7229,7 @@ public class Navigation {
             if (rc.canSenseLocation(l64)) {
                 MapInfo mapInfo = rc.senseMapInfo(l64);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p64 = mapInfo.getCooldownMultiplier(team);
                     s64 = Math.sqrt(l64.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -7254,7 +7264,7 @@ public class Navigation {
             if (rc.canSenseLocation(l12)) {
                 MapInfo mapInfo = rc.senseMapInfo(l12);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p12 = mapInfo.getCooldownMultiplier(team);
                     s12 = Math.sqrt(l12.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -7289,7 +7299,7 @@ public class Navigation {
             if (rc.canSenseLocation(l48)) {
                 MapInfo mapInfo = rc.senseMapInfo(l48);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p48 = mapInfo.getCooldownMultiplier(team);
                     s48 = Math.sqrt(l48.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -7319,232 +7329,234 @@ public class Navigation {
                 d48 = d39;
             }
         }
-    
-        int dx = targetLocation.x - l34.x;
-        int dy = targetLocation.y - l34.y;
+        if (!rc.senseCloud(currentLocation) || currentLocation.distanceSquaredTo(targetLocation) <= 4) {
+        
+            int dx = targetLocation.x - l34.x;
+            int dy = targetLocation.y - l34.y;
 
-        switch(dx) {
-            case -4:
-                switch(dy) {
-                } break;
+            switch(dx) {
+                case -4:
+                    switch(dy) {
+                    } break;
 
-            case -3:
-                switch(dy) {
-                    case -3:
-                        if (v5 < 1000000) {
-                            bug.reset();
-                            return d5;
-                        } break;
-                } break;
+                case -3:
+                    switch(dy) {
+                        case -3:
+                            if (v5 < 1000000) {
+                                bug.reset();
+                                return d5;
+                            } break;
+                    } break;
 
-            case -2:
-                switch(dy) {
-                    case -4:
-                        if (v12 < 1000000) {
-                            bug.reset();
-                            return d12;
-                        } break;
-                    case -3:
-                        if (v13 < 1000000) {
-                            bug.reset();
-                            return d13;
-                        } break;
-                    case -2:
-                        if (v14 < 1000000) {
-                            bug.reset();
-                            return d14;
-                        } break;
-                } break;
+                case -2:
+                    switch(dy) {
+                        case -4:
+                            if (v12 < 1000000) {
+                                bug.reset();
+                                return d12;
+                            } break;
+                        case -3:
+                            if (v13 < 1000000) {
+                                bug.reset();
+                                return d13;
+                            } break;
+                        case -2:
+                            if (v14 < 1000000) {
+                                bug.reset();
+                                return d14;
+                            } break;
+                    } break;
 
-            case -1:
-                switch(dy) {
-                    case -4:
-                        if (v21 < 1000000) {
-                            bug.reset();
-                            return d21;
-                        } break;
-                    case -3:
-                        if (v22 < 1000000) {
-                            bug.reset();
-                            return d22;
-                        } break;
-                    case -2:
-                        if (v23 < 1000000) {
-                            bug.reset();
-                            return d23;
-                        } break;
-                    case -1:
-                        if (v24 < 1000000) {
-                            bug.reset();
-                            return d24;
-                        } break;
-                } break;
+                case -1:
+                    switch(dy) {
+                        case -4:
+                            if (v21 < 1000000) {
+                                bug.reset();
+                                return d21;
+                            } break;
+                        case -3:
+                            if (v22 < 1000000) {
+                                bug.reset();
+                                return d22;
+                            } break;
+                        case -2:
+                            if (v23 < 1000000) {
+                                bug.reset();
+                                return d23;
+                            } break;
+                        case -1:
+                            if (v24 < 1000000) {
+                                bug.reset();
+                                return d24;
+                            } break;
+                    } break;
 
-            case 0:
-                switch(dy) {
-                    case -4:
-                        if (v30 < 1000000) {
-                            bug.reset();
-                            return d30;
-                        } break;
-                    case -3:
-                        if (v31 < 1000000) {
-                            bug.reset();
-                            return d31;
-                        } break;
-                    case -2:
-                        if (v32 < 1000000) {
-                            bug.reset();
-                            return d32;
-                        } break;
-                    case -1:
-                        if (v33 < 1000000) {
-                            bug.reset();
-                            return d33;
-                        } break;
-                } break;
+                case 0:
+                    switch(dy) {
+                        case -4:
+                            if (v30 < 1000000) {
+                                bug.reset();
+                                return d30;
+                            } break;
+                        case -3:
+                            if (v31 < 1000000) {
+                                bug.reset();
+                                return d31;
+                            } break;
+                        case -2:
+                            if (v32 < 1000000) {
+                                bug.reset();
+                                return d32;
+                            } break;
+                        case -1:
+                            if (v33 < 1000000) {
+                                bug.reset();
+                                return d33;
+                            } break;
+                    } break;
 
-            case 1:
-                switch(dy) {
-                    case -4:
-                        if (v39 < 1000000) {
-                            bug.reset();
-                            return d39;
-                        } break;
-                    case -3:
-                        if (v40 < 1000000) {
-                            bug.reset();
-                            return d40;
-                        } break;
-                    case -2:
-                        if (v41 < 1000000) {
-                            bug.reset();
-                            return d41;
-                        } break;
-                    case -1:
-                        if (v42 < 1000000) {
-                            bug.reset();
-                            return d42;
-                        } break;
-                    case 0:
-                        if (v43 < 1000000) {
-                            bug.reset();
-                            return d43;
-                        } break;
-                    case 1:
-                        if (v44 < 1000000) {
-                            bug.reset();
-                            return d44;
-                        } break;
-                } break;
+                case 1:
+                    switch(dy) {
+                        case -4:
+                            if (v39 < 1000000) {
+                                bug.reset();
+                                return d39;
+                            } break;
+                        case -3:
+                            if (v40 < 1000000) {
+                                bug.reset();
+                                return d40;
+                            } break;
+                        case -2:
+                            if (v41 < 1000000) {
+                                bug.reset();
+                                return d41;
+                            } break;
+                        case -1:
+                            if (v42 < 1000000) {
+                                bug.reset();
+                                return d42;
+                            } break;
+                        case 0:
+                            if (v43 < 1000000) {
+                                bug.reset();
+                                return d43;
+                            } break;
+                        case 1:
+                            if (v44 < 1000000) {
+                                bug.reset();
+                                return d44;
+                            } break;
+                    } break;
 
-            case 2:
-                switch(dy) {
-                    case -4:
-                        if (v48 < 1000000) {
-                            bug.reset();
-                            return d48;
-                        } break;
-                    case -3:
-                        if (v49 < 1000000) {
-                            bug.reset();
-                            return d49;
-                        } break;
-                    case -2:
-                        if (v50 < 1000000) {
-                            bug.reset();
-                            return d50;
-                        } break;
-                    case -1:
-                        if (v51 < 1000000) {
-                            bug.reset();
-                            return d51;
-                        } break;
-                    case 0:
-                        if (v52 < 1000000) {
-                            bug.reset();
-                            return d52;
-                        } break;
-                    case 1:
-                        if (v53 < 1000000) {
-                            bug.reset();
-                            return d53;
-                        } break;
-                    case 2:
-                        if (v54 < 1000000) {
-                            bug.reset();
-                            return d54;
-                        } break;
-                } break;
+                case 2:
+                    switch(dy) {
+                        case -4:
+                            if (v48 < 1000000) {
+                                bug.reset();
+                                return d48;
+                            } break;
+                        case -3:
+                            if (v49 < 1000000) {
+                                bug.reset();
+                                return d49;
+                            } break;
+                        case -2:
+                            if (v50 < 1000000) {
+                                bug.reset();
+                                return d50;
+                            } break;
+                        case -1:
+                            if (v51 < 1000000) {
+                                bug.reset();
+                                return d51;
+                            } break;
+                        case 0:
+                            if (v52 < 1000000) {
+                                bug.reset();
+                                return d52;
+                            } break;
+                        case 1:
+                            if (v53 < 1000000) {
+                                bug.reset();
+                                return d53;
+                            } break;
+                        case 2:
+                            if (v54 < 1000000) {
+                                bug.reset();
+                                return d54;
+                            } break;
+                    } break;
 
-            case 3:
-                switch(dy) {
-                    case -3:
-                        if (v57 < 1000000) {
-                            bug.reset();
-                            return d57;
-                        } break;
-                    case -2:
-                        if (v58 < 1000000) {
-                            bug.reset();
-                            return d58;
-                        } break;
-                    case -1:
-                        if (v59 < 1000000) {
-                            bug.reset();
-                            return d59;
-                        } break;
-                    case 0:
-                        if (v60 < 1000000) {
-                            bug.reset();
-                            return d60;
-                        } break;
-                    case 1:
-                        if (v61 < 1000000) {
-                            bug.reset();
-                            return d61;
-                        } break;
-                    case 2:
-                        if (v62 < 1000000) {
-                            bug.reset();
-                            return d62;
-                        } break;
-                    case 3:
-                        if (v63 < 1000000) {
-                            bug.reset();
-                            return d63;
-                        } break;
-                } break;
+                case 3:
+                    switch(dy) {
+                        case -3:
+                            if (v57 < 1000000) {
+                                bug.reset();
+                                return d57;
+                            } break;
+                        case -2:
+                            if (v58 < 1000000) {
+                                bug.reset();
+                                return d58;
+                            } break;
+                        case -1:
+                            if (v59 < 1000000) {
+                                bug.reset();
+                                return d59;
+                            } break;
+                        case 0:
+                            if (v60 < 1000000) {
+                                bug.reset();
+                                return d60;
+                            } break;
+                        case 1:
+                            if (v61 < 1000000) {
+                                bug.reset();
+                                return d61;
+                            } break;
+                        case 2:
+                            if (v62 < 1000000) {
+                                bug.reset();
+                                return d62;
+                            } break;
+                        case 3:
+                            if (v63 < 1000000) {
+                                bug.reset();
+                                return d63;
+                            } break;
+                    } break;
 
-            case 4:
-                switch(dy) {
-                    case -2:
-                        if (v64 < 1000000) {
-                            bug.reset();
-                            return d64;
-                        } break;
-                    case -1:
-                        if (v65 < 1000000) {
-                            bug.reset();
-                            return d65;
-                        } break;
-                    case 0:
-                        if (v66 < 1000000) {
-                            bug.reset();
-                            return d66;
-                        } break;
-                    case 1:
-                        if (v67 < 1000000) {
-                            bug.reset();
-                            return d67;
-                        } break;
-                    case 2:
-                        if (v68 < 1000000) {
-                            bug.reset();
-                            return d68;
-                        } break;
-                } break;
+                case 4:
+                    switch(dy) {
+                        case -2:
+                            if (v64 < 1000000) {
+                                bug.reset();
+                                return d64;
+                            } break;
+                        case -1:
+                            if (v65 < 1000000) {
+                                bug.reset();
+                                return d65;
+                            } break;
+                        case 0:
+                            if (v66 < 1000000) {
+                                bug.reset();
+                                return d66;
+                            } break;
+                        case 1:
+                            if (v67 < 1000000) {
+                                bug.reset();
+                                return d67;
+                            } break;
+                        case 2:
+                            if (v68 < 1000000) {
+                                bug.reset();
+                                return d68;
+                            } break;
+                    } break;
 
+            }
         }
     
         Direction ans = Direction.CENTER;
@@ -7791,6 +7803,7 @@ public class Navigation {
     private Direction getBestDirection4() throws GameActionException {
         double localBest = 1000000.0;
         double dist = 0.0;
+	    boolean gothroughCurrent = rc.getType() == RobotType.CARRIER && rc.getWeight() < 3;
         l34 = currentLocation;
         v34 = 0;
         d43 = null;
@@ -7989,7 +8002,7 @@ public class Navigation {
             if (rc.canSenseLocation(l33)) {
                 MapInfo mapInfo = rc.senseMapInfo(l33);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l33), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l33), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p33 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -8018,7 +8031,7 @@ public class Navigation {
             if (rc.canSenseLocation(l25)) {
                 MapInfo mapInfo = rc.senseMapInfo(l25);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l25), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l25), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p25 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -8042,7 +8055,7 @@ public class Navigation {
             if (rc.canSenseLocation(l43)) {
                 MapInfo mapInfo = rc.senseMapInfo(l43);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l43), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l43) || (rc.sensePassability(l43) && !rc.canSenseRobotAtLocation(l43) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l43), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p43 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -8066,7 +8079,7 @@ public class Navigation {
             if (rc.canSenseLocation(l42)) {
                 MapInfo mapInfo = rc.senseMapInfo(l42);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l42), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l42), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p42 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -8095,7 +8108,7 @@ public class Navigation {
             if (rc.canSenseLocation(l24)) {
                 MapInfo mapInfo = rc.senseMapInfo(l24);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l24), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l24), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p24 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -8124,7 +8137,7 @@ public class Navigation {
             if (rc.canSenseLocation(l52)) {
                 MapInfo mapInfo = rc.senseMapInfo(l52);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l52) || (rc.sensePassability(l52) && !rc.canSenseRobotAtLocation(l52) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l52), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p52 = mapInfo.getCooldownMultiplier(team);
                     s52 = Math.sqrt(l52.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8149,7 +8162,7 @@ public class Navigation {
             if (rc.canSenseLocation(l32)) {
                 MapInfo mapInfo = rc.senseMapInfo(l32);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p32 = mapInfo.getCooldownMultiplier(team);
                     s32 = Math.sqrt(l32.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8179,7 +8192,7 @@ public class Navigation {
             if (rc.canSenseLocation(l16)) {
                 MapInfo mapInfo = rc.senseMapInfo(l16);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p16 = mapInfo.getCooldownMultiplier(team);
                     s16 = Math.sqrt(l16.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8204,7 +8217,7 @@ public class Navigation {
             if (rc.canSenseLocation(l51)) {
                 MapInfo mapInfo = rc.senseMapInfo(l51);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l51) || (rc.sensePassability(l51) && !rc.canSenseRobotAtLocation(l51) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l51), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p51 = mapInfo.getCooldownMultiplier(team);
                     s51 = Math.sqrt(l51.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8239,7 +8252,7 @@ public class Navigation {
             if (rc.canSenseLocation(l15)) {
                 MapInfo mapInfo = rc.senseMapInfo(l15);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p15 = mapInfo.getCooldownMultiplier(team);
                     s15 = Math.sqrt(l15.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8274,7 +8287,7 @@ public class Navigation {
             if (rc.canSenseLocation(l23)) {
                 MapInfo mapInfo = rc.senseMapInfo(l23);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p23 = mapInfo.getCooldownMultiplier(team);
                     s23 = Math.sqrt(l23.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8309,7 +8322,7 @@ public class Navigation {
             if (rc.canSenseLocation(l41)) {
                 MapInfo mapInfo = rc.senseMapInfo(l41);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p41 = mapInfo.getCooldownMultiplier(team);
                     s41 = Math.sqrt(l41.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8344,7 +8357,7 @@ public class Navigation {
             if (rc.canSenseLocation(l50)) {
                 MapInfo mapInfo = rc.senseMapInfo(l50);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p50 = mapInfo.getCooldownMultiplier(team);
                     s50 = Math.sqrt(l50.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8374,7 +8387,7 @@ public class Navigation {
             if (rc.canSenseLocation(l14)) {
                 MapInfo mapInfo = rc.senseMapInfo(l14);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p14 = mapInfo.getCooldownMultiplier(team);
                     s14 = Math.sqrt(l14.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8404,7 +8417,7 @@ public class Navigation {
             if (rc.canSenseLocation(l60)) {
                 MapInfo mapInfo = rc.senseMapInfo(l60);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l60) || (rc.sensePassability(l60) && !rc.canSenseRobotAtLocation(l60) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l60), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p60 = mapInfo.getCooldownMultiplier(team);
                     s60 = Math.sqrt(l60.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8429,7 +8442,7 @@ public class Navigation {
             if (rc.canSenseLocation(l31)) {
                 MapInfo mapInfo = rc.senseMapInfo(l31);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p31 = mapInfo.getCooldownMultiplier(team);
                     s31 = Math.sqrt(l31.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8459,7 +8472,7 @@ public class Navigation {
             if (rc.canSenseLocation(l8)) {
                 MapInfo mapInfo = rc.senseMapInfo(l8);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p8 = mapInfo.getCooldownMultiplier(team);
                     s8 = Math.sqrt(l8.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8484,7 +8497,7 @@ public class Navigation {
             if (rc.canSenseLocation(l59)) {
                 MapInfo mapInfo = rc.senseMapInfo(l59);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l59) || (rc.sensePassability(l59) && !rc.canSenseRobotAtLocation(l59) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l59), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p59 = mapInfo.getCooldownMultiplier(team);
                     s59 = Math.sqrt(l59.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8519,7 +8532,7 @@ public class Navigation {
             if (rc.canSenseLocation(l22)) {
                 MapInfo mapInfo = rc.senseMapInfo(l22);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p22 = mapInfo.getCooldownMultiplier(team);
                     s22 = Math.sqrt(l22.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8554,7 +8567,7 @@ public class Navigation {
             if (rc.canSenseLocation(l7)) {
                 MapInfo mapInfo = rc.senseMapInfo(l7);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p7 = mapInfo.getCooldownMultiplier(team);
                     s7 = Math.sqrt(l7.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8589,7 +8602,7 @@ public class Navigation {
             if (rc.canSenseLocation(l40)) {
                 MapInfo mapInfo = rc.senseMapInfo(l40);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p40 = mapInfo.getCooldownMultiplier(team);
                     s40 = Math.sqrt(l40.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8624,7 +8637,7 @@ public class Navigation {
             if (rc.canSenseLocation(l13)) {
                 MapInfo mapInfo = rc.senseMapInfo(l13);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p13 = mapInfo.getCooldownMultiplier(team);
                     s13 = Math.sqrt(l13.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8659,7 +8672,7 @@ public class Navigation {
             if (rc.canSenseLocation(l58)) {
                 MapInfo mapInfo = rc.senseMapInfo(l58);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l58) || (rc.sensePassability(l58) && !rc.canSenseRobotAtLocation(l58) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l58), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p58 = mapInfo.getCooldownMultiplier(team);
                     s58 = Math.sqrt(l58.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8694,7 +8707,7 @@ public class Navigation {
             if (rc.canSenseLocation(l49)) {
                 MapInfo mapInfo = rc.senseMapInfo(l49);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p49 = mapInfo.getCooldownMultiplier(team);
                     s49 = Math.sqrt(l49.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8729,7 +8742,7 @@ public class Navigation {
             if (rc.canSenseLocation(l6)) {
                 MapInfo mapInfo = rc.senseMapInfo(l6);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p6 = mapInfo.getCooldownMultiplier(team);
                     s6 = Math.sqrt(l6.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8764,7 +8777,7 @@ public class Navigation {
             if (rc.canSenseLocation(l5)) {
                 MapInfo mapInfo = rc.senseMapInfo(l5);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p5 = mapInfo.getCooldownMultiplier(team);
                     s5 = Math.sqrt(l5.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8794,7 +8807,7 @@ public class Navigation {
             if (rc.canSenseLocation(l57)) {
                 MapInfo mapInfo = rc.senseMapInfo(l57);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p57 = mapInfo.getCooldownMultiplier(team);
                     s57 = Math.sqrt(l57.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8824,7 +8837,7 @@ public class Navigation {
             if (rc.canSenseLocation(l2)) {
                 MapInfo mapInfo = rc.senseMapInfo(l2);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p2 = mapInfo.getCooldownMultiplier(team);
                     s2 = Math.sqrt(l2.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8849,7 +8862,7 @@ public class Navigation {
             if (rc.canSenseLocation(l66)) {
                 MapInfo mapInfo = rc.senseMapInfo(l66);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l66) || (rc.sensePassability(l66) && !rc.canSenseRobotAtLocation(l66) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l66), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p66 = mapInfo.getCooldownMultiplier(team);
                     s66 = Math.sqrt(l66.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8874,7 +8887,7 @@ public class Navigation {
             if (rc.canSenseLocation(l30)) {
                 MapInfo mapInfo = rc.senseMapInfo(l30);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p30 = mapInfo.getCooldownMultiplier(team);
                     s30 = Math.sqrt(l30.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8904,7 +8917,7 @@ public class Navigation {
             if (rc.canSenseLocation(l21)) {
                 MapInfo mapInfo = rc.senseMapInfo(l21);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p21 = mapInfo.getCooldownMultiplier(team);
                     s21 = Math.sqrt(l21.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8939,7 +8952,7 @@ public class Navigation {
             if (rc.canSenseLocation(l1)) {
                 MapInfo mapInfo = rc.senseMapInfo(l1);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p1 = mapInfo.getCooldownMultiplier(team);
                     s1 = Math.sqrt(l1.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -8974,7 +8987,7 @@ public class Navigation {
             if (rc.canSenseLocation(l39)) {
                 MapInfo mapInfo = rc.senseMapInfo(l39);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p39 = mapInfo.getCooldownMultiplier(team);
                     s39 = Math.sqrt(l39.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -9009,7 +9022,7 @@ public class Navigation {
             if (rc.canSenseLocation(l65)) {
                 MapInfo mapInfo = rc.senseMapInfo(l65);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l65) || (rc.sensePassability(l65) && !rc.canSenseRobotAtLocation(l65) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l65), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p65 = mapInfo.getCooldownMultiplier(team);
                     s65 = Math.sqrt(l65.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -9044,7 +9057,7 @@ public class Navigation {
             if (rc.canSenseLocation(l64)) {
                 MapInfo mapInfo = rc.senseMapInfo(l64);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l64) || (rc.sensePassability(l64) && !rc.canSenseRobotAtLocation(l64) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l64), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p64 = mapInfo.getCooldownMultiplier(team);
                     s64 = Math.sqrt(l64.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -9079,7 +9092,7 @@ public class Navigation {
             if (rc.canSenseLocation(l12)) {
                 MapInfo mapInfo = rc.senseMapInfo(l12);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p12 = mapInfo.getCooldownMultiplier(team);
                     s12 = Math.sqrt(l12.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -9114,7 +9127,7 @@ public class Navigation {
             if (rc.canSenseLocation(l0)) {
                 MapInfo mapInfo = rc.senseMapInfo(l0);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p0 = mapInfo.getCooldownMultiplier(team);
                     s0 = Math.sqrt(l0.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -9149,7 +9162,7 @@ public class Navigation {
             if (rc.canSenseLocation(l48)) {
                 MapInfo mapInfo = rc.senseMapInfo(l48);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p48 = mapInfo.getCooldownMultiplier(team);
                     s48 = Math.sqrt(l48.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -9179,237 +9192,239 @@ public class Navigation {
                 d48 = d39;
             }
         }
-    
-        int dx = targetLocation.x - l34.x;
-        int dy = targetLocation.y - l34.y;
+        if (!rc.senseCloud(currentLocation) || currentLocation.distanceSquaredTo(targetLocation) <= 4) {
+        
+            int dx = targetLocation.x - l34.x;
+            int dy = targetLocation.y - l34.y;
 
-        switch(dx) {
-            case -4:
-                switch(dy) {
-                    case -2:
-                        if (v0 < 1000000) {
-                            bug.reset();
-                            return d0;
-                        } break;
-                    case -1:
-                        if (v1 < 1000000) {
-                            bug.reset();
-                            return d1;
-                        } break;
-                    case 0:
-                        if (v2 < 1000000) {
-                            bug.reset();
-                            return d2;
-                        } break;
-                } break;
+            switch(dx) {
+                case -4:
+                    switch(dy) {
+                        case -2:
+                            if (v0 < 1000000) {
+                                bug.reset();
+                                return d0;
+                            } break;
+                        case -1:
+                            if (v1 < 1000000) {
+                                bug.reset();
+                                return d1;
+                            } break;
+                        case 0:
+                            if (v2 < 1000000) {
+                                bug.reset();
+                                return d2;
+                            } break;
+                    } break;
 
-            case -3:
-                switch(dy) {
-                    case -3:
-                        if (v5 < 1000000) {
-                            bug.reset();
-                            return d5;
-                        } break;
-                    case -2:
-                        if (v6 < 1000000) {
-                            bug.reset();
-                            return d6;
-                        } break;
-                    case -1:
-                        if (v7 < 1000000) {
-                            bug.reset();
-                            return d7;
-                        } break;
-                    case 0:
-                        if (v8 < 1000000) {
-                            bug.reset();
-                            return d8;
-                        } break;
-                } break;
+                case -3:
+                    switch(dy) {
+                        case -3:
+                            if (v5 < 1000000) {
+                                bug.reset();
+                                return d5;
+                            } break;
+                        case -2:
+                            if (v6 < 1000000) {
+                                bug.reset();
+                                return d6;
+                            } break;
+                        case -1:
+                            if (v7 < 1000000) {
+                                bug.reset();
+                                return d7;
+                            } break;
+                        case 0:
+                            if (v8 < 1000000) {
+                                bug.reset();
+                                return d8;
+                            } break;
+                    } break;
 
-            case -2:
-                switch(dy) {
-                    case -4:
-                        if (v12 < 1000000) {
-                            bug.reset();
-                            return d12;
-                        } break;
-                    case -3:
-                        if (v13 < 1000000) {
-                            bug.reset();
-                            return d13;
-                        } break;
-                    case -2:
-                        if (v14 < 1000000) {
-                            bug.reset();
-                            return d14;
-                        } break;
-                    case -1:
-                        if (v15 < 1000000) {
-                            bug.reset();
-                            return d15;
-                        } break;
-                    case 0:
-                        if (v16 < 1000000) {
-                            bug.reset();
-                            return d16;
-                        } break;
-                } break;
+                case -2:
+                    switch(dy) {
+                        case -4:
+                            if (v12 < 1000000) {
+                                bug.reset();
+                                return d12;
+                            } break;
+                        case -3:
+                            if (v13 < 1000000) {
+                                bug.reset();
+                                return d13;
+                            } break;
+                        case -2:
+                            if (v14 < 1000000) {
+                                bug.reset();
+                                return d14;
+                            } break;
+                        case -1:
+                            if (v15 < 1000000) {
+                                bug.reset();
+                                return d15;
+                            } break;
+                        case 0:
+                            if (v16 < 1000000) {
+                                bug.reset();
+                                return d16;
+                            } break;
+                    } break;
 
-            case -1:
-                switch(dy) {
-                    case -4:
-                        if (v21 < 1000000) {
-                            bug.reset();
-                            return d21;
-                        } break;
-                    case -3:
-                        if (v22 < 1000000) {
-                            bug.reset();
-                            return d22;
-                        } break;
-                    case -2:
-                        if (v23 < 1000000) {
-                            bug.reset();
-                            return d23;
-                        } break;
-                    case -1:
-                        if (v24 < 1000000) {
-                            bug.reset();
-                            return d24;
-                        } break;
-                    case 0:
-                        if (v25 < 1000000) {
-                            bug.reset();
-                            return d25;
-                        } break;
-                } break;
+                case -1:
+                    switch(dy) {
+                        case -4:
+                            if (v21 < 1000000) {
+                                bug.reset();
+                                return d21;
+                            } break;
+                        case -3:
+                            if (v22 < 1000000) {
+                                bug.reset();
+                                return d22;
+                            } break;
+                        case -2:
+                            if (v23 < 1000000) {
+                                bug.reset();
+                                return d23;
+                            } break;
+                        case -1:
+                            if (v24 < 1000000) {
+                                bug.reset();
+                                return d24;
+                            } break;
+                        case 0:
+                            if (v25 < 1000000) {
+                                bug.reset();
+                                return d25;
+                            } break;
+                    } break;
 
-            case 0:
-                switch(dy) {
-                    case -4:
-                        if (v30 < 1000000) {
-                            bug.reset();
-                            return d30;
-                        } break;
-                    case -3:
-                        if (v31 < 1000000) {
-                            bug.reset();
-                            return d31;
-                        } break;
-                    case -2:
-                        if (v32 < 1000000) {
-                            bug.reset();
-                            return d32;
-                        } break;
-                    case -1:
-                        if (v33 < 1000000) {
-                            bug.reset();
-                            return d33;
-                        } break;
-                } break;
+                case 0:
+                    switch(dy) {
+                        case -4:
+                            if (v30 < 1000000) {
+                                bug.reset();
+                                return d30;
+                            } break;
+                        case -3:
+                            if (v31 < 1000000) {
+                                bug.reset();
+                                return d31;
+                            } break;
+                        case -2:
+                            if (v32 < 1000000) {
+                                bug.reset();
+                                return d32;
+                            } break;
+                        case -1:
+                            if (v33 < 1000000) {
+                                bug.reset();
+                                return d33;
+                            } break;
+                    } break;
 
-            case 1:
-                switch(dy) {
-                    case -4:
-                        if (v39 < 1000000) {
-                            bug.reset();
-                            return d39;
-                        } break;
-                    case -3:
-                        if (v40 < 1000000) {
-                            bug.reset();
-                            return d40;
-                        } break;
-                    case -2:
-                        if (v41 < 1000000) {
-                            bug.reset();
-                            return d41;
-                        } break;
-                    case -1:
-                        if (v42 < 1000000) {
-                            bug.reset();
-                            return d42;
-                        } break;
-                    case 0:
-                        if (v43 < 1000000) {
-                            bug.reset();
-                            return d43;
-                        } break;
-                } break;
+                case 1:
+                    switch(dy) {
+                        case -4:
+                            if (v39 < 1000000) {
+                                bug.reset();
+                                return d39;
+                            } break;
+                        case -3:
+                            if (v40 < 1000000) {
+                                bug.reset();
+                                return d40;
+                            } break;
+                        case -2:
+                            if (v41 < 1000000) {
+                                bug.reset();
+                                return d41;
+                            } break;
+                        case -1:
+                            if (v42 < 1000000) {
+                                bug.reset();
+                                return d42;
+                            } break;
+                        case 0:
+                            if (v43 < 1000000) {
+                                bug.reset();
+                                return d43;
+                            } break;
+                    } break;
 
-            case 2:
-                switch(dy) {
-                    case -4:
-                        if (v48 < 1000000) {
-                            bug.reset();
-                            return d48;
-                        } break;
-                    case -3:
-                        if (v49 < 1000000) {
-                            bug.reset();
-                            return d49;
-                        } break;
-                    case -2:
-                        if (v50 < 1000000) {
-                            bug.reset();
-                            return d50;
-                        } break;
-                    case -1:
-                        if (v51 < 1000000) {
-                            bug.reset();
-                            return d51;
-                        } break;
-                    case 0:
-                        if (v52 < 1000000) {
-                            bug.reset();
-                            return d52;
-                        } break;
-                } break;
+                case 2:
+                    switch(dy) {
+                        case -4:
+                            if (v48 < 1000000) {
+                                bug.reset();
+                                return d48;
+                            } break;
+                        case -3:
+                            if (v49 < 1000000) {
+                                bug.reset();
+                                return d49;
+                            } break;
+                        case -2:
+                            if (v50 < 1000000) {
+                                bug.reset();
+                                return d50;
+                            } break;
+                        case -1:
+                            if (v51 < 1000000) {
+                                bug.reset();
+                                return d51;
+                            } break;
+                        case 0:
+                            if (v52 < 1000000) {
+                                bug.reset();
+                                return d52;
+                            } break;
+                    } break;
 
-            case 3:
-                switch(dy) {
-                    case -3:
-                        if (v57 < 1000000) {
-                            bug.reset();
-                            return d57;
-                        } break;
-                    case -2:
-                        if (v58 < 1000000) {
-                            bug.reset();
-                            return d58;
-                        } break;
-                    case -1:
-                        if (v59 < 1000000) {
-                            bug.reset();
-                            return d59;
-                        } break;
-                    case 0:
-                        if (v60 < 1000000) {
-                            bug.reset();
-                            return d60;
-                        } break;
-                } break;
+                case 3:
+                    switch(dy) {
+                        case -3:
+                            if (v57 < 1000000) {
+                                bug.reset();
+                                return d57;
+                            } break;
+                        case -2:
+                            if (v58 < 1000000) {
+                                bug.reset();
+                                return d58;
+                            } break;
+                        case -1:
+                            if (v59 < 1000000) {
+                                bug.reset();
+                                return d59;
+                            } break;
+                        case 0:
+                            if (v60 < 1000000) {
+                                bug.reset();
+                                return d60;
+                            } break;
+                    } break;
 
-            case 4:
-                switch(dy) {
-                    case -2:
-                        if (v64 < 1000000) {
-                            bug.reset();
-                            return d64;
-                        } break;
-                    case -1:
-                        if (v65 < 1000000) {
-                            bug.reset();
-                            return d65;
-                        } break;
-                    case 0:
-                        if (v66 < 1000000) {
-                            bug.reset();
-                            return d66;
-                        } break;
-                } break;
+                case 4:
+                    switch(dy) {
+                        case -2:
+                            if (v64 < 1000000) {
+                                bug.reset();
+                                return d64;
+                            } break;
+                        case -1:
+                            if (v65 < 1000000) {
+                                bug.reset();
+                                return d65;
+                            } break;
+                        case 0:
+                            if (v66 < 1000000) {
+                                bug.reset();
+                                return d66;
+                            } break;
+                    } break;
 
+            }
         }
     
         Direction ans = Direction.CENTER;
@@ -9662,6 +9677,7 @@ public class Navigation {
     private Direction getBestDirection5() throws GameActionException {
         double localBest = 1000000.0;
         double dist = 0.0;
+	    boolean gothroughCurrent = rc.getType() == RobotType.CARRIER && rc.getWeight() < 3;
         l34 = currentLocation;
         v34 = 0;
         d26 = null;
@@ -9855,7 +9871,7 @@ public class Navigation {
             if (rc.canSenseLocation(l33)) {
                 MapInfo mapInfo = rc.senseMapInfo(l33);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l33), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l33), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p33 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -9879,7 +9895,7 @@ public class Navigation {
             if (rc.canSenseLocation(l25)) {
                 MapInfo mapInfo = rc.senseMapInfo(l25);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l25), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l25), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p25 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -9903,7 +9919,7 @@ public class Navigation {
             if (rc.canSenseLocation(l42)) {
                 MapInfo mapInfo = rc.senseMapInfo(l42);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l42), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l42) || (rc.sensePassability(l42) && !rc.canSenseRobotAtLocation(l42) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l42), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p42 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -9927,7 +9943,7 @@ public class Navigation {
             if (rc.canSenseLocation(l26)) {
                 MapInfo mapInfo = rc.senseMapInfo(l26);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l26), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l26), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p26 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -9951,7 +9967,7 @@ public class Navigation {
             if (rc.canSenseLocation(l24)) {
                 MapInfo mapInfo = rc.senseMapInfo(l24);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l24), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l24), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p24 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -9980,7 +9996,7 @@ public class Navigation {
             if (rc.canSenseLocation(l16)) {
                 MapInfo mapInfo = rc.senseMapInfo(l16);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p16 = mapInfo.getCooldownMultiplier(team);
                     s16 = Math.sqrt(l16.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10010,7 +10026,7 @@ public class Navigation {
             if (rc.canSenseLocation(l32)) {
                 MapInfo mapInfo = rc.senseMapInfo(l32);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p32 = mapInfo.getCooldownMultiplier(team);
                     s32 = Math.sqrt(l32.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10040,7 +10056,7 @@ public class Navigation {
             if (rc.canSenseLocation(l15)) {
                 MapInfo mapInfo = rc.senseMapInfo(l15);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p15 = mapInfo.getCooldownMultiplier(team);
                     s15 = Math.sqrt(l15.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10075,7 +10091,7 @@ public class Navigation {
             if (rc.canSenseLocation(l41)) {
                 MapInfo mapInfo = rc.senseMapInfo(l41);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l41) || (rc.sensePassability(l41) && !rc.canSenseRobotAtLocation(l41) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l41), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p41 = mapInfo.getCooldownMultiplier(team);
                     s41 = Math.sqrt(l41.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10105,7 +10121,7 @@ public class Navigation {
             if (rc.canSenseLocation(l23)) {
                 MapInfo mapInfo = rc.senseMapInfo(l23);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p23 = mapInfo.getCooldownMultiplier(team);
                     s23 = Math.sqrt(l23.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10140,7 +10156,7 @@ public class Navigation {
             if (rc.canSenseLocation(l17)) {
                 MapInfo mapInfo = rc.senseMapInfo(l17);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p17 = mapInfo.getCooldownMultiplier(team);
                     s17 = Math.sqrt(l17.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10170,7 +10186,7 @@ public class Navigation {
             if (rc.canSenseLocation(l18)) {
                 MapInfo mapInfo = rc.senseMapInfo(l18);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p18 = mapInfo.getCooldownMultiplier(team);
                     s18 = Math.sqrt(l18.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10195,7 +10211,7 @@ public class Navigation {
             if (rc.canSenseLocation(l50)) {
                 MapInfo mapInfo = rc.senseMapInfo(l50);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l50) || (rc.sensePassability(l50) && !rc.canSenseRobotAtLocation(l50) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l50), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p50 = mapInfo.getCooldownMultiplier(team);
                     s50 = Math.sqrt(l50.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10220,7 +10236,7 @@ public class Navigation {
             if (rc.canSenseLocation(l14)) {
                 MapInfo mapInfo = rc.senseMapInfo(l14);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p14 = mapInfo.getCooldownMultiplier(team);
                     s14 = Math.sqrt(l14.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10250,7 +10266,7 @@ public class Navigation {
             if (rc.canSenseLocation(l8)) {
                 MapInfo mapInfo = rc.senseMapInfo(l8);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p8 = mapInfo.getCooldownMultiplier(team);
                     s8 = Math.sqrt(l8.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10280,7 +10296,7 @@ public class Navigation {
             if (rc.canSenseLocation(l31)) {
                 MapInfo mapInfo = rc.senseMapInfo(l31);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p31 = mapInfo.getCooldownMultiplier(team);
                     s31 = Math.sqrt(l31.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10310,7 +10326,7 @@ public class Navigation {
             if (rc.canSenseLocation(l7)) {
                 MapInfo mapInfo = rc.senseMapInfo(l7);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p7 = mapInfo.getCooldownMultiplier(team);
                     s7 = Math.sqrt(l7.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10345,7 +10361,7 @@ public class Navigation {
             if (rc.canSenseLocation(l9)) {
                 MapInfo mapInfo = rc.senseMapInfo(l9);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p9 = mapInfo.getCooldownMultiplier(team);
                     s9 = Math.sqrt(l9.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10380,7 +10396,7 @@ public class Navigation {
             if (rc.canSenseLocation(l40)) {
                 MapInfo mapInfo = rc.senseMapInfo(l40);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l40) || (rc.sensePassability(l40) && !rc.canSenseRobotAtLocation(l40) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l40), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p40 = mapInfo.getCooldownMultiplier(team);
                     s40 = Math.sqrt(l40.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10415,7 +10431,7 @@ public class Navigation {
             if (rc.canSenseLocation(l22)) {
                 MapInfo mapInfo = rc.senseMapInfo(l22);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p22 = mapInfo.getCooldownMultiplier(team);
                     s22 = Math.sqrt(l22.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10450,7 +10466,7 @@ public class Navigation {
             if (rc.canSenseLocation(l6)) {
                 MapInfo mapInfo = rc.senseMapInfo(l6);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p6 = mapInfo.getCooldownMultiplier(team);
                     s6 = Math.sqrt(l6.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10485,7 +10501,7 @@ public class Navigation {
             if (rc.canSenseLocation(l13)) {
                 MapInfo mapInfo = rc.senseMapInfo(l13);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p13 = mapInfo.getCooldownMultiplier(team);
                     s13 = Math.sqrt(l13.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10520,7 +10536,7 @@ public class Navigation {
             if (rc.canSenseLocation(l49)) {
                 MapInfo mapInfo = rc.senseMapInfo(l49);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l49) || (rc.sensePassability(l49) && !rc.canSenseRobotAtLocation(l49) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l49), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p49 = mapInfo.getCooldownMultiplier(team);
                     s49 = Math.sqrt(l49.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10550,7 +10566,7 @@ public class Navigation {
             if (rc.canSenseLocation(l10)) {
                 MapInfo mapInfo = rc.senseMapInfo(l10);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p10 = mapInfo.getCooldownMultiplier(team);
                     s10 = Math.sqrt(l10.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10580,7 +10596,7 @@ public class Navigation {
             if (rc.canSenseLocation(l57)) {
                 MapInfo mapInfo = rc.senseMapInfo(l57);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l57) || (rc.sensePassability(l57) && !rc.canSenseRobotAtLocation(l57) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l57), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p57 = mapInfo.getCooldownMultiplier(team);
                     s57 = Math.sqrt(l57.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10605,7 +10621,7 @@ public class Navigation {
             if (rc.canSenseLocation(l5)) {
                 MapInfo mapInfo = rc.senseMapInfo(l5);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p5 = mapInfo.getCooldownMultiplier(team);
                     s5 = Math.sqrt(l5.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10635,7 +10651,7 @@ public class Navigation {
             if (rc.canSenseLocation(l11)) {
                 MapInfo mapInfo = rc.senseMapInfo(l11);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p11 = mapInfo.getCooldownMultiplier(team);
                     s11 = Math.sqrt(l11.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10660,7 +10676,7 @@ public class Navigation {
             if (rc.canSenseLocation(l30)) {
                 MapInfo mapInfo = rc.senseMapInfo(l30);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p30 = mapInfo.getCooldownMultiplier(team);
                     s30 = Math.sqrt(l30.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10690,7 +10706,7 @@ public class Navigation {
             if (rc.canSenseLocation(l2)) {
                 MapInfo mapInfo = rc.senseMapInfo(l2);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p2 = mapInfo.getCooldownMultiplier(team);
                     s2 = Math.sqrt(l2.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10720,7 +10736,7 @@ public class Navigation {
             if (rc.canSenseLocation(l1)) {
                 MapInfo mapInfo = rc.senseMapInfo(l1);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p1 = mapInfo.getCooldownMultiplier(team);
                     s1 = Math.sqrt(l1.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10755,7 +10771,7 @@ public class Navigation {
             if (rc.canSenseLocation(l39)) {
                 MapInfo mapInfo = rc.senseMapInfo(l39);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l39) || (rc.sensePassability(l39) && !rc.canSenseRobotAtLocation(l39) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l39), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p39 = mapInfo.getCooldownMultiplier(team);
                     s39 = Math.sqrt(l39.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10790,7 +10806,7 @@ public class Navigation {
             if (rc.canSenseLocation(l21)) {
                 MapInfo mapInfo = rc.senseMapInfo(l21);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p21 = mapInfo.getCooldownMultiplier(team);
                     s21 = Math.sqrt(l21.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10825,7 +10841,7 @@ public class Navigation {
             if (rc.canSenseLocation(l3)) {
                 MapInfo mapInfo = rc.senseMapInfo(l3);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p3 = mapInfo.getCooldownMultiplier(team);
                     s3 = Math.sqrt(l3.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10860,7 +10876,7 @@ public class Navigation {
             if (rc.canSenseLocation(l4)) {
                 MapInfo mapInfo = rc.senseMapInfo(l4);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p4 = mapInfo.getCooldownMultiplier(team);
                     s4 = Math.sqrt(l4.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10895,7 +10911,7 @@ public class Navigation {
             if (rc.canSenseLocation(l48)) {
                 MapInfo mapInfo = rc.senseMapInfo(l48);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l48) || (rc.sensePassability(l48) && !rc.canSenseRobotAtLocation(l48) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l48), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p48 = mapInfo.getCooldownMultiplier(team);
                     s48 = Math.sqrt(l48.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10930,7 +10946,7 @@ public class Navigation {
             if (rc.canSenseLocation(l0)) {
                 MapInfo mapInfo = rc.senseMapInfo(l0);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p0 = mapInfo.getCooldownMultiplier(team);
                     s0 = Math.sqrt(l0.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10965,7 +10981,7 @@ public class Navigation {
             if (rc.canSenseLocation(l12)) {
                 MapInfo mapInfo = rc.senseMapInfo(l12);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p12 = mapInfo.getCooldownMultiplier(team);
                     s12 = Math.sqrt(l12.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -10995,232 +11011,234 @@ public class Navigation {
                 d12 = d5;
             }
         }
-    
-        int dx = targetLocation.x - l34.x;
-        int dy = targetLocation.y - l34.y;
+        if (!rc.senseCloud(currentLocation) || currentLocation.distanceSquaredTo(targetLocation) <= 4) {
+        
+            int dx = targetLocation.x - l34.x;
+            int dy = targetLocation.y - l34.y;
 
-        switch(dx) {
-            case -4:
-                switch(dy) {
-                    case -2:
-                        if (v0 < 1000000) {
-                            bug.reset();
-                            return d0;
-                        } break;
-                    case -1:
-                        if (v1 < 1000000) {
-                            bug.reset();
-                            return d1;
-                        } break;
-                    case 0:
-                        if (v2 < 1000000) {
-                            bug.reset();
-                            return d2;
-                        } break;
-                    case 1:
-                        if (v3 < 1000000) {
-                            bug.reset();
-                            return d3;
-                        } break;
-                    case 2:
-                        if (v4 < 1000000) {
-                            bug.reset();
-                            return d4;
-                        } break;
-                } break;
+            switch(dx) {
+                case -4:
+                    switch(dy) {
+                        case -2:
+                            if (v0 < 1000000) {
+                                bug.reset();
+                                return d0;
+                            } break;
+                        case -1:
+                            if (v1 < 1000000) {
+                                bug.reset();
+                                return d1;
+                            } break;
+                        case 0:
+                            if (v2 < 1000000) {
+                                bug.reset();
+                                return d2;
+                            } break;
+                        case 1:
+                            if (v3 < 1000000) {
+                                bug.reset();
+                                return d3;
+                            } break;
+                        case 2:
+                            if (v4 < 1000000) {
+                                bug.reset();
+                                return d4;
+                            } break;
+                    } break;
 
-            case -3:
-                switch(dy) {
-                    case -3:
-                        if (v5 < 1000000) {
-                            bug.reset();
-                            return d5;
-                        } break;
-                    case -2:
-                        if (v6 < 1000000) {
-                            bug.reset();
-                            return d6;
-                        } break;
-                    case -1:
-                        if (v7 < 1000000) {
-                            bug.reset();
-                            return d7;
-                        } break;
-                    case 0:
-                        if (v8 < 1000000) {
-                            bug.reset();
-                            return d8;
-                        } break;
-                    case 1:
-                        if (v9 < 1000000) {
-                            bug.reset();
-                            return d9;
-                        } break;
-                    case 2:
-                        if (v10 < 1000000) {
-                            bug.reset();
-                            return d10;
-                        } break;
-                    case 3:
-                        if (v11 < 1000000) {
-                            bug.reset();
-                            return d11;
-                        } break;
-                } break;
+                case -3:
+                    switch(dy) {
+                        case -3:
+                            if (v5 < 1000000) {
+                                bug.reset();
+                                return d5;
+                            } break;
+                        case -2:
+                            if (v6 < 1000000) {
+                                bug.reset();
+                                return d6;
+                            } break;
+                        case -1:
+                            if (v7 < 1000000) {
+                                bug.reset();
+                                return d7;
+                            } break;
+                        case 0:
+                            if (v8 < 1000000) {
+                                bug.reset();
+                                return d8;
+                            } break;
+                        case 1:
+                            if (v9 < 1000000) {
+                                bug.reset();
+                                return d9;
+                            } break;
+                        case 2:
+                            if (v10 < 1000000) {
+                                bug.reset();
+                                return d10;
+                            } break;
+                        case 3:
+                            if (v11 < 1000000) {
+                                bug.reset();
+                                return d11;
+                            } break;
+                    } break;
 
-            case -2:
-                switch(dy) {
-                    case -4:
-                        if (v12 < 1000000) {
-                            bug.reset();
-                            return d12;
-                        } break;
-                    case -3:
-                        if (v13 < 1000000) {
-                            bug.reset();
-                            return d13;
-                        } break;
-                    case -2:
-                        if (v14 < 1000000) {
-                            bug.reset();
-                            return d14;
-                        } break;
-                    case -1:
-                        if (v15 < 1000000) {
-                            bug.reset();
-                            return d15;
-                        } break;
-                    case 0:
-                        if (v16 < 1000000) {
-                            bug.reset();
-                            return d16;
-                        } break;
-                    case 1:
-                        if (v17 < 1000000) {
-                            bug.reset();
-                            return d17;
-                        } break;
-                    case 2:
-                        if (v18 < 1000000) {
-                            bug.reset();
-                            return d18;
-                        } break;
-                } break;
+                case -2:
+                    switch(dy) {
+                        case -4:
+                            if (v12 < 1000000) {
+                                bug.reset();
+                                return d12;
+                            } break;
+                        case -3:
+                            if (v13 < 1000000) {
+                                bug.reset();
+                                return d13;
+                            } break;
+                        case -2:
+                            if (v14 < 1000000) {
+                                bug.reset();
+                                return d14;
+                            } break;
+                        case -1:
+                            if (v15 < 1000000) {
+                                bug.reset();
+                                return d15;
+                            } break;
+                        case 0:
+                            if (v16 < 1000000) {
+                                bug.reset();
+                                return d16;
+                            } break;
+                        case 1:
+                            if (v17 < 1000000) {
+                                bug.reset();
+                                return d17;
+                            } break;
+                        case 2:
+                            if (v18 < 1000000) {
+                                bug.reset();
+                                return d18;
+                            } break;
+                    } break;
 
-            case -1:
-                switch(dy) {
-                    case -4:
-                        if (v21 < 1000000) {
-                            bug.reset();
-                            return d21;
-                        } break;
-                    case -3:
-                        if (v22 < 1000000) {
-                            bug.reset();
-                            return d22;
-                        } break;
-                    case -2:
-                        if (v23 < 1000000) {
-                            bug.reset();
-                            return d23;
-                        } break;
-                    case -1:
-                        if (v24 < 1000000) {
-                            bug.reset();
-                            return d24;
-                        } break;
-                    case 0:
-                        if (v25 < 1000000) {
-                            bug.reset();
-                            return d25;
-                        } break;
-                    case 1:
-                        if (v26 < 1000000) {
-                            bug.reset();
-                            return d26;
-                        } break;
-                } break;
+                case -1:
+                    switch(dy) {
+                        case -4:
+                            if (v21 < 1000000) {
+                                bug.reset();
+                                return d21;
+                            } break;
+                        case -3:
+                            if (v22 < 1000000) {
+                                bug.reset();
+                                return d22;
+                            } break;
+                        case -2:
+                            if (v23 < 1000000) {
+                                bug.reset();
+                                return d23;
+                            } break;
+                        case -1:
+                            if (v24 < 1000000) {
+                                bug.reset();
+                                return d24;
+                            } break;
+                        case 0:
+                            if (v25 < 1000000) {
+                                bug.reset();
+                                return d25;
+                            } break;
+                        case 1:
+                            if (v26 < 1000000) {
+                                bug.reset();
+                                return d26;
+                            } break;
+                    } break;
 
-            case 0:
-                switch(dy) {
-                    case -4:
-                        if (v30 < 1000000) {
-                            bug.reset();
-                            return d30;
-                        } break;
-                    case -3:
-                        if (v31 < 1000000) {
-                            bug.reset();
-                            return d31;
-                        } break;
-                    case -2:
-                        if (v32 < 1000000) {
-                            bug.reset();
-                            return d32;
-                        } break;
-                    case -1:
-                        if (v33 < 1000000) {
-                            bug.reset();
-                            return d33;
-                        } break;
-                } break;
+                case 0:
+                    switch(dy) {
+                        case -4:
+                            if (v30 < 1000000) {
+                                bug.reset();
+                                return d30;
+                            } break;
+                        case -3:
+                            if (v31 < 1000000) {
+                                bug.reset();
+                                return d31;
+                            } break;
+                        case -2:
+                            if (v32 < 1000000) {
+                                bug.reset();
+                                return d32;
+                            } break;
+                        case -1:
+                            if (v33 < 1000000) {
+                                bug.reset();
+                                return d33;
+                            } break;
+                    } break;
 
-            case 1:
-                switch(dy) {
-                    case -4:
-                        if (v39 < 1000000) {
-                            bug.reset();
-                            return d39;
-                        } break;
-                    case -3:
-                        if (v40 < 1000000) {
-                            bug.reset();
-                            return d40;
-                        } break;
-                    case -2:
-                        if (v41 < 1000000) {
-                            bug.reset();
-                            return d41;
-                        } break;
-                    case -1:
-                        if (v42 < 1000000) {
-                            bug.reset();
-                            return d42;
-                        } break;
-                } break;
+                case 1:
+                    switch(dy) {
+                        case -4:
+                            if (v39 < 1000000) {
+                                bug.reset();
+                                return d39;
+                            } break;
+                        case -3:
+                            if (v40 < 1000000) {
+                                bug.reset();
+                                return d40;
+                            } break;
+                        case -2:
+                            if (v41 < 1000000) {
+                                bug.reset();
+                                return d41;
+                            } break;
+                        case -1:
+                            if (v42 < 1000000) {
+                                bug.reset();
+                                return d42;
+                            } break;
+                    } break;
 
-            case 2:
-                switch(dy) {
-                    case -4:
-                        if (v48 < 1000000) {
-                            bug.reset();
-                            return d48;
-                        } break;
-                    case -3:
-                        if (v49 < 1000000) {
-                            bug.reset();
-                            return d49;
-                        } break;
-                    case -2:
-                        if (v50 < 1000000) {
-                            bug.reset();
-                            return d50;
-                        } break;
-                } break;
+                case 2:
+                    switch(dy) {
+                        case -4:
+                            if (v48 < 1000000) {
+                                bug.reset();
+                                return d48;
+                            } break;
+                        case -3:
+                            if (v49 < 1000000) {
+                                bug.reset();
+                                return d49;
+                            } break;
+                        case -2:
+                            if (v50 < 1000000) {
+                                bug.reset();
+                                return d50;
+                            } break;
+                    } break;
 
-            case 3:
-                switch(dy) {
-                    case -3:
-                        if (v57 < 1000000) {
-                            bug.reset();
-                            return d57;
-                        } break;
-                } break;
+                case 3:
+                    switch(dy) {
+                        case -3:
+                            if (v57 < 1000000) {
+                                bug.reset();
+                                return d57;
+                            } break;
+                    } break;
 
-            case 4:
-                switch(dy) {
-                } break;
+                case 4:
+                    switch(dy) {
+                    } break;
 
+            }
         }
     
         Direction ans = Direction.CENTER;
@@ -11467,6 +11485,7 @@ public class Navigation {
     private Direction getBestDirection6() throws GameActionException {
         double localBest = 1000000.0;
         double dist = 0.0;
+	    boolean gothroughCurrent = rc.getType() == RobotType.CARRIER && rc.getWeight() < 3;
         l34 = currentLocation;
         v34 = 0;
         d35 = null;
@@ -11665,7 +11684,7 @@ public class Navigation {
             if (rc.canSenseLocation(l33)) {
                 MapInfo mapInfo = rc.senseMapInfo(l33);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l33), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l33) || (rc.sensePassability(l33) && !rc.canSenseRobotAtLocation(l33) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l33), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p33 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -11689,7 +11708,7 @@ public class Navigation {
             if (rc.canSenseLocation(l25)) {
                 MapInfo mapInfo = rc.senseMapInfo(l25);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l25), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l25), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p25 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -11718,7 +11737,7 @@ public class Navigation {
             if (rc.canSenseLocation(l35)) {
                 MapInfo mapInfo = rc.senseMapInfo(l35);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l35), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l35), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p35 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -11742,7 +11761,7 @@ public class Navigation {
             if (rc.canSenseLocation(l24)) {
                 MapInfo mapInfo = rc.senseMapInfo(l24);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l24), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l24), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p24 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -11771,7 +11790,7 @@ public class Navigation {
             if (rc.canSenseLocation(l26)) {
                 MapInfo mapInfo = rc.senseMapInfo(l26);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l26), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l26), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p26 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -11800,7 +11819,7 @@ public class Navigation {
             if (rc.canSenseLocation(l36)) {
                 MapInfo mapInfo = rc.senseMapInfo(l36);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p36 = mapInfo.getCooldownMultiplier(team);
                     s36 = Math.sqrt(l36.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -11825,7 +11844,7 @@ public class Navigation {
             if (rc.canSenseLocation(l16)) {
                 MapInfo mapInfo = rc.senseMapInfo(l16);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p16 = mapInfo.getCooldownMultiplier(team);
                     s16 = Math.sqrt(l16.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -11855,7 +11874,7 @@ public class Navigation {
             if (rc.canSenseLocation(l32)) {
                 MapInfo mapInfo = rc.senseMapInfo(l32);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l32) || (rc.sensePassability(l32) && !rc.canSenseRobotAtLocation(l32) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l32), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p32 = mapInfo.getCooldownMultiplier(team);
                     s32 = Math.sqrt(l32.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -11880,7 +11899,7 @@ public class Navigation {
             if (rc.canSenseLocation(l27)) {
                 MapInfo mapInfo = rc.senseMapInfo(l27);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p27 = mapInfo.getCooldownMultiplier(team);
                     s27 = Math.sqrt(l27.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -11915,7 +11934,7 @@ public class Navigation {
             if (rc.canSenseLocation(l15)) {
                 MapInfo mapInfo = rc.senseMapInfo(l15);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p15 = mapInfo.getCooldownMultiplier(team);
                     s15 = Math.sqrt(l15.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -11950,7 +11969,7 @@ public class Navigation {
             if (rc.canSenseLocation(l23)) {
                 MapInfo mapInfo = rc.senseMapInfo(l23);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l23) || (rc.sensePassability(l23) && !rc.canSenseRobotAtLocation(l23) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l23), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p23 = mapInfo.getCooldownMultiplier(team);
                     s23 = Math.sqrt(l23.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -11985,7 +12004,7 @@ public class Navigation {
             if (rc.canSenseLocation(l17)) {
                 MapInfo mapInfo = rc.senseMapInfo(l17);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p17 = mapInfo.getCooldownMultiplier(team);
                     s17 = Math.sqrt(l17.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12020,7 +12039,7 @@ public class Navigation {
             if (rc.canSenseLocation(l14)) {
                 MapInfo mapInfo = rc.senseMapInfo(l14);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p14 = mapInfo.getCooldownMultiplier(team);
                     s14 = Math.sqrt(l14.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12050,7 +12069,7 @@ public class Navigation {
             if (rc.canSenseLocation(l18)) {
                 MapInfo mapInfo = rc.senseMapInfo(l18);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p18 = mapInfo.getCooldownMultiplier(team);
                     s18 = Math.sqrt(l18.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12080,7 +12099,7 @@ public class Navigation {
             if (rc.canSenseLocation(l37)) {
                 MapInfo mapInfo = rc.senseMapInfo(l37);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p37 = mapInfo.getCooldownMultiplier(team);
                     s37 = Math.sqrt(l37.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12105,7 +12124,7 @@ public class Navigation {
             if (rc.canSenseLocation(l8)) {
                 MapInfo mapInfo = rc.senseMapInfo(l8);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p8 = mapInfo.getCooldownMultiplier(team);
                     s8 = Math.sqrt(l8.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12135,7 +12154,7 @@ public class Navigation {
             if (rc.canSenseLocation(l31)) {
                 MapInfo mapInfo = rc.senseMapInfo(l31);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l31) || (rc.sensePassability(l31) && !rc.canSenseRobotAtLocation(l31) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l31), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p31 = mapInfo.getCooldownMultiplier(team);
                     s31 = Math.sqrt(l31.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12160,7 +12179,7 @@ public class Navigation {
             if (rc.canSenseLocation(l28)) {
                 MapInfo mapInfo = rc.senseMapInfo(l28);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p28 = mapInfo.getCooldownMultiplier(team);
                     s28 = Math.sqrt(l28.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12195,7 +12214,7 @@ public class Navigation {
             if (rc.canSenseLocation(l9)) {
                 MapInfo mapInfo = rc.senseMapInfo(l9);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p9 = mapInfo.getCooldownMultiplier(team);
                     s9 = Math.sqrt(l9.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12230,7 +12249,7 @@ public class Navigation {
             if (rc.canSenseLocation(l22)) {
                 MapInfo mapInfo = rc.senseMapInfo(l22);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l22) || (rc.sensePassability(l22) && !rc.canSenseRobotAtLocation(l22) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l22), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p22 = mapInfo.getCooldownMultiplier(team);
                     s22 = Math.sqrt(l22.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12265,7 +12284,7 @@ public class Navigation {
             if (rc.canSenseLocation(l7)) {
                 MapInfo mapInfo = rc.senseMapInfo(l7);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p7 = mapInfo.getCooldownMultiplier(team);
                     s7 = Math.sqrt(l7.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12300,7 +12319,7 @@ public class Navigation {
             if (rc.canSenseLocation(l13)) {
                 MapInfo mapInfo = rc.senseMapInfo(l13);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l13) || (rc.sensePassability(l13) && !rc.canSenseRobotAtLocation(l13) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l13), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p13 = mapInfo.getCooldownMultiplier(team);
                     s13 = Math.sqrt(l13.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12335,7 +12354,7 @@ public class Navigation {
             if (rc.canSenseLocation(l19)) {
                 MapInfo mapInfo = rc.senseMapInfo(l19);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p19 = mapInfo.getCooldownMultiplier(team);
                     s19 = Math.sqrt(l19.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12370,7 +12389,7 @@ public class Navigation {
             if (rc.canSenseLocation(l10)) {
                 MapInfo mapInfo = rc.senseMapInfo(l10);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p10 = mapInfo.getCooldownMultiplier(team);
                     s10 = Math.sqrt(l10.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12405,7 +12424,7 @@ public class Navigation {
             if (rc.canSenseLocation(l6)) {
                 MapInfo mapInfo = rc.senseMapInfo(l6);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p6 = mapInfo.getCooldownMultiplier(team);
                     s6 = Math.sqrt(l6.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12440,7 +12459,7 @@ public class Navigation {
             if (rc.canSenseLocation(l11)) {
                 MapInfo mapInfo = rc.senseMapInfo(l11);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p11 = mapInfo.getCooldownMultiplier(team);
                     s11 = Math.sqrt(l11.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12470,7 +12489,7 @@ public class Navigation {
             if (rc.canSenseLocation(l5)) {
                 MapInfo mapInfo = rc.senseMapInfo(l5);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p5 = mapInfo.getCooldownMultiplier(team);
                     s5 = Math.sqrt(l5.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12500,7 +12519,7 @@ public class Navigation {
             if (rc.canSenseLocation(l30)) {
                 MapInfo mapInfo = rc.senseMapInfo(l30);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l30) || (rc.sensePassability(l30) && !rc.canSenseRobotAtLocation(l30) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l30), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p30 = mapInfo.getCooldownMultiplier(team);
                     s30 = Math.sqrt(l30.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12525,7 +12544,7 @@ public class Navigation {
             if (rc.canSenseLocation(l38)) {
                 MapInfo mapInfo = rc.senseMapInfo(l38);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p38 = mapInfo.getCooldownMultiplier(team);
                     s38 = Math.sqrt(l38.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12550,7 +12569,7 @@ public class Navigation {
             if (rc.canSenseLocation(l2)) {
                 MapInfo mapInfo = rc.senseMapInfo(l2);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p2 = mapInfo.getCooldownMultiplier(team);
                     s2 = Math.sqrt(l2.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12580,7 +12599,7 @@ public class Navigation {
             if (rc.canSenseLocation(l21)) {
                 MapInfo mapInfo = rc.senseMapInfo(l21);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l21) || (rc.sensePassability(l21) && !rc.canSenseRobotAtLocation(l21) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l21), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p21 = mapInfo.getCooldownMultiplier(team);
                     s21 = Math.sqrt(l21.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12615,7 +12634,7 @@ public class Navigation {
             if (rc.canSenseLocation(l3)) {
                 MapInfo mapInfo = rc.senseMapInfo(l3);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p3 = mapInfo.getCooldownMultiplier(team);
                     s3 = Math.sqrt(l3.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12650,7 +12669,7 @@ public class Navigation {
             if (rc.canSenseLocation(l1)) {
                 MapInfo mapInfo = rc.senseMapInfo(l1);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p1 = mapInfo.getCooldownMultiplier(team);
                     s1 = Math.sqrt(l1.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12685,7 +12704,7 @@ public class Navigation {
             if (rc.canSenseLocation(l29)) {
                 MapInfo mapInfo = rc.senseMapInfo(l29);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p29 = mapInfo.getCooldownMultiplier(team);
                     s29 = Math.sqrt(l29.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12720,7 +12739,7 @@ public class Navigation {
             if (rc.canSenseLocation(l20)) {
                 MapInfo mapInfo = rc.senseMapInfo(l20);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p20 = mapInfo.getCooldownMultiplier(team);
                     s20 = Math.sqrt(l20.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12755,7 +12774,7 @@ public class Navigation {
             if (rc.canSenseLocation(l12)) {
                 MapInfo mapInfo = rc.senseMapInfo(l12);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l12) || (rc.sensePassability(l12) && !rc.canSenseRobotAtLocation(l12) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l12), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p12 = mapInfo.getCooldownMultiplier(team);
                     s12 = Math.sqrt(l12.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12790,7 +12809,7 @@ public class Navigation {
             if (rc.canSenseLocation(l4)) {
                 MapInfo mapInfo = rc.senseMapInfo(l4);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p4 = mapInfo.getCooldownMultiplier(team);
                     s4 = Math.sqrt(l4.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12825,7 +12844,7 @@ public class Navigation {
             if (rc.canSenseLocation(l0)) {
                 MapInfo mapInfo = rc.senseMapInfo(l0);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p0 = mapInfo.getCooldownMultiplier(team);
                     s0 = Math.sqrt(l0.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -12855,237 +12874,239 @@ public class Navigation {
                 d0 = d5;
             }
         }
-    
-        int dx = targetLocation.x - l34.x;
-        int dy = targetLocation.y - l34.y;
+        if (!rc.senseCloud(currentLocation) || currentLocation.distanceSquaredTo(targetLocation) <= 4) {
+        
+            int dx = targetLocation.x - l34.x;
+            int dy = targetLocation.y - l34.y;
 
-        switch(dx) {
-            case -4:
-                switch(dy) {
-                    case -2:
-                        if (v0 < 1000000) {
-                            bug.reset();
-                            return d0;
-                        } break;
-                    case -1:
-                        if (v1 < 1000000) {
-                            bug.reset();
-                            return d1;
-                        } break;
-                    case 0:
-                        if (v2 < 1000000) {
-                            bug.reset();
-                            return d2;
-                        } break;
-                    case 1:
-                        if (v3 < 1000000) {
-                            bug.reset();
-                            return d3;
-                        } break;
-                    case 2:
-                        if (v4 < 1000000) {
-                            bug.reset();
-                            return d4;
-                        } break;
-                } break;
+            switch(dx) {
+                case -4:
+                    switch(dy) {
+                        case -2:
+                            if (v0 < 1000000) {
+                                bug.reset();
+                                return d0;
+                            } break;
+                        case -1:
+                            if (v1 < 1000000) {
+                                bug.reset();
+                                return d1;
+                            } break;
+                        case 0:
+                            if (v2 < 1000000) {
+                                bug.reset();
+                                return d2;
+                            } break;
+                        case 1:
+                            if (v3 < 1000000) {
+                                bug.reset();
+                                return d3;
+                            } break;
+                        case 2:
+                            if (v4 < 1000000) {
+                                bug.reset();
+                                return d4;
+                            } break;
+                    } break;
 
-            case -3:
-                switch(dy) {
-                    case -3:
-                        if (v5 < 1000000) {
-                            bug.reset();
-                            return d5;
-                        } break;
-                    case -2:
-                        if (v6 < 1000000) {
-                            bug.reset();
-                            return d6;
-                        } break;
-                    case -1:
-                        if (v7 < 1000000) {
-                            bug.reset();
-                            return d7;
-                        } break;
-                    case 0:
-                        if (v8 < 1000000) {
-                            bug.reset();
-                            return d8;
-                        } break;
-                    case 1:
-                        if (v9 < 1000000) {
-                            bug.reset();
-                            return d9;
-                        } break;
-                    case 2:
-                        if (v10 < 1000000) {
-                            bug.reset();
-                            return d10;
-                        } break;
-                    case 3:
-                        if (v11 < 1000000) {
-                            bug.reset();
-                            return d11;
-                        } break;
-                } break;
+                case -3:
+                    switch(dy) {
+                        case -3:
+                            if (v5 < 1000000) {
+                                bug.reset();
+                                return d5;
+                            } break;
+                        case -2:
+                            if (v6 < 1000000) {
+                                bug.reset();
+                                return d6;
+                            } break;
+                        case -1:
+                            if (v7 < 1000000) {
+                                bug.reset();
+                                return d7;
+                            } break;
+                        case 0:
+                            if (v8 < 1000000) {
+                                bug.reset();
+                                return d8;
+                            } break;
+                        case 1:
+                            if (v9 < 1000000) {
+                                bug.reset();
+                                return d9;
+                            } break;
+                        case 2:
+                            if (v10 < 1000000) {
+                                bug.reset();
+                                return d10;
+                            } break;
+                        case 3:
+                            if (v11 < 1000000) {
+                                bug.reset();
+                                return d11;
+                            } break;
+                    } break;
 
-            case -2:
-                switch(dy) {
-                    case -4:
-                        if (v12 < 1000000) {
-                            bug.reset();
-                            return d12;
-                        } break;
-                    case -3:
-                        if (v13 < 1000000) {
-                            bug.reset();
-                            return d13;
-                        } break;
-                    case -2:
-                        if (v14 < 1000000) {
-                            bug.reset();
-                            return d14;
-                        } break;
-                    case -1:
-                        if (v15 < 1000000) {
-                            bug.reset();
-                            return d15;
-                        } break;
-                    case 0:
-                        if (v16 < 1000000) {
-                            bug.reset();
-                            return d16;
-                        } break;
-                    case 1:
-                        if (v17 < 1000000) {
-                            bug.reset();
-                            return d17;
-                        } break;
-                    case 2:
-                        if (v18 < 1000000) {
-                            bug.reset();
-                            return d18;
-                        } break;
-                    case 3:
-                        if (v19 < 1000000) {
-                            bug.reset();
-                            return d19;
-                        } break;
-                    case 4:
-                        if (v20 < 1000000) {
-                            bug.reset();
-                            return d20;
-                        } break;
-                } break;
+                case -2:
+                    switch(dy) {
+                        case -4:
+                            if (v12 < 1000000) {
+                                bug.reset();
+                                return d12;
+                            } break;
+                        case -3:
+                            if (v13 < 1000000) {
+                                bug.reset();
+                                return d13;
+                            } break;
+                        case -2:
+                            if (v14 < 1000000) {
+                                bug.reset();
+                                return d14;
+                            } break;
+                        case -1:
+                            if (v15 < 1000000) {
+                                bug.reset();
+                                return d15;
+                            } break;
+                        case 0:
+                            if (v16 < 1000000) {
+                                bug.reset();
+                                return d16;
+                            } break;
+                        case 1:
+                            if (v17 < 1000000) {
+                                bug.reset();
+                                return d17;
+                            } break;
+                        case 2:
+                            if (v18 < 1000000) {
+                                bug.reset();
+                                return d18;
+                            } break;
+                        case 3:
+                            if (v19 < 1000000) {
+                                bug.reset();
+                                return d19;
+                            } break;
+                        case 4:
+                            if (v20 < 1000000) {
+                                bug.reset();
+                                return d20;
+                            } break;
+                    } break;
 
-            case -1:
-                switch(dy) {
-                    case -4:
-                        if (v21 < 1000000) {
-                            bug.reset();
-                            return d21;
-                        } break;
-                    case -3:
-                        if (v22 < 1000000) {
-                            bug.reset();
-                            return d22;
-                        } break;
-                    case -2:
-                        if (v23 < 1000000) {
-                            bug.reset();
-                            return d23;
-                        } break;
-                    case -1:
-                        if (v24 < 1000000) {
-                            bug.reset();
-                            return d24;
-                        } break;
-                    case 0:
-                        if (v25 < 1000000) {
-                            bug.reset();
-                            return d25;
-                        } break;
-                    case 1:
-                        if (v26 < 1000000) {
-                            bug.reset();
-                            return d26;
-                        } break;
-                    case 2:
-                        if (v27 < 1000000) {
-                            bug.reset();
-                            return d27;
-                        } break;
-                    case 3:
-                        if (v28 < 1000000) {
-                            bug.reset();
-                            return d28;
-                        } break;
-                    case 4:
-                        if (v29 < 1000000) {
-                            bug.reset();
-                            return d29;
-                        } break;
-                } break;
+                case -1:
+                    switch(dy) {
+                        case -4:
+                            if (v21 < 1000000) {
+                                bug.reset();
+                                return d21;
+                            } break;
+                        case -3:
+                            if (v22 < 1000000) {
+                                bug.reset();
+                                return d22;
+                            } break;
+                        case -2:
+                            if (v23 < 1000000) {
+                                bug.reset();
+                                return d23;
+                            } break;
+                        case -1:
+                            if (v24 < 1000000) {
+                                bug.reset();
+                                return d24;
+                            } break;
+                        case 0:
+                            if (v25 < 1000000) {
+                                bug.reset();
+                                return d25;
+                            } break;
+                        case 1:
+                            if (v26 < 1000000) {
+                                bug.reset();
+                                return d26;
+                            } break;
+                        case 2:
+                            if (v27 < 1000000) {
+                                bug.reset();
+                                return d27;
+                            } break;
+                        case 3:
+                            if (v28 < 1000000) {
+                                bug.reset();
+                                return d28;
+                            } break;
+                        case 4:
+                            if (v29 < 1000000) {
+                                bug.reset();
+                                return d29;
+                            } break;
+                    } break;
 
-            case 0:
-                switch(dy) {
-                    case -4:
-                        if (v30 < 1000000) {
-                            bug.reset();
-                            return d30;
-                        } break;
-                    case -3:
-                        if (v31 < 1000000) {
-                            bug.reset();
-                            return d31;
-                        } break;
-                    case -2:
-                        if (v32 < 1000000) {
-                            bug.reset();
-                            return d32;
-                        } break;
-                    case -1:
-                        if (v33 < 1000000) {
-                            bug.reset();
-                            return d33;
-                        } break;
-                    case 1:
-                        if (v35 < 1000000) {
-                            bug.reset();
-                            return d35;
-                        } break;
-                    case 2:
-                        if (v36 < 1000000) {
-                            bug.reset();
-                            return d36;
-                        } break;
-                    case 3:
-                        if (v37 < 1000000) {
-                            bug.reset();
-                            return d37;
-                        } break;
-                    case 4:
-                        if (v38 < 1000000) {
-                            bug.reset();
-                            return d38;
-                        } break;
-                } break;
+                case 0:
+                    switch(dy) {
+                        case -4:
+                            if (v30 < 1000000) {
+                                bug.reset();
+                                return d30;
+                            } break;
+                        case -3:
+                            if (v31 < 1000000) {
+                                bug.reset();
+                                return d31;
+                            } break;
+                        case -2:
+                            if (v32 < 1000000) {
+                                bug.reset();
+                                return d32;
+                            } break;
+                        case -1:
+                            if (v33 < 1000000) {
+                                bug.reset();
+                                return d33;
+                            } break;
+                        case 1:
+                            if (v35 < 1000000) {
+                                bug.reset();
+                                return d35;
+                            } break;
+                        case 2:
+                            if (v36 < 1000000) {
+                                bug.reset();
+                                return d36;
+                            } break;
+                        case 3:
+                            if (v37 < 1000000) {
+                                bug.reset();
+                                return d37;
+                            } break;
+                        case 4:
+                            if (v38 < 1000000) {
+                                bug.reset();
+                                return d38;
+                            } break;
+                    } break;
 
-            case 1:
-                switch(dy) {
-                } break;
+                case 1:
+                    switch(dy) {
+                    } break;
 
-            case 2:
-                switch(dy) {
-                } break;
+                case 2:
+                    switch(dy) {
+                    } break;
 
-            case 3:
-                switch(dy) {
-                } break;
+                case 3:
+                    switch(dy) {
+                    } break;
 
-            case 4:
-                switch(dy) {
-                } break;
+                case 4:
+                    switch(dy) {
+                    } break;
 
+            }
         }
     
         Direction ans = Direction.CENTER;
@@ -13338,6 +13359,7 @@ public class Navigation {
     private Direction getBestDirection7() throws GameActionException {
         double localBest = 1000000.0;
         double dist = 0.0;
+	    boolean gothroughCurrent = rc.getType() == RobotType.CARRIER && rc.getWeight() < 3;
         l34 = currentLocation;
         v34 = 0;
         d44 = null;
@@ -13531,7 +13553,7 @@ public class Navigation {
             if (rc.canSenseLocation(l25)) {
                 MapInfo mapInfo = rc.senseMapInfo(l25);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l25), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l25) || (rc.sensePassability(l25) && !rc.canSenseRobotAtLocation(l25) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l25), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p25 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -13555,7 +13577,7 @@ public class Navigation {
             if (rc.canSenseLocation(l35)) {
                 MapInfo mapInfo = rc.senseMapInfo(l35);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l35), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l35) || (rc.sensePassability(l35) && !rc.canSenseRobotAtLocation(l35) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l35), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p35 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -13579,7 +13601,7 @@ public class Navigation {
             if (rc.canSenseLocation(l24)) {
                 MapInfo mapInfo = rc.senseMapInfo(l24);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l24), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l24) || (rc.sensePassability(l24) && !rc.canSenseRobotAtLocation(l24) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l24), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p24 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -13603,7 +13625,7 @@ public class Navigation {
             if (rc.canSenseLocation(l44)) {
                 MapInfo mapInfo = rc.senseMapInfo(l44);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l44), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l44) || (rc.sensePassability(l44) && !rc.canSenseRobotAtLocation(l44) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l44), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p44 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -13627,7 +13649,7 @@ public class Navigation {
             if (rc.canSenseLocation(l26)) {
                 MapInfo mapInfo = rc.senseMapInfo(l26);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l26), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l26) || (rc.sensePassability(l26) && !rc.canSenseRobotAtLocation(l26) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l26), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p26 = mapInfo.getCooldownMultiplier(team);
                 }
             }
@@ -13656,7 +13678,7 @@ public class Navigation {
             if (rc.canSenseLocation(l36)) {
                 MapInfo mapInfo = rc.senseMapInfo(l36);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l36) || (rc.sensePassability(l36) && !rc.canSenseRobotAtLocation(l36) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l36), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p36 = mapInfo.getCooldownMultiplier(team);
                     s36 = Math.sqrt(l36.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13686,7 +13708,7 @@ public class Navigation {
             if (rc.canSenseLocation(l16)) {
                 MapInfo mapInfo = rc.senseMapInfo(l16);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l16) || (rc.sensePassability(l16) && !rc.canSenseRobotAtLocation(l16) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l16), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p16 = mapInfo.getCooldownMultiplier(team);
                     s16 = Math.sqrt(l16.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13716,7 +13738,7 @@ public class Navigation {
             if (rc.canSenseLocation(l27)) {
                 MapInfo mapInfo = rc.senseMapInfo(l27);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l27) || (rc.sensePassability(l27) && !rc.canSenseRobotAtLocation(l27) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l27), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p27 = mapInfo.getCooldownMultiplier(team);
                     s27 = Math.sqrt(l27.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13751,7 +13773,7 @@ public class Navigation {
             if (rc.canSenseLocation(l15)) {
                 MapInfo mapInfo = rc.senseMapInfo(l15);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l15) || (rc.sensePassability(l15) && !rc.canSenseRobotAtLocation(l15) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l15), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p15 = mapInfo.getCooldownMultiplier(team);
                     s15 = Math.sqrt(l15.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13781,7 +13803,7 @@ public class Navigation {
             if (rc.canSenseLocation(l17)) {
                 MapInfo mapInfo = rc.senseMapInfo(l17);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l17) || (rc.sensePassability(l17) && !rc.canSenseRobotAtLocation(l17) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l17), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p17 = mapInfo.getCooldownMultiplier(team);
                     s17 = Math.sqrt(l17.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13816,7 +13838,7 @@ public class Navigation {
             if (rc.canSenseLocation(l45)) {
                 MapInfo mapInfo = rc.senseMapInfo(l45);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l45) || (rc.sensePassability(l45) && !rc.canSenseRobotAtLocation(l45) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l45), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p45 = mapInfo.getCooldownMultiplier(team);
                     s45 = Math.sqrt(l45.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13846,7 +13868,7 @@ public class Navigation {
             if (rc.canSenseLocation(l54)) {
                 MapInfo mapInfo = rc.senseMapInfo(l54);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l54) || (rc.sensePassability(l54) && !rc.canSenseRobotAtLocation(l54) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l54), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p54 = mapInfo.getCooldownMultiplier(team);
                     s54 = Math.sqrt(l54.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13871,7 +13893,7 @@ public class Navigation {
             if (rc.canSenseLocation(l14)) {
                 MapInfo mapInfo = rc.senseMapInfo(l14);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l14) || (rc.sensePassability(l14) && !rc.canSenseRobotAtLocation(l14) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l14), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p14 = mapInfo.getCooldownMultiplier(team);
                     s14 = Math.sqrt(l14.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13896,7 +13918,7 @@ public class Navigation {
             if (rc.canSenseLocation(l18)) {
                 MapInfo mapInfo = rc.senseMapInfo(l18);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l18) || (rc.sensePassability(l18) && !rc.canSenseRobotAtLocation(l18) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l18), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p18 = mapInfo.getCooldownMultiplier(team);
                     s18 = Math.sqrt(l18.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13926,7 +13948,7 @@ public class Navigation {
             if (rc.canSenseLocation(l37)) {
                 MapInfo mapInfo = rc.senseMapInfo(l37);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l37) || (rc.sensePassability(l37) && !rc.canSenseRobotAtLocation(l37) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l37), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p37 = mapInfo.getCooldownMultiplier(team);
                     s37 = Math.sqrt(l37.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13956,7 +13978,7 @@ public class Navigation {
             if (rc.canSenseLocation(l8)) {
                 MapInfo mapInfo = rc.senseMapInfo(l8);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l8) || (rc.sensePassability(l8) && !rc.canSenseRobotAtLocation(l8) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l8), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p8 = mapInfo.getCooldownMultiplier(team);
                     s8 = Math.sqrt(l8.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -13986,7 +14008,7 @@ public class Navigation {
             if (rc.canSenseLocation(l28)) {
                 MapInfo mapInfo = rc.senseMapInfo(l28);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l28) || (rc.sensePassability(l28) && !rc.canSenseRobotAtLocation(l28) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l28), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p28 = mapInfo.getCooldownMultiplier(team);
                     s28 = Math.sqrt(l28.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14021,7 +14043,7 @@ public class Navigation {
             if (rc.canSenseLocation(l46)) {
                 MapInfo mapInfo = rc.senseMapInfo(l46);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l46) || (rc.sensePassability(l46) && !rc.canSenseRobotAtLocation(l46) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l46), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p46 = mapInfo.getCooldownMultiplier(team);
                     s46 = Math.sqrt(l46.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14056,7 +14078,7 @@ public class Navigation {
             if (rc.canSenseLocation(l7)) {
                 MapInfo mapInfo = rc.senseMapInfo(l7);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l7) || (rc.sensePassability(l7) && !rc.canSenseRobotAtLocation(l7) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l7), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p7 = mapInfo.getCooldownMultiplier(team);
                     s7 = Math.sqrt(l7.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14091,7 +14113,7 @@ public class Navigation {
             if (rc.canSenseLocation(l9)) {
                 MapInfo mapInfo = rc.senseMapInfo(l9);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l9) || (rc.sensePassability(l9) && !rc.canSenseRobotAtLocation(l9) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l9), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p9 = mapInfo.getCooldownMultiplier(team);
                     s9 = Math.sqrt(l9.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14126,7 +14148,7 @@ public class Navigation {
             if (rc.canSenseLocation(l19)) {
                 MapInfo mapInfo = rc.senseMapInfo(l19);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l19) || (rc.sensePassability(l19) && !rc.canSenseRobotAtLocation(l19) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l19), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p19 = mapInfo.getCooldownMultiplier(team);
                     s19 = Math.sqrt(l19.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14161,7 +14183,7 @@ public class Navigation {
             if (rc.canSenseLocation(l10)) {
                 MapInfo mapInfo = rc.senseMapInfo(l10);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l10) || (rc.sensePassability(l10) && !rc.canSenseRobotAtLocation(l10) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l10), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p10 = mapInfo.getCooldownMultiplier(team);
                     s10 = Math.sqrt(l10.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14196,7 +14218,7 @@ public class Navigation {
             if (rc.canSenseLocation(l6)) {
                 MapInfo mapInfo = rc.senseMapInfo(l6);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l6) || (rc.sensePassability(l6) && !rc.canSenseRobotAtLocation(l6) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l6), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p6 = mapInfo.getCooldownMultiplier(team);
                     s6 = Math.sqrt(l6.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14226,7 +14248,7 @@ public class Navigation {
             if (rc.canSenseLocation(l55)) {
                 MapInfo mapInfo = rc.senseMapInfo(l55);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l55) || (rc.sensePassability(l55) && !rc.canSenseRobotAtLocation(l55) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l55), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p55 = mapInfo.getCooldownMultiplier(team);
                     s55 = Math.sqrt(l55.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14256,7 +14278,7 @@ public class Navigation {
             if (rc.canSenseLocation(l5)) {
                 MapInfo mapInfo = rc.senseMapInfo(l5);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l5) || (rc.sensePassability(l5) && !rc.canSenseRobotAtLocation(l5) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l5), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p5 = mapInfo.getCooldownMultiplier(team);
                     s5 = Math.sqrt(l5.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14281,7 +14303,7 @@ public class Navigation {
             if (rc.canSenseLocation(l11)) {
                 MapInfo mapInfo = rc.senseMapInfo(l11);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l11) || (rc.sensePassability(l11) && !rc.canSenseRobotAtLocation(l11) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l11), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p11 = mapInfo.getCooldownMultiplier(team);
                     s11 = Math.sqrt(l11.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14311,7 +14333,7 @@ public class Navigation {
             if (rc.canSenseLocation(l63)) {
                 MapInfo mapInfo = rc.senseMapInfo(l63);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l63) || (rc.sensePassability(l63) && !rc.canSenseRobotAtLocation(l63) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l63), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p63 = mapInfo.getCooldownMultiplier(team);
                     s63 = Math.sqrt(l63.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14336,7 +14358,7 @@ public class Navigation {
             if (rc.canSenseLocation(l2)) {
                 MapInfo mapInfo = rc.senseMapInfo(l2);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l2) || (rc.sensePassability(l2) && !rc.canSenseRobotAtLocation(l2) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l2), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p2 = mapInfo.getCooldownMultiplier(team);
                     s2 = Math.sqrt(l2.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14366,7 +14388,7 @@ public class Navigation {
             if (rc.canSenseLocation(l38)) {
                 MapInfo mapInfo = rc.senseMapInfo(l38);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l38) || (rc.sensePassability(l38) && !rc.canSenseRobotAtLocation(l38) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l38), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p38 = mapInfo.getCooldownMultiplier(team);
                     s38 = Math.sqrt(l38.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14396,7 +14418,7 @@ public class Navigation {
             if (rc.canSenseLocation(l29)) {
                 MapInfo mapInfo = rc.senseMapInfo(l29);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l29) || (rc.sensePassability(l29) && !rc.canSenseRobotAtLocation(l29) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l29), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p29 = mapInfo.getCooldownMultiplier(team);
                     s29 = Math.sqrt(l29.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14431,7 +14453,7 @@ public class Navigation {
             if (rc.canSenseLocation(l1)) {
                 MapInfo mapInfo = rc.senseMapInfo(l1);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l1) || (rc.sensePassability(l1) && !rc.canSenseRobotAtLocation(l1) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l1), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p1 = mapInfo.getCooldownMultiplier(team);
                     s1 = Math.sqrt(l1.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14466,7 +14488,7 @@ public class Navigation {
             if (rc.canSenseLocation(l3)) {
                 MapInfo mapInfo = rc.senseMapInfo(l3);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l3) || (rc.sensePassability(l3) && !rc.canSenseRobotAtLocation(l3) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l3), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p3 = mapInfo.getCooldownMultiplier(team);
                     s3 = Math.sqrt(l3.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14501,7 +14523,7 @@ public class Navigation {
             if (rc.canSenseLocation(l47)) {
                 MapInfo mapInfo = rc.senseMapInfo(l47);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l47) || (rc.sensePassability(l47) && !rc.canSenseRobotAtLocation(l47) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l47), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p47 = mapInfo.getCooldownMultiplier(team);
                     s47 = Math.sqrt(l47.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14536,7 +14558,7 @@ public class Navigation {
             if (rc.canSenseLocation(l56)) {
                 MapInfo mapInfo = rc.senseMapInfo(l56);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l56) || (rc.sensePassability(l56) && !rc.canSenseRobotAtLocation(l56) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l56), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p56 = mapInfo.getCooldownMultiplier(team);
                     s56 = Math.sqrt(l56.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14571,7 +14593,7 @@ public class Navigation {
             if (rc.canSenseLocation(l0)) {
                 MapInfo mapInfo = rc.senseMapInfo(l0);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l0) || (rc.sensePassability(l0) && !rc.canSenseRobotAtLocation(l0) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l0), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p0 = mapInfo.getCooldownMultiplier(team);
                     s0 = Math.sqrt(l0.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14606,7 +14628,7 @@ public class Navigation {
             if (rc.canSenseLocation(l20)) {
                 MapInfo mapInfo = rc.senseMapInfo(l20);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l20) || (rc.sensePassability(l20) && !rc.canSenseRobotAtLocation(l20) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l20), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p20 = mapInfo.getCooldownMultiplier(team);
                     s20 = Math.sqrt(l20.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14641,7 +14663,7 @@ public class Navigation {
             if (rc.canSenseLocation(l4)) {
                 MapInfo mapInfo = rc.senseMapInfo(l4);
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
+                if (targetLocation.equals(l4) || (rc.sensePassability(l4) && !rc.canSenseRobotAtLocation(l4) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l4), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {
                     p4 = mapInfo.getCooldownMultiplier(team);
                     s4 = Math.sqrt(l4.add(currentDirection).distanceSquaredTo(targetLocation));
                 }
@@ -14671,232 +14693,234 @@ public class Navigation {
                 d4 = d9;
             }
         }
-    
-        int dx = targetLocation.x - l34.x;
-        int dy = targetLocation.y - l34.y;
+        if (!rc.senseCloud(currentLocation) || currentLocation.distanceSquaredTo(targetLocation) <= 4) {
+        
+            int dx = targetLocation.x - l34.x;
+            int dy = targetLocation.y - l34.y;
 
-        switch(dx) {
-            case -4:
-                switch(dy) {
-                    case -2:
-                        if (v0 < 1000000) {
-                            bug.reset();
-                            return d0;
-                        } break;
-                    case -1:
-                        if (v1 < 1000000) {
-                            bug.reset();
-                            return d1;
-                        } break;
-                    case 0:
-                        if (v2 < 1000000) {
-                            bug.reset();
-                            return d2;
-                        } break;
-                    case 1:
-                        if (v3 < 1000000) {
-                            bug.reset();
-                            return d3;
-                        } break;
-                    case 2:
-                        if (v4 < 1000000) {
-                            bug.reset();
-                            return d4;
-                        } break;
-                } break;
+            switch(dx) {
+                case -4:
+                    switch(dy) {
+                        case -2:
+                            if (v0 < 1000000) {
+                                bug.reset();
+                                return d0;
+                            } break;
+                        case -1:
+                            if (v1 < 1000000) {
+                                bug.reset();
+                                return d1;
+                            } break;
+                        case 0:
+                            if (v2 < 1000000) {
+                                bug.reset();
+                                return d2;
+                            } break;
+                        case 1:
+                            if (v3 < 1000000) {
+                                bug.reset();
+                                return d3;
+                            } break;
+                        case 2:
+                            if (v4 < 1000000) {
+                                bug.reset();
+                                return d4;
+                            } break;
+                    } break;
 
-            case -3:
-                switch(dy) {
-                    case -3:
-                        if (v5 < 1000000) {
-                            bug.reset();
-                            return d5;
-                        } break;
-                    case -2:
-                        if (v6 < 1000000) {
-                            bug.reset();
-                            return d6;
-                        } break;
-                    case -1:
-                        if (v7 < 1000000) {
-                            bug.reset();
-                            return d7;
-                        } break;
-                    case 0:
-                        if (v8 < 1000000) {
-                            bug.reset();
-                            return d8;
-                        } break;
-                    case 1:
-                        if (v9 < 1000000) {
-                            bug.reset();
-                            return d9;
-                        } break;
-                    case 2:
-                        if (v10 < 1000000) {
-                            bug.reset();
-                            return d10;
-                        } break;
-                    case 3:
-                        if (v11 < 1000000) {
-                            bug.reset();
-                            return d11;
-                        } break;
-                } break;
+                case -3:
+                    switch(dy) {
+                        case -3:
+                            if (v5 < 1000000) {
+                                bug.reset();
+                                return d5;
+                            } break;
+                        case -2:
+                            if (v6 < 1000000) {
+                                bug.reset();
+                                return d6;
+                            } break;
+                        case -1:
+                            if (v7 < 1000000) {
+                                bug.reset();
+                                return d7;
+                            } break;
+                        case 0:
+                            if (v8 < 1000000) {
+                                bug.reset();
+                                return d8;
+                            } break;
+                        case 1:
+                            if (v9 < 1000000) {
+                                bug.reset();
+                                return d9;
+                            } break;
+                        case 2:
+                            if (v10 < 1000000) {
+                                bug.reset();
+                                return d10;
+                            } break;
+                        case 3:
+                            if (v11 < 1000000) {
+                                bug.reset();
+                                return d11;
+                            } break;
+                    } break;
 
-            case -2:
-                switch(dy) {
-                    case -2:
-                        if (v14 < 1000000) {
-                            bug.reset();
-                            return d14;
-                        } break;
-                    case -1:
-                        if (v15 < 1000000) {
-                            bug.reset();
-                            return d15;
-                        } break;
-                    case 0:
-                        if (v16 < 1000000) {
-                            bug.reset();
-                            return d16;
-                        } break;
-                    case 1:
-                        if (v17 < 1000000) {
-                            bug.reset();
-                            return d17;
-                        } break;
-                    case 2:
-                        if (v18 < 1000000) {
-                            bug.reset();
-                            return d18;
-                        } break;
-                    case 3:
-                        if (v19 < 1000000) {
-                            bug.reset();
-                            return d19;
-                        } break;
-                    case 4:
-                        if (v20 < 1000000) {
-                            bug.reset();
-                            return d20;
-                        } break;
-                } break;
+                case -2:
+                    switch(dy) {
+                        case -2:
+                            if (v14 < 1000000) {
+                                bug.reset();
+                                return d14;
+                            } break;
+                        case -1:
+                            if (v15 < 1000000) {
+                                bug.reset();
+                                return d15;
+                            } break;
+                        case 0:
+                            if (v16 < 1000000) {
+                                bug.reset();
+                                return d16;
+                            } break;
+                        case 1:
+                            if (v17 < 1000000) {
+                                bug.reset();
+                                return d17;
+                            } break;
+                        case 2:
+                            if (v18 < 1000000) {
+                                bug.reset();
+                                return d18;
+                            } break;
+                        case 3:
+                            if (v19 < 1000000) {
+                                bug.reset();
+                                return d19;
+                            } break;
+                        case 4:
+                            if (v20 < 1000000) {
+                                bug.reset();
+                                return d20;
+                            } break;
+                    } break;
 
-            case -1:
-                switch(dy) {
-                    case -1:
-                        if (v24 < 1000000) {
-                            bug.reset();
-                            return d24;
-                        } break;
-                    case 0:
-                        if (v25 < 1000000) {
-                            bug.reset();
-                            return d25;
-                        } break;
-                    case 1:
-                        if (v26 < 1000000) {
-                            bug.reset();
-                            return d26;
-                        } break;
-                    case 2:
-                        if (v27 < 1000000) {
-                            bug.reset();
-                            return d27;
-                        } break;
-                    case 3:
-                        if (v28 < 1000000) {
-                            bug.reset();
-                            return d28;
-                        } break;
-                    case 4:
-                        if (v29 < 1000000) {
-                            bug.reset();
-                            return d29;
-                        } break;
-                } break;
+                case -1:
+                    switch(dy) {
+                        case -1:
+                            if (v24 < 1000000) {
+                                bug.reset();
+                                return d24;
+                            } break;
+                        case 0:
+                            if (v25 < 1000000) {
+                                bug.reset();
+                                return d25;
+                            } break;
+                        case 1:
+                            if (v26 < 1000000) {
+                                bug.reset();
+                                return d26;
+                            } break;
+                        case 2:
+                            if (v27 < 1000000) {
+                                bug.reset();
+                                return d27;
+                            } break;
+                        case 3:
+                            if (v28 < 1000000) {
+                                bug.reset();
+                                return d28;
+                            } break;
+                        case 4:
+                            if (v29 < 1000000) {
+                                bug.reset();
+                                return d29;
+                            } break;
+                    } break;
 
-            case 0:
-                switch(dy) {
-                    case 1:
-                        if (v35 < 1000000) {
-                            bug.reset();
-                            return d35;
-                        } break;
-                    case 2:
-                        if (v36 < 1000000) {
-                            bug.reset();
-                            return d36;
-                        } break;
-                    case 3:
-                        if (v37 < 1000000) {
-                            bug.reset();
-                            return d37;
-                        } break;
-                    case 4:
-                        if (v38 < 1000000) {
-                            bug.reset();
-                            return d38;
-                        } break;
-                } break;
+                case 0:
+                    switch(dy) {
+                        case 1:
+                            if (v35 < 1000000) {
+                                bug.reset();
+                                return d35;
+                            } break;
+                        case 2:
+                            if (v36 < 1000000) {
+                                bug.reset();
+                                return d36;
+                            } break;
+                        case 3:
+                            if (v37 < 1000000) {
+                                bug.reset();
+                                return d37;
+                            } break;
+                        case 4:
+                            if (v38 < 1000000) {
+                                bug.reset();
+                                return d38;
+                            } break;
+                    } break;
 
-            case 1:
-                switch(dy) {
-                    case 1:
-                        if (v44 < 1000000) {
-                            bug.reset();
-                            return d44;
-                        } break;
-                    case 2:
-                        if (v45 < 1000000) {
-                            bug.reset();
-                            return d45;
-                        } break;
-                    case 3:
-                        if (v46 < 1000000) {
-                            bug.reset();
-                            return d46;
-                        } break;
-                    case 4:
-                        if (v47 < 1000000) {
-                            bug.reset();
-                            return d47;
-                        } break;
-                } break;
+                case 1:
+                    switch(dy) {
+                        case 1:
+                            if (v44 < 1000000) {
+                                bug.reset();
+                                return d44;
+                            } break;
+                        case 2:
+                            if (v45 < 1000000) {
+                                bug.reset();
+                                return d45;
+                            } break;
+                        case 3:
+                            if (v46 < 1000000) {
+                                bug.reset();
+                                return d46;
+                            } break;
+                        case 4:
+                            if (v47 < 1000000) {
+                                bug.reset();
+                                return d47;
+                            } break;
+                    } break;
 
-            case 2:
-                switch(dy) {
-                    case 2:
-                        if (v54 < 1000000) {
-                            bug.reset();
-                            return d54;
-                        } break;
-                    case 3:
-                        if (v55 < 1000000) {
-                            bug.reset();
-                            return d55;
-                        } break;
-                    case 4:
-                        if (v56 < 1000000) {
-                            bug.reset();
-                            return d56;
-                        } break;
-                } break;
+                case 2:
+                    switch(dy) {
+                        case 2:
+                            if (v54 < 1000000) {
+                                bug.reset();
+                                return d54;
+                            } break;
+                        case 3:
+                            if (v55 < 1000000) {
+                                bug.reset();
+                                return d55;
+                            } break;
+                        case 4:
+                            if (v56 < 1000000) {
+                                bug.reset();
+                                return d56;
+                            } break;
+                    } break;
 
-            case 3:
-                switch(dy) {
-                    case 3:
-                        if (v63 < 1000000) {
-                            bug.reset();
-                            return d63;
-                        } break;
-                } break;
+                case 3:
+                    switch(dy) {
+                        case 3:
+                            if (v63 < 1000000) {
+                                bug.reset();
+                                return d63;
+                            } break;
+                    } break;
 
-            case 4:
-                switch(dy) {
-                } break;
+                case 4:
+                    switch(dy) {
+                    } break;
 
+            }
         }
     
         Direction ans = Direction.CENTER;

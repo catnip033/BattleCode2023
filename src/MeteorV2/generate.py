@@ -79,7 +79,7 @@ for i in range(8):
             if (rc.canSenseLocation(l{u.i})) {{
                 MapInfo mapInfo = rc.senseMapInfo(l{u.i});
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l{u.i}), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {{
+                if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l{u.i}), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {{
                     p{u.i} = mapInfo.getCooldownMultiplier(team);
                 }}
             }}
@@ -91,7 +91,7 @@ for i in range(8):
             if (rc.canSenseLocation(l{u.i})) {{
                 MapInfo mapInfo = rc.senseMapInfo(l{u.i});
                 Direction currentDirection = mapInfo.getCurrentDirection();
-                if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && (currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l{u.i}), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {{
+                if (targetLocation.equals(l{u.i}) || (rc.sensePassability(l{u.i}) && !rc.canSenseRobotAtLocation(l{u.i}) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentLocation.directionTo(l{u.i}), currentDirection) > 0 && dot(lastDirection, currentDirection) > 0)))) {{
                     p{u.i} = mapInfo.getCooldownMultiplier(team);
                     s{u.i} = Math.sqrt(l{u.i}.add(currentDirection).distanceSquaredTo(targetLocation));
                 }}
@@ -144,10 +144,10 @@ for i in range(8):
         }}'''
     
     insides[i] += f'''
-        int dx = targetLocation.x - l{C[M][M].i}.x;
-        int dy = targetLocation.y - l{C[M][M].i}.y;
+            int dx = targetLocation.x - l{C[M][M].i}.x;
+            int dy = targetLocation.y - l{C[M][M].i}.y;
 
-        switch(dx) {{'''
+            switch(dx) {{'''
 
     outsides[i] += f'''
         Direction ans = Direction.CENTER;
@@ -155,8 +155,8 @@ for i in range(8):
 
     for x in range(-M, M+1):
         insides[i] += f'''
-            case {x}:
-                switch(dy) {{'''
+                case {x}:
+                    switch(dy) {{'''
         for y in range(-M, M+1):
             if i == 0 and not (y >= 0): continue
             if i == 1 and not (-x <= y): continue
@@ -171,11 +171,11 @@ for i in range(8):
 
                 if c.i != 34:
                     insides[i] += f'''
-                    case {y}:
-                        if (v{c.i} < 1000000) {{
-                            bug.reset();
-                            return d{c.i};
-                        }} break;'''
+                        case {y}:
+                            if (v{c.i} < 1000000) {{
+                                bug.reset();
+                                return d{c.i};
+                            }} break;'''
             
                     outsides[i] += f'''
         double dist{c.i} = v{c.i} + {str(alpha) + ' * ' if alpha != 1.0 else ''}s{c.i};
@@ -186,11 +186,11 @@ for i in range(8):
 '''
 
         insides[i] += f'''
-                }} break;
+                    }} break;
 '''
 
     insides[i] += f'''
-        }}'''
+            }}'''
 
 file_name = 'Navigation'
 
@@ -228,10 +228,13 @@ for i in range(8):
     private Direction getBestDirection{i}() throws GameActionException {{
         double localBest = 1000000.0;
         double dist = 0.0;
+	    boolean gothroughCurrent = rc.getType() == RobotType.CARRIER && rc.getWeight() < 3;
         l{C[M][M].i} = currentLocation;
         v{C[M][M].i} = 0;{assigns[i]}
     {relaxations[i]}
-    {insides[i]}
+        if (!rc.senseCloud(currentLocation) || currentLocation.distanceSquaredTo(targetLocation) <= 4) {{
+        {insides[i]}
+        }}
     {outsides[i]}
         if (localBest < globalBest) {{
             globalBest = localBest;

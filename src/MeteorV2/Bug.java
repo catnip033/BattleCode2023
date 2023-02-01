@@ -23,6 +23,8 @@ public class Bug {
     public void move(MapLocation targetLocation, Direction lastDirection) throws GameActionException {
         currentLocation = rc.getLocation();
 
+	boolean gothroughCurrent = rc.getType() == RobotType.CARRIER && rc.getWeight() < 3;
+
         if (!targetLocation.equals(this.targetLocation)) {
             reset();
             this.targetLocation = targetLocation;
@@ -38,7 +40,7 @@ public class Bug {
                     if (rc.canSenseLocation(wallLocation)) {
                         Direction currentDirection = rc.senseMapInfo(wallLocation).getCurrentDirection();
 
-                        if (currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0)) {
+                        if (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0)) {
                             isWallPassible = true;
                         }
                     }
@@ -51,7 +53,7 @@ public class Bug {
                 if (rc.canSenseLocation(wallLocation)) {
                     Direction currentDirection = rc.senseMapInfo(wallLocation).getCurrentDirection();
 
-                    if (rc.sensePassability(wallLocation) && !rc.canSenseRobotAtLocation(wallLocation) && (currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0))) {
+                    if (rc.sensePassability(wallLocation) && !rc.canSenseRobotAtLocation(wallLocation) && (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0))) {
                         isWallPassible = true;
                     }
                 }
@@ -76,7 +78,7 @@ public class Bug {
                 if (rc.canSenseLocation(newLocation)) {
                     Direction currentDirection = rc.senseMapInfo(newLocation).getCurrentDirection();
 
-                    if (currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0)) {
+                    if (gothroughCurrent || currentDirection.equals(Direction.CENTER) || (dot(currentDirection, direction) > 0 && dot(currentDirection, lastDirection) >= 0)) {
                         canMove[direction.ordinal()] = true;
                     }
                 }
