@@ -23,7 +23,7 @@ public strictfp class Carrier extends MobileRobot {
 
         RNG.setSeed(rc.getID());
 
-        targetResource = RNG.nextInt(10) < Math.max(rc.getRoundNum() / 50, 4) ? ResourceType.ADAMANTIUM : ResourceType.MANA;
+        targetResource = RNG.nextInt(10) < Math.min(rc.getRoundNum() / 50, 4) ? ResourceType.ADAMANTIUM : ResourceType.MANA;
 
         updateClosestTeamHQLocation();
     }
