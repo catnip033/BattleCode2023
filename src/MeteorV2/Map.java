@@ -62,7 +62,7 @@ public class Map {
     }
 
     public void reportEnemy(MapLocation location, int level) throws GameActionException {
-        int info = getInfo(location);
+        int info = getInfo(location, true);
 
         if ((info & 0b11) >= level) { return; }
 
@@ -108,18 +108,18 @@ public class Map {
     }
 
     public int getLevel(MapLocation location) throws GameActionException {
-        return getInfo(location) & 0b11;
+        return getInfo(location, false) & 0b11;
     }
 
-    private int getInfo(MapLocation location) throws GameActionException {
+    private int getInfo(MapLocation location, boolean inverse) throws GameActionException {
         int k = location.x / GRID_SIZE + location.y / GRID_SIZE * GRID_COLS;
-        int x = rc.readSharedArray(k / INFOS_PER_INTEGER + Idx.mapOffset + parity(false));
+        int x = rc.readSharedArray(k / INFOS_PER_INTEGER + Idx.mapOffset + parity(inverse));
         return (x >> ((k % INFOS_PER_INTEGER) * BITS_PER_INFO)) & MASK;
     }
 
     private void setInfo(MapLocation location, int info) throws GameActionException {
         int k = location.x / GRID_SIZE + location.y / GRID_SIZE * GRID_COLS;
-        int x = rc.readSharedArray(k / INFOS_PER_INTEGER + Idx.mapOffset + parity(false));
+        int x = rc.readSharedArray(k / INFOS_PER_INTEGER + Idx.mapOffset + parity(true));
         x &= ~(MASK << ((k % INFOS_PER_INTEGER) * BITS_PER_INFO));
         x |= info   << ((k % INFOS_PER_INTEGER) * BITS_PER_INFO);
         rc.writeSharedArray(k / INFOS_PER_INTEGER + Idx.mapOffset + parity(true), x);

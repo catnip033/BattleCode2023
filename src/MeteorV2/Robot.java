@@ -18,7 +18,8 @@ public class Robot {
     protected MapLocation currentLocation;
     protected MapLocation targetLocation;
 
-    protected final Map map;
+    //protected final Map map;
+    protected final Comms comms;
     protected final Team team;
 
     protected static final Random RNG = new Random(42);
@@ -43,12 +44,13 @@ public class Robot {
 
         RNG.setSeed(rc.getRoundNum());
 
-        map = new Map(rc);
+        //map = new Map(rc);
+        comms = new Comms(rc);
     }
 
     public void step() throws GameActionException {
         currentLocation = rc.getLocation();
-        map.sync();
+        //map.sync();
     }
 
     protected boolean isDangerous(RobotType type) {
@@ -69,6 +71,38 @@ public class Robot {
         };
     }
 
+    public void reportEnemies() throws GameActionException {
+        int count = 0;
+        int totalX = 0;
+        int totalY = 0;
+        for (RobotInfo bot : rc.senseNearbyRobots(-1, team.opponent())) {
+            if (count == 20) {
+                break;
+            }
+            switch(bot.getType()) {
+                case LAUNCHER:
+                case DESTABILIZER:
+                case BOOSTER:
+                    totalX += bot.location.x;
+                    totalY += bot.location.y;
+                    count++;
+                    break;
+                case CARRIER:
+                case AMPLIFIER:
+//                    if(!comms.foundEnemySoldier) {
+//                        totalX += bot.location.x;
+//                        totalY += bot.location.y;
+//                        count++;
+//                    }
+                    break;
+            }
+        }
+        if (count != 0) {
+            comms.updateAvgEnemyLoc(totalX, totalY, count);
+        }
+
+    }
+
     protected void reportWell(ResourceType resourceType, MapLocation wellLocation, int passibleTileCount) throws GameActionException {
         if (!rc.canWriteSharedArray(0, 0)) {
             return;
@@ -78,18 +112,20 @@ public class Robot {
         int wellLocationOffset = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellLocationOffset : Idx.manaWellLocationOffset;
 
         int wellCount = rc.readSharedArray(wellCountOffset);
+        int wellIdx = wellCount;
 
         for (int i=0; i<wellCount; ++i) {
             int code = rc.readSharedArray(i + wellLocationOffset);
 
             if (decodeLocation(code).equals(wellLocation)) {
-                return;
+                wellIdx = i;
+                break;
             }
         }
 
-        if (wellCount < 8) {
-            rc.writeSharedArray(wellCount + wellLocationOffset, encode(wellLocation, passibleTileCount));
-            rc.writeSharedArray(wellCountOffset, wellCount + 1);
+        if (wellIdx < 8) {
+            rc.writeSharedArray(wellIdx + wellLocationOffset, encode(wellLocation, passibleTileCount));
+            if (wellIdx == wellCount) rc.writeSharedArray(wellCountOffset, wellCount + 1);
         }
     }
 
@@ -149,5 +185,37 @@ public class Robot {
         }
 
         return true;
+    }
+
+    protected boolean isWellReported(ResourceType resourceType, MapLocation wellLocation) throws GameActionException {
+        int wellCountOffset    = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellCountOffset : Idx.manaWellCountOffset;
+        int wellLocationOffset = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellLocationOffset : Idx.manaWellLocationOffset;
+
+        int wellCount = rc.readSharedArray(wellCountOffset);
+
+        for (int i=0; i<wellCount; ++i) {
+            int code = rc.readSharedArray(i + wellLocationOffset);
+
+            if (decodeLocation(code).equals(wellLocation)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected void detachWells(ResourceType resourceType) throws GameActionException {
+        int wellCountOffset    = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellCountOffset : Idx.manaWellCountOffset;
+        int wellLocationOffset = (resourceType == ResourceType.ADAMANTIUM) ? Idx.adamantiumWellLocationOffset : Idx.manaWellLocationOffset;
+
+        int wellCount = rc.readSharedArray(wellCountOffset);
+
+        for (int i=0; i<wellCount; ++i) {
+            int code = rc.readSharedArray(i + wellLocationOffset);
+
+            if (decodeID(code) == 0) {
+                rc.writeSharedArray(i + wellLocationOffset, encode(decodeLocation(code), decodeID(code) + 1));
+            }
+        }
     }
 }

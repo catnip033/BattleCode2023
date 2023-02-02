@@ -8,11 +8,13 @@ public strictfp class Launcher extends MobileRobot {
     private RobotInfo[] nearbyEnemies;
     private MapLocation attackTarget;
 
-    private MapLocation[] enemyHQLocations;
-    private boolean[] isExplored;
+    private MapLocation[] enemyHQLocations, enemyWellLocations;
+    private boolean[] isExplored, isExploredWell;
+    private int enemyWellCount;
     private int symmetry = 0b111;
 
     private final int totalHQCount;
+    private final int width, height;
 
     public Launcher(RobotController rc) throws GameActionException {
         super(rc);
@@ -20,10 +22,13 @@ public strictfp class Launcher extends MobileRobot {
         totalHQCount = rc.readSharedArray(Idx.teamHQCount);
 
         enemyHQLocations = new MapLocation[totalHQCount * 3];
+        enemyWellLocations = new MapLocation[24];
 
         isExplored = new boolean[totalHQCount * 3];
+        isExploredWell = new boolean[24];
 
-        final int width = rc.getMapWidth(), height = rc.getMapHeight();
+        width = rc.getMapWidth();
+        height = rc.getMapHeight();
 
         int minDistance = Constants.INF;
 
@@ -50,8 +55,13 @@ public strictfp class Launcher extends MobileRobot {
         nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
 
         if (rc.canWriteSharedArray(0, 0)) {
-            map.reportNearbyEnemies(nearbyEnemies);
+            reportEnemies();
+
+            // map.reportNearbyEnemies(nearbyEnemies);
             rc.writeSharedArray(Idx.symmetryOffset, rc.readSharedArray(Idx.symmetryOffset) & symmetry);
+
+            MapLocation enemy = comms.getClosestCluster(currentLocation);
+            if (enemy != null && enemy.isAdjacentTo(currentLocation)) comms.setNeedToResetEnemyLocs();
         }
 
         if (rc.getRoundNum() >= 3) {
@@ -102,9 +112,12 @@ public strictfp class Launcher extends MobileRobot {
             }
         }
 
-        MapLocation enemy = map.getClosestEnemy();
+        MapLocation enemy = comms.getClosestCluster(currentLocation); //map.getClosestEnemy();
 
-        if (enemy != null && (targetLocation == null || map.getLevel(targetLocation) == 0 || currentLocation.distanceSquaredTo(targetLocation) > currentLocation.distanceSquaredTo(enemy))) {
+//        if (enemy != null && (targetLocation == null || map.getLevel(targetLocation) == 0 || currentLocation.distanceSquaredTo(targetLocation) > currentLocation.distanceSquaredTo(enemy))) {
+//            targetLocation = enemy;
+//        }
+        if (enemy != null && (targetLocation == null || currentLocation.distanceSquaredTo(targetLocation) > currentLocation.distanceSquaredTo(enemy))) {
             targetLocation = enemy;
         }
 
@@ -114,7 +127,7 @@ public strictfp class Launcher extends MobileRobot {
 
         if (enemyAttackerCount >= 2) {
             if (rc.canWriteSharedArray(0, 0)) {
-                map.reportEnemy(closestEnemyAttacker, 3);
+                //map.reportEnemy(closestEnemyAttacker, 3);
             }
             updateTargetForEvasion(nearbyEnemies);
         }
@@ -142,7 +155,7 @@ public strictfp class Launcher extends MobileRobot {
         if (rc.isActionReady()) {
             MapLocation[] cloudLocations = rc.senseNearbyCloudLocations(16);
             if (cloudLocations.length > 0) {
-                attackTarget = cloudLocations[0];
+                attackTarget = cloudLocations[RNG.nextInt(cloudLocations.length)];
                 if (rc.canAttack(attackTarget)) rc.attack(attackTarget);
             }
         }
@@ -239,8 +252,40 @@ public strictfp class Launcher extends MobileRobot {
     protected void selectRandomTarget() throws GameActionException {
         int minDistance = Constants.INF;
 
+        int newEnemyWellCount = rc.readSharedArray(Idx.manaWellCountOffset);
+        while (enemyWellCount < newEnemyWellCount) {
+            int i = enemyWellCount;
+            MapLocation location = decodeLocation(rc.readSharedArray(i + Idx.manaWellLocationOffset));
+
+            int x = location.x, y = location.y;
+
+            enemyWellLocations[i * 3 + 0] = new MapLocation(width - x - 1, height - y - 1);
+            enemyWellLocations[i * 3 + 1] = new MapLocation(width - x - 1, y);
+            enemyWellLocations[i * 3 + 2] = new MapLocation(x, height - y - 1);
+
+            enemyWellCount++;
+        }
+
         for (int j = 0; j < 3; ++j) {
             if ((symmetry >> j & 1) == 0) continue;
+            for (int i = 0; i < enemyWellCount; ++i) {
+                int k = i * 3 + j;
+                if (isExploredWell[k]) continue;
+                MapLocation location = enemyWellLocations[k];
+
+                if (rc.canSenseLocation(location)) {
+                    if (rc.senseWell(location) == null || rc.senseWell(location).getResourceType() != ResourceType.MANA) {
+                        isExploredWell[k] = true;
+                        symmetry &= ~(1 << j);
+                        break;
+                    } else {
+                        symmetry = 1 << j;
+                        if (currentLocation.distanceSquaredTo(location) <= 2) {
+                            isExploredWell[k] = true;
+                        }
+                    }
+                }
+            }
             for (int i = 0; i < totalHQCount; ++i) {
                 int k = i * 3 + j;
                 if (isExplored[k]) continue;
@@ -269,6 +314,23 @@ public strictfp class Launcher extends MobileRobot {
 
         for (int j = 0; j < 3; ++j) {
             if ((symmetry >> j & 1) == 0) continue;
+            for (int i = 0; i < enemyWellCount; ++i) {
+                int k = i * 3 + j;
+                if (isExploredWell[k]) continue;
+                MapLocation location = enemyWellLocations[k];
+                if (isWellReported(ResourceType.MANA, location)) continue;
+
+                rc.setIndicatorDot(location, 0, 0, 255);
+
+                int distance = currentLocation.distanceSquaredTo(location);
+                distance -= 100000;
+                if (j == 0) distance -= 100000;
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    targetLocation = location;
+                }
+            }
+
             for (int i = 0; i < totalHQCount; ++i) {
                 int k = i * 3 + j;
                 if (isExplored[k]) continue;

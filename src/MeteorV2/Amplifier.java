@@ -14,6 +14,7 @@ public strictfp class Amplifier extends MobileRobot {
 
     private MapLocation[] enemyHQLocations;
     private boolean[] isExplored;
+    private int symmetry = 0b111;
 
     public Amplifier(RobotController rc) throws GameActionException {
         super(rc);
@@ -65,7 +66,8 @@ public strictfp class Amplifier extends MobileRobot {
 
         RobotInfo[] nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
 
-        map.reportNearbyEnemies(nearbyEnemies);
+        //map.reportNearbyEnemies(nearbyEnemies);
+        reportEnemies();
 
         RobotInfo enemyAttacker = null;
         for (RobotInfo robot : nearbyEnemies) {
@@ -91,7 +93,12 @@ public strictfp class Amplifier extends MobileRobot {
             }
         }
 
-        if (targetLocation == null) selectRandomTarget();
+        //if (targetLocation == null) selectRandomTarget();
+
+        selectRandomTarget();
+
+        MapLocation enemy = comms.getClosestCluster(currentLocation);
+        if (enemy != null) targetLocation = enemy;
 
         move();
         draw();

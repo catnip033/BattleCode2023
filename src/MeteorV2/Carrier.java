@@ -48,7 +48,8 @@ public strictfp class Carrier extends MobileRobot {
         nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
 
         if (rc.canWriteSharedArray(0, 0)) {
-            map.reportNearbyEnemies(nearbyEnemies);
+            reportEnemies();
+            //map.reportNearbyEnemies(nearbyEnemies);
             if (adamantiumWellLocation != null) {
                 reportWell(ResourceType.ADAMANTIUM, adamantiumWellLocation, adamantiumWellPassibleTileCount);
                 adamantiumWellLocation = null;
@@ -150,7 +151,7 @@ public strictfp class Carrier extends MobileRobot {
     }
 
     private boolean isReturning() throws GameActionException {
-        return returningResource || foundEnemy || (getClosestWellLocation(targetResource) == null && foundTargetResourceWell());
+        return returningResource || foundEnemy || foundTargetResourceWell();
     }
 
     private void mine() throws GameActionException {
@@ -229,36 +230,55 @@ public strictfp class Carrier extends MobileRobot {
         else {
             if (targetLocation != null && targetLocation.equals(closestTeamHQLocation)) targetLocation = null;
             MapLocation closestWellLocation = getClosestWellLocation(targetResource);
-            if (closestWellLocation == null && attachedWellInfo == null) {
+            boolean isApproaching = false;
+            if (attachedWellInfo == null) {
                 int approachingDistance = 8;
                 if (rc.senseCloud(currentLocation)) approachingDistance = 0;
                 for (WellInfo wellInfo : rc.senseNearbyWells()) {
                     MapLocation location = wellInfo.getMapLocation();
-                    if (!isWellAvailable(wellInfo.getResourceType(), location)) continue;
+                    if (isWellReported(wellInfo.getResourceType(), location)) continue;
+                    if (closestWellLocation != null && closestTeamHQLocation.distanceSquaredTo(closestWellLocation) < closestTeamHQLocation.distanceSquaredTo(location)) continue;
                     if (wellInfo.getResourceType() == ResourceType.MANA && manaWellLocation == null) {
                         if (currentLocation.distanceSquaredTo(location) <= approachingDistance) {
                             manaWellLocation = location;
-                            manaWellPassibleTileCount = countPassibleTiles(location);
+                            manaWellPassibleTileCount = countPassibleTiles(location, false);
                             targetLocation = null;
                         } else {
                             targetLocation = location;
+                            isApproaching = true;
                         }
                     } else if (wellInfo.getResourceType() == ResourceType.ADAMANTIUM && adamantiumWellLocation == null) {
                         if (currentLocation.distanceSquaredTo(location) <= approachingDistance) {
                             adamantiumWellLocation = location;
-                            adamantiumWellPassibleTileCount = countPassibleTiles(location);
+                            adamantiumWellPassibleTileCount = countPassibleTiles(location, false);
                             targetLocation = null;
                         } else {
                             targetLocation = location;
+                            isApproaching = true;
                         }
                     }
                 }
-            } else {
-                MapLocation wellLocation = closestWellLocation;
-                if (attachedWellInfo != null) wellLocation = attachedWellInfo.getMapLocation();
-                if (targetLocation == null || targetLocation.distanceSquaredTo(wellLocation) > 2) targetLocation = wellLocation;
+            }
+            rc.setIndicatorString("mana: " + manaWellLocation + "  close: " + closestWellLocation);
+            MapLocation wellLocation = closestWellLocation;
+            if (attachedWellInfo != null) wellLocation = attachedWellInfo.getMapLocation();
+            if (!isApproaching && wellLocation != null) {
+                if (targetLocation == null || targetLocation.distanceSquaredTo(wellLocation) > 2)
+                    targetLocation = wellLocation;
                 if (currentLocation.distanceSquaredTo(wellLocation) <= 9) {
                     targetLocation = bestLocationNextTo(wellLocation);
+//                    if (attachedWellInfo == null && currentLocation.distanceSquaredTo(wellLocation) > 2 && countPassibleTiles(wellLocation, true) == 0) {
+//                        if (targetResource == ResourceType.MANA) {
+//                            manaWellLocation = wellLocation;
+//                            manaWellPassibleTileCount = 0;
+//                            targetLocation = closestTeamHQLocation;
+//                        }
+//                        if (targetResource == ResourceType.ADAMANTIUM) {
+//                            adamantiumWellLocation = wellLocation;
+//                            adamantiumWellPassibleTileCount = 0;
+//                            targetLocation = closestTeamHQLocation;
+//                        }
+//                    }
                 }
             }
         }
@@ -329,10 +349,11 @@ public strictfp class Carrier extends MobileRobot {
         return manaWellLocation != null;
     }
 
-    private int countPassibleTiles(MapLocation location) throws GameActionException {
+    private int countPassibleTiles(MapLocation location, boolean considerRobots) throws GameActionException {
         int count = 0;
 
         for(MapInfo mapInfo : rc.senseNearbyMapInfos(location, 2)) {
+            if (considerRobots && rc.canSenseRobotAtLocation(mapInfo.getMapLocation())) continue;
             if (mapInfo.isPassable() && mapInfo.getCurrentDirection() == Direction.CENTER) count++;
         }
 

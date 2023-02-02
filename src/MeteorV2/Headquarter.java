@@ -24,13 +24,23 @@ public strictfp class Headquarter extends Robot {
     public void step() throws GameActionException {
         super.step();
 
-        if (idx == 0) { map.reset(); }
+        comms.resetAvgEnemyLoc();
+        comms.drawClusterDots();
+
+        if (rc.getRoundNum() % 100 == 0) {
+            detachWells(ResourceType.ADAMANTIUM);
+            detachWells(ResourceType.MANA);
+        }
+
+        //if (idx == 0) { map.reset(); }
 
         if (rc.getRoundNum() == 2) { reportSymmetry(); }
+        if (rc.getRoundNum() % 10 == 0) comms.setNeedToResetEnemyLocs();
 
         RobotInfo[] nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
 
-        map.reportNearbyEnemies(nearbyEnemies);
+        //map.reportNearbyEnemies(nearbyEnemies);
+        reportEnemies();
 
         for (RobotInfo robot : nearbyEnemies) {
             if (isDangerous(robot.getType())) {
