@@ -147,10 +147,51 @@ public strictfp class Launcher extends MobileRobot {
         }
 
         if (rc.isActionReady()) {
-            MapLocation[] cloudLocations = rc.senseNearbyCloudLocations(16);
-            if (cloudLocations.length > 0) {
-                attackTarget = cloudLocations[RNG.nextInt(cloudLocations.length)];
+            if (rc.senseCloud(currentLocation)) {
+                int dx = RNG.nextInt(7) - 3;
+                int dy = RNG.nextInt(7) - 3;
+
+                if (dx == 0 && dy == 0) {
+                    dx = -2;
+                    dy = +2;
+                }
+
+                if (dx * dx + dy * dy == 1) {
+                    dx = 3 * dx;
+                    dy = 3 * dy;
+                }
+
+                if (dx * dx + dy * dy == 2) {
+                    dx = 2 * dx;
+                    dy = 2 * dy;
+                }
+
+                if (dx * dx + dy * dy == 4) {
+                    dx = (int)((float)dx * 1.5);
+                    dy = (int)((float)dy * 1.5);
+                }
+
+                attackTarget = new MapLocation(currentLocation.x + dx, currentLocation.y + dy);
                 if (rc.canAttack(attackTarget)) rc.attack(attackTarget);
+            }
+
+            else {
+                MapLocation[] cloudLocations = rc.senseNearbyCloudLocations(16);
+
+                MapLocation[] eligibleLocations = new MapLocation[cloudLocations.length];
+                int farCloudCount = 0;
+
+                for (MapLocation cloudLocation : cloudLocations) {
+                    if (currentLocation.distanceSquaredTo(cloudLocation) > 4) {
+                        eligibleLocations[farCloudCount] = cloudLocation;
+                        farCloudCount += 1;
+                    }
+                }
+
+                if (farCloudCount > 0) {
+                    attackTarget = eligibleLocations[RNG.nextInt(farCloudCount)];
+                    if (rc.canAttack(attackTarget)) rc.attack(attackTarget);
+                }
             }
         }
 

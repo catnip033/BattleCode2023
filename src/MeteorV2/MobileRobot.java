@@ -33,6 +33,7 @@ public class MobileRobot extends Robot {
 
         if (hasMoved) {
             navigation.moveAgain(targetLocation);
+            currentLocation = rc.getLocation();
             return false;
         }
 
