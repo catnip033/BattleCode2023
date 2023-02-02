@@ -78,57 +78,17 @@ public strictfp class Launcher extends MobileRobot {
         // Always attack enemy when possible
         updateAttackTarget();
 
-        selectRandomTarget();
-
-        evadeInvisibleEnemyHQ();
-
         // Reset target if adjacent to it
         if (targetLocation != null && currentLocation.distanceSquaredTo(targetLocation) <= 2 &&
                 (!rc.canSenseRobotAtLocation(targetLocation)
                         || rc.senseRobotAtLocation(targetLocation).getType() != RobotType.HEADQUARTERS
                         || rc.senseRobotAtLocation(targetLocation).getTeam() != team.opponent())) { targetLocation = null; }
 
-        // Move to attack target
-        if (attackTarget != null && !isDangerous(rc.senseRobotAtLocation(attackTarget).type) && enemyAttackerCount == 0) {
-            targetLocation = attackTarget;
-            if (currentLocation.isAdjacentTo(attackTarget)) targetLocation = currentLocation;
-        }
-
-        if (attackTarget == null) {
-            for (int id : rc.senseNearbyIslands()) {
-                if (rc.senseTeamOccupyingIsland(id) != team.opponent()) continue;
-                MapLocation[] locations = rc.senseNearbyIslandLocations(id);
-                targetLocation = locations[RNG.nextInt(locations.length)];
-                break;
-            }
-        }
-
-        if (attackTarget == null && targetLocation == null) {
-            for (int id : rc.senseNearbyIslands()) {
-                if (rc.senseTeamOccupyingIsland(id) != team || rc.senseAnchorPlantedHealth(id) == 250) continue;
-                MapLocation[] locations = rc.senseNearbyIslandLocations(id);
-                targetLocation = locations[RNG.nextInt(locations.length)];
-                break;
-            }
-        }
-
-        MapLocation enemy = comms.getClosestCluster(currentLocation); //map.getClosestEnemy();
-
-//        if (enemy != null && (targetLocation == null || map.getLevel(targetLocation) == 0 || currentLocation.distanceSquaredTo(targetLocation) > currentLocation.distanceSquaredTo(enemy))) {
-//            targetLocation = enemy;
-//        }
-        if (enemy != null && (targetLocation == null || currentLocation.distanceSquaredTo(targetLocation) > currentLocation.distanceSquaredTo(enemy))) {
-            targetLocation = enemy;
-        }
-
-        if (targetLocation == null) selectRandomTarget();
+        evadeInvisibleEnemyHQ();
 
         if (closestEnemyAttacker != null && currentLocation.distanceSquaredTo(closestEnemyAttacker) <= 16) updateTargetForEvasion(nearbyEnemies);
 
         if (enemyAttackerCount >= 2) {
-            if (rc.canWriteSharedArray(0, 0)) {
-                //map.reportEnemy(closestEnemyAttacker, 3);
-            }
             updateTargetForEvasion(nearbyEnemies);
         }
 
@@ -143,6 +103,40 @@ public strictfp class Launcher extends MobileRobot {
         if (attackTarget != null && rc.isActionReady()) {
             if (isDangerous(rc.senseRobotAtLocation(attackTarget).type)) { updateTargetForEvasion(nearbyEnemies); }
             rc.attack(attackTarget);
+        }
+
+        if (!evading) {
+            selectRandomTarget();
+
+            MapLocation enemy = comms.getClosestCluster(currentLocation);
+
+            if (enemy != null && (targetLocation == null || currentLocation.distanceSquaredTo(targetLocation) > currentLocation.distanceSquaredTo(enemy))) {
+                targetLocation = enemy;
+            }
+
+            // Move to attack target
+            if (attackTarget != null && rc.canSenseRobotAtLocation(attackTarget) && !isDangerous(rc.senseRobotAtLocation(attackTarget).type) && enemyAttackerCount == 0) {
+                targetLocation = attackTarget;
+                if (currentLocation.isAdjacentTo(attackTarget)) targetLocation = currentLocation;
+            }
+
+            if (attackTarget == null) {
+                for (int id : rc.senseNearbyIslands()) {
+                    if (rc.senseTeamOccupyingIsland(id) != team.opponent()) continue;
+                    MapLocation[] locations = rc.senseNearbyIslandLocations(id);
+                    targetLocation = locations[RNG.nextInt(locations.length)];
+                    break;
+                }
+            }
+
+            if (attackTarget == null && targetLocation == null) {
+                for (int id : rc.senseNearbyIslands()) {
+                    if (rc.senseTeamOccupyingIsland(id) != team || rc.senseAnchorPlantedHealth(id) == 250) continue;
+                    MapLocation[] locations = rc.senseNearbyIslandLocations(id);
+                    targetLocation = locations[RNG.nextInt(locations.length)];
+                    break;
+                }
+            }
         }
 
         move();

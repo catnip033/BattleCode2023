@@ -64,6 +64,13 @@ public strictfp class Carrier extends MobileRobot {
             }
         }
 
+        if (adamantiumWellLocation != null && isWellReported(ResourceType.ADAMANTIUM, adamantiumWellLocation)) {
+            adamantiumWellLocation = null;
+        }
+        if (manaWellLocation != null && isWellReported(ResourceType.MANA, manaWellLocation)) {
+            manaWellLocation = null;
+        }
+
         if (countEnemyAttackers() > 0) {
             foundEnemy = true;
             if (rc.getWeight() > 0) returningResource = true;
@@ -108,6 +115,7 @@ public strictfp class Carrier extends MobileRobot {
             nearbyEnemies = rc.senseNearbyRobots(-1, team.opponent());
             if (countEnemyAttackers() > 0) updateTargetForEvasion(nearbyEnemies);
             transferOrMine();
+            updateTarget();
         }
 
         transferOrMine();
