@@ -68,17 +68,20 @@ public strictfp class Carrier extends MobileRobot {
             if (rc.getWeight() > 0) returningResource = true;
             updateTarget();
 
-            MapLocation attackTarget = selectAttackTarget();
-            if (attackTarget != null && rc.getWeight() > 0 && currentLocation.distanceSquaredTo(attackTarget) > 9) {
-                Direction direction = bestAttackDirection(currentLocation.directionTo(attackTarget));
-                if (direction != null) {
-                    rc.move(direction);
+            if (rc.getRoundNum() > 100) {
+                MapLocation attackTarget = selectAttackTarget();
+                if (attackTarget != null && rc.getWeight() > 0 && currentLocation.distanceSquaredTo(attackTarget) > 9) {
+                    Direction direction = bestAttackDirection(currentLocation.directionTo(attackTarget));
+                    if (direction != null) {
+                        rc.move(direction);
+                    }
+                }
+                if (attackTarget != null && rc.canAttack(attackTarget)) {
+                    carryingAnchor = false;
+                    rc.attack(attackTarget);
                 }
             }
-            if (attackTarget != null && rc.canAttack(attackTarget)) {
-                carryingAnchor = false;
-                rc.attack(attackTarget);
-            }
+
             if (!returningResource) updateTargetForEvasion(nearbyEnemies);
             while (move()) transferOrMine();
 
